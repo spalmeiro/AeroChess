@@ -128,13 +128,13 @@ Para instalarla, basta con ejecutar el siguiente comando (con el entorno virtual
 Una vez instalada, debemos navegar hasta el directorio de la rama del proyecto, en este caso:
 
 ```
-(AeroChess-venv) C:\Users\Usuario\Desktop\PGAA> cd AeroChess-main
+(AeroChess-venv) C:\Users\Usuario\Desktop\PGAA> cd AeroChess
 ```
 
 Y una vez dentro, simplemente ejecutamos:
 
 ```
-(AeroChess-venv) C:\Users\Usuario\Desktop\PGAA\AeroChess-main> pipenv install
+(AeroChess-venv) C:\Users\Usuario\Desktop\PGAA\AeroChess> pipenv install
 ```
 
 Y pipenv se encarga de leer los archivos "Pipfile" y "Pipfile.lock" e instalar todas las librerías necesarias.
@@ -155,7 +155,7 @@ Para garantizar que pipenv registra los cambios en "Pipfile" y "Pipfile.lock".
 
 ## Activación del servidor
 
-Una vez hecho todo lo anterior, para conseguir que el servidor funcione en modo local, lo primero que hay que hacer es asegurarse de que en el archivo "`AeroChess-main/game/views.py`" las rutas hacia Stockfish apuntan correctamente hacia el archivo ejecutable de Stockfish.
+Una vez hecho todo lo anterior, para conseguir que el servidor funcione en modo local, lo primero que hay que hacer es asegurarse de que en el archivo "`AeroChess/game/views.py`" las rutas hacia Stockfish apuntan correctamente hacia el archivo ejecutable de Stockfish.
 
 La ruta correcta para Stockfish que hay que colocar en el archivo si se ha seguido al pie de la letra este tutorial sería: "`C:\Users\Usuario\Desktop\PGAA\stockfish_13_win_x64\stockfish_13_win_x64.exe`"
 
