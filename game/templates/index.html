@@ -1,0 +1,146 @@
+{% extends "layout.html" %}
+
+{% block title %} AeroChess - Página principal {% endblock %}
+
+{% block cdn %}
+
+    <!-- CSS de Chessboard para el tablero  -->
+    <link rel="stylesheet" href="/static/css/chessboard-1.0.0.min.css">
+
+    <!-- Script de Chessboard para el funcionamiento del tablero -->
+    <script src="/static/js/chessboard-1.0.0.min.js"></script>
+
+    <!-- Script de Chess para el funcionamiento de la interfaz -->
+    <script src="/static/js/chess.js"></script>
+
+    <!-- Script propio para el funcionamiento de la página -->
+    <script src="/static/js/index.js" defer></script>
+
+{% endblock %}
+
+{% block body %}
+
+    <main>
+
+        <!-- Bloque de información -->
+        <div class="jumbotron">
+            <div class=" container text-center">
+                <h1>Bienvenido a AeroChess</h1>
+                <p class="lead">Ajedrez de excelencia internacional</p>
+            </div>
+        </div>
+
+        <!-- Bloque de partidas en juego -->
+        <div class="container mt-5">
+            
+            <!-- Título -->
+            <div class="text-left">
+                <h2>Partidas en juego <span class="fa fa-circle fa-xs text-danger blink"></span></h2>
+                <hr>
+            </div>
+            
+            <!-- Primera fila -->
+            <div class="row">
+
+                <div class="col d-flex flex-column align-items-start">
+                    <div>
+                        <span>Pablo Iglesias</span>
+                        <div id="tablero1" style="width: 300px"></div>
+                        <span>Isabel Díaz Ayuso</span>
+                    </div>
+                </div>
+                
+                <div class="col d-flex flex-column align-items-center">
+                    <div> 
+                        <span>Paco</span>
+                        <div id="tablero2" style="width: 300px"></div>
+                        <span>Magnus Carlsen</span>
+                    </div>
+                </div>
+
+                <div class="col d-flex flex-column align-items-end">
+                    <div>
+                        <span>Cristina Cuerno</span>
+                        <div id="tablero3" style="width: 300px"></div>
+                        <span>Javier Crespo</span>
+                    </div>
+                </div>
+
+            </div>
+            
+            <!-- Segunda fila -->
+            <div class="row mt-5">
+
+                <div class="col d-flex flex-column align-items-start">
+                    <div>
+                        <span>ETSIAE</span>
+                        <div id="tablero4" style="width: 300px"></div>
+                        <span>Las ganas de vivir</span>
+                    </div>
+                </div>
+                
+                <div class="col d-flex flex-column align-items-center">
+                    <div> 
+                        <span>Luis Izquierdo</span>
+                        <div id="tablero5" style="width: 300px"></div>
+                        <span>La conexión</span>
+                    </div>
+                </div>
+
+                <div class="col d-flex flex-column align-items-end">
+                    <div>
+                        <span>Bobby Fischer</span>
+                        <div id="tablero6" style="width: 300px"></div>
+                        <span>Boris Spassky</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Pie de página -->
+    <footer class="mt-5">
+
+        <div class="card-footer">
+
+            <div class="container">
+
+                <div class="row">
+
+                    <div class="col">
+                        <h4 class="text-muted"><strong>AeroChess</strong> - Ajedrez de excelencia internacional</h4>
+                    </div>
+
+                    <div class="col-auto d-flex flex-column justify-content-center">
+                        <div class="text-muted text-right">
+                            <a class="text-muted" href="/" title="Página principal">Página principal</a> |
+                            <a class="text-muted" href="/about" title="Sobre el proyecto">Sobre el proyecto</a> |
+                            <a class="text-muted" href="" title="GitHub del proyecto">GitHub del proyecto</a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="card-footer">
+
+            <div class="container">
+
+                <div class="text-muted text-center">
+                    <p>Creado por Paco, Quintín, Sergio y Valeriano como proyecto para la asignatura de Programación Gráfica en Python y JavaScript.</p>
+                    <p>Copyright 2021 <span class="far fa-copyright"></span> | Todos los derechos reservados | Versión  0.05</p>
+                </div>
+
+            </div>
+        
+        </div>
+
+    </footer>
+
+{% endblock %}

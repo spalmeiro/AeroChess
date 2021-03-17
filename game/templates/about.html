@@ -1,0 +1,125 @@
+{% extends "layout.html" %}
+
+{% block title %} Aerochess - Sobre el proyecto {% endblock %}
+
+{% block body %}
+
+    <main>
+
+        <!-- Bloque sobre el proyecto -->
+        <div class="container mt-3">
+
+            <!-- Título -->
+            <div class="text-left">
+                <h2>Sobre el proyecto</h2>
+                <hr>
+            </div>
+
+            <!-- Introducción -->
+            <p class="text-justify">
+                Este proyecto se crea con la idea de aplicar los conocimientos adquiridos en la asignatura de Programación Gráfica con Python y Java para Aplicaciones 
+                Aeronáuticas mediante la creación de un sitio web completamente funcional que requiere para su desarrollo el empleo de disciplinas distintas de programación 
+                como son el diseño web, la programación del lado del cliente y la programación del lado del servidor.
+            </p>
+            <p class="text-justify">
+                El objetivo del sitio web es proporcionar a sus usuarios un lugar dónde practicar un deporte conocido por ejercitar la destreza y fomentar el desarrollo mental:
+                el ajedrez.
+            </p>
+
+            <!-- Sección Autores -->
+            <div class="text-left">
+                <h4>Autores</h4>
+            </div>
+
+            <ul class="mt-3">
+                <li class="mb-2">Sergio Palmeiro Sánchez.</li>
+                <li class="mb-2">Quintín José Ramírez Ibáñez.</li>
+                <li class="mb-2">Valeriano Ruiz Cano.</li>
+                <li class="mb-2">Francisco Verdú Bravo.</li>
+            </ul>
+
+            <!-- Sección Herramientas -->
+            <div class="text-left">
+                <h4>Herramientas</h4>
+            </div>
+
+            <ul class="mt-3">
+                <li class="mb-2">La programación del lado del cliente se realizará en HTML5, CSS y JavaScript.</li>
+                <li class="mb-2">La programación del lado del servidor se realizará en Python 3.7.9.</li>
+                <li class="mb-2">Para el desarrollo web se utilizará el framework Django.</li>
+                <li class="mb-2">El motor de ajedrez que se utilizará será Stockfish 13.</li>
+                <li class="mb-2">Otros recursos que se utilizarán incluye pero no está limitado a: JQuery, Bootstrap, Font Awesome, Python Chess, Chess JS, Chessboard JS...</li>
+            </ul>
+            
+            <!-- Sección Ideas a implementar-->
+            <div class="text-left mt-4">
+                <h4>Ideas a implementar</h4>
+            </div>
+
+            <ul class="mt-3">
+                <li class="mb-2">Un modo de juego de un jugador contra la máquina, que será el mejor motor de ajedrez del mundo, Stockfish.</li>
+                <li class="mb-2">Un sistema de autenticación para que los usuarios puedan registrarse y autenticarse.</li>
+                <li class="mb-1">Un modo multijudador online mediante un sistema de creación de partidas a las que otro jugador se pueda unir:</li>
+                    <ul>
+                        <li class="mb-1">Desde un  lobby  para partidas públicas.</li>
+                        <li class="mb-1">Mediante una invitación para partidas privadas.</li>
+                    </ul>
+                <li class="mb-2">Distintos tipos de partida multijugador en función por ejemplo del tiempo permitido para jugar.</li>
+                <li class="mb-2">Un modo de puzzles donde el jugador tenga que conseguir determinado objetivo en un número limitado de movimientos.</li>
+                <li class="mb-2">Un sistema de personalización de la interfaz que incluya cambios de estilo fichas y tablero y la opción de jugar con o sin sonido.</li>
+                <li class="mb-2">Una barra de estado de la partida que muestre qué lado está en una posición más favorable.</li>
+                <li class="mb-2">Un registro de partidas completadas (e incluso partidas en curso) al que se pueda acceder desde el perfil del usuario.</li>
+                <li class="mb-2">Un modo de "trampas" de manera que se pueda utilizar nuestra página para calcular los mejores movimientos a realizar en partidas que se estén jugando en otras páginas de ajedrez (?).</li>
+                <li class="mb-2">Un sistema de clasificación de usuarios registrados similar a los puntos ELO (?).</li>
+            </ul>
+            
+        </div>
+
+    </main>
+
+   <!-- Pie de página -->
+   <footer class="mt-5">
+
+    <div class="card-footer">
+
+        <div class="container">
+
+            <div class="row">
+
+                <!-- Título -->
+                <div class="col">
+                    <h4 class="text-muted">AeroChess - Ajedrez de excelencia internacional</h4>
+                </div>
+
+                <!-- Links -->
+                <div class="col-auto d-flex flex-column justify-content-center">
+                    <div class="text-muted text-right">
+                        <a class="text-muted" href="/" title="Página principal">Página principal</a> |
+                        <a class="text-muted" href="/about" title="Sobre el proyecto">Sobre el proyecto</a> |
+                        <a class="text-muted" href="" title="GitHub del proyecto">GitHub del proyecto</a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="card-footer">
+
+        <div class="container">
+
+            <!-- Autores y copyright -->
+            <div class="text-muted text-center">
+                <p>Creado por Paco, Quintín, Sergio y Valeriano como proyecto para la asignatura de Programación Gráfica en Python y JavaScript.</p>
+                <p>Copyright 2021 <span class="far fa-copyright"></span> | Todos los derechos reservados | Versión  0.05</p>
+            </div>
+
+        </div>
+    
+    </div>
+
+</footer>
+
+{% endblock %}
