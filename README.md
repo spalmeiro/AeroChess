@@ -157,7 +157,7 @@ Para garantizar que pipenv registra los cambios en "Pipfile" y "Pipfile.lock".
 
 Una vez hecho todo lo anterior, para conseguir que el servidor funcione en modo local, lo primero que hay que hacer es asegurarse de que en el archivo "`AeroChess-main/game/views.py`" las rutas hacia Stockfish apuntan correctamente hacia el archivo ejecutable de Stockfish.
 
-La ruta correcta para Stockfish que hay que colocar en el archivo si se ha seguido al pie de la letra este tutorial sería: "`C:\Users\Usuario\Desktop\PGAA\Stockfish\stockfish\stockfish_13_win_x64\stockfish_13_win_x64.exe`"
+La ruta correcta para Stockfish que hay que colocar en el archivo si se ha seguido al pie de la letra este tutorial sería: "`C:\Users\Usuario\Desktop\PGAA\stockfish_13_win_x64\stockfish_13_win_x64.exe`"
 
 Reemplazando en el código todas las "\\" por "/".
 
