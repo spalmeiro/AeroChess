@@ -155,13 +155,7 @@ Para garantizar que pipenv registra los cambios en "Pipfile" y "Pipfile.lock".
 
 ## Activación del servidor
 
-Una vez hecho todo lo anterior, para conseguir que el servidor funcione en modo local, lo primero que hay que hacer es asegurarse de que en el archivo "`AeroChess/game/views.py`" las rutas hacia Stockfish apuntan correctamente hacia el archivo ejecutable de Stockfish.
-
-La ruta correcta para Stockfish que hay que colocar en el archivo si se ha seguido al pie de la letra este tutorial sería: "`C:\Users\Usuario\Desktop\PGAA\stockfish_13_win_x64\stockfish_13_win_x64.exe`"
-
-Reemplazando en el código todas las "\\" por "/".
-
-Una vez hecho esto, para activar el servidor basta con ejecutar el archivo runserver.bat que se encuentra dentro del repositorio, lo que abrirá una consola que cargará el servidor en el servidor local en el puerto por defecto, que es el 8000.
+Una vez hecho todo lo anterior, para conseguir que el servidor funcione en modo local basta con ejecutar el archivo runserver.bat que se encuentra dentro del repositorio, lo que abrirá una consola que cargará el servidor en el servidor local en el puerto por defecto, que es el 8000.
 
 Para acceder al sitio web se debe teclear [127.0.0.1:8000][web] o [localhost:8000][web] en la barra de navegación del navegador web.
 

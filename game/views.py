@@ -6,8 +6,8 @@ import chess.engine
 from stockfish import Stockfish
 
 # Rutas hacia stockfish.exe
-stockfish = Stockfish("C:/Users/Usuario/Desktop/Informatica/Programacion/Proyectos/PGAA/stockfish/stockfish_13_win_x64/stockfish_13_win_x64.exe")
-engine = chess.engine.SimpleEngine.popen_uci("C:/Users/Usuario/Desktop/Informatica/Programacion/Proyectos/PGAA/stockfish/stockfish_13_win_x64/stockfish_13_win_x64.exe")
+stockfish = Stockfish("../stockfish/stockfish_13_win_x64/stockfish_13_win_x64.exe")
+engine = chess.engine.SimpleEngine.popen_uci("../stockfish/stockfish_13_win_x64/stockfish_13_win_x64.exe")
 
 # Página principal
 def index(request):
