@@ -34,7 +34,6 @@ def make_move(request):
 
     nivel = request.POST['Nivel'] # Recoge el nivel de dificultad seleccionado para el ordenador
 
-    print(nivel)
     stockfish.set_skill_level(int(nivel)) # Carga el nivel de dificultad en stockfish
     
     sub_board = stockfish.set_fen_position(fen) # Crea un tablero en stockfish con el FEN recogido de la web
@@ -49,14 +48,21 @@ def make_move(request):
     
     fen = board.fen() # Devuelve el nuevo FEN de la partida tras el movimiento de Stockfish
 
+
+
+    stockfish.set_skill_level(20) # Carga el nivel de dificultad en stockfish
+    sub_board = stockfish.set_fen_position(fen) # Crea un tablero en stockfish con el FEN recogido de la web
+
+    Tu_best_move = stockfish.get_best_move_time(100) # Se busca el mejor movimiento en el tiempo permitido    
+    
     # Se devuelven todas las variables que serán enviadas de nuevo a la web mediante un archivo json
     data = {
         'fen': fen,            
         'best_move': str(best_move),
-        'score': str(best_move),
+        'score': str(info["score"].white().score()),
         'pv': str(best_move),
         'nodes':str(best_move),
-        'time': str(best_move)
+        'time': str(Tu_best_move)
     }
     
     return JsonResponse(data)

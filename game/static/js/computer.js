@@ -171,7 +171,13 @@
                     $score.text(data.score);
                     $time.text(data.time);
                     $nodes.text(data.nodes);
-                    $knps.text(Math.round(Number($nodes.text()) / parseFloat($time.text())) / 1000)
+                    $knps.text(data.time)
+
+                    current_progress=($score.text()/20)+50
+                    $("#dynamic")
+                    .css("width", current_progress + "%")
+                    //.attr("aria-valuenow", current_progress)
+                    .text((current_progress) + "% Probabilidad de victoria");                    
 
                     reproSon("ficha.wav");
 
@@ -280,6 +286,7 @@
     // Deshacer movimientos
     $('#take_back').on('click', function() { 
         // Retrocede un movimiento
+        game.undo();
         game.undo();
         // Actualiza el estado del tablero
         board.position(game.fen());
