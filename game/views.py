@@ -1,5 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import JsonResponse
+
+from .forms import signupform
+from django.contrib.auth import authenticate, login
 
 import chess
 import chess.engine
@@ -8,6 +11,27 @@ from stockfish import Stockfish
 # Rutas hacia stockfish.exe
 stockfish = Stockfish("../stockfish/stockfish_13_win_x64/stockfish_13_win_x64.exe")
 engine = chess.engine.SimpleEngine.popen_uci("../stockfish/stockfish_13_win_x64/stockfish_13_win_x64.exe")
+
+# Registro
+def signup(request):
+    if request.method == 'POST':
+        form = signupform(request.POST)
+        if form.is_valid():
+            user = form.save()
+            user.refresh_from_db()  
+            # Carga la instancia del perfil creada por la señal
+            user.save()
+            raw_password = form.cleaned_data.get('password1')
+ 
+            # Inicia sesión inmediatamente despúes de crear la cuenta
+            user = authenticate(username=user.username, password=raw_password)
+            login(request, user)
+ 
+            # Redirige al usuario a la página principal
+            return redirect('/')
+    else:
+        form = signupform()
+    return render(request, 'registration/signup.html', {'form': form})
 
 # Página principal
 def index(request):
@@ -48,9 +72,8 @@ def make_move(request):
     
     fen = board.fen() # Devuelve el nuevo FEN de la partida tras el movimiento de Stockfish
 
-
-
     stockfish.set_skill_level(20) # Carga el nivel de dificultad en stockfish
+    
     sub_board = stockfish.set_fen_position(fen) # Crea un tablero en stockfish con el FEN recogido de la web
 
     Tu_best_move = stockfish.get_best_move_time(100) # Se busca el mejor movimiento en el tiempo permitido    

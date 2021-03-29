@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block title %} Aerochess -  Iniciar sesión {% endblock %}
+
+{% block body %}
+
+    <main>
+
+        <div class="container">
+
+            <h2 class="text-center">AeroChess</h2>
+            <hr>
+
+            <form class="form-login" method="post">
+
+                <!-- Esto proporciona protección contra Cross Site Request Forgeries -->
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label class="sr-only" for="id_username">Nombre de usuario:</label>
+                    <input class="form-control" type="text" name="username" id="id_username" placeholder="Nombre de usuario" required autofocus>
+                </div>
+
+                <div class="form-group">
+                    <label class="sr-only" for="id_password">Contraseña:</label>
+                    <input class="form-control" type="password" name="password" id="id_password"  placeholder="Contraseña" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Iniciar sesión</button>
+
+            </form>
+
+            <hr>
+            <h6 class="font-weight-normal">¿No tienes una cuenta? &rarr; <a href="/accounts/signup">Crear cuenta</a></h6>
+
+        </div>
+
+    </main>
+
+{% endblock %}
