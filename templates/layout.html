@@ -11,17 +11,21 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
+        <!-- Esto es para cargar un tag de Django -->
+        {% load static %}
+
         <!-- Favicon -->
-        <link href="/static/img/favicon/favicon.ico" rel="shortcut icon">
+        <link rel="shortcut icon" href="{% static 'img/favicon/favicon.ico' %}">
 
         <!-- Título de la página -->
         <title>{% block title %}{% endblock %}</title>
 
         <!-- CSS de Bootstrap 4.6.0 -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">        
+        <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+        <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">         -->
         
         <!-- CSS propio -->
-        <link rel="stylesheet" href="/static/css/styles.css">
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 
         <!-- Script de JQuery 3.6.0 -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -33,7 +37,10 @@
         <script src="https://kit.fontawesome.com/7899aa2b49.js" crossorigin="anonymous"></script>
 
         <!-- Script propio para el modo hover de los dropdowns -->
-        <script src="/static/js/dropdown.js" defer></script>
+        <script src="{% static 'js/dropdown.js' %}" defer></script>
+
+        <!-- Script propio para la personalización de la página -->
+        <script src="{% static 'js/customization.js' %}" defer></script>
 
         <!-- Otros CDNs que requiera la página en particular (si los requiere) -->
         {% block cdn %}{% endblock %}

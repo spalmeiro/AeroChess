@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 
+import os
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,17 +22,21 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'xa@!cw5(1l8y9hmll+q!tk#k^a#n64m*xd+q5%vnv4+x)98t-m'
+SECRET_KEY = 'd^0ij^sa47qaj@yx$*6rilwy3vkyfvn_iv)il^)41t*8$_aeu8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    '192.168.0.100',
+]
 
-#AUTH_USER_MODEL = 'game.models.User'
+# AUTH_USER_MODEL = 'game.models.User'
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
 
 # Application definition
 
@@ -41,7 +47,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'game.apps.GameConfig'
+    'django_extensions',
+    'accounts.apps.AccountsConfig',
+    'base.apps.BaseConfig',
+    'channels',
+    'play.apps.PlayConfig',
 ]
 
 MIDDLEWARE = [
@@ -59,7 +69,7 @@ ROOT_URLCONF = 'aerochess.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -71,6 +81,22 @@ TEMPLATES = [
         },
     },
 ]
+
+
+# Channels
+# https://channels.readthedocs.io/en/stable/
+
+ASGI_APPLICATION = 'aerochess.asgi.application'
+
+redis_host = os.environ.get('REDIS_HOST', 'localhost')
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [(redis_host, 6379)],
+        },
+    },
+}
 
 WSGI_APPLICATION = 'aerochess.wsgi.application'
 
@@ -123,3 +149,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [str(BASE_DIR.joinpath('static'))]

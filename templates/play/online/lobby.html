@@ -1,0 +1,114 @@
+{% extends "layout.html" %}
+
+{% block title %} Aerochess - Lobby {% endblock %}
+
+{% block body %}
+
+    <!-- Barra de navegación -->
+    {% include "includes/navbar.html" %}
+
+    <main>
+
+        <!-- Bloque de partidas públicas disponibles -->
+        <div class="container mt-5">
+
+            <!-- Título -->
+            <div class="text-left">
+                <h2>Sala de espera</h2>
+                <hr>
+            </div>
+
+            {% if public %}
+
+                <table class="table table-hover">
+
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Oponente</th>
+                            <th scope="col">Juegas con</th>
+                            <th scope="col">Modo</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        {% for room in public %}
+                            <tr style="transform: rotate(0);"> 
+                                <th scope="row"><a class="stretched-link" href="{{ room.link }}"></a>1</th>
+                                <td>{{ room.owner.username }}</td>
+                                <td>{{ room.side }}</td>
+                                <td>Normal</td>
+                            </tr>
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            {% else %}
+
+                <p>Parece que no hay ninguna partida pública disponible.</p>
+
+            {% endif %}
+
+            <div class="card" style="margin-top: 10%;">
+
+                <div class="card-header">
+
+                    <!-- Título -->
+                    <div class="text-left">
+                        <h2>Tus partidas</h2>
+                        <hr>
+                    </div>
+
+                    <ul class="nav nav-tabs card-header-tabs">
+                        <li class="col-6 nav-item">
+                            <a class="nav-link text-center active" data-toggle="tab" href="#ongoing">En curso</a>
+                        </li>
+                        <li class="col-6 nav-item">
+                            <a class="nav-link text-center" id="profile-tab" data-toggle="tab" href="#public">Públicas</a>
+                        </li>
+                    </ul>
+
+                </div>
+
+                <div class="card-body">
+
+                    <div class="tab-content" id="myTabContent">
+
+                        <div class="tab-pane fade show active" id="ongoing">
+
+                            <div class="align-items-stretch" style="display: flex; flex-direction: row; flex-wrap: wrap; align-items: baseline;">
+                                {% for room in public %}
+                                    <div class="card border-primary m-1" style="width: 250px">
+                                    <div class="card-body">
+                                        <h6 class="card-text">Username: {{room.owner.username}}</h6>
+                                        <h6 class="card-text">Play as {{room.side}}</h6>
+                                        <a type="button" class="btn btn-lg btn-block btn-primary" href="{{room.link}}">Join Game</a>
+                                    </div>
+                                    </div>
+                                {% empty %}
+                                    <p>Parece que no hay ninguna partida disponible ahora mismo. <a class="btn btn-secondary" href="{% url 'creategame' %}" role="button">Crear partida</a></p>
+                                {% endfor %}
+                            </div> 
+
+                        </div>
+
+                        <div class="tab-pane fade" id="public" role="tabpanel" aria-labelledby="profile-tab">
+
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+{% endblock %}

@@ -1,0 +1,193 @@
+{% extends "layout.html" %}
+
+{% block  title %} Aerochess - Partida multijugador {% endblock %}
+
+{% block cdn %}
+
+    <!-- Esto es para cargar un tag de Django -->
+    {% load static %}
+
+    <!-- CSS de Chessboard para el tablero  -->
+    <link rel="stylesheet" href="{% static 'css/chessboard-1.0.0.css' %}">
+
+    <!-- Script de Chessboard para el funcionamiento del tablero -->
+    <script src="{% static 'js/chessboard-1.0.0.js' %}"></script>
+
+    <!-- Script de Chess para el funcionamiento de la interfaz -->
+    <script src="{% static 'js/chess.js' %}"></script>
+
+    <!-- Script propio para el funcionamiento de la página -->
+    <script src="{% static 'js/multiplayer.js' %}" defer></script>
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/reconnecting-websocket/1.0.0/reconnecting-websocket.min.js" integrity="sha512-B4skI5FiLurS86aioJx9VfozI1wjqrn6aTdJH+YQUmCZum/ZibPBTX55k5d9XM6EsKePDInkLVrN7vPmJxc1qA==" crossorigin="anonymous"></script> -->
+
+{% endblock %}
+
+{% block body %}
+
+    <!-- Barra de navegación -->
+    {% include "includes/navbar.html" %}
+
+    <!-- Modales -->
+    {% include "includes/customization.html" %}
+
+    <!-- Modales exclusivos de esta página -->
+
+    <!-- Modal genérico para los distintos mensajes sobre el estado de la partida -->
+    <div class="modal fade" id="statusModal" tabindex="0">
+
+        <div class="modal-dialog modal-dialog-centered">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="statusModal_title"></h5>
+                </div>
+
+                <div class="modal-body">
+                    <p id="statusModal_body"></p>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-success" type="button" role="button" data-dismiss="modal">Aceptar</button>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para abandonar la partida -->
+    <div class="modal fade" id="resignModal" tabindex="0">
+
+        <div class="modal-dialog modal-dialog-centered">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">¿Estás seguro de que quieres abandonar la partida?</h5>
+                </div>
+
+                <div class="modal-body">
+                    <p id="resignModal_body">Si lo haces, la partida contará como una derrota.</p>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-danger mr-auto" type="button" role="button" data-dismiss="modal">Cancelar</button>
+                    <button class="btn btn-success" id="resign_yes" type="button" role="button" data-dismiss="modal">Sí, estoy seguro</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para ofrecer tablas -->
+    <div class="modal fade" id="drawOfferModal" tabindex="0">
+
+        <div class="modal-dialog modal-dialog-centered">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">¿Estás seguro de que quieres ofrecer tablas?</h5>
+                </div>
+
+                <div class="modal-body">
+                    <p>Si tu oponente acepta, la partida acabará en tablas. En caso contrario, continuará.</p>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-secondary mr-auto" id="drawOffer_cancel" type="button" role="button" data-dismiss="modal">Cancelar</button>
+                    <button class="btn btn-success" id="drawOffer_send" type="button" role="button" data-dismiss="modal">Sí, estoy seguro</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para aceptar tablas -->
+    <div class="modal fade" id="drawModal" tabindex="0">
+
+        <div class="modal-dialog modal-dialog-centered">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title">Tu oponente ha ofrecido tablas</h5>
+                </div>
+
+                <div class="modal-body">
+                    <p>Si aceptas, la partida acabará en tablas. En caso contrario, continuará.</p>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-secondary mr-auto" id="draw_reject" type="button" role="button" data-dismiss="modal">Rechazar</button>
+                    <button class="btn btn-success" id="draw_accept" type="button" role="button" data-dismiss="modal">Aceptar</button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    
+    <main>
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-md-7">
+
+                    <!-- Oponente -->
+                    <h5>Añadir</h5>
+
+                    <!-- Tablero -->
+                    <hr class="mt-1 mb-2">
+                    <div id="multiplayerBoard" style="width: 100%;"></div>
+                    <hr class="mt-2 mb-1">
+
+                    <!-- Usuario -->
+                    <h5>{{ user.username }}</h5>
+
+                </div>
+    
+                <div class="col-md-5">
+    
+                    <div class="card" style="height: 100%; width: 100%;">
+    
+                        <div class="card-header">
+                            Partida contra el ordenador
+                        </div>
+    
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item" id="status"></li>
+                            <li class="list-group-item" style="height: 100%;">
+                                <strong>PGN:</strong><div id="pgn"></div>
+                            </li>
+                        </ul>
+
+                        <div class="card-body d-flex">
+
+                            <div class="align-self-end" style="width: 100%;">
+
+                                <div class="btn-group" style="width: 100%;">
+                                    <button class="btn btn-outline-secondary" id="draw_offer">Ofrecer tablas</button>
+                                    <button class="btn btn-outline-secondary" id="resign">Abandonar</button>
+                                </div>
+
+                            </div>
+    
+                        </div>
+    
+                    </div>
+    
+                </div>
+    
+            </div>
+
+        </div>
+
+    </main>
+
+{% endblock %}

@@ -1,0 +1,124 @@
+{% extends "layout.html" %}
+
+{% block  title %} Aerochess - Partida contra el ordenador {% endblock %}
+
+{% block cdn %}
+
+    <!-- Esto es para cargar un tag de Django -->
+    {% load static %}
+
+    <!-- CSS de Chessboard para el tablero  -->
+    <link rel="stylesheet" href="{% static 'css/chessboard-1.0.0.css' %}">
+
+    <!-- Script de Chessboard para el funcionamiento del tablero -->
+    <script src="{% static 'js/chessboard-1.0.0.js' %}"></script>
+
+    <!-- Script de Chess para el funcionamiento de la interfaz -->
+    <script src="{% static 'js/chess.js' %}"></script>
+
+    <!-- Script propio para el funcionamiento de la página -->
+    <script src="{% static 'js/computer.js' %}" defer></script>
+
+{% endblock %}
+
+{% block body %}
+
+    <!-- Barra de navegación -->
+    {% include "includes/navbar.html" %}
+
+    <!-- Modales -->
+    {% include "includes/customization.html" %}
+
+    <main>
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-md-7">
+
+                    <h5>Stockfish 13</h5>
+
+                    <hr class="mt-1 mb-2">
+                    <div id="tablero" style="width: 100%;"></div>
+                    <hr class="mt-2 mb-1">
+
+                    {% if user.is_authenticated %}
+                        <h5>{{ user.username }}</h5>
+                    {% else %}
+                        <h5>Anónimo</h5>
+                    {% endif %}
+
+                </div>
+    
+                <div class="col-md-5">
+    
+                    <div class="card" style="height: 100%; width: 100%;">
+    
+                        <div class="card-header">
+                            Partida contra el ordenador
+                        </div>
+    
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item" id="status"></li>
+                            <li class="list-group-item" style="height: 100%;">
+                                <strong>PGN:</strong><div id="pgn"></div>
+                            </li>
+                        </ul>
+
+                        <div class="card-body d-flex">
+
+                            <div class="align-self-end">
+
+                                <div class="input-group mb-3">
+                                    <select id="move_time" class="form-control mr-2">
+                                      <option value="100" selected>Instantaneo</option>
+                                      <option value="1000">1 sec</option>
+                                      <option value="2000">2 sec</option>
+                                      <option value="3000">3 sec</option>
+                                      <option value="4000">4 sec</option>
+                                      <option value="5000">5 sec</option>
+                                      <option value="6000">6 sec</option>
+                                      <option value="7000">7 sec</option>
+                                      <option value="8000">8 sec</option>
+                                      <option value="9000">9 sec</option>
+                                      <option value="10000">10 sec</option>
+                                    </select>
+                                    <select id="Nivel" class="form-control ml-2">
+                                      <option value="0">Nivel 0</option>
+                                      <option value="2">Nivel 2</option>
+                                      <option value="4">Nivel 4</option>
+                                      <option value="6">Nivel 6</option>
+                                      <option value="8">Nivel 8</option>
+                                      <option value="10" selected>Nivel 10</option>
+                                      <option value="12">Nivel 12</option>
+                                      <option value="14">Nivel 14</option>
+                                      <option value="16">Nivel 16</option>
+                                      <option value="18">Nivel 18</option>
+                                      <option value="20">Nivel 20</option>
+                                    </select>
+                                </div>
+
+                                <div class="btn-group">
+                                    <button id="new_game" class="btn btn-outline-secondary">Nueva partida</button>
+                                    <button id="make_move" class="btn btn-outline-secondary">Realizar movimiento</button>
+                                    <button id="take_back" class="btn btn-outline-secondary">Retroceder movimiento</button>
+                                    <button id="flip_board" class="btn btn-outline-secondary">Rotar tablero</button>
+                                </div>
+
+                            </div>
+    
+                        </div>
+    
+                    </div>
+    
+                </div>
+    
+            </div>
+
+        </div>
+
+    </main>
+
+{% endblock %}
+

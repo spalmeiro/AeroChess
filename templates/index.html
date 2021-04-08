@@ -4,24 +4,27 @@
 
 {% block cdn %}
 
+    <!-- Esto es para cargar un tag de Django -->
+    {% load static %}
+
     <!-- CSS de Chessboard para el tablero  -->
-    <link rel="stylesheet" href="/static/css/chessboard-1.0.0.min.css">
+    <link rel="stylesheet" href="{% static 'css/chessboard-1.0.0.css' %}">
 
     <!-- Script de Chessboard para el funcionamiento del tablero -->
-    <script src="/static/js/chessboard-1.0.0.min.js"></script>
+    <script src="{% static 'js/chessboard-1.0.0.js' %}" defer></script>
 
     <!-- Script de Chess para el funcionamiento de la interfaz -->
-    <script src="/static/js/chess.js"></script>
+    <script src="{% static 'js/chess.js' %}"></script>
 
     <!-- Script propio para el funcionamiento de la página -->
-    <script src="/static/js/index.js" defer></script>
+    <script src="{% static 'js/index.js' %}" defer></script>
 
 {% endblock %}
 
 {% block body %}
 
     <!-- Barra de navegación -->
-    {% include "navbar.html" %}
+    {% include "includes/navbar.html" %}
 
     <main>
 
@@ -105,6 +108,6 @@
     </main>
 
     <!-- Pie de página -->
-    {% include "footer.html" %}
+    {% include "includes/footer.html" %}
 
 {% endblock %}

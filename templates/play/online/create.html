@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block title %} Aerochess -  Crear partida online {% endblock %}
+
+{% block body %}
+
+    <main>
+
+        <div class="container">
+
+            <h2 class="text-center">Crear partida online</h2>
+            <hr>
+
+            <form class="form-create" method="post">
+
+                <!-- Esto proporciona protección contra Cross Site Request Forgeries -->
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label class="form-label" for="opponent">Oponente (si se deja en blanco será una partida pública que aparecerá en el lobby):</label>
+                    <input class="form-control" type="text" name="opponent" id="opponent" placeholder="Oponente" autofocus>
+                </div>
+
+                <div class="form-group">
+                    <label for="owner_side">Selecciona con qué piezas deseas jugar:</label>
+                    <select class="form-control" id="owner_side" name="owner_side">
+                        <option value="white">Blancas</option>
+                        <option value="black">Negras</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Crear partida</button>
+
+            </form>
+
+        </div>
+
+    </main>
+
+{% endblock %}

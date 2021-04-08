@@ -8,64 +8,28 @@
     var $board = $('#tablero')
     var game = new Chess()
     var $status = $('#status') // Estado de la partida
-    var $apariencia = $('#apariencia') // Tema de las piezas
     var $fen = $('#fen') // FEN
-    var $pgn = $('#pgn')
+    var $pgn = $('#pgn') // PGN
     var $score = $('#score')
     var $time = $('#time')
     var $nodes = $('#nodes')
     var $knps = $('#knps')
-    var squareClass = 'square-55d63'// se usa para pintar los cuadros de los ultimos movimientos
-    var squareToHighlight = null // se usa para pintar los cuadros de los ultimos movimientos
+    var squareClass = 'square-55d63' // Se usa para pintar los cuadros de los ultimos movimientos
+    var squareToHighlight = null // Se usa para pintar los cuadros de los ultimos movimientos
     var whiteSquareGrey = '#a9a9a9' // Determina el color con el que se destaca una casilla blanca
     var blackSquareGrey = '#696969' // Determina el color con el que se destaca una casilla negra
 
-    // Función que permite la personalización de la apariencia de las piezas
-    function tema (piece) {
-        opcion = $('#apariencia option:selected').val()
-        return '/static/img/chesspieces/'+ opcion + '/'+ piece + '.png'
-    }
+    // Variables de personalización
+    var $piece_style = $('#piece_style') // Estilo de las piezas
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    
 
     // Función que reproduce los sonidos que se le pasan como argumento
     function reproSon (name) {
         var audio = new Audio('/static/sounds/' + name);
         audio.play();
-    }
-
-    // Función que actualiza los datos sobre el estado de la partida
-    function actualizacion () {
-
-        var status = ''
-        var moveColor = 'Blancas'
-
-        if (game.turn() === 'b') {
-        moveColor = 'Negras'
-        }
-
-        // Comprueba si hay jaque mate
-        if (game.in_checkmate()) {
-            status = 'Fin del Juego, ' + moveColor + ' hacen jaque mate.'
-            reproSon('mate.mp3')
-        }
-
-        // Comprueba si hay tablas
-        else if (game.in_draw()) {
-            status = 'Fin del juego, tablas'
-        }
-
-        // Si no se cumple lo anterior, la partida continúa
-        else {
-            status = ' Turno de ' + moveColor
-            // Comprueba si hay jaque
-            if (game.in_check()) {
-                status += ', ' + moveColor + 'en jaque'
-            }
-        }
-
-        // Se actualizan los elementos DOM (Document Object Model)
-        $status.html(status)
-        $fen.val(game.fen())
-        $pgn.html(game.pgn())
     }
 
     // Función que controla las marcas de color al mover
@@ -117,82 +81,134 @@
         removeGreySquares()
     }
 
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    // Función que actualiza los datos sobre el estado de la partida
+    function actualizacion () {
+
+        var status = ''
+        var moveColor = 'blancas'
+
+        // Comprueba si mueven las negras
+        if (game.turn() === 'b') {
+            moveColor = 'negras'
+        }
+
+        // Comprueba si hay jaque mate
+        if (game.in_checkmate()) {
+            status = 'Fin de la partida, ' + moveColor + ' hacen jaque mate.'
+            reproSon('mate.mp3')
+        }
+
+        // Comprueba si hay tablas
+        else if (game.in_draw()) {
+            status = 'Fin de la partida, tablas'
+        }
+
+        // Comprueba si hay tablas por ahogado
+        else if (game.in_stalemate()) {
+            status = 'Fin de la partida, tablas por ahogado'
+        }
+
+        // Si no se cumple lo anterior, la partida continúa
+        else {
+            status = 'Turno de ' + moveColor
+            // Comprueba si hay jaque
+            if (game.in_check()) {
+                status += ', ' + moveColor + 'en jaque'
+            }
+        }
+
+        // Se actualiza el estado de la partida, el FEN y el PGN
+        $status.html(status)
+        $fen.val(game.fen())
+        $pgn.html(game.pgn())
+    }
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
     // Comunicación entre la web y el servidor, para que Stockfish calcule el mejor movimiento
     
-        // Con esta función cumplimos los protocolos de seguridad de CRFS
-        function getCookie(name) {
-            let cookieValue = null;
-            if (document.cookie && document.cookie !== '') {
-                const cookies = document.cookie.split(';');
-                for (let i = 0; i < cookies.length; i++) {
-                    const cookie = cookies[i].trim();
-                    // Does this cookie string begin with the name we want?
-                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                        break;
-                    }
+    // Con esta función cumplimos los protocolos de seguridad de CRFS
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
                 }
             }
-            return cookieValue;
         }
-        const csrftoken = getCookie('csrftoken');
+        return cookieValue;
+    }
+    const csrftoken = getCookie('csrftoken');
 
-        // Envia información sobre la partida al servidor y devuelve el mejor movimiento calculado por Stockfish
-        function make_move() {
+    // Envia información sobre la partida al servidor y devuelve el mejor movimiento calculado por Stockfish
+    function make_move() {
 
-            $.ajax({
-                url: '/play/computer/make_move',
-                type: "POST",
-                data: {
-                    'fen': game.fen(),
-                    'move_time': $('#move_time option:selected').val(),
-                    'Nivel': $('#Nivel option:selected').val(),
-                },
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
-                },
-                success: function (data) {
-                    // Carga el nuevo FEN en el tablero
-                    game.move(data.best_move, { sloppy: true })
+        $.ajax({
+            url: '/play/computer/make_move',
+            type: "POST",
+            data: {
+                'fen': game.fen(),
+                'move_time': $('#move_time option:selected').val(),
+                'Nivel': $('#Nivel option:selected').val(),
+            },
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            },
+            success: function (data) {
+                // Carga el nuevo FEN en el tablero
+                game.move(data.best_move, { sloppy: true })
 
-                    // Actualiza el tablero
-                    board.position(game.fen());
+                // Actualiza el tablero
+                board.position(game.fen());
 
-                    estoy=data.best_move.substring(0,2);
-                    voy=data.best_move.substring(2,4);
+                estoy=data.best_move.substring(0,2);
+                voy=data.best_move.substring(2,4);
 
-                    removeHighlights('black');
+                removeHighlights('black');
 
-                    $board.find('.square-' + estoy).addClass('highlight-black');
-                    $board.find('.square-' + voy).addClass('highlight-black')
-                    squareToHighlight = data.best_move;
+                $board.find('.square-' + estoy).addClass('highlight-black');
+                $board.find('.square-' + voy).addClass('highlight-black')
+                squareToHighlight = data.best_move;
 
-                    // Actualiza la información sobre la partida
-                    $score.text(data.score);
-                    $time.text(data.time);
-                    $nodes.text(data.nodes);
-                    $knps.text(data.time)
+                // Actualiza la información sobre la partida
+                $score.text(data.score);
+                $time.text(data.time);
+                $nodes.text(data.nodes);
+                $knps.text(data.time)
 
-                    current_progress=($score.text()/20)+50
-                    $("#dynamic")
-                    .css("width", current_progress + "%")
-                    //.attr("aria-valuenow", current_progress)
-                    .text((current_progress) + "% Probabilidad de victoria");                    
+                current_progress=($score.text()/20)+50
+                $("#dynamic")
+                .css("width", current_progress + "%")
+                //.attr("aria-valuenow", current_progress)
+                .text((current_progress) + "% Probabilidad de victoria");                    
 
-                    reproSon("ficha.wav");
+                reproSon("ficha.wav");
 
-                    // Actualiza el estado de la partida
-                    actualizacion();
+                // Actualiza el estado de la partida
+                actualizacion();
 
-                    console.log(data)
-                },
-                error: function (error) {
-                    console.log(error);
-                }
-            });
-        }
+                console.log(data)
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
 
-    //
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
     // Función que controla cuándo y qué piezas se pueden seleccionar para mover
     function onDragStart (source, piece, position, orientation) {
@@ -241,10 +257,14 @@
         board.position(game.fen())
     }
 
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
     // Configuración del tablero
     var config = {
         draggable: true,
-        pieceTheme: tema,
+        pieceTheme: style,
         position: 'start',
         onDragStart: onDragStart,
         onDrop: onDrop,
@@ -256,11 +276,16 @@
 
     // Crea la instancia del tablero
     board = Chessboard('tablero', config)
+    $(window).resize(board.resize)
 
     // Actualiza el estado de la partida
     actualizacion();
 
 //
+
+
+
+
 
 // FUNCIONES PARA LOS BOTONES QUE SE MUESTRAN EN LA INTERFAZ
 
@@ -317,11 +342,11 @@
         actualizacion();
     });
 
-    //
-    $('#subboton').on('click', function(){
-        reproSon("click.wav");
-        board.flip();    
-        board.flip();
+    // Aplica los cambios de personalización al tablero
+    $('#customization').on('click', function(){
+        reproSon("click.wav")
+        board.flip()    
+        board.flip()
     })
 
 //
