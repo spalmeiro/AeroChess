@@ -23,7 +23,9 @@
     // Variables de personalización
     var $piece_style = $('#piece_style') // Estilo de las piezas
     
-    // Variables que definen el título y contenido del modal sobre el estado de la partida
+    // Variables que definen el título y contenido de los 
+    var $connectionModalTitle = $("#connectionModal_title")
+    var $connectionModalBody = $("#connectionModal_body")
     var $statusModalTitle = $('#statusModal_title')
     var $statusModalBody = $('#statusModal_body')
 
@@ -65,9 +67,8 @@
     // Función que marca los posibles movimientos cuando el ratón se sitúa sobre una pieza
     function onMouseoverSquare (square, piece) {
 
-        // Controla que sólo se puedan seleccionar las piezas del lado al que le toca mover
-        // if ((orientation === 'white' && piece.search(/^w/) === -1) || (orientation === 'black' && piece.search(/^b/) === -1)) return false
-        // if (!((orientation === 'white' && game.turn()==='w') || (orientation === 'black' && game.turn()==='b'))) return
+        // Controla que sólo se marquen las piezas del lado al que le toca mover
+        if (!((orientation === 'white' && game.turn()==='w') || (orientation === 'black' && game.turn()==='b'))) return
 
         // Consigue la lista de movimientos posibles para esa casilla
         var moves = game.moves({
@@ -132,8 +133,8 @@
 
             socket.send(JSON.stringify({"command": "game-over", "result": "Game ended in drawn position"}))
 
-            $statusModalTitle.html("Game Over")
-            $statusModalBody.html(status)
+            $statusModalTitle.html("Tablas")
+            $statusModalBody.html("La partida ha acabado en tablas. ¡Habéis empatado!")
             $('#statusModal').modal({
                 keyboard: false,
                 backdrop: 'static'
@@ -147,8 +148,23 @@
 
             socket.send(JSON.stringify({"command": "game-over", "result": "Game ended in stalemate"}))
 
-            $statusModalTitle.html("Game Over")
-            $statusModalBody.html(status)
+            $statusModalTitle.html("Tablas por ahogado.")
+            $statusModalBody.html("La partida ha acabado en tablas por ahogado. ¡Habéis empatado!")
+            $('#statusModal').modal({
+                keyboard: false,
+                backdrop: 'static'
+            })
+        }
+
+        // Comprueba si hay tablas
+        else if (game.in_threefold_repetition()) {
+
+            status = 'Fin de la partida, tablas por repetición'
+
+            socket.send(JSON.stringify({"command": "game-over", "result": "Game ended in drawn position due to threefold repetition rule"}))
+
+            $statusModalTitle.html("Tablas")
+            $statusModalBody.html("La partida ha acabado en tablas por repetición. ¡Habéis empatado!")
             $('#statusModal').modal({
                 keyboard: false,
                 backdrop: 'static'
@@ -169,7 +185,7 @@
         // Se actualiza el estado de la partida, el FEN y el PGN
         $status.html(status)
         $fen.html(game.fen())
-        $pgn.html(game.pgn())
+        $pgn.html(game.pgn({ max_width: 5, newline_char: "<br />"}))
     }
 
     updateStatus()
@@ -210,7 +226,7 @@
         updateStatus();
     }
 
-    //
+    // Función que controla qué ocurre cuando se acaba un movmiento (en concreto quita los highlights)
     function onMoveEnd () {
         $board.find('.square-' + squareToHighlight)
         .addClass('highlight-black')
@@ -227,15 +243,15 @@
 
     // Función que se encarga de manejar el inicio de la comunicación
     socket.onopen = function () {
-        $('#statusModal').modal('hide');
-        $('#statusModal').data('bs.modal', null);
+        $('#connectionModal').modal('hide');
+        $('#connectionModal').data('bs.modal', null);
     }
     
     // Función que se encarga de manejar una posible interrupción de la comunicación
     socket.onclose = function () {
-        $statusModalTitle.html("Conexión interrumpida")
-        $statusModalBody.html("La conexión se ha interrumpido inesperadamente, por favor espera mientras intentamos reconectar...")
-        $('#statusModal').modal({
+        $connectionModalTitle.html("Conexión interrumpida")
+        $connectionModalBody.html("La conexión se ha interrumpido inesperadamente, por favor espera mientras intentamos reconectar...")
+        $('#connectionModal').modal({
             keyboard: false,
             backdrop: 'static'
         })
@@ -284,26 +300,26 @@
 
             // Si el oponente no está conectado, espera
             if (data.opp_online != true) {
-                $statusModalTitle.html("Oponente desconectado")
-                $statusModalBody.html("Por favor espera a que tu oponente se conecte a la partida...")
-                $('#statusModal').modal({
+                $connectionModalTitle.html("Oponente desconectado")
+                $connectionModalBody.html("Por favor espera a que tu oponente se conecte a la partida...")
+                $('#connectionModal').modal({
                     backdrop: 'static',
                     keyboard: false
                 })
             }
         }
 
-        // Si el oponente está conectado, esconde la partida del lobby
+        // Si el oponente está conectado, permite jugar haciendo desaparecer el modal
         else if (data.command == "opponent-online"){
-            $('#statusModal').modal('hide')
-            $('#statusModal').data('bs.modal',null)
+            $('#connectionModal').modal('hide')
+            $('#connectionModal').data('bs.modal',null)
         }
 
         // Si el oponente se desconecta, espera
         else if (data.command == "opponent-offline"){
-            $statusModalTitle.html("Oponente desconectado")
-            $statusModalBody.html("Tu oponente se ha desconectado repentinamente. Por favor espera a que vuelva a conectarse a la partida...")
-            $('#statusModal').modal({
+            $connectionModalTitle.html("Oponente desconectado")
+            $connectionModalBody.html("Tu oponente se ha desconectado repentinamente. Por favor espera a que vuelva a conectarse a la partida...")
+            $('#connectionModal').modal({
                 backdrop: 'static',
                 keyboard: false
             })

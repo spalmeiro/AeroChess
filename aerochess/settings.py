@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'base.apps.BaseConfig',
     'channels',
     'play.apps.PlayConfig',
+    'puzzles.apps.PuzzlesConfig',
 ]
 
 MIDDLEWARE = [

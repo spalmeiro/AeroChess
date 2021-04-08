@@ -33,6 +33,29 @@
 
     <!-- Modales exclusivos de esta página -->
 
+    <!-- Modal genérico para los distintos mensajes sobre el estado de la conexión -->
+    <div class="modal fade" id="connectionModal" tabindex="0">
+
+        <div class="modal-dialog modal-dialog-centered">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="connectionModal_title"></h5>
+                </div>
+
+                <div class="modal-body">
+                    <p id="connectionModal_body"></p>
+                </div>
+
+                <div class="modal-footer">
+                    <a class="btn btn-danger" id="connection_cancel" href="{% url 'lobby' %}" type="button" role="button">Cancelar partida</a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
     <!-- Modal genérico para los distintos mensajes sobre el estado de la partida -->
     <div class="modal fade" id="statusModal" tabindex="0">
 
@@ -52,7 +75,6 @@
                     <button class="btn btn-success" type="button" role="button" data-dismiss="modal">Aceptar</button>
                 </div>
 
-
             </div>
         </div>
     </div>
@@ -69,7 +91,7 @@
                 </div>
 
                 <div class="modal-body">
-                    <p id="resignModal_body">Si lo haces, la partida contará como una derrota.</p>
+                    <p>Si lo haces, la partida contará como una derrota.</p>
                 </div>
 
                 <div class="modal-footer">
@@ -126,9 +148,7 @@
                 </div>
 
             </div>
-
         </div>
-
     </div>
     
     <main>
@@ -140,7 +160,11 @@
                 <div class="col-md-7">
 
                     <!-- Oponente -->
-                    <h5>Añadir</h5>
+                    {% if user.username == owner %}
+                        <h5>{{ opponent }}</h5>
+                    {% else %}
+                        <h5>dsakfjsl</h5>
+                    {% endif %}
 
                     <!-- Tablero -->
                     <hr class="mt-1 mb-2">

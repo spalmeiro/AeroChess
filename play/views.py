@@ -86,7 +86,7 @@ def game(request, game_id):
     if game.status == 3:
         messages.add_message(request, messages.ERROR, "Esta partida ya ha terminado. ¡Empieza otra!")
         return HttpResponseRedirect(reverse("/play/online/lobby"))
-
+    
     if request.user != game.owner:
         if game.opponent == None:
             game.opponent = request.user
@@ -97,7 +97,7 @@ def game(request, game_id):
             messages.add_message(request, messages.ERROR, "This game already has enough participants. Try joining another")
             return HttpResponseRedirect(reverse("lobby"))
             
-    return render(request, "play/online/game.html", {"game_id": game_id})
+    return render(request, "play/online/game.html", {"owner": game.owner, "opponent": game.opponent})
 
 # Partida contra el ordenador
 def computer(request):

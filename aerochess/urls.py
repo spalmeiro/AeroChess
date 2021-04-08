@@ -30,4 +30,7 @@ urlpatterns = [
 
     # Jugar: play/
     re_path(r'^play/', include('play.urls')),
+
+    # Puzzles: puzzles/
+    re_path(r'^puzzles/', include('puzzles.urls'))
 ]
