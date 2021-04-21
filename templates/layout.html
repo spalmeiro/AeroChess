@@ -39,9 +39,6 @@
         <!-- Script propio para el modo hover de los dropdowns -->
         <script src="{% static 'js/dropdown.js' %}" defer></script>
 
-        <!-- Script propio para la personalización de la página -->
-        <script src="{% static 'js/customization.js' %}" defer></script>
-
         <!-- Otros CDNs que requiera la página en particular (si los requiere) -->
         {% block cdn %}{% endblock %}
 
@@ -54,6 +51,9 @@
 
         <!-- Cuerpo -->
         {% block body %}{% endblock %}
+
+        <!-- Scripts -->
+        {% block scripts %}{% endblock %}
 
     </body>
 

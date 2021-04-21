@@ -4,5 +4,5 @@ from . import views
 # Puzzles: puzzles/
 urlpatterns = [
     path('lista', views.lista, name='lista'),
-    path('lista2', views.lista2, name='lista2'),
+    path('<int:puzzle_id>', views.puzzle, name='puzzle'),
 ]

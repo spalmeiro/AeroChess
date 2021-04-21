@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% block title %} AeroChess - Perfil de usuario {% endblock %}
+
+{% block body %}
+
+    <!-- Barra de navegación -->
+    {% include "includes/navbar.html" %}
+
+    <main>
+
+        <!-- Bloque de partidas completadas -->
+        <div class="container mt-5">
+
+            <!-- Título -->
+            <div>
+                <h2 class="text-left">Partidas completadas</h2>
+                <hr>
+            </div>
+
+            {% if completed %}
+                
+                <table class="table table-hover" id="public">
+
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">Oponente</th>
+                            <th scope="col">Jugaste como</th>
+                            <th scope="col">Resultado</th>
+                            <th scope="col">Detalles</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        
+                        {% for game in completed %}
+
+                            <tr style="transform: rotate(0);"> 
+                                <th scope="row">{{ game.opponent }}</th>
+                                <td>{{ game.side }}</td>
+                                <td>{{ game.result }}</td>
+                                <td>{{ game.details }}</td>
+                            </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            {% else %}
+
+                <p>Parece que todavía no has jugado ninguna partida.</p>
+
+            {% endif %}
+                
+        </div>
+
+    </main>
+
+{% endblock %}

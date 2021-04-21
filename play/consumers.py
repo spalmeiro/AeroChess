@@ -7,6 +7,9 @@ from django.contrib.auth.models import User
 # Consumer para el modo multijugador online
 class multiplayerConsumer(AsyncJsonWebsocketConsumer):
 
+
+    ## -- CONEXIÓN -- ##
+
     # Se encarga del establecimiento de la conexión del WebSocket
     async def connect(self):
 
@@ -18,47 +21,167 @@ class multiplayerConsumer(AsyncJsonWebsocketConsumer):
         # Coge la id de la partida desde la ruta
         self.game_id = self.scope["url_route"]["kwargs"]["game_id"]
 
-        # Comprueba que la id de la partida es un entero
+        # Convierte la id de la partida en un entero
         try: 
             self.game_id = int(self.game_id)
         except:
             await self.close()
             return
 
-        # 
+        # Conecta con la base de datos para averiguar a que lado debe unirse el usario
         side = await self.connect_in_db(self.game_id)
+
+        # Si algo falla, cierra la conexión
         if side == False:
             await self.close()
             return
+
+        # Si todo va bien, abre la conexión
         await self.accept()
+
+        # El usuario se une a la sala
         await self.join_room(side)
+
+        # Si su oponente está conectado, se puede jugar
         if side[2]:
-            await self.opp_online()
+            await self.opponent_online()
 
 
-    # Se encarga de la desconexión del WebSocket
-    async def disconnect(self, code):
-        await self.disconnect_in_db()
-        await self.opp_offline()
+    # Modifica la información de la partida en la base de datos al conectarse
+    @database_sync_to_async
+    def connect_in_db(self, game_id):
+        
+        # Carga los datos de la partida desde la base de datos
+        game = Game.objects.all().filter(id=game_id)[0]
+
+        # Comprueba que existe la partida en la base de datos
+        if not game:
+            return False
+
+        # Carga el usuario
+        user = self.scope["user"]
+
+        # Recoge información sobre el usuario desde los datos de la partida, lo conecta y comprueba si su oponente está conectado
+        opponent = False
+
+        if user == game.owner:
+            game.owner_online = True
+            if game.owner_side == "white":
+                side = "white"
+            else:
+                side = "black"
+            if game.adversary_online == True:
+                opponent = True
+            print("Setting owner online")
+
+        elif user == game.adversary:
+            game.adversary_online = True
+            if game.owner_side == "white":
+                side = "black"
+            else:
+                side = "white"
+            if game.owner_online == True:
+                opponent = True
+            print("Setting adversary online")
+
+        else:
+            return False
+        
+        # Guarda los cambios en la base de datos
+        game.save()
+
+        # Devuelve el lado, el PGN y si se puede jugar ya o no
+        return [side, game.pgn, opponent]
 
 
-    # Se encarga de gestionar la unión a la partida
+    # Se encarga de gestionar la unión a la sala
     async def join_room(self, data):
 
-        # 
         await self.channel_layer.group_add(
             str(self.game_id),
             self.channel_name,
         )
 
-        # 
         await self.send_json({
             "command": "join",
             "orientation": data[0],
             "pgn": data[1],
-            "opp_online": data[2]
+            "opponent_online": data[2]
         })
 
+
+    # Si el oponente está conectado, permite jugar
+
+    async def opponent_online(self):
+        await self.channel_layer.group_send(
+            str(self.game_id),
+            {
+                "type": "opponent.online.handler",
+                "sender_channel_name": self.channel_name
+            }
+        )
+    
+    async def opponent_online_handler(self,event):
+        if self.channel_name != event["sender_channel_name"]:
+            await self.send_json({
+                "command":"opponent-online",
+            })
+
+    
+
+
+    ## -- DESCONEXIÓN -- ##
+
+    # Se encarga de las desconexiones en la comunicación
+    async def disconnect(self, code):
+        await self.disconnect_in_db()
+        await self.opponent_offline()
+
+
+    # Modifica la información de la partida en la base de datos al desconectarse
+    @database_sync_to_async
+    def disconnect_in_db(self):
+
+        # Carga los datos de la partida desde la base de datos
+        game = Game.objects.all().filter(id=self.game_id)[0]
+        
+        # Carga el usuario
+        user = self.scope["user"]
+
+        # Desconecta al usuario en la base de datos
+        if user == game.adversary:
+            game.adversary_online = False
+            print("Setting adversary offline")
+
+        elif user == game.owner:
+            game.owner_online = False
+            print("Setting owner offline")
+
+        # Guarda los cambios
+        game.save()
+
+    
+    # Si el oponente se desconecta, no se puede jugar
+
+    async def opponent_offline(self):
+        await self.channel_layer.group_send(
+            str(self.game_id),
+            {
+                "type": "opponent.offline.handler",
+                "sender_channel_name": self.channel_name
+            }
+        )
+    
+    async def opponent_offline_handler(self,event):
+        if self.channel_name != event["sender_channel_name"]:
+            await self.send_json({
+                "command":"opponent-offline",
+            })
+
+
+
+
+    ## -- MENSAJES -- ##
 
     # Se encarga de recibir las actualizaciones del estado de la partida y activar las acciones necesarias en cada caso
     async def receive_json(self, content):
@@ -68,59 +191,40 @@ class multiplayerConsumer(AsyncJsonWebsocketConsumer):
 
         # Y ejecuta distintas acciones en función del mismo
         try:
+
+            # Nuevo movimiento
             if command == "new-move":
                 await self.new_move(content["source"], content["target"], content["fen"], content["pgn"])
+
+            # Fin de partida
             elif command == "game-over":
                 await self.game_over(content["winner"])
-                await self.game_over_in_db(content["result"])
+                await self.game_over_in_db(content["winner"], content["details"])
+
+            # Oferta de tablas
+            elif command == "draw-offer":
+                await self.draw_offer()
+
+            # Acepta la oferta de tablas
+            elif command == "draw-accept":
+                await self.draw_accept()
+                await self.game_over_in_db(content["winner"], content["details"])
+
+            # Rechaza la oferta de tablas
+            elif command == "draw-reject":
+                await self.draw_reject()
+
+            # Abandono
             elif command == "resign":
                 await self.resign()
-                await self.game_over_in_db(content["result"])
+                await self.game_over_in_db(content["winner"], content["details"])
+
         except:
-            pass
-
+            pass   
     
 
-    # Se encargan de
 
-    async def opp_offline(self):
-        await self.channel_layer.group_send(
-            str(self.game_id),
-            {
-                "type": "opp.offline.handler",
-                "sender_channel_name": self.channel_name
-            }
-        )
-    
-    async def opp_offline_handler(self,event):
-        if self.channel_name != event["sender_channel_name"]:
-            await self.send_json({
-                "command":"opponent-offline",
-            })
-            print("sending offline")
-
-
-
-    # Se encargan de
-
-    async def opp_online(self):
-        await self.channel_layer.group_send(
-            str(self.game_id),
-            {
-                "type": "opp.online.handler",
-                "sender_channel_name": self.channel_name
-            }
-        )
-    
-    async def opp_online_handler(self,event):
-        if self.channel_name != event["sender_channel_name"]:
-            await self.send_json({
-                "command":"opponent-online",
-            })
-    
-    
-
-    # Se encargan de gestionar los nuevos movimientos
+    # Nuevo movimiento
 
     async def new_move(self, source, target, fen, pgn):
         await self.channel_layer.group_send(
@@ -146,9 +250,27 @@ class multiplayerConsumer(AsyncJsonWebsocketConsumer):
             })
         await self.update_in_db(event["fen"], event["pgn"])
 
+    # Actualiza el estado de la partida en la base de datos-
+    @database_sync_to_async
+    def update_in_db(self, fen, pgn):
+
+        # Carga los datos de la partida desde la base de datos
+        game = Game.objects.all().filter(id=self.game_id)[0]
+
+        # Comprueba que la partida existe
+        if not game:
+            print("Game not found")
+            return
+        
+        # Guarda los nuevos detalles de la partida
+        game.fen = fen
+        game.pgn = pgn
+        game.save()
+        print("Saving game details")
 
 
-    # Se encargan de gestionar el final de una partida
+
+    # Final de una partida
 
     async def game_over(self, winner):
         await self.channel_layer.group_send(
@@ -169,7 +291,64 @@ class multiplayerConsumer(AsyncJsonWebsocketConsumer):
 
 
 
-    # Se encargan de gestionar el abandono de una partida
+    # Oferta de tablas
+
+    async def draw_offer(self):
+        await self.channel_layer.group_send(
+            str(self.game_id),
+            {
+                "type": "draw.offer.handler",
+                "sender_channel_name": self.channel_name,
+            }
+        )
+    
+    async def draw_offer_handler(self, event):
+        if self.channel_name != event["sender_channel_name"]:
+            await self.send_json({
+                "command": "opponent-offer-draw",
+            })
+
+    
+
+    # Acepta la oferta de tablas
+
+    async def draw_accept(self):
+        await self.channel_layer.group_send(
+            str(self.game_id),
+            {
+                "type": "draw.accept.handler",
+                "sender_channel_name": self.channel_name,
+            }
+        )
+    
+    async def draw_accept_handler(self, event):
+        if self.channel_name != event["sender_channel_name"]:
+            await self.send_json({
+                "command": "opponent-accept-draw",
+            })
+
+
+    
+    # Rechaza la oferta de tablas
+
+    async def draw_reject(self):
+        await self.channel_layer.group_send(
+            str(self.game_id),
+            {
+                "type": "draw.reject.handler",
+                "sender_channel_name": self.channel_name,
+            }
+        )
+    
+    async def draw_reject_handler(self, event):
+        if self.channel_name != event["sender_channel_name"]:
+            await self.send_json({
+                "command": "opponent-reject-draw",
+            })
+
+
+
+    # Abandono de una partida
 
     async def resign(self):
         await self.channel_layer.group_send(
@@ -185,100 +364,12 @@ class multiplayerConsumer(AsyncJsonWebsocketConsumer):
             await self.send_json({
                 "command": "opponent-resigned",
             })
-        
 
-
-    ## COMUNICACIÓN CON LA BASE DE DATOS ##
-
-    # Modifica la información de la partida en la base de datos al conectarse
-    @database_sync_to_async
-    def connect_in_db(self, game_id):
-        
-        # Carga los datos de la partida desde la base de datos
-        game = Game.objects.all().filter(id=game_id)[0]
-
-        # Comprueba que existe la entrada en la base de datos
-        if not game:
-            return False
-
-        # Carga el usuario
-        user = self.scope["user"]
-        side = "white"
-        opp = False
-
-        # Conecta al usuario en la base de datos y le asigna su lado
-        if game.opponent == user:
-            game.opponent_online = True
-            if game.owner_side == "white":
-                side = "black"
-            else:
-                side = "white"
-            if game.owner_online == True:
-                opp = True
-            print("Setting opponent online")
-        elif game.owner == user:
-            game.owner_online = True
-            if game.owner_side == "white":
-                side = "white"
-            else:
-                side = "black"
-            if game.opponent_online == True:
-                opp = True
-            print("Setting owner online")
-        else:
-            return False
-        
-        # Guarda los cambios
-        game.save()
-
-        # Devuelve el lado, el PGN y si se puede jugar ya o no
-        return [side, game.pgn, opp]
-
-
-    # Modifica la información de la partida en la base de datos al desconectarse
-    @database_sync_to_async
-    def disconnect_in_db(self):
-
-        # Carga los datos de la partida desde la base de datos
-        game = Game.objects.all().filter(id=self.game_id)[0]
-        
-        # Carga el usuario
-        user = self.scope["user"]
-
-        # Desconecta al usuario en la base de datos
-        if game.opponent == user:
-            game.opponent_online = False
-            print("Setting opponent offline")
-        elif game.owner == user:
-            game.owner_online = False
-            print("Setting owner offline")
-
-        # Guarda los cambios
-        game.save()
-    
-
-    # Actualiza los datos sobre el estado de la partida en la base de datos
-    @database_sync_to_async
-    def update_in_db(self, fen, pgn):
-
-        # Carga los datos de la partida desde la base de datos
-        game = Game.objects.all().filter(id=self.game_id)[0]
-
-        # Comprueba que la partida existe
-        if not game:
-            print("Game not found")
-            return
-        
-        # Guarda los nuevos detalles de la partida
-        game.fen = fen
-        game.pgn = pgn
-        game.save()
-        print("Saving game details")
 
 
     # Guarda la partida como finalizada en la base de datos
     @database_sync_to_async
-    def game_over_in_db(self, result):
+    def game_over_in_db(self, winner, details):
 
         # Carga los datos de la partida desde la base de datos
         game = Game.objects.all().filter(id=self.game_id)[0]
@@ -286,6 +377,7 @@ class multiplayerConsumer(AsyncJsonWebsocketConsumer):
         # Guarda los datos finales de la partida acabada
         if game.status == 3:
             return
-        game.winner = result
         game.status = 3
+        game.winner = winner
+        game.details = details
         game.save()

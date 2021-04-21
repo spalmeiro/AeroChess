@@ -165,6 +165,36 @@ Para cerrar el servidor basta con hacer "CTRL + C" en la consola que se ha abier
 
 **NOTA:** también se puede cerrar el servidor cerrando directamente la consola, aunque es una manera un poco más brusca de hacerlo.
 
+# Reseteo de la base de datos
+
+Se hace necesario un reset de la base de datos cada vez que se haga un cambio en su estructura, a través de la modificación de los modelos de Django.
+
+Para borrar todos los datos almacenados en la base de datos (dependiendo del cambio aplicado, ejecutar esto puede ser opcional):
+
+```
+(AeroChess-venv) C:\Users\Usuario\Desktop\PGAA> python manage.py reset_db
+```
+
+Crea las migraciones necesarias para aplicar los cambios realizados en los modelos de Django:
+
+```
+(AeroChess-venv) C:\Users\Usuario\Desktop\PGAA> python manage.py makemigrations
+```
+
+Sincroniza la base de datos para que sea coherente con los modelos actualizados utilizando las migraciones creadas con el comando anterior:
+
+```
+(AeroChess-venv) C:\Users\Usuario\Desktop\PGAA> python manage.py migrate
+```
+
+NOTA: si se quisiera además eliminar todo rastro de la estructura de la base de datos anterior, deberían borrarse a mano en cada una de las aplicaciones del servidor que utilizan la base de datos los archivos de las migraciones y sus caches (archivos del tipo "0001_initial.py" pero no los archivos que empiezan por "\_\_init__"), almacenados en la carpeta "migrations" dentro de cada aplicación del proyecto, pero esto no debería ser necesario (solo por cuestión de limpieza y orden).
+
+Por último, para cargar en la base de datos la lista de puzzles, se ejecuta:
+
+```
+(AeroChess-venv) C:\Users\Usuario\Desktop\PGAA> python manage.py loaddata puzzle
+```
+
 # Cómo contribuir
 
 Si estáis utilizando GitHub Desktop, él mismo detectará los cambios que se realicen en el repositorio y podréis llevar un registro de dichos cambios haciendo "commits" a vuestra copia local del repositorio a través de la aplicación.

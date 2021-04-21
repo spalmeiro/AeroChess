@@ -1,0 +1,217 @@
+<!-- Modal genérico para los distintos mensajes sobre el estado de la conexión -->
+<div class="modal fade" id="connectionModal" tabindex="0">
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="connectionModal_title"></h5>
+            </div>
+
+            <div class="modal-body">
+                <p id="connectionModal_body"></p>
+            </div>
+
+            <div class="modal-footer">
+                <a class="btn btn-danger" id="connection_cancel" href="{% url 'lobby' %}" type="button" role="button">Cancelar partida</a>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal genérico para los distintos mensajes sobre el estado de la partida -->
+<div class="modal fade" id="statusModal" tabindex="0">
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="statusModal_title"></h5>
+            </div>
+
+            <div class="modal-body">
+                <p id="statusModal_body"></p>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-success" type="button" role="button" data-dismiss="modal">Aceptar</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal para ofrecer tablas -->
+<div class="modal fade" id="drawOfferModal" tabindex="0">
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">¿Estás seguro de que quieres ofrecer tablas?</h5>
+            </div>
+
+            <div class="modal-body">
+                <p>Si tu oponente acepta, la partida acabará en tablas. En caso contrario, continuará.</p>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-secondary mr-auto" id="drawOffer_cancel" type="button" role="button" data-dismiss="modal">Cancelar</button>
+                <button class="btn btn-success" id="drawOffer_send" type="button" role="button" data-dismiss="modal">Sí, estoy seguro</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal para esperar el resultado de la oferta de tablas -->
+<div class="modal fade" id="drawWaitModal" tabindex="0">
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Esperando respuesta...</h5>
+            </div>
+
+            <div class="modal-body">
+                <p>Tablas ofrecidas. Esperando respuesta de tu oponente...</p>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal para responder a la oferta de tablas -->
+<div class="modal fade" id="drawAcceptModal" tabindex="0">
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Tu oponente ha ofrecido tablas</h5>
+            </div>
+
+            <div class="modal-body">
+                <p>Si aceptas, la partida acabará en tablas. En caso contrario, continuará.</p>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-secondary mr-auto" id="drawAccept_no" type="button" role="button" data-dismiss="modal">Rechazar</button>
+                <button class="btn btn-success" id="drawAccept_yes" type="button" role="button" data-dismiss="modal">Aceptar</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal para abandonar la partida -->
+<div class="modal fade" id="resignModal" tabindex="0">
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">¿Estás seguro de que quieres abandonar la partida?</h5>
+            </div>
+
+            <div class="modal-body">
+                <p>Si lo haces, la partida contará como una derrota.</p>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-danger mr-auto" type="button" role="button" data-dismiss="modal">Cancelar</button>
+                <button class="btn btn-success" id="resign_yes" type="button" role="button" data-dismiss="modal">Sí, estoy seguro</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal de desconexión del oponente -->
+<div class="modal fade" id="disconnectionModal" tabindex="0">
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Tu oponente ha abandonado la sala</h5>
+            </div>
+
+            <div class="modal-body">
+                <p>Esperando a que regrese...<div id="countdown"></div></p>
+                <p>Si lo haces, la partida contará como una derrota.</p>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal para la personalización de las piezas y el tablero -->
+<div class="modal fade" id="personalizacion" data-backdrop="static" tabindex="0">
+
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content">
+            
+            <div class="modal-header">
+                <h5 class="modal-title">Personalización</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form>
+
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="piece_style">Selecciona un estilo para las piezas:</label>
+                        <select class="custom-select" id="piece_style">
+                            <option value="wikipedia" selected>Predeterminado</option>
+                            <option value="piezas">Tema 1 </option>
+                            <option value="uscf">Tema 2</option>
+                            <option value="alpha">Tema 3</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="board_theme">Selecciona un estilo para el tablero:</label>
+                        <select class="custom-select" id="board_theme">
+                            <option value="boardtheme1" id="boardtheme1"selected>Predeterminado</option>
+                            <option value="boardtheme2" id="boardtheme2">Verde</option>
+                            <option value="boardtheme2" id="boardtheme3">Azul</option>
+                        </select>
+                    </div>
+
+                    <div id="BoardPreview" class="mx-auto mb-2" style="width: 400px;"></div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-secondary mr-auto" type="button" role="button" data-dismiss="modal">Cerrar</button>
+                    <button class="btn btn-primary mb-2" id="customization" type="button" role="button" data-dismiss="modal">Aplicar cambios</button>
+                </div>
+
+            </form>
+            
+        </div>
+
+    </div>
+
+</div>

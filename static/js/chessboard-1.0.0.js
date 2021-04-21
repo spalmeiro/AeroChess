@@ -5,6 +5,24 @@
 // Released under the MIT license
 // https://github.com/oakmac/chessboardjs/blob/master/LICENSE.md
 
+var CSS = {}
+  CSS['alpha'] = 'alpha-d2270'
+  CSS['black'] = 'black-3c85d'
+  CSS['board'] = 'board-b72b1'
+  CSS['chessboard'] = 'chessboard-63f37'
+  CSS['clearfix'] = 'clearfix-7da63'
+  CSS['highlight1'] = 'highlight1-32417'
+  CSS['highlight2'] = 'highlight2-9c5d2'
+  CSS['notation'] = 'notation-322f9'
+  CSS['numeric'] = 'numeric-fc462'
+  CSS['piece'] = 'piece-417db'
+  CSS['row'] = 'row-5277c'
+  CSS['sparePieces'] = 'spare-pieces-7492f'
+  CSS['sparePiecesBottom'] = 'spare-pieces-bottom-ae20f'
+  CSS['sparePiecesTop'] = 'spare-pieces-top-4028b'
+  CSS['square'] = 'square-55d63'
+  CSS['white'] = 'white-1e1d7'
+
 // start anonymous scope
 ;(function () {
   'use strict'
@@ -33,23 +51,23 @@
   // use unique class names to prevent clashing with anything else on the page
   // and simplify selectors
   // NOTE: these should never change
-  var CSS = {}
-  CSS['alpha'] = 'alpha-d2270'
-  CSS['black'] = 'black-3c85d'
-  CSS['board'] = 'board-b72b1'
-  CSS['chessboard'] = 'chessboard-63f37'
-  CSS['clearfix'] = 'clearfix-7da63'
-  CSS['highlight1'] = 'highlight1-32417'
-  CSS['highlight2'] = 'highlight2-9c5d2'
-  CSS['notation'] = 'notation-322f9'
-  CSS['numeric'] = 'numeric-fc462'
-  CSS['piece'] = 'piece-417db'
-  CSS['row'] = 'row-5277c'
-  CSS['sparePieces'] = 'spare-pieces-7492f'
-  CSS['sparePiecesBottom'] = 'spare-pieces-bottom-ae20f'
-  CSS['sparePiecesTop'] = 'spare-pieces-top-4028b'
-  CSS['square'] = 'square-55d63'
-  CSS['white'] = 'white-1e1d7'
+  // var CSS = {}
+  // CSS['alpha'] = 'alpha-d2270'
+  // CSS['black'] = 'black-3c85d'
+  // CSS['board'] = 'board-b72b1'
+  // CSS['chessboard'] = 'chessboard-63f37'
+  // CSS['clearfix'] = 'clearfix-7da63'
+  // CSS['highlight1'] = 'highlight1-32417'
+  // CSS['highlight2'] = 'highlight2-9c5d2'
+  // CSS['notation'] = 'notation-322f9'
+  // CSS['numeric'] = 'numeric-fc462'
+  // CSS['piece'] = 'piece-417db'
+  // CSS['row'] = 'row-5277c'
+  // CSS['sparePieces'] = 'spare-pieces-7492f'
+  // CSS['sparePiecesBottom'] = 'spare-pieces-bottom-ae20f'
+  // CSS['sparePiecesTop'] = 'spare-pieces-top-4028b'
+  // CSS['square'] = 'square-55d63'
+  // CSS['white'] = 'white-1e1d7'
 
   // ---------------------------------------------------------------------------
   // Misc Util Functions
@@ -576,7 +594,7 @@
     // default piece theme is wikipedia
     if (!config.hasOwnProperty('pieceTheme') ||
         (!isString(config.pieceTheme) && !isFunction(config.pieceTheme))) {
-      config.pieceTheme = '/static/img/chesspieces/wikipedia/{piece}.png'
+      config.pieceTheme = 'img/chesspieces/wikipedia/{piece}.png'
     }
 
     // animation speeds

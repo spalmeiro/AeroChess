@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 
-{% block  title %} Aerochess - Partida multijugador {% endblock %}
+{% block  title %} Aerochess - Puzzles {% endblock %}
 
 {% block cdn %}
 
@@ -20,7 +20,7 @@
     <script src="{% static 'js/customization.js' %}" defer></script>
 
     <!-- Script propio para el funcionamiento de la página -->
-    <script src="{% static 'js/multiplayer.js' %}" defer></script>
+    <script src="{% static 'js/puzzle.js' %}" defer></script>
 
 {% endblock %}
 
@@ -31,7 +31,7 @@
 
     <!-- Modales -->
     {% include "includes/modals.html" %}
-    
+
     <main>
 
         <div class="container">
@@ -40,26 +40,10 @@
 
                 <div class="col-md-7">
 
-                    <!-- Oponente -->
-                    <div id="opponent_name">
-                        {% if user.username == owner %}
-                            {% if opponent == None %}
-                                <h5>Esperando oponente...</h5>
-                            {% else %}
-                                <h5>{{ opponent }}</h5>
-                            {% endif %}
-                        {% else %}
-                            <h5>{{ owner }}</h5>
-                        {% endif %}
-                    </div>
-
-                    <!-- Tablero -->
+                    <h5>{{ puzzle.citation }}</h5>
                     <hr class="mt-1 mb-2">
-                    <div id="multiplayerBoard" style="width: 100%;"></div>
-                    <hr class="mt-2 mb-1">
 
-                    <!-- Usuario -->
-                    <h5>{{ user.username }}</h5>
+                    <div id="puzzleBoard" style="width: 100%;"></div>
 
                 </div>
     
@@ -67,14 +51,24 @@
     
                     <div class="card" style="height: 100%; width: 100%;">
     
-                        <div class="card-header">
-                            Partida multijugador
+                        <div class="card-header d-flex align-items-center justify-content-center" style="height: 10%;">
+                            {% if puzzle.category == 1 %}
+                                <h4 class="text-center">Mate en 2 movimientos</h4>
+                            {% elif puzzle.category == 2 %}
+                                <h4 class="text-center">Mate en 3 movimientos</h4>
+                            {% elif puzzle.category == 3 %}
+                                <h4 class="text-center">Mate en 4 movimientos</h4>
+                            {% endif %}                            
                         </div>
     
-                        <ul class="list-group list-group-flush">
+                        <ul class="list-group list-group-flush" style="height: 70%;">
+
                             <li class="list-group-item" id="status"></li>
-                            <li class="list-group-item" style="height: 100%;">
-                                <strong>PGN:</strong><div id="pgn"></div>
+
+                            <li class="list-group-item" style="max-height: 100%; overflow-y: auto;">
+
+                                <div id="pgn"></div>
+
                             </li>
                         </ul>
 
@@ -83,18 +77,31 @@
                             <div class="align-self-end" style="width: 100%;">
 
                                 <div class="btn-group" style="width: 100%;">
-                                    <button class="btn btn-outline-secondary" id="drawOffer">Ofrecer tablas</button>
-                                    <button class="btn btn-outline-secondary" id="resign">Abandonar</button>
+                                    <button class="btn btn-outline-secondary" id="drawOffer">Mostrar solución</button>
                                 </div>
 
                             </div>
     
                         </div>
+    
                     </div>
+    
                 </div>
+    
             </div>
+
         </div>
 
     </main>
+
+{% endblock %}
+
+{% block scripts %}
+
+    <script>
+
+        var puzzle_fen = "{{puzzle.fen}}"
+
+    </script>
 
 {% endblock %}

@@ -14,6 +14,7 @@ from channels.routing import ProtocolTypeRouter, URLRouter
 from django.core.asgi import get_asgi_application
 
 import play.routing
+import puzzles.routing
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'aerochess.settings')
 
@@ -21,7 +22,7 @@ application = ProtocolTypeRouter({
     'http': get_asgi_application(),
     'websocket': AuthMiddlewareStack(
         URLRouter(
-            play.routing.websocket_urlpatterns
+            play.routing.websocket_urlpatterns + puzzles.routing.websocket_urlpatterns
         )
     ),
 })

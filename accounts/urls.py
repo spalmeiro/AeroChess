@@ -3,5 +3,6 @@ from . import views
 
 # Gestión de usuarios: accounts/
 urlpatterns = [
-    path('signup/', views.signup, name='signup'), 
+    path("signup/", views.signup, name="signup"),
+    path("profile/", views.profile, name="profile"),
 ]

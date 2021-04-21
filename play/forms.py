@@ -5,4 +5,4 @@ from django.forms import ModelForm
 class privategameform(ModelForm):
     class Meta:
         model = Game
-        fields = ['opponent', 'owner_side']
+        fields = ['adversary', 'owner_side']

@@ -9,7 +9,7 @@
 
 
 // Variables del tablero y del estado de la partida
-var $board = $('#computerBoard')
+var $board = $('#puzzleBoard')
 var game = new Chess()
 var $status = $('#status') // Estado de la partida
 var $fen = $('#fen') // FEN
@@ -41,7 +41,7 @@ function reproSon (name) {
 
 // Función que marca las casillas disponibles para mover
 function greySquare (square) {
-    var $square = $('#computerBoard .square-' + square)
+    var $square = $('#puzzleBoard .square-' + square)
     
     var background = whiteSquareGrey
     if ($square.hasClass('black-3c85d')) {
@@ -53,7 +53,7 @@ function greySquare (square) {
 
 // Función que desmarca las casillas disponibles para mover
 function removeGreySquares () {
-    $('#computerBoard .square-55d63').css('background', '')
+    $('#puzzleBoard .square-55d63').css('background', '')
 }
 
 // Función que marca los posibles movimientos cuando el ratón se sitúa sobre una pieza
@@ -196,7 +196,7 @@ function updateStatus () {
 var config = {
     draggable: true,
     pieceTheme: style,
-    position: 'start',
+    position: puzzle_fen,
     onDragStart: onDragStart,
     onDrop: onDrop,
     onMouseoutSquare: onMouseoutSquare,
@@ -206,7 +206,7 @@ var config = {
 }
 
 // Crea la instancia del tablero
-board = Chessboard('computerBoard', config)
+board = Chessboard('puzzleBoard', config)
 $(window).resize(board.resize)
 
 // Actualiza el estado de la partida
