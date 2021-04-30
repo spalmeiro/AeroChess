@@ -192,7 +192,11 @@ NOTA: si se quisiera además eliminar todo rastro de la estructura de la base de
 Por último, para cargar en la base de datos la lista de puzzles, se ejecuta:
 
 ```
+<<<<<<< HEAD
 (AeroChess-venv) C:\Users\Usuario\Desktop\PGAA\AeroChess> python manage.py loaddata puzzle
+=======
+(AeroChess-venv) C:\Users\Usuario\Desktop\PGAA> python manage.py loaddata puzzle_list.json
+>>>>>>> 03fffcde8f7b8462833cdd62dc3d0fee861ab0bb
 ```
 
 # Cómo contribuir
