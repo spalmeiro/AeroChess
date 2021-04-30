@@ -172,19 +172,19 @@ Se hace necesario un reset de la base de datos cada vez que se haga un cambio en
 Para borrar todos los datos almacenados en la base de datos (dependiendo del cambio aplicado, ejecutar esto puede ser opcional):
 
 ```
-(AeroChess-venv) C:\Users\Usuario\Desktop\PGAA> python manage.py reset_db
+(AeroChess-venv) C:\Users\Usuario\Desktop\PGAA\AeroChess> python manage.py reset_db
 ```
 
 Crea las migraciones necesarias para aplicar los cambios realizados en los modelos de Django:
 
 ```
-(AeroChess-venv) C:\Users\Usuario\Desktop\PGAA> python manage.py makemigrations
+(AeroChess-venv) C:\Users\Usuario\Desktop\PGAA\AeroChess> python manage.py makemigrations
 ```
 
 Sincroniza la base de datos para que sea coherente con los modelos actualizados utilizando las migraciones creadas con el comando anterior:
 
 ```
-(AeroChess-venv) C:\Users\Usuario\Desktop\PGAA> python manage.py migrate
+(AeroChess-venv) C:\Users\Usuario\Desktop\PGAA\AeroChess> python manage.py migrate
 ```
 
 NOTA: si se quisiera además eliminar todo rastro de la estructura de la base de datos anterior, deberían borrarse a mano en cada una de las aplicaciones del servidor que utilizan la base de datos los archivos de las migraciones y sus caches (archivos del tipo "0001_initial.py" pero no los archivos que empiezan por "\_\_init__"), almacenados en la carpeta "migrations" dentro de cada aplicación del proyecto, pero esto no debería ser necesario (solo por cuestión de limpieza y orden).
@@ -192,7 +192,7 @@ NOTA: si se quisiera además eliminar todo rastro de la estructura de la base de
 Por último, para cargar en la base de datos la lista de puzzles, se ejecuta:
 
 ```
-(AeroChess-venv) C:\Users\Usuario\Desktop\PGAA> python manage.py loaddata puzzle
+(AeroChess-venv) C:\Users\Usuario\Desktop\PGAA\AeroChess> python manage.py loaddata puzzle
 ```
 
 # Cómo contribuir
