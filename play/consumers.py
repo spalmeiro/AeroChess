@@ -28,11 +28,11 @@ class multiplayerConsumer(AsyncJsonWebsocketConsumer):
             await self.close()
             return
 
-        # Conecta con la base de datos para averiguar a que lado debe unirse el usario
-        side = await self.connect_in_db(self.game_id)
+        # Conecta con la base de datos para averiguar cómo debe unirse el usario
+        data = await self.connect_in_db(self.game_id)
 
         # Si algo falla, cierra la conexión
-        if side == False:
+        if data == False:
             await self.close()
             return
 
@@ -40,10 +40,14 @@ class multiplayerConsumer(AsyncJsonWebsocketConsumer):
         await self.accept()
 
         # El usuario se une a la sala
-        await self.join_room(side)
+        await self.join_room(data)
 
-        # Si su oponente está conectado, se puede jugar
-        if side[2]:
+        # Si es un espectador, no hace nada
+        if data[3]:
+            pass
+
+        # Si es un jugador y su oponente está conectado, permite jugar
+        elif data[2]:
             await self.opponent_online()
 
 
@@ -63,7 +67,9 @@ class multiplayerConsumer(AsyncJsonWebsocketConsumer):
 
         # Recoge información sobre el usuario desde los datos de la partida, lo conecta y comprueba si su oponente está conectado
         opponent = False
+        spectator = False
 
+        # Entra como dueño de la partida
         if user == game.owner:
             game.owner_online = True
             if game.owner_side == "white":
@@ -72,8 +78,9 @@ class multiplayerConsumer(AsyncJsonWebsocketConsumer):
                 side = "black"
             if game.adversary_online == True:
                 opponent = True
-            print("Setting owner online")
+            print("Setting owner online...")
 
+        # Entra como adversario
         elif user == game.adversary:
             game.adversary_online = True
             if game.owner_side == "white":
@@ -82,16 +89,19 @@ class multiplayerConsumer(AsyncJsonWebsocketConsumer):
                 side = "white"
             if game.owner_online == True:
                 opponent = True
-            print("Setting adversary online")
+            print("Setting adversary online...")
 
+        # Entra como espectador
         else:
-            return False
+            side =  "white"
+            spectator = True
+            print("Adding spectator...")
         
         # Guarda los cambios en la base de datos
         game.save()
 
         # Devuelve el lado, el PGN y si se puede jugar ya o no
-        return [side, game.pgn, opponent]
+        return [side, game.pgn, opponent, spectator]
 
 
     # Se encarga de gestionar la unión a la sala
@@ -106,7 +116,8 @@ class multiplayerConsumer(AsyncJsonWebsocketConsumer):
             "command": "join",
             "orientation": data[0],
             "pgn": data[1],
-            "opponent_online": data[2]
+            "opponent_online": data[2],
+            "spectator": data[3]
         })
 
 

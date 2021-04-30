@@ -33,13 +33,13 @@ var orientation = "white" // Siempre se entra jugando con blancas
 //-------------- BLOQUE DE FUNCIONES PARA EL FUNCIONAMIENTO DEL TABLERO Y EL JUEGO ---------------//
     
 
-// Función que reproduce los sonidos que se le pasan como argumento
+// Reproduce los sonidos que se le pasan como argumento
 function reproSon (name) {
     var audio = new Audio('/static/sounds/' + name);
     audio.play();
 }
 
-// Función que marca las casillas disponibles para mover
+// Marca las casillas disponibles para mover
 function greySquare (square) {
     var $square = $('#computerBoard .square-' + square)
     
@@ -51,12 +51,12 @@ function greySquare (square) {
     $square.css('background', background)
 }
 
-// Función que desmarca las casillas disponibles para mover
+// Desmarca las casillas disponibles para mover
 function removeGreySquares () {
     $('#computerBoard .square-55d63').css('background', '')
 }
 
-// Función que marca los posibles movimientos cuando el ratón se sitúa sobre una pieza
+// Marca los posibles movimientos cuando el ratón se sitúa sobre una pieza
 function onMouseoverSquare (square, piece) {
 
     // Evita que se marquen movimientos en una partida acabada
@@ -83,17 +83,17 @@ function onMouseoverSquare (square, piece) {
     }
 }
 
-// Función que desmarca los posibles movimientos cuando el ratón ya no está situado sobre esa pieza
+// Desmarca los posibles movimientos cuando el ratón ya no está situado sobre esa pieza
 function onMouseoutSquare (square, piece) {
     removeGreySquares()
 }
 
-// Función que desmarca el último movimiento realizado
+// Desmarca el último movimiento realizado
 function removeHighlights () {
     $board.find('.' + squareClass).removeClass('highlight')
 }
 
-// Función que controla cuándo y qué piezas se pueden seleccionar para mover
+// Controla cuándo y qué piezas se pueden seleccionar para mover
 function onDragStart (source, piece, position, orientation) {
     
     // Evita que se puedan mover fichas en una partida acabada
@@ -103,7 +103,7 @@ function onDragStart (source, piece, position, orientation) {
     if ((orientation === 'white' && piece.search(/^w/) === -1) || (orientation === 'black' && piece.search(/^b/) === -1)) return false
 }
 
-// Función que controla qué ocurre cuando soltamos una pieza
+// Controla qué ocurre cuando soltamos una pieza
 function onDrop (source, target) {
 
     // Comprueba si el movimiento es legal
@@ -130,7 +130,7 @@ function onDrop (source, target) {
     updateStatus();
 }
 
-// Función que controla qué ocurre cuando se acaba un movmiento (en concreto lo destaca)
+// Cntrola qué ocurre cuando se acaba un movmiento (en concreto lo destaca)
 function onMoveEnd () {
     $board.find('.square-' + squareToHighlight).addClass('highlight')
 }
@@ -143,7 +143,7 @@ function onSnapEnd () {
 
 
 
-// Función que actualiza los datos sobre el estado de la partida
+// Actualiza los datos sobre el estado de la partida
 function updateStatus () {
 
     var status = ''

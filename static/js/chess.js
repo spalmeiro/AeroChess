@@ -1873,7 +1873,7 @@ var Chess = function(fen) {
         delete comments[generate_fen()];
         return comment;
       },
-  
+
       get_comments: function() {
         prune_comments();
         return Object.keys(comments).map(function(fen) {

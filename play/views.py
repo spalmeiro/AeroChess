@@ -90,6 +90,11 @@ def game(request, game_id):
     # Carga la información sobre la partida desde la base de datos
     game = get_object_or_404(Game, pk=game_id)
 
+    # Si la partida ya ha empezado, entra como espectador
+    # if game.status == 2:
+    #     return render(request, "play/online/spectate.html")
+
+    # Si la partida ya ha acabado, vuelve
     if game.status == 3:
         messages.add_message(request, messages.ERROR, "Esta partida ya ha terminado. ¡Empieza otra!")
         return HttpResponseRedirect(reverse("/play/online/lobby"))
@@ -102,14 +107,8 @@ def game(request, game_id):
 
             game.adversary = request.user
             game.status = 2
-            game.save()
-        
-        # Si ya hay adversario entra como espectador
-        # elif request.user != game.adversary:
-            # return render(request, "play/online/spectate.html")
-            
-            
-            
+            game.save()         
+                       
     return render(request, "play/online/game.html", {"owner": game.owner.username , "opponent": game.adversary })
 
 

@@ -42,7 +42,6 @@ console.log("Connecting to " + ws_path)
 // WebSocket
 var socket = new WebSocket(ws_path)
 
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -51,13 +50,13 @@ var socket = new WebSocket(ws_path)
 //-------------- BLOQUE DE FUNCIONES PARA EL FUNCIONAMIENTO DEL TABLERO Y EL JUEGO ---------------//
 
 
-// Función que reproduce los sonidos que se le pasan como argumento
+// Reproduce los sonidos que se le pasan como argumento
 function reproSon (name) {
     var audio = new Audio('/static/sounds/' + name);
     audio.play();
 }
 
-// Función que marca las casillas disponibles para mover
+// Marca las casillas disponibles para mover
 function greySquare (square) {
     var $square = $('#multiplayerBoard .square-' + square)
     
@@ -69,12 +68,12 @@ function greySquare (square) {
     $square.css('background', background)
 }
 
-// Función que desmarca las casillas disponibles para mover
+// Desmarca las casillas disponibles para mover
 function removeGreySquares () {
     $('#multiplayerBoard .square-55d63').css('background', '')
 }
 
-// Función que marca los posibles movimientos cuando el ratón se sitúa sobre una pieza
+// Marca los posibles movimientos cuando el ratón se sitúa sobre una pieza
 function onMouseoverSquare (square, piece) {
 
     // Evita que se marquen movimientos en una partida acabada
@@ -101,12 +100,17 @@ function onMouseoverSquare (square, piece) {
     }
 }
 
-// Función que desmarca los posibles movimientos cuando el ratón ya no está situado sobre esa pieza
+// Desmarca los posibles movimientos cuando el ratón ya no está situado sobre esa pieza
 function onMouseoutSquare (square, piece) {
     removeGreySquares()
 }
 
-// Función que controla cuándo y qué piezas se pueden seleccionar para mover
+// Desmarca el último movimiento realizado
+function removeHighlights () {
+    $board.find('.' + squareClass).removeClass('highlight')
+}
+
+// Controla cuándo y qué piezas se pueden seleccionar para mover
 function onDragStart (source, piece, position, orientation) {
     
     // Evita que se puedan mover fichas en una partida acabada
@@ -116,7 +120,7 @@ function onDragStart (source, piece, position, orientation) {
     if ((orientation === 'white' && piece.search(/^w/) === -1) || (orientation === 'black' && piece.search(/^b/) === -1)) return false
 }
 
-// Función que controla qué ocurre cuando soltamos una pieza
+// Controla qué ocurre cuando soltamos una pieza
 function onDrop (source, target) {
 
     // Comprueba si el movimiento es legal
@@ -134,12 +138,17 @@ function onDrop (source, target) {
     // Al soltar la pieza se envía la información del movimiento en forma de JSON
     socket.send(JSON.stringify({"command": "new-move", "source": source, "target": target, "fen": game.fen(), "pgn": game.pgn()}));
 
+    // Se destaca el movimiento realizado
+    removeHighlights()
+    $board.find('.square-' + source).addClass('highlight')
+    $board.find('.square-' + target).addClass('highlight')
+
     // Se actualizan los datos
     updateStatus();
 
 }
 
-// Función que controla qué ocurre cuando se acaba un movmiento (en concreto quita los highlights)
+// Controla qué ocurre cuando se acaba un movmiento (en concreto quita los highlights)
 function onMoveEnd () {
     $board.find('.square-' + squareToHighlight)
     .addClass('highlight-black')
@@ -153,7 +162,7 @@ function onSnapEnd () {
 
 
 
-// Función que actualiza los datos sobre el estado de la partida
+// Actualiza los datos sobre el estado de la partida
 function updateStatus () {
 
     var status = ""
@@ -323,6 +332,7 @@ socket.onmessage = function (message) {
                 backdrop: 'static',
                 keyboard: false
             })
+            opponent_online = false
         }
     }
 
@@ -331,10 +341,13 @@ socket.onmessage = function (message) {
         $('#connectionModal').modal('hide')
         $('#connectionModal').data('bs.modal', null)
         $("#opponent_name").load(location.href + " #opponent_name")
+        opponent_online = true
     }
 
     // Si el oponente se desconecta
     else if (data.command == "opponent-offline"){
+
+        opponent_online = false
 
         // Si la partida ha acabado, desactiva la funcionalidad
         if (game.game_over() || game_over) return false
@@ -346,7 +359,7 @@ socket.onmessage = function (message) {
 
         var time = 10
         var time_remaining = time
-        var interval = null
+        var countdown = null
         
         // Para actualizar el contador
         function updateCountdown() {
@@ -354,16 +367,22 @@ socket.onmessage = function (message) {
         }
 
         // Realiza la cuenta atrás
-        interval = setInterval( function() {
+        countdown = setInterval( function() {
 
             updateCountdown(time_remaining);
             time_remaining--
 
+            // Si el oponente se reconecta, permite jugar de nuevo
+            if(opponent_online == true) {
+                clearInterval(countdown)
+                $('#disconnectionModal').modal('hide')
+                $('#disconnectionModal').data('bs.modal', null)
+            }
+
             if(time_remaining < 0) {
                 
-                // Detiene la cuenta atrás
-                clearInterval(interval)
-
+                // Detiene la cuenta atrás y quita el modal
+                clearInterval(countdown)
                 $('#disconnectionModal').modal('hide')
                 $('#disconnectionModal').data('bs.modal', null)
 
@@ -377,8 +396,6 @@ socket.onmessage = function (message) {
                     socket.send(JSON.stringify({"command": "resign", "winner": "Blancas", "details": "Abandono de negras"}))
                     status = "Fin de la partida, abandono de negras"
                 }
-
-                var status = "Fin de la partida, tablas voluntarias"
 
                 game_over = true
                 $status.html(status)
@@ -396,13 +413,23 @@ socket.onmessage = function (message) {
 
     // Ejecuta el movimiento que ha realizado el oponente
     else if (data.command == "new-move") {
+
+        // Se realiza el movimiento
         game.move({
             from: data.source,
             to: data.target,
             promotion: 'q'
             });
         board.position(game.fen())
+
+        // Reproduce el sonido
         reproSon("ficha.wav")
+
+        // Se destaca el movimiento realizado
+        removeHighlights()
+        $board.find('.square-' + data.source).addClass('highlight')
+        $board.find('.square-' + data.target).addClass('highlight')
+        
         updateStatus()
     }
 

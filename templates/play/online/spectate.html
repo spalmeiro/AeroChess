@@ -16,8 +16,11 @@
     <!-- Script de Chess para el funcionamiento de la interfaz -->
     <script src="{% static 'js/chess.js' %}"></script>
 
+    <!-- Script propio para permitire la personalización del tablero -->
+    <script src="{% static 'js/customization.js' %}" async></script>
+
     <!-- Script propio para el funcionamiento de la página -->
-    <script src="{% static 'js/spectate.js' %}" defer></script>
+    <script src="{% static 'js/spectate.js' %}" async></script>
 
 {% endblock %}
 
@@ -52,7 +55,7 @@
 
                     <!-- Tablero -->
                     <hr class="mt-1 mb-2">
-                    <div id="multiplayerBoard" style="width: 100%;"></div>
+                    <div id="spectatorBoard" style="width: 100%;"></div>
                     <hr class="mt-2 mb-1">
 
                     <!-- Usuario -->
@@ -65,7 +68,7 @@
                     <div class="card" style="height: 100%; width: 100%;">
     
                         <div class="card-header">
-                            Partida multijugador
+                            Espectando partida multijugador
                         </div>
     
                         <ul class="list-group list-group-flush">
@@ -79,10 +82,7 @@
 
                             <div class="align-self-end" style="width: 100%;">
 
-                                <div class="btn-group" style="width: 100%;">
-                                    <button class="btn btn-outline-secondary" id="drawOffer">Ofrecer tablas</button>
-                                    <button class="btn btn-outline-secondary" id="resign">Abandonar</button>
-                                </div>
+                                
 
                             </div>
     

@@ -5,5 +5,5 @@ from .models import Puzzle
 from django.contrib.auth.models import User
 
 class puzzleConsumer(AsyncJsonWebsocketConsumer):
-
+    
     pass

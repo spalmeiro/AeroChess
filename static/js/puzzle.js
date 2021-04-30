@@ -22,7 +22,7 @@ var squareClass = 'square-55d63' // Se usa para destacar el último movimiento
 var squareToHighlight = null // Se usa para destacar el último movimiento
 var whiteSquareGrey = '#a9a9a9' // Determina el color con el que se destaca una casilla blanca
 var blackSquareGrey = '#696969' // Determina el color con el que se destaca una casilla negra
-var orientation = "white" // Siempre se entra jugando con blancas
+var orientation = null
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -140,8 +140,11 @@ function onSnapEnd () {
     board.position(game.fen())
 }
 
+// Elimina el header del pgn
+function remove_pgn_header(pgn) {
 
-
+    return pgn.split("<br />").slice(3,100).join("<br />")
+} 
 
 // Función que actualiza los datos sobre el estado de la partida
 function updateStatus () {
@@ -189,7 +192,19 @@ function updateStatus () {
     // Se actualiza el estado de la partida, el FEN y el PGN
     $status.html(status)
     $fen.val(game.fen())
-    $pgn.html(game.pgn({ max_width: 5, newline_char: "<br />"}))
+    new_pgn = remove_pgn_header(game.pgn({ max_width: 5, newline_char: "<br />"}))
+    $pgn.html(new_pgn)
+}
+
+// Carga el FEN del puzzle
+game.load(puzzle_fen)
+
+// Determina el lado del jugador
+if (game.turn() === 'b') {
+    orientation = "black"
+}
+else if (game.turn() === 'w') {
+    orientation = "white"
 }
 
 // Configuración del tablero
@@ -202,7 +217,8 @@ var config = {
     onMouseoutSquare: onMouseoutSquare,
     onMouseoverSquare: onMouseoverSquare,
     onMoveEnd: onMoveEnd,
-    onSnapEnd: onSnapEnd
+    onSnapEnd: onSnapEnd,
+    orientation: orientation
 }
 
 // Crea la instancia del tablero
@@ -215,6 +231,17 @@ updateStatus();
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+
+
+//---------------------- BLOQUE DE FUNCIONES PARA LA RESOLUCIÓN DEL PUZZLE -----------------------//
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+ 
 
 
 
@@ -302,62 +329,7 @@ function make_move() {
 //------------- BLOQUE DE FUNCIONES PARA LOS BOTONES QUE SE MUESTRAN EN LA INTERFAZ --------------//
 
 
-// Reiniciar la partida
-$('#new_game').on('click', function() {
-    // Reinicia el estado del tablero
-    game.reset();
-    reproSon("click2.wav");
-    // Establece la posición de inicio
-    board.position('start');
-});
 
-// Hacer un movimiento
-$('#make_move').on('click', function() {
-    // Pide que el movimiento lo haga el ordenador
-    reproSon("click2.wav");
-    make_move();
-});
-
-// Deshacer movimientos
-$('#take_back').on('click', function() { 
-    // Retrocede un movimiento
-    game.undo();
-    game.undo();
-    // Actualiza el estado del tablero
-    board.position(game.fen());
-    reproSon("click2.wav");
-    // Actualiza el estado de la partida
-    updateStatus();
-});
-
-// Rota el tablero
-$('#flip_board').on('click', function() {
-
-    board.flip();
-
-    if (orientation === "white") {
-        orientation = "black"
-    }
-    else if (orientation === "black") {
-        orientation = "white"
-    }
-
-    reproSon("boton.mp3");
-});
-
-// Introducir un FEN determinado
-$('#set_fen').on('click', function() {
-    reproSon("click.wav");
-    // FEN válido
-    if (game.load($('#fen').val()))
-    // Carga el FEN en el tablero
-    board.position(game.fen());
-    // FEN no válido
-    else
-    alert('¡Este FEN no es válido!');
-    // Actualiza el estado de la partida
-    updateStatus();
-});
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
