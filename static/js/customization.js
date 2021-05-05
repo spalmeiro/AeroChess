@@ -36,29 +36,34 @@ $('#piece_style').on('click', function() {
 
 
 
+
 //// PERSONALIZACIÓN DEL TABLERO ////
 
-// Se  seleccionan y previsualizan los cambios en el tablero
-$('#boardtheme1').on('click', function() {
-    CSS['black'] = 'boardtheme1black';
-    CSS['white'] = 'boardtheme1white';
+// Selecciona el tema del tablero
+$("#board_theme").on('change',  function () {
+    // Tablero predeterminado
+    if (this.selectedIndex == 0) {
+        CSS['black'] = 'boardtheme1black';
+        CSS['white'] = 'boardtheme1white';
+    } 
+    // Tablero verde
+    else if (this.selectedIndex == 1) {
+        CSS['black'] = 'boardtheme2black';
+        CSS['white'] = 'boardtheme2white';
+    }
+    // Tablero azul
+    else if (this.selectedIndex == 2) {
+        CSS['black'] = 'boardtheme3black';
+        CSS['white'] = 'boardtheme3white';
+    }
+});
+
+// Se previsualizan los cambios
+$('#board_theme').on('click', function() {
     board_preview.flip()    
     board_preview.flip()
 })
 
-$('#boardtheme2').on('click', function() {
-    CSS['black'] = 'boardtheme2black';
-    CSS['white'] = 'boardtheme2white';
-    board_preview.flip()    
-    board_preview.flip()
-})
-
-$('#boardtheme3').on('click', function() {
-    CSS['black'] = 'boardtheme3black';
-    CSS['white'] = 'boardtheme3white';
-    board_preview.flip()    
-    board_preview.flip()
-})
 
 
 
