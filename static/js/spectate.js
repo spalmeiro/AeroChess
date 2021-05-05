@@ -221,14 +221,14 @@ socket.onmessage = function (message) {
         updateStatus();
 
         // Si alguno de los jugadores no está conectado, espera
-        if (data.opponent_online != true) {
-            $connectionModalTitle.html("Jugador desconectado")
-            $connectionModalBody.html("Uno de los jugadores está desconectado, esperando a que se conecte...")
-            $('#connectionModal').modal({
-                backdrop: 'static',
-                keyboard: false
-            })
-        }
+        // if (data.opponent_online != true) {
+        //     $connectionModalTitle.html("Jugador desconectado")
+        //     $connectionModalBody.html("Uno de los jugadores está desconectado, esperando a que se conecte...")
+        //     $('#connectionModal').modal({
+        //         backdrop: 'static',
+        //         keyboard: false
+        //     })
+        // }
     }
 
     // Cuando ambos jugadores se conectan, hace desaparecer el modal

@@ -292,7 +292,10 @@ var Chess = function(fen) {
       }
   
       /* 2nd criterion: move number field is a integer value > 0? */
-      if (isNaN(tokens[5]) || parseInt(tokens[5], 10) <= 0) {
+      // if (isNaN(tokens[5]) || parseInt(tokens[5], 10) <= 0) {
+      //   return { valid: false, error_number: 2, error: errors[2] }
+      // }
+      if (isNaN(tokens[5]) || parseInt(tokens[5], 10) < 0) {
         return { valid: false, error_number: 2, error: errors[2] }
       }
   

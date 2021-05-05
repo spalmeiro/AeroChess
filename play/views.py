@@ -91,8 +91,8 @@ def game(request, game_id):
     game = get_object_or_404(Game, pk=game_id)
 
     # Si la partida ya ha empezado, entra como espectador
-    # if game.status == 2:
-    #     return render(request, "play/online/spectate.html")
+    if game.status == 2:
+        return render(request, "play/online/spectate.html")
 
     # Si la partida ya ha acabado, vuelve
     if game.status == 3:

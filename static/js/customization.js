@@ -2,7 +2,6 @@
     CÓDIGO NECESARIO PARA HABILITAR LA PERSONALIZACIÓN DE LA PÁGINA
 */
 
-
 //// PREVISUALIZACIÓN ////
 
 // Configura el tablero

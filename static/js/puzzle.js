@@ -270,12 +270,12 @@ const csrftoken = getCookie('csrftoken');
 function make_move() {
 
     $.ajax({
-        url: '/play/computer/make_move',
+        url: '/puzzles/make_move',
         type: "POST",
         data: {
             'fen': game.fen(),
-            'move_time': $('#move_time option:selected').val(),
-            'Nivel': $('#Nivel option:selected').val(),
+            'move_time': 1000,
+            'Nivel': 20,
         },
         beforeSend: function (xhr) {
             xhr.setRequestHeader("X-CSRFToken", csrftoken);
@@ -289,6 +289,7 @@ function make_move() {
 
             estoy=data.best_move.substring(0,2);
             voy=data.best_move.substring(2,4);
+            alert(voy)
 
             removeHighlights()
             $board.find('.square-' + estoy).addClass('highlight');
@@ -328,8 +329,10 @@ function make_move() {
 
 //------------- BLOQUE DE FUNCIONES PARA LOS BOTONES QUE SE MUESTRAN EN LA INTERFAZ --------------//
 
-
-
+// Mostrar solución
+$('#showSolution').on('click', function() {
+    game.load_pgn(puzzle_pgn)
+});
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
