@@ -120,8 +120,6 @@ function onDrop (source, target) {
 
     reproSon("ficha.wav");
 
- console.log(game.fen())   
- console.log(fen_to_compare[j])
    if (game.fen()==fen_to_compare[j]){}
    else{
     game.undo();
@@ -134,7 +132,7 @@ return
  j=j+1
 p=p+1
     // Al soltar la pieza se activa la función que genera la respuesta del motor de ajedrez
-    make_move();
+    movsolution()
 
     // Se destaca el movimiento realizado
     removeHighlights()
@@ -351,29 +349,37 @@ function dividirCadena(cadenaADividir,separador) {
 // Mostrar solución
 
 $('#showSolution').on('click', function() {
-k=1
-i=2
-dividirCadena(puzzle_pgn," ")
-
- 
-if (game.turn() === 'b') {
-    n=i+3*p
-    p=p+1
-}
-
-
- else{
-       
-    n=k+3*p
-
-}
-
-
-    game.move(Solucion[n], {sloppy: true })
-    board.position(game.fen());
-
-     updateStatus();
+movsolution()
 });
+
+function movsolution(){
+
+    k=1
+    i=2
+    dividirCadena(puzzle_pgn," ")
+    
+     
+    if (game.turn() === 'b') {
+        n=i+3*p
+        p=p+1
+    }
+    
+    
+     else{
+           
+        n=k+3*p
+    
+    }
+    
+    
+        game.move(Solucion[n], {sloppy: true })
+        board.position(game.fen());
+    
+         updateStatus();
+
+
+
+}
 
 // Moviemiento valido
 var fen_to_compare = [];
