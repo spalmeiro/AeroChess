@@ -11,6 +11,7 @@
 // Variables del tablero y del estado de la partida
 var $board = $('#puzzleBoard')
 var game = new Chess()
+var game2 = new Chess()
 var $status = $('#status') // Estado de la partida
 var $fen = $('#fen') // FEN
 var $pgn = $('#pgn') // PGN
@@ -102,7 +103,8 @@ function onDragStart (source, piece, position, orientation) {
     // Controla que sólo se puedan seleccionar las piezas del lado al que le toca mover
     if ((orientation === 'white' && piece.search(/^w/) === -1) || (orientation === 'black' && piece.search(/^b/) === -1)) return false
 }
-
+p=0
+j=0
 // Función que controla qué ocurre cuando soltamos una pieza
 function onDrop (source, target) {
 
@@ -118,6 +120,19 @@ function onDrop (source, target) {
 
     reproSon("ficha.wav");
 
+ console.log(game.fen())   
+ console.log(fen_to_compare[j])
+   if (game.fen()==fen_to_compare[j]){}
+   else{
+    game.undo();
+    // Actualiza el estado del tablero
+    board.position(game.fen());
+    // Actualiza el estado de la partida
+    updateStatus();
+return
+   }
+ j=j+1
+p=p+1
     // Al soltar la pieza se activa la función que genera la respuesta del motor de ajedrez
     make_move();
 
@@ -198,6 +213,7 @@ function updateStatus () {
 
 // Carga el FEN del puzzle
 game.load(puzzle_fen)
+game2.load(puzzle_fen)
 
 // Determina el lado del jugador
 if (game.turn() === 'b') {
@@ -289,7 +305,7 @@ function make_move() {
 
             estoy=data.best_move.substring(0,2);
             voy=data.best_move.substring(2,4);
-            alert(voy)
+          
 
             removeHighlights()
             $board.find('.square-' + estoy).addClass('highlight');
@@ -321,6 +337,9 @@ function make_move() {
     });
 }
 
+function dividirCadena(cadenaADividir,separador) {
+    Solucion = cadenaADividir.split(separador);
+ }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -330,9 +349,60 @@ function make_move() {
 //------------- BLOQUE DE FUNCIONES PARA LOS BOTONES QUE SE MUESTRAN EN LA INTERFAZ --------------//
 
 // Mostrar solución
+
 $('#showSolution').on('click', function() {
-    game.load_pgn(puzzle_pgn)
+k=1
+i=2
+dividirCadena(puzzle_pgn," ")
+
+ 
+if (game.turn() === 'b') {
+    n=i+3*p
+    p=p+1
+}
+
+
+ else{
+       
+    n=k+3*p
+
+}
+
+
+    game.move(Solucion[n], {sloppy: true })
+    board.position(game.fen());
+
+     updateStatus();
 });
 
+// Moviemiento valido
+var fen_to_compare = [];
+function arrayfen(){
+    
+    n=0
 
+
+    dividirCadena(puzzle_pgn," ")
+    
+ 
+ 
+        if (game2.turn() === 'b') { i=2}
+        
+        
+         else{i=1}
+
+
+         while (n < 8) {
+            
+            x=n*3+i;
+         
+        game2.move(Solucion[x], {sloppy: true })
+        fen_to_compare[n]=game2.fen()
+        x=x+i
+        game2.move(Solucion[x], {sloppy: true })
+        n++;
+    } 
+}
+
+window.onload = arrayfen
 ////////////////////////////////////////////////////////////////////////////////////////////////////
