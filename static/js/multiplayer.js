@@ -258,7 +258,6 @@ if (game_over === false) {
     updateStatus()
 }
 
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -314,6 +313,9 @@ socket.onmessage = function (message) {
         // Crea la instancia del tablero y la orientación
         board = Chessboard('multiplayerBoard', config)
         orientation = data.orientation
+
+        // Permite que el tablero sea responsive
+        $(window).resize(board.resize)
 
         // Carga el PGN si existiera
         if(data.pgn){

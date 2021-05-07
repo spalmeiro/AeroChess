@@ -39,15 +39,11 @@ class multiplayerConsumer(AsyncJsonWebsocketConsumer):
         # Si todo va bien, abre la conexión
         await self.accept()
 
-        # El usuario se une a la sala
+        # Se une a la sala
         await self.join_room(data)
 
-        # Si es un espectador, no hace nada
-        if data[3]:
-            pass
-
-        # Si es un jugador y su oponente está conectado, permite jugar
-        elif data[2]:
+        # Si su oponente está conectado, permite jugar
+        if data[2]:
             await self.opponent_online()
 
 
@@ -67,7 +63,7 @@ class multiplayerConsumer(AsyncJsonWebsocketConsumer):
 
         # Recoge información sobre el usuario desde los datos de la partida, lo conecta y comprueba si su oponente está conectado
         opponent = False
-        spectator = False
+        spectators = 0
 
         # Entra como dueño de la partida
         if user == game.owner:
@@ -94,14 +90,14 @@ class multiplayerConsumer(AsyncJsonWebsocketConsumer):
         # Entra como espectador
         else:
             side =  "white"
-            spectator = True
+            spectators += 1
             print("Adding spectator...")
         
         # Guarda los cambios en la base de datos
         game.save()
 
-        # Devuelve el lado, el PGN y si se puede jugar ya o no
-        return [side, game.pgn, opponent, spectator]
+        # Devuelve el lado, el PGN, si se puede jugar ya o no y el número de espectadores
+        return [side, game.pgn, opponent, spectators]
 
 
     # Se encarga de gestionar la unión a la sala
@@ -112,13 +108,23 @@ class multiplayerConsumer(AsyncJsonWebsocketConsumer):
             self.channel_name,
         )
 
-        await self.send_json({
-            "command": "join",
-            "orientation": data[0],
-            "pgn": data[1],
-            "opponent_online": data[2],
-            "spectator": data[3]
-        })
+        # Si es un espectador
+        if data[3]:
+            await self.send_json({
+                "command": "join_spectator",
+                "orientation": data[0],
+                "pgn": data[1],
+                "spectators": data[3]
+            })
+
+        # Si es un jugador
+        else:
+            await self.send_json({
+                "command": "join",
+                "orientation": data[0],
+                "pgn": data[1],
+                "opponent_online": data[2],
+            })
 
 
     # Si el oponente está conectado, permite jugar
@@ -145,8 +151,16 @@ class multiplayerConsumer(AsyncJsonWebsocketConsumer):
 
     # Se encarga de las desconexiones en la comunicación
     async def disconnect(self, code):
-        await self.disconnect_in_db()
-        await self.opponent_offline()
+
+        spectator = await self.disconnect_in_db()
+        
+        # Si es un espectador pasa
+        if spectator:
+            pass
+
+        # Si es un jugador, avisa de que se ha desconectado
+        else:
+            await self.opponent_offline()
 
 
     # Modifica la información de la partida en la base de datos al desconectarse
@@ -158,6 +172,7 @@ class multiplayerConsumer(AsyncJsonWebsocketConsumer):
         
         # Carga el usuario
         user = self.scope["user"]
+        spectator = False
 
         # Desconecta al usuario en la base de datos
         if user == game.adversary:
@@ -167,6 +182,11 @@ class multiplayerConsumer(AsyncJsonWebsocketConsumer):
         elif user == game.owner:
             game.owner_online = False
             print("Setting owner offline")
+        
+        # Si es un espectador
+        else:
+            spectator = True
+            return spectator
 
         # Guarda los cambios
         game.save()

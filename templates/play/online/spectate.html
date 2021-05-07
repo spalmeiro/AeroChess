@@ -40,9 +40,9 @@
 
                 <div class="col-md-7">
 
-                    <!-- Oponente -->
+                    <!-- Jugador de negras -->
                     <div id="opponent_name">
-                        {% if user.username == owner %}
+                        {% if owner_side == "white" %}
                             {% if opponent == None %}
                                 <h5>Esperando oponente...</h5>
                             {% else %}
@@ -58,8 +58,12 @@
                     <div id="spectatorBoard" style="width: 100%;"></div>
                     <hr class="mt-2 mb-1">
 
-                    <!-- Usuario -->
-                    <h5>{{ user.username }}</h5>
+                    <!-- Jugador de blancas -->
+                    {% if owner_side == "white" %}
+                        <h5>{{ owner }}</h5>
+                    {% else %}
+                        <h5>{{ opponent }}</h5>
+                    {% endif %}
 
                 </div>
     

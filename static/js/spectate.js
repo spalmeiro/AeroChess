@@ -83,13 +83,11 @@ function updateStatus () {
         // Ganan negras
         if(moveColor === 'blancas') {
             status = "Fin de la partida, las negras hacen jaque mate."
-            socket.send(JSON.stringify({"command": "game-over", "winner": "Negras", "details": "Jaque mate"}))
         }
 
         // Ganan blancas
         else {    
             status = "Fin de la partida, las blancas hacen jaque mate."
-            socket.send(JSON.stringify({"command": "game-over", "winner": "Blancas", "details": "Jaque mate"}))
         }
     }
 
@@ -97,8 +95,6 @@ function updateStatus () {
     else if (game.in_draw()) {
 
         status = "Fin de la partida, tablas"
-
-        socket.send(JSON.stringify({"command": "game-over", "winner": "Tablas", "details": "Tablas forzadas"}))
 
         $statusModalTitle.html("Tablas")
         $statusModalBody.html("La partida ha acabado en tablas. ¡Han empatado!")
@@ -113,8 +109,6 @@ function updateStatus () {
 
         status = 'Fin de la partida, tablas por ahogado'
 
-        socket.send(JSON.stringify({"command": "game-over", "winner": "Tablas", "details": "Tablas por ahogado"}))
-
         $statusModalTitle.html("Tablas por ahogado.")
         $statusModalBody.html("La partida ha acabado en tablas por ahogado. ¡Han empatado!")
         $('#statusModal').modal({
@@ -127,8 +121,6 @@ function updateStatus () {
     else if (game.in_threefold_repetition()) {
 
         status = 'Fin de la partida, tablas por repetición'
-
-        socket.send(JSON.stringify({"command": "game-over", "winner": "Tablas", "details": "Tablas por repetición"}))
 
         $statusModalTitle.html("Tablas")
         $statusModalBody.html("La partida ha acabado en tablas por repetición. ¡Han empatado!")
@@ -159,7 +151,6 @@ function updateStatus () {
 if (game_over === false) {
     updateStatus()
 }
-
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -195,7 +186,7 @@ socket.onmessage = function (message) {
     var data = JSON.parse(message.data)
 
     // Se encarga de las acciones a realizar cuando te unes a la partida
-    if (data.command == "join") {
+    if (data.command == "join_spectator") {
 
         console.log("Joining room as spectator")
 
@@ -211,6 +202,9 @@ socket.onmessage = function (message) {
         board = Chessboard('spectatorBoard', config)
         orientation = data.orientation
 
+        // Permite que el tablero sea responsive
+        $(window).resize(board.resize)
+
         // Carga el PGN si existiera
         if(data.pgn){
             game.load_pgn(data.pgn)
@@ -220,15 +214,6 @@ socket.onmessage = function (message) {
         board.position(game.fen());
         updateStatus();
 
-        // Si alguno de los jugadores no está conectado, espera
-        // if (data.opponent_online != true) {
-        //     $connectionModalTitle.html("Jugador desconectado")
-        //     $connectionModalBody.html("Uno de los jugadores está desconectado, esperando a que se conecte...")
-        //     $('#connectionModal').modal({
-        //         backdrop: 'static',
-        //         keyboard: false
-        //     })
-        // }
     }
 
     // Cuando ambos jugadores se conectan, hace desaparecer el modal
@@ -244,59 +229,46 @@ socket.onmessage = function (message) {
         // Si la partida ha acabado, desactiva la funcionalidad
         if (game.game_over() || game_over) return false
 
-        $('#disconnectionModal').modal({
-            backdrop: 'static',
-            keyboard: false
-        })
+        // $('#disconnectionModal').modal({
+        //     backdrop: 'static',
+        //     keyboard: false
+        // })
 
-        var time = 10
-        var time_remaining = time
-        var interval = null
+        // var time = 10
+        // var time_remaining = time
+        // var interval = null
         
-        // Para actualizar el contador
-        function updateCountdown() {
-            $("#countdown").html(time_remaining)
-        }
+        // // Para actualizar el contador
+        // function updateCountdown() {
+        //     $("#countdown").html(time_remaining)
+        // }
 
-        // Realiza la cuenta atrás
-        interval = setInterval( function() {
+        // // Realiza la cuenta atrás
+        // interval = setInterval( function() {
 
-            updateCountdown(time_remaining);
-            time_remaining--
+        //     updateCountdown(time_remaining);
+        //     time_remaining--
 
-            if(time_remaining < 0) {
+        //     if(time_remaining < 0) {
                 
-                // Detiene la cuenta atrás
-                clearInterval(interval)
+        //         // Detiene la cuenta atrás
+        //         clearInterval(interval)
 
-                $('#disconnectionModal').modal('hide')
-                $('#disconnectionModal').data('bs.modal', null)
+        //         $('#disconnectionModal').modal('hide')
+        //         $('#disconnectionModal').data('bs.modal', null)
+                
+        //         game_over = true
+        //         $status.html(status)
 
-                var status = ""
+        //         $statusModalTitle.html("Victoria")
+        //         $statusModalBody.html("Tu oponente ha abandonado la sala. ¡Has ganado!")
+        //         $('#statusModal').modal({
+        //             backdrop: 'static',
+        //             keyboard: false
+        //         })
+        //     }
 
-                if(orientation === 'black') {
-                    socket.send(JSON.stringify({"command": "resign", "winner": "Negras", "details": "Abandono de blancas"}))
-                    status = "Fin de la partida, abandono de blancas"
-                }
-                else {
-                    socket.send(JSON.stringify({"command": "resign", "winner": "Blancas", "details": "Abandono de negras"}))
-                    status = "Fin de la partida, abandono de negras"
-                }
-
-                var status = "Fin de la partida, tablas voluntarias"
-
-                game_over = true
-                $status.html(status)
-
-                $statusModalTitle.html("Victoria")
-                $statusModalBody.html("Tu oponente ha abandonado la sala. ¡Has ganado!")
-                $('#statusModal').modal({
-                    backdrop: 'static',
-                    keyboard: false
-                })
-            }
-
-        }, 1000)
+        // }, 1000)
     }
 
     // Ejecuta el movimiento que ha realizado el oponente
@@ -324,13 +296,13 @@ socket.onmessage = function (message) {
     // Si se acaba la partida
     else if (data.command == "gameisover") {
 
-        if ((orientation === "white" && data.winner == "Blancas") || (orientation === "black" && data.winner == "Negras")) {
-            $statusModalTitle.html("Victoria")
-            $statusModalBody.html("Has hecho jaque mate a tu oponente. ¡Has ganado!")
+        if (data.winner == "Blancas") {
+            $statusModalTitle.html("Fin de la partida")
+            $statusModalBody.html("Las blancas han hecho jaque mate a su oponente.")
         }
-        else {
-            $statusModalTitle.html("Derrota");
-            $statusModalBody.html("Tu oponente te ha hecho jaque mate. ¡Has perdido!");
+        else if (data.winner == "Negras") {
+            $statusModalTitle.html("Fin de la partida");
+            $statusModalBody.html("Las negras han hecho jaque mate a su oponente.d");
         }
 
         $('#statusModal').modal({
@@ -339,41 +311,41 @@ socket.onmessage = function (message) {
         })
     }
 
-    // Si el oponente ofrece tablas abre el modal para responder
+    // Si se ofrecen tablas
     else if (data.command == "opponent-offer-draw") {
-        $("#drawAcceptModal").modal({
-            backdrop: "static",
+        $statusModalTitle.html("Oferta de tablas")
+        $statusModalBody.html("Se ha hecho una oferta de tablas. Esperando respuesta...")
+        $('#statusModal').modal({
+            backdrop: 'static',
             keyboard: false
         })
     }
 
-    // Si el oponente acepta las tablas esconde el modal de espera y acaba la partida
+    // Si se aceptan las tablas
     else if (data.command == "opponent-accept-draw") {
         
-        $('#drawWaitModal').modal('hide')
-        $('#drawWaitModal').data('bs.modal', null)
+        $('#statusModal').modal('hide')
+        $('#statusModal').data('bs.modal', null)
 
         var status = "Fin de la partida, tablas voluntarias"
 
-        game_over = true
         $status.html(status)
 
-        $statusModalTitle.html("Tablas")
-        $statusModalBody.html("Tu oponente ha aceptado tu oferta de tablas. ¡Habéis empatado!")
+        $statusModalTitle.html("Fin de la partida")
+        $statusModalBody.html("Se ha aceptado la oferta de tablas. La partida acaba en empate.")
         $('#statusModal').modal({
             backdrop: 'static',
             keyboard: false
-        })
-    }
+        })    }
 
     // Si el oponente rechaza las tablas esconde el modal de espera y continúa la partida
     else if (data.command == "opponent-reject-draw") {
 
-        $('#drawWaitModal').modal('hide')
-        $('#drawWaitModal').data('bs.modal', null)
+        $('#statusModal').modal('hide')
+        $('#statusModal').data('bs.modal', null)
 
         $statusModalTitle.html("Tablas rechazadas")
-        $statusModalBody.html("Tu oponente ha rechazado tu oferta de tablas. La partida continúa.")
+        $statusModalBody.html("Se ha rechazado la oferta de tablas. La partida continúa.")
         $("#statusModal").modal()
     }
 
@@ -416,88 +388,6 @@ $('#customization').on('click', function() {
     board.flip() 
     board.flip()
 })
-
-// Abre el modal para ofrecer tablas
-$("#drawOffer").on("click", function() {
-
-    // Si la partida ha acabado, desactiva el botón
-    if (game.game_over() || game_over) return false
-
-    $("#drawOfferModal").modal()
-})
-
-// Envia la oferta de tablas y abre el modal para esperar la respuesta
-$("#drawOffer_send").on("click", function() {
-
-    socket.send(JSON.stringify({"command": "draw-offer"}));
-
-    $("#drawWaitModal").modal({
-        backdrop: "static",
-        keyboard: false
-    })
-})
-
-// Acepta la oferta de tablas
-$("#drawAccept_yes").on("click", function() {
-
-    socket.send(JSON.stringify({"command": "draw-accept", "winner": "Tablas", "details": "Tablas voluntarias"}))
-
-    var status = "Fin de la partida, tablas voluntarias"
-
-    game_over = true
-    $status.html(status)
-
-    $statusModalTitle.html("Tablas")
-    $statusModalBody.html("Has aceptado la oferta de tablas de tu oponente. ¡Habéis empatado!")
-    $('#statusModal').modal({
-        keyboard: false,
-        backdrop: 'static'
-    })
-})
-
-// Rechaza la oferta de tablas
-$("#drawAccept_no").on("click", function() {
-    socket.send(JSON.stringify({"command": "draw-reject"}))
-})
-
-// Abre el modal para abandonar partida
-$("#resign").on("click", function() {
-
-    // Si la partida ha acabado, desactiva el botón
-    if (game.game_over() || game_over) return false
-
-    $("#resignModal").modal()
-})
-
-// Abandona la partida
-$("#resign_yes").on("click", function() {
-
-    var status = ""
-
-    if(orientation === 'white') {
-        socket.send(JSON.stringify({"command": "resign", "winner": "Negras", "details": "Abandono de blancas"}));
-        status = "Fin de la partida, abandono de blancas"
-    }
-    else {
-        socket.send(JSON.stringify({"command": "resign", "winner": "Blancas", "details": "Abandono de negras"}));
-        status = "Fin de la partida, abandono de negras"
-    }
-
-    game_over = true
-    $status.html(status)
-
-    $statusModalTitle.html("Derrota")
-    $statusModalBody.html("Has abandonado la partida. ¡Has perdido!")
-    $('#statusModal').modal({
-        backdrop: "static",
-        keyboard: false
-    })
-})
-
-// Al intentar salir de la página, muestra un mensaje de confirmación
-// $(window).bind("beforeunload", function() {
-//     return true;
-// })
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

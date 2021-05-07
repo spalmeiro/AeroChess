@@ -91,8 +91,8 @@ def game(request, game_id):
     game = get_object_or_404(Game, pk=game_id)
 
     # Si la partida ya ha empezado, entra como espectador
-    if game.status == 2:
-        return render(request, "play/online/spectate.html")
+    if (game.owner_online and game.adversary_online):
+        return render(request, "play/online/spectate.html", {"owner": game.owner.username , "opponent": game.adversary, "owner_side": game.owner_side})
 
     # Si la partida ya ha acabado, vuelve
     if game.status == 3:
@@ -109,7 +109,7 @@ def game(request, game_id):
             game.status = 2
             game.save()         
                        
-    return render(request, "play/online/game.html", {"owner": game.owner.username , "opponent": game.adversary })
+    return render(request, "play/online/game.html", {"owner": game.owner.username , "opponent": game.adversary})
 
 
 
