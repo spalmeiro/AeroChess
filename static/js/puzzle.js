@@ -123,6 +123,7 @@ function onDrop (source, target) {
    if (game.fen()==fen_to_compare[j]){}
    else{
     game.undo();
+    reproSon("burla.mp3")
     // Actualiza el estado del tablero
     board.position(game.fen());
     // Actualiza el estado de la partida
