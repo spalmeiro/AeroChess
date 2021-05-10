@@ -60,7 +60,7 @@ body {
   line-height: 1.5;
   color: #212529;
   text-align: left;
-  background-color: #fff;
+  background-color: rgb(10, 44, 26); /* Color de fondo (pagina index) cambiado*/
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -604,6 +604,7 @@ pre code {
 .col-xl-auto {
   position: relative;
   width: 100%;
+  color: #ffffff; /* Color Nombre jugador vs. stockfish (juego contra la maquina) cambiado*/
   padding-right: 15px;
   padding-left: 15px;
 }
@@ -1127,6 +1128,12 @@ pre code {
     max-width: 50%;
   }
   .col-md-7 {
+    background-color: rgb(50, 50, 50); /*Añadidos varios para el marco del tablero*/ 
+    border-style: ridge;
+    border-color: rgb(148, 148, 148);
+    border-width: thick;
+    padding-top: 1rem;
+    padding-bottom: 0.8rem;
     -ms-flex: 0 0 58.333333%;
     flex: 0 0 58.333333%;
     max-width: 58.333333%;
@@ -1661,7 +1668,7 @@ pre code {
 .table {
   width: 100%;
   margin-bottom: 1rem;
-  color: #212529;
+  color: #ffffff; /*Color palabras de las tablas (por ejemplo en los puzzles)*/
 }
 
 .table th,
@@ -1711,7 +1718,7 @@ pre code {
 }
 
 .table-hover tbody tr:hover {
-  color: #212529;
+  color: #ffffff; /*Sombreado  que aparece al ir a seleccionar un puzzle*/
   background-color: rgba(0, 0, 0, 0.075);
 }
 
@@ -2009,13 +2016,15 @@ pre code {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #495057;
-  background-color: #fff;
+  color: #ffffff;
+  background-color: rgb(70, 70, 70); /*Color de los cuadros de los dropdowns*/
   background-clip: padding-box;
-  border: 1px solid #ced4da;
+  border: 3px #ffffff;
+  border-style: groove; /* Estilo de borde de los recuadros de los ajustes de stockfish, cambiado*/
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+
 
 @media (prefers-reduced-motion: reduce) {
   .form-control {
@@ -2033,9 +2042,9 @@ pre code {
   text-shadow: 0 0 0 #495057;
 }
 
-.form-control:focus {
-  color: #495057;
-  background-color: #fff;
+.form-control:focus { 
+  color: #ffffff;  /* Cambios de color de las letras para cuando el dropdown está desplegado*/
+  background-color: rgb(100, 100, 100); /* Cambios de color del fondo para cuando el dropdown está desplegado*/
   border-color: #80bdff;
   outline: 0;
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
@@ -2506,7 +2515,7 @@ textarea.form-control {
 .btn {
   display: inline-block;
   font-weight: 400;
-  color: #212529;
+  color: #ffffff;
   text-align: center;
   vertical-align: middle;
   -webkit-user-select: none;
@@ -2879,15 +2888,18 @@ fieldset:disabled a.btn {
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
 }
 
-.btn-outline-secondary {
-  color: #6c757d;
-  border-color: #6c757d;
+.btn-outline-secondary { /*CSS para definir el color de los botones secundarios en la pantalla de juego*/
+  color: #ffffff;
+  border-color: #ffffff;
+  background-color: rgb(70, 70, 70);
+  border-width: 2px;
+  border-style: ridge;
 }
 
 .btn-outline-secondary:hover {
   color: #fff;
-  background-color: #6c757d;
-  border-color: #6c757d;
+  background-color: rgb(100, 100, 100);
+  border-color: #dbdbdb;
 }
 
 .btn-outline-secondary:focus, .btn-outline-secondary.focus {
@@ -4756,7 +4768,7 @@ input[type="button"].btn-block {
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: #fff;
+  background-color: rgb(50, 50, 50); /*Color del cuadro de partida (contra el ordenador al menos), y registro de movimientos*/
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
@@ -4768,6 +4780,7 @@ input[type="button"].btn-block {
 }
 
 .card > .list-group {
+  color: rgb(255, 255, 255); /* color de las letras de movimientos y turnos*/
   border-top: inherit;
   border-bottom: inherit;
 }
@@ -5277,10 +5290,23 @@ a.badge-dark:focus, a.badge-dark.focus {
   box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.5);
 }
 
+.titulo{
+  color: #ffffff;
+  text-align: center;
+}
+
 .jumbotron {
   padding: 2rem 1rem;
   margin-bottom: 2rem;
-  background-color: #e9ecef;
+  height: 100%;
+  background-image: url(https://image.freepik.com/vector-gratis/ajedrez-piezas-ajedrez-blanco-negro-rey-reina-alfil-torre-caballo-peon_229548-1196.jpg); /*Nueva imagen de fondo*/
+  background-position: center;
+  background-size: cover; /*Intento de ubicacion de la imagen dentro del cuadro*/
+  /*background-color: rgb(255, 255, 255); /* Color del contenedor cambiado*/
+  color: rgb(0, 0, 0); /*Color añadido al título de la página*/
+  border-style: ridge; /*Declaracion del borde del recuadro*/
+  border-color: rgb(92, 92, 92); /*Color del borde*/
+  border-width: 10px; /*Grosor del borde*/
   border-radius: 0.3rem;
 }
 
@@ -5548,7 +5574,7 @@ a.badge-dark:focus, a.badge-dark.focus {
   position: relative;
   display: block;
   padding: 0.75rem 1.25rem;
-  background-color: #fff;
+  background-color: inherit; /* Color borde del recuadro del registro de movimientos*/
   border: 1px solid rgba(0, 0, 0, 0.125);
 }
 
@@ -8240,6 +8266,7 @@ button.bg-dark:focus {
 
 .mt-3,
 .my-3 {
+  color: #fbfcfc;
   margin-top: 1rem !important;
 }
 
@@ -9991,6 +10018,7 @@ button.bg-dark:focus {
 }
 
 .text-justify {
+  color: #fbfcfc; /*Color de texto añadido*/
   text-align: justify !important;
 }
 
@@ -10009,6 +10037,7 @@ button.bg-dark:focus {
 }
 
 .text-left {
+  color: #ffffff; /*Color de texto añadido*/
   text-align: left !important;
 }
 
@@ -10017,6 +10046,7 @@ button.bg-dark:focus {
 }
 
 .text-center {
+  color: #ffffff; /*Color de texto añadido*/
   text-align: center !important;
 }
 
@@ -10089,6 +10119,7 @@ button.bg-dark:focus {
 }
 
 .font-weight-normal {
+color: #ffffff; /* Color "¿No tienes cuenta?"*/
   font-weight: 400 !important;
 }
 
@@ -10177,7 +10208,7 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 .text-muted {
-  color: #6c757d !important;
+  color: #ffffff !important; /*Color de texto (footer, etc.) cambiado*/
 }
 
 .text-black-50 {

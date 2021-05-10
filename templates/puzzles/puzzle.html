@@ -40,7 +40,7 @@
 
                 <div class="col-md-7">
 
-                    <h5>{{ puzzle.citation }}</h5>
+                    <h4 class="text-center">{{ puzzle.citation }}</h4> <!-- Texto centrado y tamaño cambiado a h4-->
                     <hr class="mt-1 mb-2">
 
                     <div id="puzzleBoard" style="width: 100%;"></div>
@@ -53,11 +53,11 @@
     
                         <div class="card-header d-flex align-items-center justify-content-center" style="height: 10%;">
                             {% if puzzle.category == 1 %}
-                                <h4 class="text-center">Mate en 2 movimientos</h4>
+                                <h4 class="text-center"><u>Mate en 2 movimientos</u></h4>
                             {% elif puzzle.category == 2 %}
-                                <h4 class="text-center">Mate en 3 movimientos</h4>
+                                <h4 class="text-center"><u>Mate en 3 movimientos</u></h4>
                             {% elif puzzle.category == 3 %}
-                                <h4 class="text-center">Mate en 4 movimientos</h4>
+                                <h4 class="text-center"><u>Mate en 4 movimientos</u></h4>
                             {% endif %}                            
                         </div>
     

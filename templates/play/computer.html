@@ -39,17 +39,16 @@
             <div class="row">
 
                 <div class="col-md-7">
-
-                    <h5>Stockfish 13</h5>
+                    <h4 class="text-center">Stockfish 13</h4> <!-- Texto centrado -->
                     <hr class="mt-1 mb-2">
 
                     <div id="computerBoard" style="width: 100%;"></div>
 
                     <hr class="mt-2 mb-1">
                     {% if user.is_authenticated %}
-                        <h5>{{ user.username }}</h5>
+                        <h4 class="text-center">{{ user.username }}</h4> <!-- Texto centrado -->
                     {% else %}
-                        <h5>Anónimo</h5>
+                        <h4 class="text-center">Anónimo</h4> <!-- Texto centrado -->
                     {% endif %}
 
                 </div>
@@ -59,14 +58,14 @@
                     <div class="card" style="height: 100%; width: 100%;">
     
                         <div class="card-header d-flex align-items-center justify-content-center" style="height: 10%;">
-                            <h4 class="text-center">Partida contra el ordenador</h4>
+                            <h4 class="text-center"><u>Partida contra el ordenador</u></h4> <!-- Subrayado añadido -->
                         </div>
     
                         <ul class="list-group list-group-flush" style="height: 70%;">
 
                             <li class="list-group-item" id="status"></li>
 
-                            <li class="list-group-item" style="max-height: 100%; overflow-y: auto;">
+                            <li class="list-group-item" style="max-height: 400px; overflow-y: auto;"> <!-- Altura de la caja de movimientos redefinida para que no se vaya hacia abajo -->
 
                                 <div id="pgn"></div>
 
@@ -77,10 +76,10 @@
 
                             <div class="align-self-end">
 
-                                <label>Nivel de Stockfish:</label>
+                                <label><h5>Nivel de Stockfish:</h5></label> <!-- Tamaño de letra cambiado -->
                                 <div class="input-group mb-3">
                                     <select id="move_time" class="form-control mr-2">
-                                      <option value="100" selected>Instantaneo</option>
+                                      <option value="100" selected>Instantáneo</option>
                                       <option value="1000">1 sec</option>
                                       <option value="2000">2 sec</option>
                                       <option value="3000">3 sec</option>
