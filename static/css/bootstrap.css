@@ -60,7 +60,13 @@ body {
   line-height: 1.5;
   color: #212529;
   text-align: left;
+<<<<<<< Updated upstream
   background-color: rgb(10, 44, 26); /* Color de fondo (pagina index) cambiado*/
+=======
+  background: rgb(255,255,255);                                                                                                                                                                               /* CAMBIO DE FONDO AL BODY */
+  background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(201,203,201,1) 10%, rgba(174,187,169,1) 26%, rgba(120,130,116,1) 38%, rgba(64,66,63,1) 65%, rgba(52,58,64,1) 80%);                  /* CAMBIO DE FONDO AL BODY */        
+  background-repeat: no-repeat;                                                                                         /* PARA NO REPETIR GRADIENTE */
+>>>>>>> Stashed changes
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -5298,6 +5304,7 @@ a.badge-dark:focus, a.badge-dark.focus {
 .jumbotron {
   padding: 2rem 1rem;
   margin-bottom: 2rem;
+<<<<<<< Updated upstream
   height: 100%;
   background-image: url(https://image.freepik.com/vector-gratis/ajedrez-piezas-ajedrez-blanco-negro-rey-reina-alfil-torre-caballo-peon_229548-1196.jpg); /*Nueva imagen de fondo*/
   background-position: center;
@@ -5307,12 +5314,19 @@ a.badge-dark:focus, a.badge-dark.focus {
   border-style: ridge; /*Declaracion del borde del recuadro*/
   border-color: rgb(92, 92, 92); /*Color del borde*/
   border-width: 10px; /*Grosor del borde*/
+=======
+  background: rgb(0,36,11);
+  background: linear-gradient(90deg, rgba(0,36,11,1) 0%, rgba(28,112,0,1) 37%, rgba(85,190,53,1) 77%, rgba(216,247,220,1) 100%);                                                          /* CAMBIO DE FONDO A jumbotron */
+  background-image: url(../img/indexbackground/piezas_de_fondo.png);                  /* INCLUSIÓN IMAGEN DE FONDO */
+  background-repeat: no-repeat;                                                       /* INCLUSIÓN IMAGEN DE FONDO */
+  background-position: top center;                                                    /* INCLUSIÓN IMAGEN DE FONDO */
+>>>>>>> Stashed changes
   border-radius: 0.3rem;
 }
 
 @media (min-width: 576px) {
   .jumbotron {
-    padding: 4rem 2rem;
+    padding: 2rem 2rem;                                                               /* CAMBIO DE TAMAÑO CAJA DE JUMBOTRON */
   }
 }
 

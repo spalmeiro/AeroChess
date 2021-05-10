@@ -80,3 +80,30 @@
 }
 
 /* -------------------------------------------------- */
+
+
+.colocacion-inicial{                    /* CLASE PARA LA COLOCACIÓN INICIAL */
+    margin-top: 6rem;
+    padding: 2rem 1rem;
+    margin-bottom: 2rem;
+}
+
+.botones-de-juego {                     /* CLASE PARA CAMBIAR EL TIPO DE BOTONES */
+    display: flex;
+    border-radius: 6px;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 10px;
+    padding: 10px 10px;
+    text-align: center;
+    width: auto;
+    }
+    .botones-de-juego:hover {
+    background-color: #FB7E29;
+    color: #fff;
+    }
+
+.grupo-botones{
+    display: flex;
+}

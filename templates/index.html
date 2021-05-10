@@ -34,24 +34,89 @@
         </div>
         <!-- Bloque de información -->
         <div class="jumbotron">
+<<<<<<< Updated upstream
             <div class="container text-center">
                 <!-- <h1>Bienvenido a AeroChess</h1>
                 <p class="lead">Ajedrez de excelencia internacional</p> -->
+=======
+            <div class="colocacion-inicial">                    <!-- CLASE PARA LA COLOCACIÓN INICIAL -->
+                <div class="container text-center">
+                    <h1 style="color:white">Bienvenido a AeroChess</h1>
+                    <p class="lead" style="color:white">Ajedrez de excelencia internacional</p>
+                </div>
+>>>>>>> Stashed changes
             </div>
         </div>
 
+
+        </div> 
+
+        <!-- Bloque de juego -->                                 <!-- AÑADIDO -->
+
+
+        <div class="grupo-botones" role="group" aria-label="Modo de juego">
+                <a href= "% url 'computer' %">
+                    <button type="button" class="btn btn-primary">Juego contra el ordenador <i class="fas fa-chess-rook"></i></button>
+                </a>
+<!--                 <a href= "% url 'computer' %">   
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <span>Multijugador <i class="fas fa-chess-king"></i></span>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li><a class="dropdown-item" href="{% url 'lobby' %}">Unirse a una partida</a></li>
+                                <li><a class="dropdown-item" href="{% url 'creategame' %}">Crear una partida</a></li>
+                                <li><a class="dropdown-item" href="/">Jugar contra un amigo</a></li>
+                            </ul>
+                        </li>
+                </a> -->
+                <a href= "% url 'computer' %">
+                    <button type="button" class="btn btn-primary">Puzzles <i class="fas fa-chess-board"></i></button>
+                </a>
+                <a href= "% url 'computer' %">
+                    <button type="button" class="btn btn-primary">Modo Espectador <i class="far fa-eye"></i></button>
+                </a>
+        </div>
+
+
+
+
+<!--         <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+            <button type="button" class="btn btn-primary">1</button>
+            <button type="button" class="btn btn-primary">2</button>
+          
+            <div class="btn-group" role="group">
+              <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Dropdown
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+                <li><a class="dropdown-item" href="#">Dropdown link</a></li>
+              </ul>
+            </div>
+        </div> -->
+
+        
+<!--         <script>
+<input type="button1" onclick="location.href='http://google.com';" value="Go to Google" />
+        </script>  -->
+
+
+
+
+
         <!-- Bloque de partidas en juego -->
-        <!-- <div class="container mt-5"> -->
+        <!-- <div class="container mt-5">  -->
             
-            <!-- Título -->
-            <!-- <div class="text-left">
+        <!-- Título -->
+<!--             <div class="text-left">
                 <h2>Partidas en juego <span class="fa fa-circle fa-xs text-danger blink"></span></h2>
                 <hr>
             </div> -->
             
             <!-- Primera fila -->
-            <!-- <div class="row">
-
+ <!--            <div class="row">
+        
                 <div class="col d-flex flex-column align-items-start">
                     <div>
                         <span>Pablo Iglesias</span>
@@ -76,10 +141,10 @@
                     </div>
                 </div>
 
-            </div> -->
-
+            </div>
+ -->
             <!-- Segunda fila -->
-            <!-- <div class="row mt-5">
+<!--             <div class="row mt-5">
 
                 <div class="col d-flex flex-column align-items-start">
                     <div>
@@ -107,11 +172,18 @@
 
             </div> -->
 
-        <!-- </div> -->
+        <!--  </div> -->
 
+             <!-- Pie de página -->
+            {% include "includes/footer.html" %}
     </main>
 
-    <!-- Pie de página -->
-    {% include "includes/footer.html" %}
 
 {% endblock %}
+
+<div>
+    <!-- Pie de página -->
+    {% include "includes/footer.html" %}
+</div>
+
+CAMBIAR!
