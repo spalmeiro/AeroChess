@@ -62,9 +62,7 @@ body {
   min-height: 100%; /* Cambiado */
   color: #212529;
   text-align: left;
-  background: rgb(255,255,255);                                                                                                                                                                               /* CAMBIO DE FONDO AL BODY */
-  background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(201,203,201,1) 10%, rgba(174,187,169,1) 26%, rgba(120,130,116,1) 38%, rgba(64,66,63,1) 65%, rgba(52,58,64,1) 80%);                  /* CAMBIO DE FONDO AL BODY */        
-  background-repeat: no-repeat;                                                                                         /* PARA NO REPETIR GRADIENTE */
+  background: rgb(50,50,50);                                                                                                                                                                               /* CAMBIO DE FONDO AL BODY */
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
