@@ -123,16 +123,25 @@ function onDrop (source, target) {
    if (game.fen()==fen_to_compare[j]){}
    else{
     game.undo();
+    reproSon("burla.mp3")
     // Actualiza el estado del tablero
     board.position(game.fen());
     // Actualiza el estado de la partida
     updateStatus();
 return
    }
+
  j=j+1
-p=p+1
     // Al soltar la pieza se activa la función que genera la respuesta del motor de ajedrez
-    movsolution()
+
+    if (game.turn() === 'w') {
+        p=p+1
+    }
+    console.log(j)
+    console.log(p)
+
+    setTimeout(movsolution, 1000);
+   
 
     // Se destaca el movimiento realizado
     removeHighlights()
@@ -353,7 +362,6 @@ movsolution()
 });
 
 function movsolution(){
-
     k=1
     i=2
     dividirCadena(puzzle_pgn," ")
