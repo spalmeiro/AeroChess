@@ -20,19 +20,18 @@
                     <label class="form-label" for="opponent">Oponente (si se deja en blanco será una partida pública que aparecerá en el lobby):</label>
                     <input class="form-control" type="text" name="opponent" id="opponent" placeholder="Oponente" autofocus>
                 </div>
-
-                <div class="form-group">
+                <!-- AÑADO CAJA DE CONFIGURACIÓN PARA EL MODO CREAR PARTIDA -->
+                <div class="color-box">                                            
                     <label for="owner_side">Selecciona con qué piezas deseas jugar:</label>
-                    <select class="form-control" id="owner_side" name="owner_side">
-                        <option value="white">Blancas</option>
-                        <option value="black">Negras</option>
-                    </select>
+                    <div class="selection-box">
+                        <button type="button" value="white" class="btn btn-dark"><i class="fas fa-chess-queen fa-3x"></i></button>
+                        <button type="button" value="black" class="btn btn-dark"><i class="fas fa-chess-knight fa-3x"></i></button>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Crear partida</button>    
                 </div>
-
-                <button type="submit" class="btn btn-primary">Crear partida</button>
-
+                
             </form>
-
+S
         </div>
 
     </main>

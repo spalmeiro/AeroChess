@@ -420,7 +420,7 @@ hr {
   margin-top: 1rem;
   margin-bottom: 1rem;
   border: 0;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: 1px solid #6c757d;
 }
 
 small,
@@ -3238,10 +3238,10 @@ input[type="button"].btn-block {
   color: #212529;
   text-align: left;
   list-style: none;
-  background-color: #fff;
+  background-color:rgb(42,42,42);                    /* Cambio en el fondo del menu dropdown de inicio */
   background-clip: padding-box;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: 0.25rem;
+  border: 4px solid rgba(0, 0, 0, 0.15);
+  border-radius: 1em 10%;
 }
 
 .dropdown-menu-left {
@@ -3402,10 +3402,10 @@ input[type="button"].btn-block {
   padding: 0.25rem 1.5rem;
   clear: both;
   font-weight: 400;
-  color: #212529;
+  color:#fff;                           /* Cambio en el color de los botones dropdown de inicio */
   text-align: inherit;
   white-space: nowrap;
-  background-color: transparent;
+  background-color: rgb(42,42,42);               /* Cambio en el color del fondo de los botones dropdown de inicio */
   border: 0;
 }
 

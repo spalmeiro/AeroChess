@@ -125,3 +125,60 @@
 .grupo-botones{
     display: flex;
 }
+
+
+.color-box{
+    border: 3px solid #fff;
+    background-color: gray;
+    padding: 40px;
+    margin: 20px;
+    width: 300px;
+    height: 350px;
+    margin-top: 10px;
+    margin-right: 63%;
+    margin-left: 37%;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+/* .color-selection { */
+/*     text-decoration:none;
+    font-weight: 600;
+    font-size: 20px;
+    color:#333333; */
+/*     display:flex;
+    padding-top:15px;
+    padding-bottom:15px;
+    padding-left:25px;
+    padding-right:25px;
+    background-color:grey;
+    border-color: #d8d8d8;
+    border-width: 3px;
+    border-style: solid;
+    border-radius:35px;
+    } */
+
+
+.selection-box{
+    display:flex;
+    padding: 20px 20px 20px 20px;
+    margin: 0 0 25px;
+    width: 250;
+    height: 150;
+}
+
+.btn-dark{
+    height: 100px;
+    width: 100px;
+}
+
+.form-group{
+    color:white;
+}
+
+.fa-chess-knight{
+color: black;
+width:20px;
+height:20px;
+}
