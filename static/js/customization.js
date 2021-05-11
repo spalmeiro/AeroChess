@@ -25,7 +25,7 @@ var $piece_style = $('#piece_style')
 // Selecciona las imágenes de las piezas
 function style (piece) {
     opcion = $('#piece_style option:selected').val()
-    return '/static/img/chesspieces/'+ opcion + '/'+ piece + '.png'
+    return '/static/img/chesspieces/'+ opcion + '/'+ piece + '.svg'
 }
 
 // Se previsualizan los cambios
