@@ -62,7 +62,8 @@ body {
   min-height: 100%; /* Cambiado */
   color: #212529;
   text-align: left;
-  background: rgb(50,50,50);                                                                                                                                                                               /* CAMBIO DE FONDO AL BODY */
+  background: rgb(50, 50, 50);
+                                                                                    /* PARA NO REPETIR GRADIENTE */
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -5300,8 +5301,8 @@ a.badge-dark:focus, a.badge-dark.focus {
 .jumbotron {
   padding: 2rem 1rem;
   margin-bottom: 2rem;
-  background: rgb(0,36,11);
-  background: linear-gradient(90deg, rgba(0,36,11,1) 0%, rgba(28,112,0,1) 37%, rgba(85,190,53,1) 77%, rgba(216,247,220,1) 100%);                                                          /* CAMBIO DE FONDO A jumbotron */
+  background: rgb(255,224,191);
+  background: linear-gradient(0deg, rgba(255,224,191,1) 0%, rgba(255,170,80,1) 21%, rgba(222,146,71,1) 39%, rgba(139,85,48,1) 80%, rgba(111,68,56,1) 100%);                                                           /* CAMBIO DE FONDO A jumbotron */
   background-image: url(../img/indexbackground/piezas_de_fondo.png);                  /* INCLUSIÓN IMAGEN DE FONDO */
   background-repeat: no-repeat;                                                       /* INCLUSIÓN IMAGEN DE FONDO */
   background-position: top center;                                                    /* INCLUSIÓN IMAGEN DE FONDO */
@@ -6841,7 +6842,7 @@ button.bg-light:focus {
 }
 
 .bg-dark {
-  background-color: #343a40 !important;
+  background-color: rgb(42,42,42) !important;
 }
 
 a.bg-dark:hover, a.bg-dark:focus,

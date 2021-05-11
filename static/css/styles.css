@@ -70,15 +70,33 @@
 }
 
 .boardtheme3white {
-    background-color:#e1e1e1;
-    color:#3b42aa;
+    background-color:#89A4B9;
+    color:#637E91;
 }
   
 .boardtheme3black {
-    background-color:#3b42aa;
-    color:#e1e1e1;
+    background-color:#637E91;
+    color:#89A4B9;
 }
 
+.boardtheme4white {
+    background-color:#CFCFC7;
+    color:#C08D0F;
+}
+  
+.boardtheme4black {
+    background-color:#C08D0F;
+    color:#CFCFC7;
+}
+.boardtheme5white {
+    background-color:#A7A7A7;
+    color:#888888;
+}
+  
+.boardtheme5black {
+    background-color:#888888;
+    color:#A7A7A7;
+}
 /* -------------------------------------------------- */
 
 

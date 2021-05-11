@@ -56,6 +56,17 @@ $("#board_theme").on('change',  function () {
         CSS['black'] = 'boardtheme3black';
         CSS['white'] = 'boardtheme3white';
     }
+
+    else if (this.selectedIndex == 3) {
+        CSS['black'] = 'boardtheme4black';
+        CSS['white'] = 'boardtheme4white';
+    }
+
+    else if (this.selectedIndex == 4) {
+        CSS['black'] = 'boardtheme5black';
+        CSS['white'] = 'boardtheme5white';
+    }
+
 });
 
 // Se previsualizan los cambios
