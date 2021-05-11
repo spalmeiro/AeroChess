@@ -4,6 +4,104 @@
 
 
 
+/* --------------------- Index ---------------------- */
+
+.index-header {
+    padding-bottom: 5rem;
+}
+
+.index-main {
+    background-color: rgb(0,0,0);
+    background-image: url("../img/indexbackground/chessKnight_copy.jpg");
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+/* -------------------------------------------------- */
+
+
+
+/* --------------- Botones del index ---------------- */
+
+.btn-index {
+    width: calc(100% - 20px);
+    height: calc(100vw * 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    border-color: #ffffff;
+    background-color: rgba(100, 100, 100, 0.75);
+    border-width: 2px;
+    border-style: ridge;
+}
+
+/* -------------------------------------------------- */
+
+
+
+/* ---------- Botones para crear partida ------------ */
+
+.btn-pieces {
+    display: block;
+    padding: 0;
+    width: 100px;
+    height: 100px;
+}
+
+.btn-pieces:hover {
+    color: #fff;
+    background-color: #0069d9;
+    border-color: #0062cc;
+  }
+  
+  .btn-pieces:focus {
+    color: #fff;
+    background-color: #0069d9;
+    border-color: #0062cc;
+    box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+  }
+
+.black {
+    background-color: #ffffff;
+    background-image: url("../img/chesspieces/cburnett/bK.svg");
+    background-size: contain;
+}
+
+.random {
+    background-image: url("../img/chesspieces/cburnett/bwK.png");
+    background-size: contain;
+}
+
+.white {
+    background-image: url("../img/chesspieces/cburnett/wK.svg");
+    background-size: contain;
+}
+
+/* -------------------------------------------------- */
+
+
+
+/* --------------------- Forms ---------------------- */
+
+.form {
+    background-color: rgba(50, 50, 50, 0.9);
+    padding-left: 1rem;
+    padding-top: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 1rem;
+    border-width: 2px;
+    border-style: ridge;
+    border-radius: 0.25rem;
+}
+
+/* -------------------------------------------------- */
+
+
+
 /* ----------- Animación de los dropdowns ----------- */
 
 .dropdown-toggle::after {
@@ -101,27 +199,6 @@
 
 
 .colocacion-inicial{                    /* CLASE PARA LA COLOCACIÓN INICIAL */
-    margin-top: 6rem;
-    padding: 2rem 1rem;
-    margin-bottom: 2rem;
-}
-
-.botones-de-juego {                     /* CLASE PARA CAMBIAR EL TIPO DE BOTONES */
-    display: flex;
-    border-radius: 6px;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-    font-size: 10px;
-    padding: 10px 10px;
-    text-align: center;
-    width: auto;
-    }
-    .botones-de-juego:hover {
-    background-color: #FB7E29;
-    color: #fff;
-    }
-
-.grupo-botones{
-    display: flex;
+    margin-top: 8rem;
+    padding: 2rem;
 }

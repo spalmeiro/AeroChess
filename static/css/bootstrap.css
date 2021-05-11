@@ -53,6 +53,10 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
   display: block;
 }
 
+main {
+  padding-top: 5rem;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -63,7 +67,6 @@ body {
   color: #212529;
   text-align: left;
   background: rgb(50, 50, 50);
-                                                                                    /* PARA NO REPETIR GRADIENTE */
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -72,6 +75,7 @@ body {
 
 hr {
   box-sizing: content-box;
+  background-color: white;
   height: 0;
   overflow: visible;
 }
@@ -4846,8 +4850,8 @@ input[type="button"].btn-block {
 
 .card-footer {
   padding: 0.75rem 1.25rem;
-  background-color: rgba(0, 0, 0, 0.03);
-  border-top: 1px solid rgba(0, 0, 0, 0.125);
+  background-color: rgba(0, 0, 0, 0.4);
+  border-top: 1px solid rgba(0, 0, 0, 0.6);
 }
 
 .card-footer:last-child {
@@ -5300,12 +5304,12 @@ a.badge-dark:focus, a.badge-dark.focus {
 
 .jumbotron {
   padding: 2rem 1rem;
-  margin-bottom: 2rem;
-  background: rgb(255,224,191);
-  background: linear-gradient(0deg, rgba(255,224,191,1) 0%, rgba(255,170,80,1) 21%, rgba(222,146,71,1) 39%, rgba(139,85,48,1) 80%, rgba(111,68,56,1) 100%);                                                           /* CAMBIO DE FONDO A jumbotron */
-  background-image: url(../img/indexbackground/piezas_de_fondo.png);                  /* INCLUSIÓN IMAGEN DE FONDO */
-  background-repeat: no-repeat;                                                       /* INCLUSIÓN IMAGEN DE FONDO */
-  background-position: top center;                                                    /* INCLUSIÓN IMAGEN DE FONDO */
+  margin-bottom: 2rem;                                                         /* CAMBIO DE FONDO A jumbotron */
+  background-image: url("../img/indexbackground/chessKnight.jpg");
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;                                                   /* INCLUSIÓN IMAGEN DE FONDO */
   border-radius: 0.3rem;
 }
 
@@ -6842,7 +6846,7 @@ button.bg-light:focus {
 }
 
 .bg-dark {
-  background-color: rgb(42,42,42) !important;
+  background-color: rgb(30, 30, 30) !important;
 }
 
 a.bg-dark:hover, a.bg-dark:focus,

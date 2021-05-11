@@ -26,42 +26,66 @@
     <!-- Barra de navegación -->
     {% include "includes/navbar.html" %}
 
-    <main>
+    <main class="index-main">
 
-        <!-- Bloque de información -->
-        <div class="jumbotron">
-            <div class="colocacion-inicial">                    <!-- CLASE PARA LA COLOCACIÓN INICIAL -->
-                <div class="container text-center">
-                    <h1 style="color:white">Bienvenido a AeroChess</h1>
-                    <p class="lead" style="color:white">Ajedrez de excelencia internacional</p>
-                </div>
+        <!-- Cabecera -->
+        <header class="index-header">
+            <div class="container text-center">
+                <h1 style="color:white">Bienvenido a AeroChess</h1>
+                <p class="lead" style="color:white">Ajedrez de excelencia internacional</p>
             </div>
-        </div>
+        </header>
 
-        <!-- Bloque de juego -->
-        <div class="grupo-botones" role="group" aria-label="Modo de juego">
-                <a href= "{% url 'computer' %}">
-                    <button type="button" class="btn btn-primary">Juego contra el ordenador <i class="fas fa-chess-rook"></i></button>
-                </a>
-                <a href= "{% url 'lista' %}">
-                    <button type="button" class="btn btn-primary">Puzzles <i class="fas fa-chess-board"></i></button>
-                </a>
-                <a href= "{% url 'lobby' %}">
-                    <button type="button" class="btn btn-primary">Modo Espectador <i class="far fa-eye"></i></button>
-                </a>
-        </div>
+        <!-- Bloque de botones -->
+        <div class="container">
+            
+            <div class="row">
 
-             <!-- Pie de página -->
-            {% include "includes/footer.html" %}
+                <div class="col-12">
+
+                    <a href="{% url 'lobby' %}" type="button" class="btn btn-index btn-lg btn-block">Lobby</a>
+
+                </div>
+
+            </div>
+
+            <div class="row mt-3">
+
+                <div class="col">
+
+                    <a href="{% url 'creategame' %}" type="button" class="btn btn-index btn-lg btn-block">Crear partida</a>
+
+                </div>
+
+                <div class="col">
+
+                    <a href="{% url 'computer' %}" type="button" class="btn btn-index btn-lg btn-block">Jugar contra el ordenador</a>
+
+                </div> 
+
+            </div>
+
+            <div class="row mt-3">
+
+                <div class="col-6">
+
+                    <a href="{% url 'random_puzzle' %}" type="button" class="btn btn-index btn-lg btn-block">Puzzle aleatorio</a>
+
+                </div>
+
+                <div class="col-6">
+
+                    <a href="{% url 'lista' %}" type="button" class="btn btn-index btn-lg btn-block">Lista de puzzles</a>
+
+                </div> 
+
+            </div>
+
+        </div>
 
     </main>
 
-
-{% endblock %}
-
-<div>
     <!-- Pie de página -->
     {% include "includes/footer.html" %}
-</div>
 
-CAMBIAR!
+{% endblock %}

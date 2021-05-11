@@ -4,37 +4,45 @@
 
 {% block body %}
 
-    <main>
+    <!-- Barra de navegación -->
+    {% include "includes/navbar.html" %}
 
-        <div class="container">
+    <main class="index-main h-100">
+        <div class="container h-100">
+            <div class="row h-100 justify-content-center align-items-center">
+                <div class="col-10 col-md-8 col-lg-6">
 
-            <h2 class="text-center">Inicia sesión en AeroChess</h2>
-            <hr>
+                    <form class="form" method="post">
 
-            <form class="form-login" method="post">
+                        <!-- Esto proporciona protección contra Cross Site Request Forgeries -->
+                        {% csrf_token %}
 
-                <!-- Esto proporciona protección contra Cross Site Request Forgeries -->
-                {% csrf_token %}
+                        <h1 class="text-center">Inicia sesión en AeroChess</h1>
+                        <hr>
 
-                <div class="form-group">
-                    <label class="sr-only" for="username">Nombre de usuario:</label>
-                    <input class="form-control" type="text" name="username" id="username" placeholder="Nombre de usuario" required autofocus>
+                        <!-- Introducir usuario -->
+                        <div class="form-group">
+                            <label for="username">Usuario:</label>
+                            <input class="form-control" type="text" name="username" id="username" placeholder="Usuario..." required autofocus>
+                        </div>
+
+                        <!-- Introducir contraseña -->
+                        <div class="form-group">
+                            <label for="password">Contraseña:</label>
+                            <input class="form-control" type="password" name="password" id="password" placeholder="Contraseña..." required>
+                        </div>
+
+                        <!-- Enviar -->
+                        <button type="submit" class="btn btn-primary w-100">Iniciar sesión</button>
+
+                        <hr>
+                        <h6 class="font-weight-normal">¿No tienes una cuenta? &rarr; <a href="{% url 'signup' %}">Crear cuenta</a></h6>
+
+                    </form>
+
                 </div>
-
-                <div class="form-group">
-                    <label class="sr-only" for="password">Contraseña:</label>
-                    <input class="form-control" type="password" name="password" id="password"  placeholder="Contraseña" required>
-                </div>
-
-                <button type="submit" class="btn btn-primary">Iniciar sesión</button>
-
-            </form>
-
-            <hr>
-            <h6 class="font-weight-normal">¿No tienes una cuenta? &rarr; <a href="/accounts/signup">Crear cuenta</a></h6>
-
+            </div>
         </div>
-
     </main>
 
 {% endblock %}
