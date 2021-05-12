@@ -1135,9 +1135,9 @@ pre code {
     max-width: 50%;
   }
   .col-md-7 {
-    background-color: rgb(50, 50, 50); /*Añadidos varios para el marco del tablero*/ 
+    background: linear-gradient(0deg, rgb(22, 12, 12) 0%, rgba(115,64,13,1) 50%, rgba(22,12,12,1) 100%); /*Añadidos varios para el marco del tablero*/ 
     border-style: ridge;
-    border-color: rgb(148, 148, 148);
+    border-color: rgb(75, 75, 75);
     border-width: thick;
     padding-top: 1rem;
     padding-bottom: 0.8rem;
@@ -2024,7 +2024,7 @@ pre code {
   font-weight: 400;
   line-height: 1.5;
   color: #ffffff;
-  background-color: rgb(70, 70, 70); /*Color de los cuadros de los dropdowns*/
+  background-color: rgb(48, 48, 48); /*Color de los cuadros de los dropdowns*/
   background-clip: padding-box;
   border: 2px #ffffff;
   border-style: solid; /* Estilo de borde de los recuadros de los ajustes de stockfish, cambiado*/
@@ -2051,8 +2051,10 @@ pre code {
 
 .form-control:focus { 
   color: #ffffff;  /* Cambios de color de las letras para cuando el dropdown está desplegado*/
-  background-color: rgb(100, 100, 100); /* Cambios de color del fondo para cuando el dropdown está desplegado*/
-  border-color: #ffffff;
+  /* background-color: rgb(100, 100, 100);
+  border-color: #ffffff; */
+  background-color: rgb(70, 70, 70); /* Cambios de color del fondo para cuando el dropdown está desplegado*/
+  border-color: #80bdff;
   outline: 0;
   box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.1);
 }
@@ -2606,13 +2608,13 @@ fieldset:disabled a.btn {
 
 .btn-secondary {
   color: #fff;
-  background-color: #6c757d;
+  background-color: rgb(48, 48, 48); /*Color boton seccundario cambiado*/
   border-color: #6c757d;
 }
 
 .btn-secondary:hover {
   color: #fff;
-  background-color: #5a6268;
+  background-color: rgb(70, 70, 70); /*Color boton seccundario cambiado*/
   border-color: #545b62;
 }
 
@@ -2898,14 +2900,14 @@ fieldset:disabled a.btn {
 .btn-outline-secondary { /*CSS para definir el color de los botones secundarios en la pantalla de juego*/
   color: #ffffff;
   border-color: #ffffff;
-  background-color: rgb(70, 70, 70);
+  background-color: rgb(48, 48, 48);
   border-width: 2px;
   border-style:solid;
 }
 
 .btn-outline-secondary:hover {
   color: #fff;
-  background-color: rgb(100, 100, 100);
+  background-color: rgb(70, 70, 70);
   border-color: #dbdbdb;
 }
 
@@ -3945,10 +3947,11 @@ input[type="button"].btn-block {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #495057;
-  vertical-align: middle;
-  background: #fff url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='4' height='5' viewBox='0 0 4 5'%3e%3cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e") right 0.75rem center/8px 10px no-repeat;
-  border: 1px solid #ced4da;
+  color: #ffffff;
+  background-color: rgb(48, 48, 48); /*Color de los cuadros de los dropdowns*/
+  background-clip: padding-box;
+  border: 3px #ffffff;
+  border-style: groove; /* Estilo de borde de los recuadros de los ajustes, cambiado*/
   border-radius: 0.25rem;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -4775,7 +4778,9 @@ input[type="button"].btn-block {
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: rgb(50, 50, 50); /*Color del cuadro de partida (contra el ordenador al menos), y registro de movimientos*/
+  background: linear-gradient(0deg, rgb(22, 12, 12) 0%, rgba(115,64,13,1) 50%, rgba(22,12,12,1) 100%); /*Color del cuadro de partida (contra el ordenador al menos), y registro de movimientos*/
+  /*background: rgb(51, 29, 6);  ALTERNATIVA*/
+  background-size: cover;
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
@@ -5891,13 +5896,13 @@ a.badge-dark:focus, a.badge-dark.focus {
   font-size: 1.5rem;
   font-weight: 700;
   line-height: 1;
-  color: #000;
-  text-shadow: 0 1px 0 #fff;
+  color: #fff;
+  /*text-shadow: 0 1px 0 #fff;*/
   opacity: .5;
 }
 
 .close:hover {
-  color: #000;
+  color: #fff;
   text-decoration: none;
 }
 
@@ -6077,7 +6082,7 @@ a.close.disabled {
   flex-direction: column;
   width: 100%;
   pointer-events: auto;
-  background-color: #fff;
+  background: linear-gradient(0deg, rgb(22, 12, 12) 0%, rgba(115,64,13,1) 50%, rgba(22,12,12,1) 100%);
   background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 0.3rem;
@@ -6123,6 +6128,7 @@ a.close.disabled {
 .modal-title {
   margin-bottom: 0;
   line-height: 1.5;
+  color: white;
 }
 
 .modal-body {
