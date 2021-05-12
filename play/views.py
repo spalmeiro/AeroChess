@@ -4,13 +4,15 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
-from .forms import privategameform
+from .forms import creategameform
 from .models import Game
 from django.db.models import Q
 
 import chess
 import chess.engine
 from stockfish import Stockfish
+
+import random
 
 # Rutas hacia stockfish.exe
 stockfish = Stockfish("../stockfish/stockfish_13_win_x64/stockfish_13_win_x64.exe")
@@ -27,19 +29,24 @@ def creategame(request):
 
     if request.method == "POST":
 
-        form = privategameform(request.POST)
+        form = creategameform(request.POST)
 
         if form.is_valid():
 
             game = form.save(commit=False)
             game.owner = request.user
+            print(game.private)
+
+            if game.owner_side == "random":
+                game.owner_side = random.choice(("white", "black"))
+
             game.save()
 
             # Redirige al usuario a la sala creada
             return redirect(f"/play/online/game/{game.pk}")
 
     else:
-        form = privategameform()
+        form = creategameform()
 
     return render(request, "play/online/create.html", {"form": form})
 
@@ -48,8 +55,8 @@ def creategame(request):
 @login_required
 def lobby(request):
 
-    public_games = Game.objects.all().filter(status=1).exclude(owner=request.user)
-    ongoing_games = Game.objects.all().filter(status=2).exclude(Q(owner=request.user) | Q(adversary=request.user))
+    public_games = Game.objects.all().filter(status=1).exclude(Q(owner=request.user) | Q(private=True))
+    ongoing_games = Game.objects.all().filter(status=2).exclude(Q(owner=request.user) | Q(adversary=request.user) | Q(private=True))
 
     public = []
     ongoing = []
@@ -109,7 +116,7 @@ def game(request, game_id):
             game.status = 2
             game.save()         
                        
-    return render(request, "play/online/game.html", {"owner": game.owner.username , "opponent": game.adversary})
+    return render(request, "play/online/game.html", {"owner": game.owner.username , "opponent": game.adversary, "private": game.private})
 
 
 

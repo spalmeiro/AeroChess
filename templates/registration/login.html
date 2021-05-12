@@ -7,7 +7,7 @@
     <!-- Barra de navegación -->
     {% include "includes/navbar.html" %}
 
-    <main class="index-main h-100">
+    <main class="bg-img h-100">
         <div class="container h-100">
             <div class="row h-100 justify-content-center align-items-center">
                 <div class="col-10 col-md-8 col-lg-6">
@@ -17,7 +17,7 @@
                         <!-- Esto proporciona protección contra Cross Site Request Forgeries -->
                         {% csrf_token %}
 
-                        <h1 class="text-center">Inicia sesión en AeroChess</h1>
+                        <h1 class="text-center">Iniciar sesión en AeroChess</h1>
                         <hr>
 
                         <!-- Introducir usuario -->
@@ -30,6 +30,11 @@
                         <div class="form-group">
                             <label for="password">Contraseña:</label>
                             <input class="form-control" type="password" name="password" id="password" placeholder="Contraseña..." required>
+                            {% if form.errors %}
+                                <div class="invalid-form">
+                                    <p>El usuario y la contraseña no coinciden. Vuelve a intentarlo.</p>
+                                </div>
+                            {% endif %}
                         </div>
 
                         <!-- Enviar -->

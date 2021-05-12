@@ -328,13 +328,26 @@ socket.onmessage = function (message) {
 
         // Si el oponente no está conectado, espera
         if (data.opponent_online != true) {
-            $connectionModalTitle.html("Oponente desconectado")
-            $connectionModalBody.html("Por favor espera a que tu oponente se conecte a la partida...")
-            $('#connectionModal').modal({
-                backdrop: 'static',
-                keyboard: false
-            })
-            opponent_online = false
+
+            // Distinto modal en función de si la partida es privada o pública
+            if (private == "True") {
+                $connectionModalTitle.html("Partida privada creada")
+                $connectionModalBody.html("Jugarás contra el primer oponente que se conecte al siguiente enlace: " + window.location.href)
+                $('#connectionModal').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                })
+                opponent_online = false
+            }
+            else {
+                $connectionModalTitle.html("Oponente desconectado")
+                $connectionModalBody.html("Por favor espera a que tu oponente se conecte a la partida...")
+                $('#connectionModal').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                })
+                opponent_online = false
+            }
         }
     }
 

@@ -10,6 +10,7 @@ class Game(models.Model):
     adversary_online = models.BooleanField(default=False)
     fen = models.CharField(max_length=92, null=True, blank=True)
     pgn = models.TextField(null=True, blank=True)
+    private = models.BooleanField(default=False)
     CHOICES=(
         (1,"Game Created. Waiting for adversary"),
         (2,"Game Started"),

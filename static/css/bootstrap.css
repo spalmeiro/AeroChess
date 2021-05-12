@@ -2026,8 +2026,8 @@ pre code {
   color: #ffffff;
   background-color: rgb(70, 70, 70); /*Color de los cuadros de los dropdowns*/
   background-clip: padding-box;
-  border: 3px #ffffff;
-  border-style: groove; /* Estilo de borde de los recuadros de los ajustes de stockfish, cambiado*/
+  border: 2px #ffffff;
+  border-style: solid; /* Estilo de borde de los recuadros de los ajustes de stockfish, cambiado*/
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
@@ -2052,33 +2052,33 @@ pre code {
 .form-control:focus { 
   color: #ffffff;  /* Cambios de color de las letras para cuando el dropdown está desplegado*/
   background-color: rgb(100, 100, 100); /* Cambios de color del fondo para cuando el dropdown está desplegado*/
-  border-color: #80bdff;
+  border-color: #ffffff;
   outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.1);
 }
 
 .form-control::-webkit-input-placeholder {
-  color: #6c757d;
+  color: rgb(150, 150, 150);
   opacity: 1;
 }
 
 .form-control::-moz-placeholder {
-  color: #6c757d;
+  color: rgb(150, 150, 150);
   opacity: 1;
 }
 
 .form-control:-ms-input-placeholder {
-  color: #6c757d;
+  color: rgb(150, 150, 150);
   opacity: 1;
 }
 
 .form-control::-ms-input-placeholder {
-  color: #6c757d;
+  color: rgb(150, 150, 150);
   opacity: 1;
 }
 
 .form-control::placeholder {
-  color: #6c757d;
+  color: rgb(150, 150, 150);
   opacity: 1;
 }
 
@@ -2900,7 +2900,7 @@ fieldset:disabled a.btn {
   border-color: #ffffff;
   background-color: rgb(70, 70, 70);
   border-width: 2px;
-  border-style: ridge;
+  border-style:solid;
 }
 
 .btn-outline-secondary:hover {
@@ -3242,7 +3242,7 @@ input[type="button"].btn-block {
   color: #212529;
   text-align: left;
   list-style: none;
-  background-color:rgb(42,42,42);                    /* Cambio en el fondo del menu dropdown de inicio */
+  background-color:rgb(50,50,50);                    /* Cambio en el fondo del menu dropdown de inicio */
   background-clip: padding-box;
   border: 4px solid rgba(0, 0, 0, 0.15);
   border-radius: 1em 10%;
@@ -3409,14 +3409,14 @@ input[type="button"].btn-block {
   color:#fff;                           /* Cambio en el color de los botones dropdown de inicio */
   text-align: inherit;
   white-space: nowrap;
-  background-color: rgb(42,42,42);               /* Cambio en el color del fondo de los botones dropdown de inicio */
+  background-color: rgb(50,50,50);               /* Cambio en el color del fondo de los botones dropdown de inicio */
   border: 0;
 }
 
 .dropdown-item:hover, .dropdown-item:focus {
-  color: #16181b;
+  color: #ffffff;
   text-decoration: none;
-  background-color: #e9ecef;
+  background-color: rgba(255, 255, 255, 0.3);
 }
 
 .dropdown-item.active, .dropdown-item:active {

@@ -259,107 +259,9 @@ updateStatus();
 
 //---------------------- BLOQUE DE FUNCIONES PARA LA RESOLUCIÓN DEL PUZZLE -----------------------//
 
-
-
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
- 
-
-
-
-//------------- BLOQUE DE FUNCIONES PARA LA COMUNICACIÓN CON STOCKFISH MEDIANTE AJAX -------------//
-
-
-// Garantiza que se cumplen los protocolos de seguridad de CRFS
-function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
-const csrftoken = getCookie('csrftoken');
-
-// Envia información sobre la partida al servidor y devuelve el mejor movimiento calculado por Stockfish
-function make_move() {
-
-    $.ajax({
-        url: '/puzzles/make_move',
-        type: "POST",
-        data: {
-            'fen': game.fen(),
-            'move_time': 1000,
-            'Nivel': 20,
-        },
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader("X-CSRFToken", csrftoken);
-        },
-        success: function (data) {
-            // Carga el nuevo FEN en el tablero
-            game.move(data.best_move, { sloppy: true })
-
-            // Actualiza el tablero
-            board.position(game.fen());
-
-            estoy=data.best_move.substring(0,2);
-            voy=data.best_move.substring(2,4);
-          
-
-            removeHighlights()
-            $board.find('.square-' + estoy).addClass('highlight');
-            $board.find('.square-' + voy).addClass('highlight')
-            squareToHighlight = data.best_move;
-
-            // Actualiza la información sobre la partida
-            $score.text(data.score);
-            $time.text(data.time);
-            $nodes.text(data.nodes);
-            $knps.text(data.time)
-
-            current_progress=($score.text()/20)+50
-            $("#dynamic")
-            .css("width", current_progress + "%")
-            //.attr("aria-valuenow", current_progress)
-            .text((current_progress) + "% Probabilidad de victoria");                    
-
-            reproSon("ficha.wav");
-
-            // Actualiza el estado de la partida
-            updateStatus();
-
-            console.log(data)
-        },
-        error: function (error) {
-            console.log(error);
-        }
-    });
-}
-
 function dividirCadena(cadenaADividir,separador) {
     Solucion = cadenaADividir.split(separador);
- }
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-//------------- BLOQUE DE FUNCIONES PARA LOS BOTONES QUE SE MUESTRAN EN LA INTERFAZ --------------//
-
-// Mostrar solución
-
-$('#showSolution').on('click', function() {
-movsolution()
-});
+}
 
 function movsolution(){
     k=1
@@ -419,4 +321,40 @@ function arrayfen(){
 }
 
 window.onload = arrayfen
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+ 
+
+
+
+//------------- BLOQUE DE FUNCIONES PARA LOS BOTONES QUE SE MUESTRAN EN LA INTERFAZ --------------//
+
+// Mostrar solución
+$('#showSolution').on('click', function() {
+    movsolution()
+});
+
+// Puzzle anterior
+$('#previous_puzzle').on('click', function() {
+    puzzle_pk = parseInt(puzzle_pk) - 1
+    if (puzzle_pk == 0) puzzle_pk = 1169
+    var path = window.location.protocol + "//" + window.location.host + "/puzzles/" + puzzle_pk
+    window.location.href = path
+})
+
+// Puzzle aleatorio
+$('#random_puzzle').on('click', function() {
+    puzzle_pk = Math.floor(Math.random() * (1170 - 1)) + 1
+    var path = window.location.protocol + "//" + window.location.host + "/puzzles/" + puzzle_pk
+    window.location.href = path
+})
+
+// Siguiente puzzle
+$('#next_puzzle').on('click', function() {
+    puzzle_pk = parseInt(puzzle_pk) + 1
+    if (puzzle_pk == 1170) puzzle_pk = 1
+    var path = window.location.protocol + "//" + window.location.host + "/puzzles/" + puzzle_pk
+    window.location.href = path
+})
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
