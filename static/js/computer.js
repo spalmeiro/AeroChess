@@ -140,7 +140,37 @@ function onSnapEnd () {
     board.position(game.fen())
 }
 
+function marcador(x) {
+        
+    if (x>1000)
+            puntuacion=1000
+            
+        else if(x<-1000)
+            puntuacion=-1000
+        
+        else if(isNaN(x))
 
+        return
+
+        else
+            puntuacion=x
+
+
+        current_progress=(puntuacion/20)+50
+
+        $("#dynamic")
+        .css("width", current_progress + "%")
+        //.attr("aria-valuenow", current_progress)
+        .text((current_progress) + "% Victoria de Blancas" );          
+
+        current_progress2=(100-current_progress)
+
+        $("#dynamic2")
+        .css("width", current_progress2 + "%")
+        //.attr("aria-valuenow", current_progress)
+        .text((current_progress2) + "% Victoria de Negras");   
+    
+}
 
 
 // Actualiza los datos sobre el estado de la partida
@@ -148,16 +178,24 @@ function updateStatus () {
 
     var status = ''
     var moveColor = 'blancas'
-
+    var moveColor2 = 'negras'
     // Comprueba si mueven las negras
     if (game.turn() === 'b') {
         moveColor = 'negras'
+        moveColor2 = 'blancas'
     }
 
     // Comprueba si hay jaque mate
     if (game.in_checkmate()) {
         reproSon('mate.mp3')
-        status = 'Fin de la partida, ' + moveColor + ' hacen jaque mate.'
+        status = 'Fin de la partida, ' + moveColor2 + ' hacen jaque mate.'
+        if (game.turn() === 'b') {
+             marcador(1000)
+        }
+        else{
+            marcador(-1000)
+        }
+        
     }
 
     // Comprueba si hay tablas
@@ -274,11 +312,8 @@ function make_move() {
             $nodes.text(data.nodes);
             $knps.text(data.time)
 
-            current_progress=($score.text()/20)+50
-            $("#dynamic")
-            .css("width", current_progress + "%")
-            //.attr("aria-valuenow", current_progress)
-            .text((current_progress) + "% Probabilidad de victoria");                    
+            marcador(data.score)
+
 
             reproSon("ficha.wav");
 
@@ -309,6 +344,7 @@ $('#new_game').on('click', function() {
     reproSon("click2.wav");
     // Establece la posición de inicio
     board.position('start');
+    marcador(0)
 });
 
 // Hacer un movimiento
