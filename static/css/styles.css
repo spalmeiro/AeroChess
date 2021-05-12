@@ -2,14 +2,69 @@
     CSS PARA LOS ESTILOS PERSONALIZADOS
 */
 
-
-
-/* --------------------- Index ---------------------- */
-
-.index-header {
-    padding-top: 1.5rem;
-    padding-bottom: 5rem;
+/* Modificado de Bootstrap */
+hr {
+    border-top: 1px solid white;
 }
+
+/* Modificado de Bootstrap */
+.pt-6 {
+    padding-top: 6rem;
+}
+
+
+
+
+/* -------------- Barra de navegación --------------- */
+
+.custom-navbar {
+    background-color: rgb(40, 40, 40) !important;
+    border-bottom: 1px solid black;
+}
+
+/* -------------------------------------------------- */
+
+
+
+/* ----------- Animación de los dropdowns ----------- */
+
+.dropdown-toggle::after {
+    transition: transform 0.15s linear; 
+}
+
+.show.dropdown .dropdown-toggle::after {
+    transform: translateY(3px);
+}
+
+.dropdown-menu {
+    margin-top: 0;
+}
+
+/* -------------------------------------------------- */
+
+
+
+/* --------------------- Footer --------------------- */
+
+.custom-footer-header {
+    color: white;
+    background-color: rgb(40, 40, 40) !important;
+}
+
+.custom-footer-body {
+    color: white;
+    background-color: rgb(30, 30, 30) !important;
+}
+
+.custom-text-footer {
+    color: white;
+}
+
+/* -------------------------------------------------- */
+
+
+
+/* ------------------- Background ------------------- */
 
 .bg-img {
     background-color: rgb(0,0,0);
@@ -19,9 +74,10 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
+    overflow-y: auto;
 }
 
-.index-main2 {
+.bg-img2 {
     background-color: rgb(0,0,0);
     background-image: linear-gradient(to bottom, rgba(50, 50, 50, 0.8) 0%, rgba(50, 50, 50, 0.8) 100%), url("../img/indexbackground/chessKnight_copy.jpg");
     height: 100vh;
@@ -35,14 +91,20 @@
 
 
 
-/* --------------- Botones del index ---------------- */
+/* --------------------- Index ---------------------- */
+
+.index-header {
+    padding-bottom: 5rem;
+    color: white;
+}
 
 .btn-index {
-    width: calc(100% - 20px);
-    height: calc(100vw * 0.1);
+    width: 100%;
+    height: 20vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
     color: #ffffff;
     border-color: #ffffff;
     background-color: rgba(100, 100, 100, 0.75);
@@ -66,27 +128,62 @@
 
 
 
+/* ---------------------- About ----------------------*/
+
+.custom-about {
+    color: white;
+}
+
+/* -------------------------------------------------- */
+
+
+
+/* --------------------- Forms ---------------------- */
+
+.custom-form {
+    color: white;
+    background-color: rgba(50, 50, 50, 0.9);
+    padding-left: 1rem;
+    padding-top: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 1rem;
+    border-width: 2px;
+    border-style: ridge;
+    border-radius: 0.25rem;
+}
+
+/* Modificado de Bootstrap */
+.invalid-form {
+    margin-top: 0.25rem;
+    font-size: 100%;
+    color: #dc3545;
+}
+
+/* -------------------------------------------------- */
+
+
+
 /* ----------- Botones de tipo de partida ----------- */
 
-.btn-game {
+.btn-gametype {
     display: flex;
     align-items: center;
     justify-content: center;
     color: #ffffff;
-    border-color: #ffffff;
     background-color: rgba(100, 100, 100, 0.75);
-    border-width: 1px;
+    border-color: #ffffff;
     border-style: solid;
+    border-width: 1px;
 }
 
-.btn-game:hover {
+.btn-gametype:hover {
     color: #ffffff;
     background-color:rgba(255, 255, 255, 0.3);
     outline: 0;
     box-shadow: 0 0 0 0.15rem rgb(255, 255, 255);
 }
   
-.btn-game:focus, .btn-game.focus {
+.btn-gametype:focus, .btn-game.focus {
     outline: 0;
     box-shadow: 0 0 0 0.15rem rgb(255, 255, 255);
 }
@@ -147,56 +244,135 @@
 
 
 
-/* --------------------- Forms ---------------------- */
+/* ---------------- Páginas de juego ---------------- */
 
-.form {
-    background-color: rgba(50, 50, 50, 0.9);
+.game-ui {
+    max-height: 752px;
+    max-width: 1140px;
+    margin-bottom: 5rem;
+    display: flex;
+    flex-direction: row;
+}
+
+.game-board {
+    height: 100%;
+    width: 59%;
+    margin-right: 2%;
     padding-left: 1rem;
     padding-top: 1rem;
     padding-right: 1rem;
     padding-bottom: 1rem;
+    color: white;
+    background-color: rgba(50, 50, 50, 0.9);
+    border-color: white;
+    border-radius: 0.25rem;
+    border-style: ridge;
+    border-width: 2px;
+}
+
+/* .chessboard {
+    height: 20vh;
+    width: 20vw;
+} */
+
+.game-info {
+    width: 39%;
+    display: flex;
+    align-self: stretch;
+    flex-direction: column;
+    font-size: 100%;
+    color: white;
+    background-color: rgba(50, 50, 50, 0.9);
     border-width: 2px;
     border-style: ridge;
     border-radius: 0.25rem;
 }
 
-.invalid-form {
-    margin-top: 0.25rem;
+.game-info-header {
+    padding: 1.25rem;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    color: white;
+    border-bottom: 1px ridge white;
+}
+
+.game-info-status {
+    padding: 1.25rem;
+    height: 5%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
     font-size: 100%;
-    color: #dc3545;
+    color: white;
+    border-bottom: 1px ridge white;
 }
 
-/* -------------------------------------------------- */
-
-
-
-/* ----------- Animación de los dropdowns ----------- */
-
-.dropdown-toggle::after {
-    transition: transform 0.15s linear; 
+.game-info-pgn {
+    padding: 1.25rem;
+    display: flex;
+    justify-content: left;
+    align-items: flex-start;
+    overflow-y: auto;
+    font-size: 100%;
+    color: white;
 }
 
-.show.dropdown .dropdown-toggle::after {
-    transform: translateY(3px);
+.game-info-options {
+    margin-top: auto;
+    padding: 1.25rem;
+    height: auto;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    font-size: 100%;
+    color: white;
+    border-top: 1px ridge white;
 }
 
-.dropdown-menu {
-    margin-top: 0;
+.btn-game {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    background-color: rgba(100, 100, 100, 0.75);
+    border-color: #ffffff;
+    border-style: solid;
+    border-width: 1px;
 }
 
-/* -------------------------------------------------- */
-
-
-
-/* ------------- Animación de parpadeo -------------- */
-
-.blink {
-    animation: blinker 1.5s cubic-bezier(.5, 0, 1, 1) infinite alternate;  
+.btn-game:hover {
+    color: #ffffff;
+    background-color:rgba(255, 255, 255, 0.3);
+    outline: 0;
+    box-shadow: 0 0 0 0.15rem rgb(255, 255, 255);
+}
+  
+.btn-game:focus, .btn-game.focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.15rem rgb(255, 255, 255);
 }
 
-@keyframes blinker {  
-    from { opacity: 1; }
-    to { opacity: 0; }
+@media (max-width: 768px) {
+    .game-ui {
+        max-height: max-content;
+        max-width: 1140px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .game-board {
+        height: 100%;
+        width: 100%;
+        margin-right: 0;
+    }
+
+    .game-info {
+        width: 100%;
+        margin-top: 2rem;
+    }
 }
 
 /* -------------------------------------------------- */
@@ -266,6 +442,17 @@
 /* -------------------------------------------------- */
 
 
+
+
+
+
+
+
+
+
+
+
+
 .colocacion-inicial{                    /* CLASE PARA LA COLOCACIÓN INICIAL */
     margin-top: 8rem;
     padding: 2rem;
@@ -327,3 +514,11 @@ color: black;
 width:20px;
 height:20px;
 }
+
+/* background: rgb(51, 29, 6); */
+/* background: linear-gradient(0deg, rgb(22, 12, 12) 0%, rgba(115,64,13,1) 50%, rgba(22,12,12,1) 100%); 
+    border-style: ridge;
+    border-color: rgb(75, 75, 75);
+    border-width: thick;
+    padding-top: 1rem;
+    padding-bottom: 0.8rem; */

@@ -44,6 +44,7 @@
 html {
   font-family: sans-serif;
   line-height: 1.15;
+  height: 100%; /* Cambiado */
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
@@ -52,15 +53,20 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
   display: block;
 }
 
+main {
+  padding-top: 5rem;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
+  min-height: 100%; /* Cambiado */
   color: #212529;
   text-align: left;
-  background-color: #fff;
+  background: rgb(50, 50, 50);
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -69,6 +75,7 @@ body {
 
 hr {
   box-sizing: content-box;
+  background-color: white;
   height: 0;
   overflow: visible;
 }
@@ -417,7 +424,7 @@ hr {
   margin-top: 1rem;
   margin-bottom: 1rem;
   border: 0;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: 1px solid #6c757d;
 }
 
 small,
@@ -604,6 +611,7 @@ pre code {
 .col-xl-auto {
   position: relative;
   width: 100%;
+  color: #ffffff; /* Color Nombre jugador vs. stockfish (juego contra la maquina) cambiado*/
   padding-right: 15px;
   padding-left: 15px;
 }
@@ -1661,7 +1669,7 @@ pre code {
 .table {
   width: 100%;
   margin-bottom: 1rem;
-  color: #212529;
+  color: #ffffff; /*Color palabras de las tablas (por ejemplo en los puzzles)*/
 }
 
 .table th,
@@ -1711,7 +1719,7 @@ pre code {
 }
 
 .table-hover tbody tr:hover {
-  color: #212529;
+  color: #ffffff; /*Sombreado  que aparece al ir a seleccionar un puzzle*/
   background-color: rgba(0, 0, 0, 0.075);
 }
 
@@ -2009,13 +2017,15 @@ pre code {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #495057;
-  background-color: #fff;
+  color: #ffffff;
+  background-color: rgb(48, 48, 48); /*Color de los cuadros de los dropdowns*/
   background-clip: padding-box;
-  border: 1px solid #ced4da;
+  border: 2px #ffffff;
+  border-style: solid; /* Estilo de borde de los recuadros de los ajustes de stockfish, cambiado*/
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+
 
 @media (prefers-reduced-motion: reduce) {
   .form-control {
@@ -2033,36 +2043,38 @@ pre code {
   text-shadow: 0 0 0 #495057;
 }
 
-.form-control:focus {
-  color: #495057;
-  background-color: #fff;
+.form-control:focus { 
+  color: #ffffff;  /* Cambios de color de las letras para cuando el dropdown está desplegado*/
+  /* background-color: rgb(100, 100, 100);
+  border-color: #ffffff; */
+  background-color: rgb(70, 70, 70); /* Cambios de color del fondo para cuando el dropdown está desplegado*/
   border-color: #80bdff;
   outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.1);
 }
 
 .form-control::-webkit-input-placeholder {
-  color: #6c757d;
+  color: rgb(150, 150, 150);
   opacity: 1;
 }
 
 .form-control::-moz-placeholder {
-  color: #6c757d;
+  color: rgb(150, 150, 150);
   opacity: 1;
 }
 
 .form-control:-ms-input-placeholder {
-  color: #6c757d;
+  color: rgb(150, 150, 150);
   opacity: 1;
 }
 
 .form-control::-ms-input-placeholder {
-  color: #6c757d;
+  color: rgb(150, 150, 150);
   opacity: 1;
 }
 
 .form-control::placeholder {
-  color: #6c757d;
+  color: rgb(150, 150, 150);
   opacity: 1;
 }
 
@@ -2506,7 +2518,7 @@ textarea.form-control {
 .btn {
   display: inline-block;
   font-weight: 400;
-  color: #212529;
+  color: #ffffff;
   text-align: center;
   vertical-align: middle;
   -webkit-user-select: none;
@@ -2590,13 +2602,13 @@ fieldset:disabled a.btn {
 
 .btn-secondary {
   color: #fff;
-  background-color: #6c757d;
+  background-color: rgb(48, 48, 48); /*Color boton seccundario cambiado*/
   border-color: #6c757d;
 }
 
 .btn-secondary:hover {
   color: #fff;
-  background-color: #5a6268;
+  background-color: rgb(70, 70, 70); /*Color boton seccundario cambiado*/
   border-color: #545b62;
 }
 
@@ -2879,15 +2891,18 @@ fieldset:disabled a.btn {
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
 }
 
-.btn-outline-secondary {
-  color: #6c757d;
-  border-color: #6c757d;
+.btn-outline-secondary { /*CSS para definir el color de los botones secundarios en la pantalla de juego*/
+  color: #ffffff;
+  border-color: #ffffff;
+  background-color: rgb(48, 48, 48);
+  border-width: 2px;
+  border-style:solid;
 }
 
 .btn-outline-secondary:hover {
   color: #fff;
-  background-color: #6c757d;
-  border-color: #6c757d;
+  background-color: rgb(70, 70, 70);
+  border-color: #dbdbdb;
 }
 
 .btn-outline-secondary:focus, .btn-outline-secondary.focus {
@@ -3223,10 +3238,10 @@ input[type="button"].btn-block {
   color: #212529;
   text-align: left;
   list-style: none;
-  background-color: #fff;
+  background-color:rgb(50,50,50);                    /* Cambio en el fondo del menu dropdown de inicio */
   background-clip: padding-box;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: 0.25rem;
+  border: 4px solid rgba(0, 0, 0, 0.15);
+  border-radius: 1em 10%;
 }
 
 .dropdown-menu-left {
@@ -3387,17 +3402,17 @@ input[type="button"].btn-block {
   padding: 0.25rem 1.5rem;
   clear: both;
   font-weight: 400;
-  color: #212529;
+  color:#fff;                           /* Cambio en el color de los botones dropdown de inicio */
   text-align: inherit;
   white-space: nowrap;
-  background-color: transparent;
+  background-color: rgb(50,50,50);               /* Cambio en el color del fondo de los botones dropdown de inicio */
   border: 0;
 }
 
 .dropdown-item:hover, .dropdown-item:focus {
-  color: #16181b;
+  color: #ffffff;
   text-decoration: none;
-  background-color: #e9ecef;
+  background-color: rgba(255, 255, 255, 0.3);
 }
 
 .dropdown-item.active, .dropdown-item:active {
@@ -3926,10 +3941,11 @@ input[type="button"].btn-block {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #495057;
-  vertical-align: middle;
-  background: #fff url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='4' height='5' viewBox='0 0 4 5'%3e%3cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e") right 0.75rem center/8px 10px no-repeat;
-  border: 1px solid #ced4da;
+  color: #ffffff;
+  background-color: rgb(48, 48, 48); /*Color de los cuadros de los dropdowns*/
+  background-clip: padding-box;
+  border: 3px #ffffff;
+  border-style: groove; /* Estilo de borde de los recuadros de los ajustes, cambiado*/
   border-radius: 0.25rem;
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -4756,7 +4772,8 @@ input[type="button"].btn-block {
   flex-direction: column;
   min-width: 0;
   word-wrap: break-word;
-  background-color: #fff;
+  background: rgb(50, 50, 50);
+  background-size: cover;
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
@@ -4768,6 +4785,7 @@ input[type="button"].btn-block {
 }
 
 .card > .list-group {
+  color: rgb(255, 255, 255); /* color de las letras de movimientos y turnos*/
   border-top: inherit;
   border-bottom: inherit;
 }
@@ -4830,8 +4848,8 @@ input[type="button"].btn-block {
 
 .card-footer {
   padding: 0.75rem 1.25rem;
-  background-color: rgba(0, 0, 0, 0.03);
-  border-top: 1px solid rgba(0, 0, 0, 0.125);
+  background-color: rgba(0, 0, 0, 0.4);
+  border-top: 1px solid rgba(0, 0, 0, 0.6);
 }
 
 .card-footer:last-child {
@@ -5277,16 +5295,25 @@ a.badge-dark:focus, a.badge-dark.focus {
   box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.5);
 }
 
+.titulo{
+  color: #ffffff;
+  text-align: center;
+}
+
 .jumbotron {
   padding: 2rem 1rem;
-  margin-bottom: 2rem;
-  background-color: #e9ecef;
+  margin-bottom: 2rem;                                                         /* CAMBIO DE FONDO A jumbotron */
+  background-image: url("../img/indexbackground/chessKnight.jpg");
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;                                                   /* INCLUSIÓN IMAGEN DE FONDO */
   border-radius: 0.3rem;
 }
 
 @media (min-width: 576px) {
   .jumbotron {
-    padding: 4rem 2rem;
+    padding: 2rem 2rem;                                                               /* CAMBIO DE TAMAÑO CAJA DE JUMBOTRON */
   }
 }
 
@@ -5548,7 +5575,7 @@ a.badge-dark:focus, a.badge-dark.focus {
   position: relative;
   display: block;
   padding: 0.75rem 1.25rem;
-  background-color: #fff;
+  background-color: inherit; /* Color borde del recuadro del registro de movimientos*/
   border: 1px solid rgba(0, 0, 0, 0.125);
 }
 
@@ -5862,13 +5889,13 @@ a.badge-dark:focus, a.badge-dark.focus {
   font-size: 1.5rem;
   font-weight: 700;
   line-height: 1;
-  color: #000;
-  text-shadow: 0 1px 0 #fff;
+  color: #fff;
+  /*text-shadow: 0 1px 0 #fff;*/
   opacity: .5;
 }
 
 .close:hover {
-  color: #000;
+  color: #fff;
   text-decoration: none;
 }
 
@@ -6048,10 +6075,11 @@ a.close.disabled {
   flex-direction: column;
   width: 100%;
   pointer-events: auto;
-  background-color: #fff;
+  color: rgb(255, 255, 255);
+  background: rgb(50, 50, 50);
   background-clip: padding-box;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 0.3rem;
+  border: 2px ridge rgb(255, 255, 255);
+  border-radius: 0.25rem;
   outline: 0;
 }
 
@@ -6094,6 +6122,7 @@ a.close.disabled {
 .modal-title {
   margin-bottom: 0;
   line-height: 1.5;
+  color: white;
 }
 
 .modal-body {
@@ -6817,7 +6846,7 @@ button.bg-light:focus {
 }
 
 .bg-dark {
-  background-color: #343a40 !important;
+  background-color: rgb(30, 30, 30) !important;
 }
 
 a.bg-dark:hover, a.bg-dark:focus,
@@ -8240,6 +8269,7 @@ button.bg-dark:focus {
 
 .mt-3,
 .my-3 {
+  color: #fbfcfc;
   margin-top: 1rem !important;
 }
 
@@ -9991,6 +10021,7 @@ button.bg-dark:focus {
 }
 
 .text-justify {
+  color: #fbfcfc; /*Color de texto añadido*/
   text-align: justify !important;
 }
 
@@ -10009,6 +10040,7 @@ button.bg-dark:focus {
 }
 
 .text-left {
+  color: #ffffff; /*Color de texto añadido*/
   text-align: left !important;
 }
 
@@ -10017,6 +10049,7 @@ button.bg-dark:focus {
 }
 
 .text-center {
+  color: #ffffff; /*Color de texto añadido*/
   text-align: center !important;
 }
 
@@ -10089,6 +10122,7 @@ button.bg-dark:focus {
 }
 
 .font-weight-normal {
+color: #ffffff; /* Color "¿No tienes cuenta?"*/
   font-weight: 400 !important;
 }
 
@@ -10177,7 +10211,7 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 .text-muted {
-  color: #6c757d !important;
+  color: #ffffff !important; /*Color de texto (footer, etc.) cambiado*/
 }
 
 .text-black-50 {

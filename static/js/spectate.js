@@ -389,5 +389,10 @@ $('#customization').on('click', function() {
     board.flip()
 })
 
+// Volver al lobby
+$('#return').on('click', function() {
+    var path = window.location.protocol + "//" + window.location.host + "/play/online"
+    window.location.href = path
+})
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

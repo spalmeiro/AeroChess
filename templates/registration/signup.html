@@ -7,12 +7,13 @@
     <!-- Barra de navegación -->
     {% include "includes/navbar.html" %}
 
-    <main class="bg-img h-100">
+    <main class="bg-img">
         <div class="container h-100">
             <div class="row h-100 justify-content-center align-items-center">
                 <div class="col-10 col-md-8 col-lg-6">
 
-                    <form class="form" method="post" novalidate>
+                    <!-- Signup form -->
+                    <form class="custom-form" method="post">
 
                         <!-- Esto proporciona protección contra Cross Site Request Forgeries -->
                         {% csrf_token %}
@@ -73,7 +74,7 @@
                         </div>
 
                         <!-- Enviar -->
-                        <button type="submit" class="btn btn-primary w-100">Iniciar sesión</button>
+                        <button class="btn btn-primary w-100" type="submit">Iniciar sesión</button>
 
                         <hr>
                         <h6 class="font-weight-normal">¿Ya tienes una cuenta? &rarr; <a href="{% url 'login' %}">Iniciar sesión</a></h6>

@@ -21,8 +21,9 @@
         <title>{% block title %}{% endblock %}</title>
 
         <!-- CSS de Bootstrap 4.6.0 -->
-        <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
-        <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">         -->
+        <!-- <link rel="stylesheet" href="{% static 'css/bootstrap_mod.css' %}"> -->
+        <!-- <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}"> -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">        
         
         <!-- CSS propio -->
         <link rel="stylesheet" href="{% static 'css/styles.css' %}">
@@ -47,7 +48,7 @@
 
     </head>
 
-    <body class="h-100">
+    <body class="vh-100">
 
         <!-- Cuerpo -->
         {% block body %}{% endblock %}

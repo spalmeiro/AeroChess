@@ -32,69 +32,68 @@
     <!-- Modales -->
     {% include "includes/modals.html" %}
     
-    <main>
-
+    <!-- Contenido -->
+    <main class="bg-img pt-6 h-100">
         <div class="container">
 
-            <div class="row">
+            <!-- Interfaz de juego -->
+            <div class="game-ui">
 
-                <div class="col-md-7">
+                <!-- Partida -->
+                <div class="game-board">
 
                     <!-- Oponente -->
-                    <div id="opponent_name">
+                    <div class="text-center" id="opponent_name">
                         {% if user.username == owner %}
                             {% if opponent == None %}
-                                <h5>Esperando oponente...</h5>
+                                <h4>Esperando oponente...</h5>
                             {% else %}
-                                <h5>{{ opponent }}</h5>
+                                <h4>{{ opponent }}</h5>
                             {% endif %}
                         {% else %}
-                            <h5>{{ owner }}</h5>
+                            <h4>{{ owner }}</h5>
                         {% endif %}
                     </div>
 
                     <!-- Tablero -->
                     <hr class="mt-1 mb-2">
-                    <div id="multiplayerBoard" style="width: 100%;"></div>
+                    <div class="chessboard" id="multiplayerBoard"></div>
                     <hr class="mt-2 mb-1">
 
                     <!-- Usuario -->
-                    <h5>{{ user.username }}</h5>
-
+                    <h5 class="text-center">{{ user.username }}</h5>
+                
                 </div>
     
-                <div class="col-md-5">
-    
-                    <div class="card" style="height: 100%; width: 100%;">
-    
-                        <div class="card-header">
-                            Partida multijugador
-                        </div>
-    
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item" id="status"></li>
-                            <li class="list-group-item" style="height: 100%;">
-                                <strong>PGN:</strong><div id="pgn"></div>
-                            </li>
-                        </ul>
+                <!-- Información de la partida -->
+                <div class="game-info">
+                    
+                    <!-- Cabecera -->
+                    <div class="game-info-header">Partida multijudador</div>
 
-                        <div class="card-body d-flex">
+                    <!-- Status -->
+                    <div class="game-info-status" id="status"></div>
 
-                            <div class="align-self-end" style="width: 100%;">
+                    <!-- PGN -->
+                    <div class="game-info-pgn" id="pgn"></div>
 
-                                <div class="btn-group" style="width: 100%;">
-                                    <button class="btn btn-outline-secondary" id="drawOffer">Ofrecer tablas</button>
-                                    <button class="btn btn-outline-secondary" id="resign">Abandonar</button>
-                                </div>
+                    <!-- Botones -->
+                    <div class="game-info-options">
+                        <div class="align-self-end w-100">
 
+                            <!-- Opciones -->
+                            <div class="btn-group" style="width: 100%;">
+                                <button class="btn btn-game" id="drawOffer">Ofrecer tablas</button>
+                                <button class="btn btn-game" id="resign">Abandonar</button>
                             </div>
-    
+
                         </div>
                     </div>
+
                 </div>
+
             </div>
         </div>
-
     </main>
 
 {% endblock %}
