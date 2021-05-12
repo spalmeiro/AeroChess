@@ -5486,11 +5486,11 @@ a.badge-dark:focus, a.badge-dark.focus {
 .progress {
   display: -ms-flexbox;
   display: flex;
-  height: 1rem;
+  height: 2.25rem;
   overflow: hidden;
   line-height: 0;
-  font-size: 0.75rem;
-  background-color: #e9ecef;
+  font-size: 1.25rem;
+  background-color: #242020; /* color del fondo */
   border-radius: 0.25rem;
 }
 
@@ -5502,13 +5502,26 @@ a.badge-dark:focus, a.badge-dark.focus {
   -ms-flex-pack: center;
   justify-content: center;
   overflow: hidden;
-  color: #fff;
+  color: rgb(0, 0, 0); /* color de la letra */
   text-align: center;
   white-space: nowrap;
-  background-color: #007bff;
+  background-color: rgba(207, 200, 207, 0.774); /* color de la barra*/
   transition: width 0.6s ease;
 }
-
+.progress-bar2 {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-pack: center;
+  justify-content: center;
+  overflow: hidden;
+  color: rgb(255, 255, 255); /* color de la letra */
+  text-align: center;
+  white-space: nowrap;
+  background-color: rgb(0, 0, 0); /* color de la barra*/
+  transition: width 0.6s ease;
+}
 @media (prefers-reduced-motion: reduce) {
   .progress-bar {
     transition: none;

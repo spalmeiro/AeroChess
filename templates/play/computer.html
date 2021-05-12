@@ -34,15 +34,25 @@
 
     <main>
 
-        <div style="height: 100%; width: 80%;" class="container-fluid">
+        <div style="height: 80%; width: 70%; " class="container-fluid">
 
             <div class="row">
 
-                <div class="col-md-7">
+                <div class="col-md-7"style="width: 100%;min-width:450px; max-width:750px ">
+                    <div class="progress">
+
+                        <div  id="dynamic" class=" progress-bar progress-bar-success progress-bar-striped active progress-bar-animated" role="progressbar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="10"  style="width: 50%"></div>
+                        <div  id="dynamic2" class=" progress-bar2 progress-bar-success progress-bar-striped active progress-bar-animated" role="progressbar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="10"  style="width: 50%"></div>
+
+                        <span id="current_progress"></span>
+                        <span id="current_progress2"></span>
+                      </div>
+
+                     <p></p> 
                     <h4 class="text-center">Stockfish 13</h4> <!-- Texto centrado -->
                     <hr class="mt-1 mb-2">
 
-                    <div id="computerBoard" style="width: 100%;"></div>
+                    <div id="computerBoard" style="width: 100%;min-width:400px; max-width:700px "></div>
 
                     <hr class="mt-2 mb-1">
                     {% if user.is_authenticated %}
@@ -51,35 +61,26 @@
                         <h4 class="text-center">Anónimo</h4> <!-- Texto centrado -->
                     {% endif %}
 
+                    <div class="input-group mb-3">
+                        <input id="fen" type="text" class="form-control">
+                        <div class="input-group-append">
+                          <button id="set_fen" class="btn btn-outline-success">Set FEN</button>
+                        </div>
+                      </div>
                 </div>
     
-                <div class="col-md-5">
+                <div class="col mr-auto md-5" style="min-width:230px; max-width:480px ">
     
                     <div class="card" style="height: 100%; width: 100%;">
     
                         <div class="card-header d-flex align-items-center justify-content-center" style="height: 10%;">
                             <h4 class="text-center"><u>Partida contra el ordenador</u></h4> <!-- Subrayado añadido -->
                         </div>
-                        <div class="progress">
-
-                            <div  id="dynamic" class=" progress-bar progress-bar-success progress-bar-striped active progress-bar-animated" role="progressbar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="10"  style="width: 50%"></div>
-
-                            <span id="current_progress"></span>
-
-                          </div>
-
-                         <p></p> 
-                        <div class="input-group mb-3">
-                            <input id="fen" type="text" class="form-control">
-                            <div class="input-group-append">
-                              <button id="set_fen" class="btn btn-outline-success">Set FEN</button>
-                            </div>
-                          </div>
 
                           <div class="align-self-end">
                             <label><h5>Nivel de Stockfish:</h5></label> <!-- Tamaño de letra cambiado -->
                             <div class="input-group mb-3">
-                                <select id="Nivel" class="form-control mr-2">
+                                <select id="Nivel" class="form-control m-2">
                                   <option value="0">Nivel 0</option>
                                   <option value="2">Nivel 1</option>
                                   <option value="4">Nivel 2</option>
@@ -91,26 +92,29 @@
                                   <option value="16">Nivel 8</option>
                                   <option value="18">Nivel 9</option>
                                   <option value="20">Nivel 10</option>
-                                </select>
-                                <select id="move_time" class="form-control ml-2">
-                                    <option value="100" selected>Instantáneo</option>
-                                    <option value="1000">1 sec</option>
-                                    <option value="2000">2 sec</option>
-                                    <option value="3000">3 sec</option>
-                                    <option value="4000">4 sec</option>
-                                    <option value="5000">5 sec</option>
-                                    <option value="6000">6 sec</option>
-                                    <option value="7000">7 sec</option>
-                                    <option value="8000">8 sec</option>
-                                    <option value="9000">9 sec</option>
-                                    <option value="10000">10 sec</option>
-                                    <option value="1000000">Stop</option>
-                                  </select>
-                            </div>
+                                </select>    
+                            </div>    
+                                <label><h5>Tiempo de Respuesta:</h5></label> <!-- Tamaño de letra cambiado -->
+                                <div class="input-group mb-3">                                                       
+                                    <select id="move_time" class="form-control m-2">
+                                        <option value="100" selected>Instantáneo</option>
+                                        <option value="1000">1 sec</option>
+                                        <option value="2000">2 sec</option>
+                                        <option value="3000">3 sec</option>
+                                        <option value="4000">4 sec</option>
+                                        <option value="5000">5 sec</option>
+                                        <option value="6000">6 sec</option>
+                                        <option value="7000">7 sec</option>
+                                        <option value="8000">8 sec</option>
+                                        <option value="9000">9 sec</option>
+                                        <option value="10000">10 sec</option>
+                                        <option value="1000000">Stop</option>
+                                    </select>
+                                </div>
 
                           <div class="btn-group flex-wrap row-sm-1 btn-block">
 
-                            <button id="new_game"  class="btn btn-outline-secondary sm-1">Nueva partida</button>
+                            <button type="button" class="btn btn-outline-secondary sm-1" data-toggle="modal" data-target="#exampleModalCenter">Nueva Partida</button>
 
                             <button id="make_move" class="btn btn-outline-secondary sm-1">Realizar movimiento</button>
 
@@ -123,9 +127,32 @@
                             <button id="take_back"  class="btn btn-outline-secondary sm-1">Retroceder movimiento</button>
 
                         </div>
+                                                                            <!-- Button trigger modal -->
+                                                    
+                                                    
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLongTitle">Nueva Partida</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                            ¿Esta seguro de querer iniciar una nueva partida?
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                            <button id="new_game"  type="button" class="btn btn-success " data-dismiss="modal">SI</button>
+                                                            <button                type="button" class="btn btn-secondary" data-dismiss="modal">NO</button>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                    </div>
                         <ul class="list-group list-group-flush" style="height: 70%;">
 
-                            <li class="list-group-item" id="status"></li>
+                            <h6><li class="list-group-item" id="status"></li></h6>
 
                             <li class="list-group-item" style="max-height: 250px; overflow-y: auto;"> <!-- Altura de la caja de movimientos redefinida para que no se vaya hacia abajo -->
 
