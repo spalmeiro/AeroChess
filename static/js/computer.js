@@ -274,7 +274,8 @@ function make_move() {
             $nodes.text(data.nodes);
             $knps.text(data.time)
 
-            current_progress=($score.text()/20)+50
+            current_progress=(data.score/20)+50
+            
             $("#dynamic")
             .css("width", current_progress + "%")
             //.attr("aria-valuenow", current_progress)
