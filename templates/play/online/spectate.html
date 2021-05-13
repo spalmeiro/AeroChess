@@ -40,7 +40,7 @@
             <div class="game-ui">
 
                 <!-- Partida -->
-                <div class="game-board">
+                <div class="game-wrapper">
 
                     <!-- Jugador de negras -->
                     <div class="text-center" id="opponent_name">
@@ -54,13 +54,15 @@
                             <h4>{{ owner }}</h5>
                         {% endif %}
                     </div>
-
-                    <!-- Tablero -->
                     <hr class="mt-1 mb-2">
-                    <div class="chessboard" id="spectatorBoard"></div>
-                    <hr class="mt-2 mb-1">
+                    
+                    <!-- Tablero -->
+                    <div class="game-board-wrapper">
+                        <div class="game-board" id="spectatorBoard"></div>
+                    </div>
 
                     <!-- Jugador de blancas -->
+                    <hr class="mt-2 mb-1">
                     {% if owner_side == "white" %}
                         <h4 class="text-center">{{ owner }}</h5>
                     {% else %}

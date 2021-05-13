@@ -40,14 +40,16 @@
             <div class="game-ui">
 
                 <!-- Partida -->
-                <div class="game-board">
+                <div class="game-wrapper">
 
                     <!-- Oponente -->
                     <h4 class="text-center">{{ puzzle.citation }}</h4>
+                    <hr class="mt-1 mb-2">
 
                     <!-- Tablero -->
-                    <hr class="mt-1 mb-2">
-                    <div class="chessboard" id="puzzleBoard"></div>
+                    <div class="game-board-wrapper">
+                        <div class="game-board" id="puzzleBoard"></div>
+                    </div>
                 
                 </div>
     
