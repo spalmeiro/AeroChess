@@ -140,8 +140,31 @@ function onSnapEnd () {
     board.position(game.fen())
 }
 
+// Actualiza la barra de estado de la partida
+function marcador(x) {
+        
+    if (x>1000) {
+        puntuacion=1000
+    }            
+    else if(x<-1000) {
+        puntuacion=-1000
+    } 
+    else if(isNaN(x)) {
+        return
+    }
+    else {
+        puntuacion=x
+    }
 
+    current_progress=(puntuacion/20)+50
 
+    $("#white-progress").css("height", current_progress + "%");       
+
+    // current_progress2=(100-current_progress)
+
+    // $("#dynamic2").css("width", current_progress2 + "%").text((current_progress2) + "% Victoria de Negras");   
+    
+}
 
 // Actualiza los datos sobre el estado de la partida
 function updateStatus () {
@@ -272,13 +295,10 @@ function make_move() {
             $score.text(data.score);
             $time.text(data.time);
             $nodes.text(data.nodes);
-            $knps.text(data.time)
+            $knps.text(data.time);
 
-            current_progress=($score.text()/20)+50
-            $("#dynamic")
-            .css("width", current_progress + "%")
-            //.attr("aria-valuenow", current_progress)
-            .text((current_progress) + "% Probabilidad de victoria");                    
+            // Actualiza la barra de estado de la partida
+            marcador(data.score);                
 
             reproSon("ficha.wav");
 
@@ -309,6 +329,7 @@ $('#new_game').on('click', function() {
     reproSon("click2.wav");
     // Establece la posición de inicio
     board.position('start');
+    marcador(0)
     updateStatus()
 });
 
