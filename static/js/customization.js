@@ -40,6 +40,9 @@ $('#piece_style').on('click', function() {
 //// PERSONALIZACIÓN DEL TABLERO ////
 
 // Selecciona el tema del tablero
+
+
+
 $("#board_theme").on('change',  function () {
     // Tablero predeterminado
     if (this.selectedIndex == 0) {
@@ -85,3 +88,39 @@ $('#customization').on('click', function(){
     board.flip()    
     board.flip()
 })
+
+var $board_theme = $('#board_theme')
+
+window.addEventListener('load', prueba(), false);
+function prueba() {
+    opcion2 = $('#board_theme option:selected').val()
+
+    if (opcion2 == "default") {
+        CSS['black'] = 'boardtheme1black';
+        CSS['white'] = 'boardtheme1white';
+    } 
+    // Tablero verde
+    else if (opcion2 == "green") {
+        CSS['black'] = 'boardtheme2black';
+        CSS['white'] = 'boardtheme2white';
+    }
+    // Tablero azul
+    else if (opcion2 == "blue") {
+        CSS['black'] = 'boardtheme3black';
+        CSS['white'] = 'boardtheme3white';
+    }
+
+    else if (opcion2 == "Ocre") {
+        CSS['black'] = 'boardtheme4black';
+        CSS['white'] = 'boardtheme4white';
+    }
+
+    else if (opcion2 == "Verde") {
+        CSS['black'] = 'boardtheme5black';
+        CSS['white'] = 'boardtheme5white';
+    }
+    $('#board_theme').on('click', function() {
+        board_preview.flip()    
+        board_preview.flip()
+    })
+}
