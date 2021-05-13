@@ -25,45 +25,47 @@
 
     <!-- Contenido -->
     <main class="bg-img pt-6 h-100">
+        <div class="container">
 
-        <!-- Cabecera -->
-        <header class="container index-header text-center">
-            <h1>Bienvenido a AeroChess</h1>
-            <p class="lead">Ajedrez de excelencia internacional</p>
-        </header>
+            <!-- Cabecera -->
+            <header class="index-header text-center">
+                <h1>Bienvenido a AeroChess</h1>
+                <p class="lead">Ajedrez de excelencia internacional</p>
+            </header>
 
-        <!-- Bloque de botones de acceso rápido -->
-        <div class="container pb-5">
-            
-            <!-- Primera fila -->
-            <div class="row">
-                <div class="col-12">
-                    <a href="{% url 'lobby' %}" type="button" class="btn btn-index btn-lg btn-block">Lobby</a>
+            <!-- Bloque de botones de acceso rápido -->
+            <div class="pb-5">
+                
+                <!-- Primera fila -->
+                <div class="row">
+                    <div class="col-12">
+                        <a href="{% url 'lobby' %}" type="button" class="btn btn-index btn-lg btn-block">Lobby</a>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Segunda fila -->
-            <div class="row mt-3">
-                <div class="col">
-                    <a href="{% url 'creategame' %}" type="button" class="btn btn-index btn-lg btn-block">Crear partida</a>
+                <!-- Segunda fila -->
+                <div class="row mt-3">
+                    <div class="col">
+                        <a href="{% url 'creategame' %}" type="button" class="btn btn-index btn-lg btn-block">Crear partida</a>
+                    </div>
+                    <div class="col">
+                        <a href="{% url 'computer' %}" type="button" class="btn btn-index btn-lg btn-block">Jugar contra el ordenador</a>
+                    </div> 
                 </div>
-                <div class="col">
-                    <a href="{% url 'computer' %}" type="button" class="btn btn-index btn-lg btn-block">Jugar contra el ordenador</a>
-                </div> 
-            </div>
 
-            <!-- Tercera fila -->
-            <div class="row mt-3">
-                <div class="col-6">
-                    <a href="{% url 'random_puzzle' %}" type="button" class="btn btn-index btn-lg btn-block">Puzzle aleatorio</a>
+                <!-- Tercera fila -->
+                <div class="row mt-3">
+                    <div class="col-6">
+                        <a href="{% url 'random_puzzle' %}" type="button" class="btn btn-index btn-lg btn-block">Puzzle aleatorio</a>
+                    </div>
+                    <div class="col-6">
+                        <a href="{% url 'lista' %}" type="button" class="btn btn-index btn-lg btn-block">Lista de puzzles</a>
+                    </div> 
                 </div>
-                <div class="col-6">
-                    <a href="{% url 'lista' %}" type="button" class="btn btn-index btn-lg btn-block">Lista de puzzles</a>
-                </div> 
+
             </div>
 
         </div>
-
     </main>
 
     <!-- Pie de página -->

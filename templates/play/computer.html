@@ -33,7 +33,7 @@
     {% include "includes/modals.html" %}
 
     <!-- Contenido -->
-    <main class="bg-img pt-6 h-100">
+    <main class="bg-img pt-6 vh-100">
         <div class="container">
 
             <!-- Interfaz de juego -->
@@ -80,7 +80,7 @@
                             <div class="input-group">
 
                                 <!-- Nivel de dificultad -->
-                                <select class="form-control mr-2" id="Nivel" title="Nivel de Stockfish">
+                                <select class="form-control game-form-control mr-2" id="level" title="Nivel de Stockfish">
                                     <option class="select-title text-center" disabled>Nivel de Stockfish</option>
                                     <option value="0">Nivel 0</option>
                                     <option value="2">Nivel 1</option>
@@ -96,7 +96,7 @@
                                 </select>
 
                                 <!-- Tiempo para calcular -->
-                                <select id="move_time" class="form-control ml-2">
+                                <select class="form-control game-form-control ml-2" id="move_time" title="Tiempo de respuesta">
                                     <option value="100" selected>Instantáneo</option>
                                     <option value="1000">1 sec</option>
                                     <option value="2000">2 sec</option>
@@ -115,18 +115,18 @@
 
                             <!-- FEN -->
                             <div class="input-group mt-3">
-                                <input id="fen" type="text" class="form-control">
+                                <input class="form-control game-form-control" id="fen" type="text">
                                 <div class="input-group-append">
-                                <button id="set_fen" class="btn btn-outline-success">FEN</button>
+                                    <button class="btn game-btn" id="set_fen">FEN</button>
                                 </div>
                             </div>
 
                             <!-- Controles -->
                             <div class="btn-group mt-3">
-                                <button id="new_game" class="btn btn-game">Nueva partida</button>
-                                <button id="make_move" class="btn btn-game">Realizar movimiento</button>
-                                <button id="take_back" class="btn btn-game">Retroceder movimiento</button>
-                                <button id="flip_board" class="btn btn-game">Rotar tablero</button>
+                                <button id="new_game" class="btn game-btn">Nueva partida</button>
+                                <button id="make_move" class="btn game-btn">Realizar movimiento</button>
+                                <button id="take_back" class="btn game-btn">Retroceder movimiento</button>
+                                <button id="flip_board" class="btn game-btn">Rotar tablero</button>
                             </div>
 
                         </div>

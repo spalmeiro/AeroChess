@@ -4,8 +4,12 @@
 
 /* Modificado de Bootstrap */
 hr {
-    border-top: 1px solid white;
+    border-top: 1px solid #ffffff;
 }
+
+/* ul {
+    list-style: none;
+} */
 
 /* Modificado de Bootstrap */
 .pt-6 {
@@ -47,17 +51,17 @@ hr {
 /* --------------------- Footer --------------------- */
 
 .custom-footer-header {
-    color: white;
+    color: #ffffff;
     background-color: rgb(40, 40, 40) !important;
 }
 
 .custom-footer-body {
-    color: white;
+    color: #ffffff;
     background-color: rgb(30, 30, 30) !important;
 }
 
 .custom-text-footer {
-    color: white;
+    color: #ffffff;
 }
 
 /* -------------------------------------------------- */
@@ -85,6 +89,7 @@ hr {
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
+    overflow-y: auto;
 }
 
 /* -------------------------------------------------- */
@@ -95,7 +100,7 @@ hr {
 
 .index-header {
     padding-bottom: 5rem;
-    color: white;
+    color: #ffffff;
 }
 
 .btn-index {
@@ -119,7 +124,7 @@ hr {
     box-shadow: 0 0 0 0.15rem rgb(255, 255, 255);
 }
 
-.btn-index:focus, .btn-game.focus {
+.btn-index:focus, .btn-index.focus {
     outline: 0;
     box-shadow: 0 0 0 0.15rem rgb(255, 255, 255);
 }
@@ -131,7 +136,7 @@ hr {
 /* ---------------------- About ----------------------*/
 
 .custom-about {
-    color: white;
+    color: #ffffff;
 }
 
 /* -------------------------------------------------- */
@@ -141,20 +146,39 @@ hr {
 /* --------------------- Forms ---------------------- */
 
 .custom-form {
-    color: white;
+    color: #ffffff;
     background-color: rgba(50, 50, 50, 0.9);
     padding-left: 1rem;
     padding-top: 1rem;
     padding-right: 1rem;
     padding-bottom: 1rem;
-    border-width: 2px;
-    border-style: ridge;
+    border-color: #ffffff;
     border-radius: 0.25rem;
+    border-style: solid;
+    border-width: 1px;
 }
 
-/* Modificado de Bootstrap */
-.invalid-form {
-    margin-top: 0.25rem;
+.custom-form-control {
+    color: #ffffff;
+    background-color: rgba(100, 100, 100, 0.75);
+}
+
+.custom-form-control:focus {
+    color: #ffffff;
+    background-color: rgba(100, 100, 100, 0.75);
+    border-color: #ffffff;
+    outline: 0;
+    box-shadow: 0 0 0 0.15rem rgb(255, 255, 255);
+}
+
+.custom-form-control::placeholder {
+    color: #ffffff;
+    opacity: 0.5;
+}
+
+.custom-invalid-form {
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
     font-size: 100%;
     color: #dc3545;
 }
@@ -183,7 +207,7 @@ hr {
     box-shadow: 0 0 0 0.15rem rgb(255, 255, 255);
 }
   
-.btn-gametype:focus, .btn-game.focus {
+.btn-gametype:focus, .btn-gametype.focus {
     outline: 0;
     box-shadow: 0 0 0 0.15rem rgb(255, 255, 255);
 }
@@ -201,10 +225,10 @@ hr {
     padding: 0;
     width: 100px;
     height: 100px;
-    border-color: #ffffff;
     background-color: rgba(100, 100, 100, 0.75);
-    border-width: 1px;
+    border-color: #ffffff;
     border-style: solid;
+    border-width: 1px;
 }
 
 .btn-pieces:hover {
@@ -244,6 +268,98 @@ hr {
 
 
 
+/* ---------------- Lista de puzzles ---------------- */
+
+.puzzle-list {
+    color: #ffffff;
+}
+
+.puzzle-list-header {
+    padding: 1.25rem;
+    color: #ffffff;
+    font-size: 150%;
+    text-align: left;
+    background-color: rgb(40, 40, 40);
+    border-color: #ffffff;
+    border-style: solid;
+    border-width: 2px;
+    border-bottom: 1px solid #ffffff;
+}
+
+.puzzle-list-body {
+    padding: 0;
+    margin: 0;
+    color: #ffffff;
+    text-align: left;
+    background-color: rgba(70, 70, 70);
+    border-color: #ffffff;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.puzzle-list-item {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    border: 1px solid #ffffff;
+}
+
+.puzzle-list-item:hover {
+    color: #ffffff;
+    background-color:rgba(255, 255, 255, 0.3);
+    outline: 0;
+    box-shadow: 0 0 0 0.15rem rgb(255, 255, 255);
+}
+
+/* -------------------------------------------------- */
+
+
+
+/* --------------------- Perfil --------------------- */
+
+.profile {
+    color: #ffffff;
+}
+
+/* -------------------------------------------------- */
+
+
+
+/* --------------- Lista de partidas ---------------- */
+
+.lobby {
+    color: #ffffff;
+}
+
+.game-list {
+    margin: 0;
+    border-color: #ffffff;
+    border-radius: 0.25rem;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.game-list-header {
+    color: #ffffff;
+    background-color: rgb(40, 40, 40);
+    border-color: #ffffff;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.game-list-body {
+    color: #ffffff;
+    background-color: rgb(70, 70, 70);
+    border-color: #ffffff;
+    border-style: solid;
+    border-width: 1px;
+}
+
+/* -------------------------------------------------- */
+
+
+
 /* ---------------- Páginas de juego ---------------- */
 
 .game-ui {
@@ -262,18 +378,13 @@ hr {
     padding-top: 1rem;
     padding-right: 1rem;
     padding-bottom: 1rem;
-    color: white;
+    color: #ffffff;
     background-color: rgba(50, 50, 50, 0.9);
-    border-color: white;
+    border-color: #ffffff;
     border-radius: 0.25rem;
     border-style: ridge;
     border-width: 2px;
 }
-
-/* .chessboard {
-    height: 20vh;
-    width: 20vw;
-} */
 
 .game-info {
     width: 39%;
@@ -281,33 +392,33 @@ hr {
     align-self: stretch;
     flex-direction: column;
     font-size: 100%;
-    color: white;
+    color: #ffffff;
     background-color: rgba(50, 50, 50, 0.9);
-    border-width: 2px;
-    border-style: ridge;
     border-radius: 0.25rem;
+    border-style: ridge;
+    border-width: 2px;
 }
 
 .game-info-header {
     padding: 1.25rem;
-    height: 10%;
+    height: max-content;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 1.5rem;
-    color: white;
-    border-bottom: 1px ridge white;
+    color: #ffffff;
+    border-bottom: 1px ridge #ffffff;
 }
 
 .game-info-status {
     padding: 1.25rem;
-    height: 5%;
+    height: max-content;
     display: flex;
     justify-content: left;
     align-items: center;
     font-size: 100%;
-    color: white;
-    border-bottom: 1px ridge white;
+    color: #ffffff;
+    border-bottom: 1px ridge #ffffff;
 }
 
 .game-info-pgn {
@@ -317,7 +428,7 @@ hr {
     align-items: flex-start;
     overflow-y: auto;
     font-size: 100%;
-    color: white;
+    color: #ffffff;
 }
 
 .game-info-options {
@@ -328,29 +439,59 @@ hr {
     justify-content: left;
     align-items: center;
     font-size: 100%;
-    color: white;
-    border-top: 1px ridge white;
+    color: #ffffff;
+    border-top: 1px ridge #ffffff;
 }
 
-.btn-game {
+.game-form-control {
+    color: #ffffff;
+    background-color: rgba(100, 100, 100, 0.75);
+    border-color: #ffffff;
+    border-radius: 0.25rem;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.game-form-control:hover {
+    color: #ffffff;
+    background-color:rgba(255, 255, 255, 0.3);
+    border-color: #ffffff;
+    outline: 0;
+    box-shadow: 0 0 0 0.15rem rgb(255, 255, 255);
+}
+
+.game-form-control:focus, .game-form-control.focus {
+    color: #ffffff;
+    background-color:rgba(255, 255, 255, 0.3);
+    border-color: #ffffff;
+    outline: 0;
+    box-shadow: 0 0 0 0.15rem rgb(255, 255, 255);
+}
+
+.game-btn {
     display: flex;
     align-items: center;
     justify-content: center;
     color: #ffffff;
     background-color: rgba(100, 100, 100, 0.75);
     border-color: #ffffff;
+    border-radius: 0.25rem;
     border-style: solid;
     border-width: 1px;
 }
 
-.btn-game:hover {
+.game-btn:hover {
     color: #ffffff;
     background-color:rgba(255, 255, 255, 0.3);
+    border-color: #ffffff;
     outline: 0;
     box-shadow: 0 0 0 0.15rem rgb(255, 255, 255);
 }
   
-.btn-game:focus, .btn-game.focus {
+.game-btn:focus, .game-btn.focus {
+    color: #ffffff;
+    background-color:rgba(255, 255, 255, 0.3);
+    border-color: #ffffff;
     outline: 0;
     box-shadow: 0 0 0 0.15rem rgb(255, 255, 255);
 }
@@ -440,85 +581,3 @@ hr {
     color:#A7A7A7;
 }
 /* -------------------------------------------------- */
-
-
-
-
-
-
-
-
-
-
-
-
-
-.colocacion-inicial{                    /* CLASE PARA LA COLOCACIÓN INICIAL */
-    margin-top: 8rem;
-    padding: 2rem;
-}
-
-
-.color-box{
-    border: 3px solid #fff;
-    background-color: gray;
-    padding: 40px;
-    margin: 20px;
-    width: 300px;
-    height: 350px;
-    margin-top: 10px;
-    margin-right: 63%;
-    margin-left: 37%;
-    justify-content: center;
-    text-align: center;
-    color: white;
-}
-
-/* .color-selection { */
-/*     text-decoration:none;
-    font-weight: 600;
-    font-size: 20px;
-    color:#333333; */
-/*     display:flex;
-    padding-top:15px;
-    padding-bottom:15px;
-    padding-left:25px;
-    padding-right:25px;
-    background-color:grey;
-    border-color: #d8d8d8;
-    border-width: 3px;
-    border-style: solid;
-    border-radius:35px;
-    } */
-
-
-.selection-box{
-    display:flex;
-    padding: 20px 20px 20px 20px;
-    margin: 0 0 25px;
-    width: 250;
-    height: 150;
-}
-
-.btn-dark{
-    height: 100px;
-    width: 100px;
-}
-
-.form-group{
-    color:white;
-}
-
-.fa-chess-knight{
-color: black;
-width:20px;
-height:20px;
-}
-
-/* background: rgb(51, 29, 6); */
-/* background: linear-gradient(0deg, rgb(22, 12, 12) 0%, rgba(115,64,13,1) 50%, rgba(22,12,12,1) 100%); 
-    border-style: ridge;
-    border-color: rgb(75, 75, 75);
-    border-width: thick;
-    padding-top: 1rem;
-    padding-bottom: 0.8rem; */

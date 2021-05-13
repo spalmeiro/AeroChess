@@ -7,10 +7,11 @@
     <!-- Barra de navegación -->
     {% include "includes/navbar.html" %}
 
-    <main>
-
-        <!-- Bloque de partidas públicas disponibles -->
-        <div class="container mt-5">
+    <!-- Contenido -->
+    <main class="bg-img pt-6 vh-100">
+        
+        <!-- Bloque de partidas públicas esperando oponente -->
+        <div class="container lobby">
 
             <!-- Título -->
             <div>
@@ -18,30 +19,27 @@
                 <hr>
             </div>
 
+            <!-- Lista de partidas -->
             {% if public %}
 
-                <table class="table table-hover" id="public">
+                <table class="table table-hover game-list" id="public">
 
-                    <thead class="thead-light">
+                    <thead class="game-list-header">
                         <tr>
-                            <th scope="col">#</th>
                             <th scope="col">Oponente</th>
                             <th scope="col">Juegas con</th>
                             <th scope="col">Modo</th>
                         </tr>
                     </thead>
 
-                    <tbody>
-
+                    <tbody class="game-list-body">
                         {% for room in public %}
                             <tr style="transform: rotate(0);"> 
-                                <th scope="row"><a class="stretched-link" href="{{ room.link }}"></a>1</th>
-                                <td>{{ room.owner.username }}</td>
+                                <th scope="row"><a class="stretched-link" href="{{ room.link }}"></a>{{ room.owner.username }}</th>
                                 <td>{{ room.side }}</td>
                                 <td>Normal</td>
                             </tr>
                         {% endfor %}
-
                     </tbody>
 
                 </table>
@@ -51,43 +49,41 @@
                 <p>Parece que no hay ninguna partida pública disponible.</p>
 
             {% endif %}
-                
+
         </div>
 
-        <!-- Bloque de partidas en juego -->
-        <div class="container mt-5">
+        <!-- Bloque de partidas públicas en juego -->
+        <div class="container lobby">
 
             <!-- Título -->
-            <div class="text-left">
+            <div class="text-left mt-5">
                 <h2>Partidas en juego</h2>
                 <hr>
             </div>
 
+            <!-- Lista de partidas -->
             {% if ongoing %}
 
-                <table class="table table-hover" id="ongoing">
+                <table class="table table-hover game-list" id="ongoing">
 
-                    <thead class="thead-light">
+                    <thead class="game-list-header">
                         <tr>
                             <th scope="col">Creador</th>
                             <th scope="col">Oponente</th>
                         </tr>
                     </thead>
 
-                    <tbody>
-
+                    <tbody class="game-list-body">
                         {% for room in ongoing %}
                             <tr style="transform: rotate(0);"> 
-                                <th scope="row"><a class="stretched-link" href="{{ room.link }}"></a>1</th>
-                                <td>{{ room.owner.username }}</td>
+                                <th scope="row"><a class="stretched-link" href="{{ room.link }}"></a>{{ room.owner.username }}</th>
                                 <td>{{ room.adversary }}</td>
                             </tr>
                         {% endfor %}
-
                     </tbody>
 
                 </table>
-
+                
             {% else %}
 
                 <p>Parece que no hay ninguna partida en juego ahora mismo.</p>

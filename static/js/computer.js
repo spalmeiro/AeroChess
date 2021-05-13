@@ -248,7 +248,7 @@ function make_move() {
         data: {
             'fen': game.fen(),
             'move_time': $('#move_time option:selected').val(),
-            'Nivel': $('#Nivel option:selected').val(),
+            'level': $('#level option:selected').val(),
         },
         beforeSend: function (xhr) {
             xhr.setRequestHeader("X-CSRFToken", csrftoken);
@@ -309,6 +309,7 @@ $('#new_game').on('click', function() {
     reproSon("click2.wav");
     // Establece la posición de inicio
     board.position('start');
+    updateStatus()
 });
 
 // Hacer un movimiento
