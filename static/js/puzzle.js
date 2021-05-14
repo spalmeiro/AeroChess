@@ -21,6 +21,7 @@ var $nodes = $('#nodes')
 var $knps = $('#knps')
 var squareClass = 'square-55d63' // Se usa para destacar el último movimiento
 var squareToHighlight = null // Se usa para destacar el último movimiento
+var micolor=CSS['black']
 var whiteSquareGrey = '#a9a9a9' // Determina el color con el que se destaca una casilla blanca
 var blackSquareGrey = '#696969' // Determina el color con el que se destaca una casilla negra
 var orientation = null
@@ -32,7 +33,35 @@ var orientation = null
 
 
 //-------------- BLOQUE DE FUNCIONES PARA EL FUNCIONAMIENTO DEL TABLERO Y EL JUEGO ---------------//
-    
+$("#board_theme").on('change',  function () {
+    // Tablero predeterminado
+    if (this.selectedIndex == 0) {
+        micolor = 'boardtheme1black';
+      
+    } 
+    // Tablero verde
+    else if (this.selectedIndex == 1) {
+        micolor = 'boardtheme2black';
+        
+    }
+    // Tablero azul
+    else if (this.selectedIndex == 2) {
+        micolor = 'boardtheme3black';
+        
+    }
+
+    else if (this.selectedIndex == 3) {
+        micolor= 'boardtheme4black';
+        
+    }
+
+    else if (this.selectedIndex == 4) {
+        micolor = 'boardtheme5black';
+        
+    }
+
+}); 
+   
 
 // Función que reproduce los sonidos que se le pasan como argumento
 function reproSon (name) {
@@ -41,11 +70,11 @@ function reproSon (name) {
 }
 
 // Función que marca las casillas disponibles para mover
-function greySquare (square) {
+function greySquare (square,Codecolor) {
     var $square = $('#puzzleBoard .square-' + square)
     
     var background = whiteSquareGrey
-    if ($square.hasClass('black-3c85d')) {
+    if ($square.hasClass(Codecolor)) {
         background = blackSquareGrey
     }
     
@@ -76,11 +105,11 @@ function onMouseoverSquare (square, piece) {
     if (moves.length === 0) return
     
     // Destaca la casilla en la que se sitúa el ratón
-    greySquare(square)
+    greySquare(square,micolor)
     
     // Destaca las casillas donde se puede mover la pieza
     for (var i = 0; i < moves.length; i++) {
-        greySquare(moves[i].to)
+        greySquare(moves[i].to,micolor)
     }
 }
 
@@ -229,6 +258,8 @@ if (game.turn() === 'b') {
 else if (game.turn() === 'w') {
     orientation = "white"
 }
+
+
 
 // Configuración del tablero
 var config = {

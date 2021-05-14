@@ -306,6 +306,10 @@ function getCookie(name) {
 const csrftoken = getCookie('csrftoken');
 
 // Envia información sobre la partida al servidor y devuelve el mejor movimiento calculado por Stockfish
+r=1
+
+var scores = [];
+scores[0]=0
 function make_move() {
 
     $.ajax({
@@ -342,13 +346,12 @@ function make_move() {
 
             marcador(data.score)
 
-
+            scores[r]=data.score
+            r=r+1
             reproSon("ficha.wav");
 
             // Actualiza el estado de la partida
             updateStatus();
-
-            console.log(data)
         },
         error: function (error) {
             console.log(error);
@@ -387,6 +390,8 @@ $('#take_back').on('click', function() {
     // Retrocede un movimiento
     game.undo();
     game.undo();
+    r=r-2
+    marcador(scores[r])
     // Actualiza el estado del tablero
     board.position(game.fen());
     reproSon("click2.wav");
@@ -423,5 +428,6 @@ $('#set_fen').on('click', function() {
     updateStatus();
 });
 
+//---------------------GRAFICAR-------------------//
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
