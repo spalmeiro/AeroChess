@@ -2,14 +2,12 @@
     CSS PARA LOS ESTILOS PERSONALIZADOS
 */
 
+
+
 /* Modificado de Bootstrap */
 hr {
     border-top: 1px solid #ffffff;
 }
-
-/* ul {
-    list-style: none;
-} */
 
 /* Modificado de Bootstrap */
 .pt-6 {
@@ -49,8 +47,17 @@ hr {
 /* -------------- Barra de navegación --------------- */
 
 .custom-navbar {
-    background-color: rgb(40, 40, 40) !important;
+    background-color: rgb(40, 40, 40);
     border-bottom: 1px solid black;
+}
+
+.custom-dropdown-menu {
+    color: #ffffff;
+    background-color: rgb(85, 85, 85);
+}
+
+.custom-dropdown-item {
+    color: #ffffff;
 }
 
 /* -------------------------------------------------- */
@@ -79,7 +86,7 @@ hr {
 
 .custom-modal-content {
     color: #ffffff;
-    background-color: rgba(40, 40, 40);
+    background-color: rgba(45, 45, 45);
     padding-left: 1rem;
     padding-top: 1rem;
     padding-right: 1rem;
@@ -92,11 +99,26 @@ hr {
 
 .custom-modal-header {
     color: #ffffff;
-    background-color: rgb(30, 30, 30) !important;
 }
 
 .custom-modal-body {
     color: #ffffff;
+}
+
+.custom-modal-select {
+    color: #ffffff;
+    background-color: rgb(85, 85, 85);
+    border-color: #ffffff;
+    border-radius: 0.25rem;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.custom-modal-select:focus {
+    color: #ffffff;
+    border-color: #ffffff;
+    outline: 0;
+    box-shadow: 0 0 0 0.15rem rgb(255, 255, 255);
 }
 
 /* -------------------------------------------------- */
