@@ -97,14 +97,6 @@ hr {
     border-width: 1px;
 }
 
-.custom-modal-header {
-    color: #ffffff;
-}
-
-.custom-modal-body {
-    color: #ffffff;
-}
-
 .custom-modal-select {
     color: #ffffff;
     background-color: rgb(85, 85, 85);
@@ -614,6 +606,16 @@ hr {
 
 .highlight {
     box-shadow: inset 0 0 3px 3px yellow;
+}
+
+/* -------------------------------------------------- */
+
+
+
+/* -------- Destaca los posibles movimientos -------- */
+
+.showMoves {
+    background: radial-gradient(rgba(20,85,30,0.5) 19%, rgba(0,0,0,0) 20%);
 }
 
 /* -------------------------------------------------- */
