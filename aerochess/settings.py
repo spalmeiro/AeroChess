@@ -29,10 +29,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'd^0ij^sa47qaj@yx$*6rilwy3vkyfv
 # DEBUG = False
 DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
-ALLOWED_HOSTS = [
-    'localhost',
-    '192.168.0.100',
-]
+ALLOWED_HOSTS = ["*"]
 
 # AUTH_USER_MODEL = 'game.models.User'
 
