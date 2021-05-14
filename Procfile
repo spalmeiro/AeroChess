@@ -1,1 +1,1 @@
-daphne aerochess.asgi:application
+web: daphne aerochess.asgi:application
