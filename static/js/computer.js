@@ -206,9 +206,13 @@ function updateStatus () {
     // Se actualiza el estado de la partida, el FEN y el PGN
     $status.html(status)
     $fen.val(game.fen())
-    $pgn.html(game.pgn({ max_width: 5, newline_char: "<br />"}))
+    new_pgn = remove_pgn_header(game.pgn({ max_width: 5, newline_char: "<br />"}))
+    $pgn.html(new_pgn)
 }
+function remove_pgn_header(pgn) {
 
+    return pgn.split("<br />").slice(3,100).join("<br />")
+} 
 // Configuración del tablero
 var config = {
     draggable: true,
@@ -257,6 +261,9 @@ function getCookie(name) {
 const csrftoken = getCookie('csrftoken');
 
 // Envia información sobre la partida al servidor y devuelve el mejor movimiento calculado por Stockfish
+r=1
+var scores = [];
+scores[0]=0
 function make_move() {
 
     $.ajax({
@@ -293,7 +300,8 @@ function make_move() {
 
             // Actualiza la barra de estado de la partida
             marcador(data.score);                
-
+            scores[r]=data.score
+            r=r+1
             reproSon("ficha.wav");
 
             // Actualiza el estado de la partida
@@ -339,6 +347,8 @@ $('#take_back').on('click', function() {
     // Retrocede un movimiento
     game.undo();
     game.undo();
+    r=r-2
+    marcador(scores[r])
     // Actualiza el estado del tablero
     board.position(game.fen());
     reproSon("click2.wav");
