@@ -233,7 +233,7 @@ else if (game.turn() === 'w') {
 // Configuración del tablero
 var config = {
     draggable: true,
-    pieceTheme: style,
+    pieceTheme: piece_theme,
     position: puzzle_fen,
     onDragStart: onDragStart,
     onDrop: onDrop,

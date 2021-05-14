@@ -24,9 +24,6 @@ var whiteSquareGrey = '#a9a9a9' // Determina el color con el que se destaca una 
 var blackSquareGrey = '#696969' // Determina el color con el que se destaca una casilla negra
 var orientation = null
 
-// Variables para la personalización
-var $piece_style = $('#piece_style') // Estilo de las piezas
-
 // Variables que definen el título y contenido de los modales
 var $connectionModalTitle = $("#connectionModal_title")
 var $connectionModalBody = $("#connectionModal_body")
@@ -193,7 +190,7 @@ socket.onmessage = function (message) {
         // Carga la configuración del tablero
         var config = {
             draggable: false,
-            pieceTheme: style,
+            pieceTheme: piece_theme,
             position: 'start',
             orientation: data.orientation
         }

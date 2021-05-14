@@ -218,7 +218,7 @@ function updateStatus () {
 // Configuración del tablero
 var config = {
     draggable: true,
-    pieceTheme: style,
+    pieceTheme: piece_theme,
     position: 'start',
     onDragStart: onDragStart,
     onDrop: onDrop,

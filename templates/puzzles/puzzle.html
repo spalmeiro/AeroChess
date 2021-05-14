@@ -7,17 +7,8 @@
     <!-- Esto es para cargar un tag de Django -->
     {% load static %}
 
-    <!-- CSS de Chessboard para el tablero  -->
-    <link rel="stylesheet" href="{% static 'css/chessboard-1.0.0.css' %}">
-
-    <!-- Script de Chessboard para el funcionamiento del tablero -->
-    <script src="{% static 'js/chessboard-1.0.0.js' %}"></script>
-
     <!-- Script de Chess para el funcionamiento de la interfaz -->
     <script src="{% static 'js/chess.js' %}"></script>
-
-    <!-- Script propio para permitire la personalización del tablero -->
-    <script src="{% static 'js/customization.js' %}" async></script>
 
     <!-- Script propio para el funcionamiento de la página -->
     <script src="{% static 'js/puzzle.js' %}" defer></script>
