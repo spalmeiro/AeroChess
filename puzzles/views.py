@@ -3,16 +3,7 @@ from django.shortcuts import get_object_or_404, render
 
 from .models import Puzzle
 
-import chess
-import chess.engine
-from stockfish import Stockfish
-
 import random
-
-# Rutas hacia stockfish.exe
-stockfish = Stockfish("../stockfish/stockfish_13_win_x64/stockfish_13_win_x64.exe")
-engine = chess.engine.SimpleEngine.popen_uci("../stockfish/stockfish_13_win_x64/stockfish_13_win_x64.exe")
-
 
 
 # Lista de puzzles

@@ -15,8 +15,8 @@ from stockfish import Stockfish
 import random
 
 # Rutas hacia stockfish.exe
-stockfish = Stockfish("../stockfish/stockfish_13_win_x64/stockfish_13_win_x64.exe")
-engine = chess.engine.SimpleEngine.popen_uci("../stockfish/stockfish_13_win_x64/stockfish_13_win_x64.exe")
+stockfish = Stockfish("./stockfish/stockfish")
+engine = chess.engine.SimpleEngine.popen_uci("./stockfish/stockfish")
 
 
 

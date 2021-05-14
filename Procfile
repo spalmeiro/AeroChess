@@ -1,0 +1,1 @@
+daphne myproject.asgi:application
