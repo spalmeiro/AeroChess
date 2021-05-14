@@ -1,1 +1,1 @@
-daphne myproject.asgi:application
+daphne aerochess.asgi:application
