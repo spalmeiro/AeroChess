@@ -135,9 +135,9 @@ def make_move(request):
     
     move_time = request.POST["move_time"] # Recoge el tiempo de movimiento permitido para el ordenador
 
-    nivel = request.POST["Nivel"] # Recoge el nivel de dificultad seleccionado para el ordenador
+    level = request.POST["level"] # Recoge el nivel de dificultad seleccionado para el ordenador
 
-    stockfish.set_skill_level(int(nivel)) # Carga el nivel de dificultad en stockfish
+    stockfish.set_skill_level(int(level)) # Carga el nivel de dificultad en stockfish
     
     sub_board = stockfish.set_fen_position(fen) # Crea un tablero en stockfish con el FEN recogido de la web
     

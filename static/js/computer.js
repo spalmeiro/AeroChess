@@ -20,7 +20,6 @@ var $nodes = $('#nodes')
 var $knps = $('#knps')
 var squareClass = 'square-55d63' // Se usa para destacar el último movimiento
 var squareToHighlight = null // Se usa para destacar el último movimiento
-var micolor=CSS['black']
 var whiteSquareGrey = '#a9a9a9' // Determina el color con el que se destaca una casilla blanca
 var blackSquareGrey = '#696969' // Determina el color con el que se destaca una casilla negra
 var orientation = "white" // Siempre se entra jugando con blancas
@@ -32,34 +31,7 @@ var orientation = "white" // Siempre se entra jugando con blancas
 
 
 //-------------- BLOQUE DE FUNCIONES PARA EL FUNCIONAMIENTO DEL TABLERO Y EL JUEGO ---------------//
-$("#board_theme").on('change',  function () {
-    // Tablero predeterminado
-    if (this.selectedIndex == 0) {
-        micolor = 'boardtheme1black';
-      
-    } 
-    // Tablero verde
-    else if (this.selectedIndex == 1) {
-        micolor = 'boardtheme2black';
-        
-    }
-    // Tablero azul
-    else if (this.selectedIndex == 2) {
-        micolor = 'boardtheme3black';
-        
-    }
-
-    else if (this.selectedIndex == 3) {
-        micolor= 'boardtheme4black';
-        
-    }
-
-    else if (this.selectedIndex == 4) {
-        micolor = 'boardtheme5black';
-        
-    }
-
-}); 
+    
 
 // Reproduce los sonidos que se le pasan como argumento
 function reproSon (name) {
@@ -68,20 +40,14 @@ function reproSon (name) {
 }
 
 // Marca las casillas disponibles para mover
-function greySquare (square,Codecolor) {
+function greySquare (square) {
     var $square = $('#computerBoard .square-' + square)
-    
-    var background = whiteSquareGrey
-    if ($square.hasClass(Codecolor)) {
-        background = blackSquareGrey
-    }
-    
-    $square.css('background', background)
+    $square.addClass("showMoves")
 }
 
 // Desmarca las casillas disponibles para mover
 function removeGreySquares () {
-    $('#computerBoard .square-55d63').css('background', '')
+    $('#computerBoard .square-55d63').removeClass('showMoves')
 }
 
 // Marca los posibles movimientos cuando el ratón se sitúa sobre una pieza
@@ -91,7 +57,7 @@ function onMouseoverSquare (square, piece) {
     if (game.game_over()) return false
 
     // Controla que sólo se marquen las piezas del lado al que le toca mover
-   if (!((orientation === 'white' && game.turn()==='w') || (orientation === 'black' && game.turn()==='b'))) return false 
+    if (!((orientation === 'white' && game.turn()==='w') || (orientation === 'black' && game.turn()==='b'))) return false
 
     // Consigue la lista de movimientos posibles para esa casilla
     var moves = game.moves({
@@ -103,11 +69,11 @@ function onMouseoverSquare (square, piece) {
     if (moves.length === 0) return
     
     // Destaca la casilla en la que se sitúa el ratón
-    greySquare(square,micolor)
+    greySquare(square)
     
     // Destaca las casillas donde se puede mover la pieza
     for (var i = 0; i < moves.length; i++) {
-        greySquare(moves[i].to,micolor)
+        greySquare(moves[i].to)
     }
 }
 
@@ -168,62 +134,47 @@ function onSnapEnd () {
     board.position(game.fen())
 }
 
+// Actualiza la barra de estado de la partida
 function marcador(x) {
         
-    if (x>1000)
-            puntuacion=1000
-            
-        else if(x<-1000)
-            puntuacion=-1000
-        
-        else if(isNaN(x))
-
+    if (x>1000) {
+        puntuacion=1000
+    }            
+    else if(x<-1000) {
+        puntuacion=-1000
+    } 
+    else if(isNaN(x)) {
         return
+    }
+    else {
+        puntuacion=x
+    }
 
-        else
-            puntuacion=x
+    current_progress=(puntuacion/20)+50
 
+    $("#white-progress").css("height", current_progress + "%");       
 
-        current_progress=(puntuacion/20)+50
+    // current_progress2=(100-current_progress)
 
-        $("#dynamic")
-        .css("width", current_progress + "%")
-        //.attr("aria-valuenow", current_progress)
-        .text((current_progress) + "% Victoria de Blancas" );          
-
-        current_progress2=(100-current_progress)
-
-        $("#dynamic2")
-        .css("width", current_progress2 + "%")
-        //.attr("aria-valuenow", current_progress)
-        .text((current_progress2) + "% Victoria de Negras");   
+    // $("#dynamic2").css("width", current_progress2 + "%").text((current_progress2) + "% Victoria de Negras");   
     
 }
-
 
 // Actualiza los datos sobre el estado de la partida
 function updateStatus () {
 
     var status = ''
     var moveColor = 'blancas'
-    var moveColor2 = 'negras'
+
     // Comprueba si mueven las negras
     if (game.turn() === 'b') {
         moveColor = 'negras'
-        moveColor2 = 'blancas'
     }
 
     // Comprueba si hay jaque mate
     if (game.in_checkmate()) {
         reproSon('mate.mp3')
-        status = 'Fin de la partida, ' + moveColor2 + ' hacen jaque mate.'
-        if (game.turn() === 'b') {
-             marcador(1000)
-        }
-        else{
-            marcador(-1000)
-        }
-        
+        status = 'Fin de la partida, ' + moveColor + ' hacen jaque mate.'
     }
 
     // Comprueba si hay tablas
@@ -261,7 +212,7 @@ function updateStatus () {
 // Configuración del tablero
 var config = {
     draggable: true,
-    pieceTheme: style,
+    pieceTheme: piece_theme,
     position: 'start',
     onDragStart: onDragStart,
     onDrop: onDrop,
@@ -306,10 +257,6 @@ function getCookie(name) {
 const csrftoken = getCookie('csrftoken');
 
 // Envia información sobre la partida al servidor y devuelve el mejor movimiento calculado por Stockfish
-r=1
-
-var scores = [];
-scores[0]=0
 function make_move() {
 
     $.ajax({
@@ -318,7 +265,7 @@ function make_move() {
         data: {
             'fen': game.fen(),
             'move_time': $('#move_time option:selected').val(),
-            'Nivel': $('#Nivel option:selected').val(),
+            'level': $('#level option:selected').val(),
         },
         beforeSend: function (xhr) {
             xhr.setRequestHeader("X-CSRFToken", csrftoken);
@@ -342,16 +289,17 @@ function make_move() {
             $score.text(data.score);
             $time.text(data.time);
             $nodes.text(data.nodes);
-            $knps.text(data.time)
+            $knps.text(data.time);
 
-            marcador(data.score)
+            // Actualiza la barra de estado de la partida
+            marcador(data.score);                
 
-            scores[r]=data.score
-            r=r+1
             reproSon("ficha.wav");
 
             // Actualiza el estado de la partida
             updateStatus();
+
+            console.log(data)
         },
         error: function (error) {
             console.log(error);
@@ -376,6 +324,7 @@ $('#new_game').on('click', function() {
     // Establece la posición de inicio
     board.position('start');
     marcador(0)
+    updateStatus()
 });
 
 // Hacer un movimiento
@@ -390,8 +339,6 @@ $('#take_back').on('click', function() {
     // Retrocede un movimiento
     game.undo();
     game.undo();
-    r=r-2
-    marcador(scores[r])
     // Actualiza el estado del tablero
     board.position(game.fen());
     reproSon("click2.wav");
@@ -428,6 +375,5 @@ $('#set_fen').on('click', function() {
     updateStatus();
 });
 
-//---------------------GRAFICAR-------------------//
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

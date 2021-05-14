@@ -7,12 +7,16 @@
     <!-- Barra de navegación -->
     {% include "includes/navbar.html" %}
 
-    <main class="bg-img h-100">
+    <!-- Modales -->
+    {% include "includes/modals.html" %}
+
+    <main class="bg-img">
         <div class="container h-100">
             <div class="row h-100 justify-content-center align-items-center">
                 <div class="col-10 col-md-8 col-lg-6">
 
-                    <form class="form" method="post" novalidate>
+                    <!-- Signup form -->
+                    <form class="custom-form" method="post">
 
                         <!-- Esto proporciona protección contra Cross Site Request Forgeries -->
                         {% csrf_token %}
@@ -23,9 +27,9 @@
                         <!-- Introducir usuario -->
                         <div class="form-group">
                             <label for="username">Nombre de usuario:</label>
-                            <input class="form-control" type="text" name="username" id="username" placeholder="Nombre de usuario..." required autofocus>
+                            <input class="form-control custom-form-control" type="text" name="username" id="username" placeholder="Nombre de usuario..." required autofocus>
                             {% if form.username.errors %}
-                                <div class="invalid-form">
+                                <div class="custom-invalid-form">
                                 {% for error in form.username.errors %}
                                     <p>{{ error|escape }}</p>
                                 {% endfor %}
@@ -36,9 +40,9 @@
                         <!-- Introducir correo electrónico (opcional) -->
                         <div class="form-group">
                             <label for="email">Correo electrónico (opcional):</label>
-                            <input class="form-control" type="email" name="email" id="email" placeholder="Correo electrónico (opcional)...">
+                            <input class="form-control custom-form-control" type="email" name="email" id="email" placeholder="Correo electrónico (opcional)...">
                             {% if form.email.errors %}
-                                <div class="invalid-form">
+                                <div class="custom-invalid-form">
                                 {% for error in form.email.errors %}
                                     <p>{{ error|escape }}</p>
                                 {% endfor %}
@@ -49,9 +53,9 @@
                         <!-- Introducir contraseña -->
                         <div class="form-group">
                             <label for="password">Contraseña:</label>
-                            <input class="form-control" type="password" name="password1" id="password" placeholder="Contraseña..." required>
+                            <input class="form-control custom-form-control" type="password" name="password1" id="password" placeholder="Contraseña..." required>
                             {% if form.password1.errors %}
-                                <div class="invalid-form">
+                                <div class="custom-invalid-form">
                                 {% for error in form.password1.errors %}
                                     <p>{{ error|escape }}</p>
                                 {% endfor %}
@@ -62,18 +66,18 @@
                         <!-- Confirmar contraseña -->
                         <div class="form-group">
                             <label for="password">Confirma tu contraseña:</label>
-                            <input class="form-control" type="password" name="password2" id="password" placeholder="Confirma tu contraseña..." required>
+                            <input class="form-control custom-form-control" type="password" name="password2" id="password" placeholder="Confirma tu contraseña..." required>
                             {% if form.password2.errors %}
-                                <div class="invalid-form">
+                                <div class="custom-invalid-form">
                                 {% for error in form.password2.errors %}
-                                    <p>{{ error|escape }}</p>
+                                    <div>{{ error|escape }}</div>
                                 {% endfor %}
                                 </div>
                             {% endif %}
                         </div>
 
                         <!-- Enviar -->
-                        <button type="submit" class="btn btn-primary w-100">Iniciar sesión</button>
+                        <button class="btn btn-primary w-100" type="submit">Iniciar sesión</button>
 
                         <hr>
                         <h6 class="font-weight-normal">¿Ya tienes una cuenta? &rarr; <a href="{% url 'login' %}">Iniciar sesión</a></h6>

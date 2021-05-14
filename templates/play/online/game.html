@@ -7,17 +7,8 @@
     <!-- Esto es para cargar un tag de Django -->
     {% load static %}
 
-    <!-- CSS de Chessboard para el tablero  -->
-    <link rel="stylesheet" href="{% static 'css/chessboard-1.0.0.css' %}">
-
-    <!-- Script de Chessboard para el funcionamiento del tablero -->
-    <script src="{% static 'js/chessboard-1.0.0.js' %}"></script>
-
     <!-- Script de Chess para el funcionamiento de la interfaz -->
     <script src="{% static 'js/chess.js' %}"></script>
-
-    <!-- Script propio para permitir la personalización del tablero -->
-    <script src="{% static 'js/customization.js' %}" async></script>
 
     <!-- Script propio para el funcionamiento de la página -->
     <script src="{% static 'js/multiplayer.js' %}" async></script>
@@ -32,69 +23,70 @@
     <!-- Modales -->
     {% include "includes/modals.html" %}
     
-    <main>
-
+    <!-- Contenido -->
+    <main class="bg-img pt-6 vh-100">
         <div class="container">
 
-            <div class="row">
+            <!-- Interfaz de juego -->
+            <div class="game-ui">
 
-                <div class="col-md-7">
+                <!-- Partida -->
+                <div class="game-wrapper">
 
                     <!-- Oponente -->
-                    <div id="opponent_name">
+                    <div class="text-center" id="opponent_name">
                         {% if user.username == owner %}
                             {% if opponent == None %}
-                                <h5>Esperando oponente...</h5>
+                                <h4>Esperando oponente...</h5>
                             {% else %}
-                                <h5>{{ opponent }}</h5>
+                                <h4>{{ opponent }}</h5>
                             {% endif %}
                         {% else %}
-                            <h5>{{ owner }}</h5>
+                            <h4>{{ owner }}</h5>
                         {% endif %}
                     </div>
+                    <hr class="mt-1 mb-2">
 
                     <!-- Tablero -->
-                    <hr class="mt-1 mb-2">
-                    <div id="multiplayerBoard" style="width: 100%;"></div>
-                    <hr class="mt-2 mb-1">
+                    <div class="game-board-wrapper">
+                        <div class="game-board" id="multiplayerBoard"></div>
+                    </div>
 
                     <!-- Usuario -->
-                    <h5>{{ user.username }}</h5>
-
+                    <hr class="mt-2 mb-1">
+                    <h5 class="text-center">{{ user.username }}</h5>
+                
                 </div>
     
-                <div class="col-md-5">
-    
-                    <div class="card" style="height: 100%; width: 100%;">
-    
-                        <div class="card-header">
-                            Partida multijugador
-                        </div>
-    
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item" id="status"></li>
-                            <li class="list-group-item" style="height: 100%;">
-                                <strong>PGN:</strong><div id="pgn"></div>
-                            </li>
-                        </ul>
+                <!-- Información de la partida -->
+                <div class="game-info">
+                    
+                    <!-- Cabecera -->
+                    <div class="game-info-header">Partida multijudador</div>
 
-                        <div class="card-body d-flex">
+                    <!-- Status -->
+                    <div class="game-info-status" id="status"></div>
 
-                            <div class="align-self-end" style="width: 100%;">
+                    <!-- PGN -->
+                    <div class="game-info-pgn" id="pgn"></div>
 
-                                <div class="btn-group" style="width: 100%;">
-                                    <button class="btn btn-outline-secondary" id="drawOffer">Ofrecer tablas</button>
-                                    <button class="btn btn-outline-secondary" id="resign">Abandonar</button>
-                                </div>
+                    <!-- Botones -->
+                    <div class="game-info-options">
+                        <div class="align-self-end w-100">
 
+                            <!-- Opciones -->
+                            <div class="btn-group" style="width: 100%;">
+                                <button class="btn game-btn" id="drawOffer">Ofrecer tablas</button>
+                                <button class="btn game-btn" id="resign">Abandonar</button>
                             </div>
-    
+
                         </div>
                     </div>
+
                 </div>
+
             </div>
         </div>
-
     </main>
 
 {% endblock %}

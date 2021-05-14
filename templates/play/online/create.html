@@ -6,13 +6,16 @@
 
     <!-- Barra de navegación -->
     {% include "includes/navbar.html" %}
+    
+    <!-- Modales -->
+    {% include "includes/modals.html" %}
 
-    <main class="bg-img h-100">
+    <main class="bg-img">
         <div class="container h-100">
             <div class="row h-100 justify-content-center align-items-center">
                 <div class="col-10 col-md-8 col-lg-6">
 
-                    <form class="form" method="post">
+                    <form class="custom-form" method="post">
 
                         <!-- Esto proporciona protección contra Cross Site Request Forgeries -->
                         {% csrf_token %}
@@ -26,14 +29,14 @@
                             <div class="row mt-2">
                                 <div class="col">
                                     <div class="btn-group-toggle" data-toggle="buttons">
-                                        <label class="btn btn-game active w-100">
+                                        <label class="btn btn-gametype active w-100">
                                             <input type="radio" name="private" value="False" checked>Pública
                                         </label>
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="btn-group-toggle" data-toggle="buttons">
-                                        <label class="btn btn-game active w-100">
+                                        <label class="btn btn-gametype active w-100">
                                             <input type="radio" name="private" value="True">Privada
                                         </label>
                                     </div>
@@ -44,9 +47,9 @@
                         <div class="form-group mt-4">
                             <label for="owner_side">Selecciona con qué piezas deseas jugar:</label>
                             <div class="d-flex justify-content-center mt-2">
-                                <button type="submit" class="btn btn-pieces black" id="owner_side" name="owner_side" value="black"></button>
-                                <button type="submit" class="btn btn-pieces random" id="owner_side" name="owner_side" value="random"></button>
-                                <button type="submit" class="btn btn-pieces white" id="owner_side" name="owner_side" value="white"></button>
+                                <button type="submit" class="btn btn-pieces black" name="owner_side" id="owner_side" value="black"></button>
+                                <button type="submit" class="btn btn-pieces random" name="owner_side" id="owner_side" value="random"></button>
+                                <button type="submit" class="btn btn-pieces white" name="owner_side" id="owner_side" value="white"></button>
                             </div>
                         </div>
 

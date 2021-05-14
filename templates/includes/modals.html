@@ -3,7 +3,7 @@
 
     <div class="modal-dialog modal-dialog-centered">
 
-        <div class="modal-content">
+        <div class="modal-content custom-modal-content">
 
             <div class="modal-header">
                 <h5 class="modal-title" id="connectionModal_title"></h5>
@@ -27,7 +27,7 @@
 
     <div class="modal-dialog modal-dialog-centered">
 
-        <div class="modal-content">
+        <div class="modal-content custom-modal-content">
 
             <div class="modal-header">
                 <h5 class="modal-title" id="statusModal_title"></h5>
@@ -51,7 +51,7 @@
 
     <div class="modal-dialog modal-dialog-centered">
 
-        <div class="modal-content">
+        <div class="modal-content custom-modal-content">
 
             <div class="modal-header">
                 <h5 class="modal-title">¿Estás seguro de que quieres ofrecer tablas?</h5>
@@ -76,7 +76,7 @@
 
     <div class="modal-dialog modal-dialog-centered">
 
-        <div class="modal-content">
+        <div class="modal-content custom-modal-content">
 
             <div class="modal-header">
                 <h5 class="modal-title">Esperando respuesta...</h5>
@@ -96,7 +96,7 @@
 
     <div class="modal-dialog modal-dialog-centered">
 
-        <div class="modal-content">
+        <div class="modal-content custom-modal-content">
 
             <div class="modal-header">
                 <h5 class="modal-title">Tu oponente ha ofrecido tablas</h5>
@@ -121,7 +121,7 @@
 
     <div class="modal-dialog modal-dialog-centered">
 
-        <div class="modal-content">
+        <div class="modal-content custom-modal-content">
 
             <div class="modal-header">
                 <h5 class="modal-title">¿Estás seguro de que quieres abandonar la partida?</h5>
@@ -146,7 +146,7 @@
 
     <div class="modal-dialog modal-dialog-centered">
 
-        <div class="modal-content">
+        <div class="modal-content custom-modal-content">
 
             <div class="modal-header">
                 <h5 class="modal-title">Tu oponente ha abandonado la sala</h5>
@@ -167,12 +167,12 @@
 
     <div class="modal-dialog modal-dialog-centered">
 
-        <div class="modal-content">
+        <div class="modal-content custom-modal-content">
             
             <div class="modal-header">
                 <h5 class="modal-title">Personalización</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                <button class="close" type="button" data-dismiss="modal">
+                    <span style="color: white;">&times;</span>
                 </button>
             </div>
 
@@ -181,9 +181,9 @@
                 <div class="modal-body">
 
                     <div class="form-group">
-                        <label for="piece_style">Selecciona un estilo para las piezas:</label>
-                        <select class="custom-select" id="piece_style">
-                            <option value="cburnett" selected>Predeterminado</option>
+                        <label for="piece_theme">Selecciona un estilo para las piezas:</label>
+                        <select class="custom-select custom-modal-select" id="piece_theme">
+                            <option value="cburnett">Predeterminado</option>
                             <option value="icpieces">Tema 1 </option>
                             <option value="uscf">Tema 2</option>
                             <option value="alpha">Tema 3</option>
@@ -195,12 +195,12 @@
 
                     <div class="form-group">
                         <label for="board_theme">Selecciona un estilo para el tablero:</label>
-                        <select class="custom-select" id="board_theme">
-                            <option value="default" selected>Predeterminado</option>
+                        <select class="custom-select custom-modal-select" id="board_theme">
+                            <option value="default">Predeterminado</option>
                             <option value="green">Verde</option>
                             <option value="blue">Azul</option>
-                            <option value="Ocre">Ocre</option>
-                            <option value="Verde">Verde y Amarillo</option>
+                            <option value="ocher">Ocre</option>
+                            <option value="green-yellow">Verde y amarillo</option>
                         </select>
                     </div>
 

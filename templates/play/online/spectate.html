@@ -7,17 +7,8 @@
     <!-- Esto es para cargar un tag de Django -->
     {% load static %}
 
-    <!-- CSS de Chessboard para el tablero  -->
-    <link rel="stylesheet" href="{% static 'css/chessboard-1.0.0.css' %}">
-
-    <!-- Script de Chessboard para el funcionamiento del tablero -->
-    <script src="{% static 'js/chessboard-1.0.0.js' %}"></script>
-
     <!-- Script de Chess para el funcionamiento de la interfaz -->
     <script src="{% static 'js/chess.js' %}"></script>
-
-    <!-- Script propio para permitire la personalización del tablero -->
-    <script src="{% static 'js/customization.js' %}" async></script>
 
     <!-- Script propio para el funcionamiento de la página -->
     <script src="{% static 'js/spectate.js' %}" async></script>
@@ -32,70 +23,73 @@
     <!-- Modales -->
     {% include "includes/modals.html" %}
     
-    <main>
-
+    <!-- Contenido -->
+    <main class="bg-img pt-6 vh-100">
         <div class="container">
 
-            <div class="row">
+            <!-- Interfaz de juego -->
+            <div class="game-ui">
 
-                <div class="col-md-7">
+                <!-- Partida -->
+                <div class="game-wrapper">
 
                     <!-- Jugador de negras -->
-                    <div id="opponent_name">
+                    <div class="text-center" id="opponent_name">
                         {% if owner_side == "white" %}
                             {% if opponent == None %}
-                                <h5>Esperando oponente...</h5>
+                                <h4>Esperando oponente...</h5>
                             {% else %}
-                                <h5>{{ opponent }}</h5>
+                                <h4>{{ opponent }}</h5>
                             {% endif %}
                         {% else %}
-                            <h5>{{ owner }}</h5>
+                            <h4>{{ owner }}</h5>
                         {% endif %}
                     </div>
-
-                    <!-- Tablero -->
                     <hr class="mt-1 mb-2">
-                    <div id="spectatorBoard" style="width: 100%;"></div>
-                    <hr class="mt-2 mb-1">
+                    
+                    <!-- Tablero -->
+                    <div class="game-board-wrapper">
+                        <div class="game-board" id="spectatorBoard"></div>
+                    </div>
 
                     <!-- Jugador de blancas -->
+                    <hr class="mt-2 mb-1">
                     {% if owner_side == "white" %}
-                        <h5>{{ owner }}</h5>
+                        <h4 class="text-center">{{ owner }}</h5>
                     {% else %}
-                        <h5>{{ opponent }}</h5>
+                        <h4 class="text-center">{{ opponent }}</h5>
                     {% endif %}
-
+                
                 </div>
     
-                <div class="col-md-5">
-    
-                    <div class="card" style="height: 100%; width: 100%;">
-    
-                        <div class="card-header">
-                            Espectando partida multijugador
-                        </div>
-    
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item" id="status"></li>
-                            <li class="list-group-item" style="height: 100%;">
-                                <strong>PGN:</strong><div id="pgn"></div>
-                            </li>
-                        </ul>
+                <!-- Información de la partida -->
+                <div class="game-info">
+                    
+                    <!-- Cabecera -->
+                    <div class="game-info-header">Espectando partida multijugador</div>
 
-                        <div class="card-body d-flex">
+                    <!-- Status -->
+                    <div class="game-info-status" id="status"></div>
 
-                            <div class="align-self-end" style="width: 100%;">
+                    <!-- PGN -->
+                    <div class="game-info-pgn" id="pgn"></div>
 
-                                
+                    <!-- Botones -->
+                    <div class="game-info-options">
+                        <div class="align-self-end w-100">
 
+                            <!-- Opciones -->
+                            <div class="btn-group" style="width: 100%;">
+                                <button class="btn game-btn" id="return">Volver al lobby</button>
                             </div>
-    
+
                         </div>
                     </div>
+
                 </div>
+
             </div>
         </div>
-
-    </main>
+    </main>    
 
 {% endblock %}

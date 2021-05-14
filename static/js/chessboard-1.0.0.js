@@ -23,6 +23,55 @@ var CSS = {}
   CSS['square'] = 'square-55d63'
   CSS['white'] = 'white-1e1d7'
 
+
+
+  
+// ----------------------- Personalización -------------------- //
+
+// Aplica la personalización de las piezas
+function piece_theme (piece) {
+  theme = sessionStorage.getItem("piece_theme")
+  if (theme == null) {
+    theme = "cburnett"
+  }
+  return '/static/img/chesspieces/'+ theme + '/'+ piece + '.svg'
+}
+
+// Obtiene el tema del tablero seleccionado por el usuario
+var board_theme = sessionStorage.getItem("board_theme")
+
+// Si no hay ninguno, usa el predeterminado
+if (board_theme == null) {
+  board_theme = "default"
+}
+
+// Aplica la personalización del tablero
+if (board_theme == "default") {
+  CSS['black'] = 'boardtheme1black';
+  CSS['white'] = 'boardtheme1white';
+} 
+else if (board_theme == "green") {
+  CSS['black'] = 'boardtheme2black';
+  CSS['white'] = 'boardtheme2white';
+}
+else if (board_theme == "blue") {
+  CSS['black'] = 'boardtheme3black';
+  CSS['white'] = 'boardtheme3white';
+}
+else if (board_theme == "ocher") {
+  CSS['black'] = 'boardtheme4black';
+  CSS['white'] = 'boardtheme4white';
+}
+else if (board_theme == "green-yellow") {
+  CSS['black'] = 'boardtheme5black';
+  CSS['white'] = 'boardtheme5white';
+}
+
+//////////////////////////////////////////////////////////////////
+
+
+
+
 // start anonymous scope
 ;(function () {
   'use strict'
