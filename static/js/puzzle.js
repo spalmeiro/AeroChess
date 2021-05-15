@@ -40,24 +40,24 @@ function reproSon (name) {
 
 // Marca la casilla de la pieza seleccionada para mover
 function showStart (square) {
-    var $square = $('#computerBoard .square-' + square)
+    var $square = $('#puzzleBoard .square-' + square)
     $square.addClass("showStart")
 }
 
 // Marca las casillas disponibles para mover
 function showMoves (square) {
-    var $square = $('#computerBoard .square-' + square)
+    var $square = $('#puzzleBoard .square-' + square)
     $square.addClass("showMoves")
 }
 
 // Desmarca la casilla de la pieza seleccionada para mover
 function removeshowStart () {
-    $('#computerBoard .square-55d63').removeClass('showStart')
+    $('#puzzleBoard .square-55d63').removeClass('showStart')
 }
 
 // Desmarca las casillas disponibles para mover
 function removeshowMoves () {
-    $('#computerBoard .square-55d63').removeClass('showMoves')
+    $('#puzzleBoard .square-55d63').removeClass('showMoves')
 }
 
 // Función que marca los posibles movimientos cuando el ratón se sitúa sobre una pieza
