@@ -104,7 +104,7 @@ def game(request, game_id):
     # Si la partida ya ha acabado, vuelve
     if game.status == 3:
         messages.add_message(request, messages.ERROR, "Esta partida ya ha terminado. ¡Empieza otra!")
-        return HttpResponseRedirect(reverse("/play/online/lobby"))
+        return redirect("/play/online/lobby")
     
     # Si el usuario no es el creador de la partida
     if request.user != game.owner:
