@@ -40,21 +40,15 @@ function reproSon (name) {
     audio.play();
 }
 
-// Función que marca las casillas disponibles para mover
+// Marca las casillas disponibles para mover
 function greySquare (square) {
-    var $square = $('#puzzleBoard .square-' + square)
-    
-    var background = whiteSquareGrey
-    if ($square.hasClass('black-3c85d')) {
-        background = blackSquareGrey
-    }
-    
-    $square.css('background', background)
+    var $square = $('#computerBoard .square-' + square)
+    $square.addClass("showMoves")
 }
 
-// Función que desmarca las casillas disponibles para mover
+// Desmarca las casillas disponibles para mover
 function removeGreySquares () {
-    $('#puzzleBoard .square-55d63').css('background', '')
+    $('#computerBoard .square-55d63').removeClass('showMoves')
 }
 
 // Función que marca los posibles movimientos cuando el ratón se sitúa sobre una pieza

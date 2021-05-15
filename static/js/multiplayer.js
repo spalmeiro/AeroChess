@@ -55,19 +55,13 @@ function reproSon (name) {
 
 // Marca las casillas disponibles para mover
 function greySquare (square) {
-    var $square = $('#multiplayerBoard .square-' + square)
-    
-    var background = whiteSquareGrey
-    if ($square.hasClass('black-3c85d')) {
-        background = blackSquareGrey
-    }
-    
-    $square.css('background', background)
+    var $square = $('#computerBoard .square-' + square)
+    $square.addClass("showMoves")
 }
 
 // Desmarca las casillas disponibles para mover
 function removeGreySquares () {
-    $('#multiplayerBoard .square-55d63').css('background', '')
+    $('#computerBoard .square-55d63').removeClass('showMoves')
 }
 
 // Marca los posibles movimientos cuando el ratón se sitúa sobre una pieza
