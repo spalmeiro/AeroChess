@@ -20,8 +20,6 @@ var $nodes = $('#nodes')
 var $knps = $('#knps')
 var squareClass = 'square-55d63' // Se usa para destacar el último movimiento
 var squareToHighlight = null // Se usa para destacar el último movimiento
-var whiteSquareGrey = '#a9a9a9' // Determina el color con el que se destaca una casilla blanca
-var blackSquareGrey = '#696969' // Determina el color con el que se destaca una casilla negra
 var orientation = "white" // Siempre se entra jugando con blancas
 
 
@@ -39,14 +37,25 @@ function reproSon (name) {
     audio.play();
 }
 
+// Marca la casilla de la pieza seleccionada para mover
+function showStart (square) {
+    var $square = $('#computerBoard .square-' + square)
+    $square.addClass("showStart")
+}
+
 // Marca las casillas disponibles para mover
-function greySquare (square) {
+function showMoves (square) {
     var $square = $('#computerBoard .square-' + square)
     $square.addClass("showMoves")
 }
 
+// Desmarca la casilla de la pieza seleccionada para mover
+function removeshowStart () {
+    $('#computerBoard .square-55d63').removeClass('showStart')
+}
+
 // Desmarca las casillas disponibles para mover
-function removeGreySquares () {
+function removeshowMoves () {
     $('#computerBoard .square-55d63').removeClass('showMoves')
 }
 
@@ -69,17 +78,18 @@ function onMouseoverSquare (square, piece) {
     if (moves.length === 0) return
     
     // Destaca la casilla en la que se sitúa el ratón
-    greySquare(square)
+    showStart(square)
     
     // Destaca las casillas donde se puede mover la pieza
     for (var i = 0; i < moves.length; i++) {
-        greySquare(moves[i].to)
+        showMoves(moves[i].to)
     }
 }
 
 // Desmarca los posibles movimientos cuando el ratón ya no está situado sobre esa pieza
 function onMouseoutSquare (square, piece) {
-    removeGreySquares()
+    removeshowStart()
+    removeshowMoves()
 }
 
 // Desmarca el último movimiento realizado
@@ -124,7 +134,7 @@ function onDrop (source, target) {
     updateStatus();
 }
 
-// Cntrola qué ocurre cuando se acaba un movmiento (en concreto lo destaca)
+// Controla qué ocurre cuando se acaba un movmiento (en concreto lo destaca)
 function onMoveEnd () {
     $board.find('.square-' + squareToHighlight).addClass('highlight')
 }
@@ -152,13 +162,13 @@ function marcador(x) {
 
     current_progress=(puntuacion/20)+50
 
-    $("#white-progress").css("height", current_progress + "%");       
-
-    // current_progress2=(100-current_progress)
-
-    // $("#dynamic2").css("width", current_progress2 + "%").text((current_progress2) + "% Victoria de Negras");   
-    
+    $("#white-progress").css("height", current_progress + "%");    
 }
+
+// Elimina el header del pgn
+function remove_pgn_header(pgn) {
+    return pgn.split("<br />").slice(3,100).join("<br />")
+} 
 
 // Actualiza los datos sobre el estado de la partida
 function updateStatus () {
@@ -206,6 +216,7 @@ function updateStatus () {
     // Se actualiza el estado de la partida, el FEN y el PGN
     $status.html(status)
     $fen.val(game.fen())
+    new_pgn = remove_pgn_header(game.pgn({ max_width: 5, newline_char: "<br />"}))
     $pgn.html(game.pgn({ max_width: 5, newline_char: "<br />"}))
 }
 
@@ -257,6 +268,10 @@ function getCookie(name) {
 const csrftoken = getCookie('csrftoken');
 
 // Envia información sobre la partida al servidor y devuelve el mejor movimiento calculado por Stockfish
+r = 1
+var scores = [];
+scores[0] = 0
+
 function make_move() {
 
     $.ajax({
@@ -271,6 +286,7 @@ function make_move() {
             xhr.setRequestHeader("X-CSRFToken", csrftoken);
         },
         success: function (data) {
+
             // Carga el nuevo FEN en el tablero
             game.move(data.best_move, { sloppy: true })
 
@@ -293,7 +309,8 @@ function make_move() {
 
             // Actualiza la barra de estado de la partida
             marcador(data.score);                
-
+            scores[r]=data.score
+            r=r+1
             reproSon("ficha.wav");
 
             // Actualiza el estado de la partida
@@ -339,6 +356,8 @@ $('#take_back').on('click', function() {
     // Retrocede un movimiento
     game.undo();
     game.undo();
+    r=r-2
+    marcador(scores[r])
     // Actualiza el estado del tablero
     board.position(game.fen());
     reproSon("click2.wav");
