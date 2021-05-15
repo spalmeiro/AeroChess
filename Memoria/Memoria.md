@@ -89,27 +89,28 @@ Cuando queráis actualizar el repositorio online con los cambios que habéis hec
 ```
 
 # Página Final
-Página principal del sitio web.
+
+## Página principal del sitio web.
+<span></span>
 <p align="center">
-        <img src="Memoria/img/f1.png" alt="drawing " width="drawing" >
+        <img src="img/f1.png" alt="drawing " width="drawing" >
 </p>
-Pensada para abarcar las distintas opciones de juego: modo contra el ordenador, puzzle y multijugador.
-La zona de Lobby muestra las partidas activas y, además, permite a los usuarios unirse a las partidas disponibles. Si lo tuyo no es el ajedrez, o necesitas perfeccionar tu destreza en este deporte, no dudes en usar el modo espectador para visualizar partidas en vivo.
+<p>Pensada para abarcar las distintas opciones de juego: modo contra el ordenador, puzzle y multijugador.
+Personaliza las fichas y el tablero a tu gusto y desmuestra tu destreza.</p>  
+<p>La zona de Lobby muestra las partidas activas y, además, permite a los usuarios unirse a las partidas disponibles. Si lo tuyo no es el ajedrez, o necesitas perfeccionar tu destreza en este deporte, no dudes en usar el modo espectador para visualizar partidas en vivo.</p>
 
-
-Modo contra el ordenador
+## Modo contra el ordenador
 <p align="center">
-        <img src="Memoria/img/f3.png" alt="drawing " width="drawing" >
+        <img src="img/f2.png" alt="drawing " width="drawing" >
 </p>
-Nada mejor para aprender que practicar con los distintos niveles de dificultad del ordenador. 
-Dividida en dos partes, la carta de la derecha permite al jugador visualizar los movimientos realizados hasta el momento, así como usar los distintos botones típicos para realizar movimientos, retroceder, rotar tablero o crear una partida nueva.
-La opción FEN permite elegir crear una situación de partida.
-El motor Stokfish será un verdadero quebradero de cabeza para ti.
+<p>Nada mejor para aprender que practicar con los distintos niveles de dificultad del ordenador.</p>
+<p>Dividida en dos partes, la carta de la derecha permite al jugador visualizar los movimientos realizados hasta el momento, así como usar los distintos botones típicos para realizar movimientos, retroceder, rotar tablero o crear una partida nueva.
+La opción FEN permite crear una situación de partida.
+El motor Stokfish será un verdadero quebradero de cabeza para ti. </p>
 
-Modo puzzle
+## Modo puzzle
 <p align="center">
-        <img src="Memoria/img/f5.png" alt="drawing " width="drawing" >
+        <img src="img/f3.png" alt="drawing " width="drawing" >
 </p>
 
-El modo puzzle permite poner en jaque situaciones reales de partida. Demuestra que eres capaz de vencer a la máquina en pocos movimientos. A pesar de todo, si te atrancas, ¡nunca viene mal echar un vistazo a la solución!
-
+<p>El modo puzzle permite poner en jaque situaciones reales de partida. Demuestra que eres capaz de vencer a la máquina en pocos movimientos. A pesar de todo, si te atrancas, ¡nunca viene mal echar un vistazo a la solución!</p>
