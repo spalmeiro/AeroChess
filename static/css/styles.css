@@ -677,4 +677,12 @@ hr {
     background-color:#86A666;
     color:#FFFFDD;
 }
+
+.fa-check {
+    color: rgb(4, 179, 4);
+}
+
+.fa-times{
+    color: red;
+}
 /* -------------------------------------------------- */
