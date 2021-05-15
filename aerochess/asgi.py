@@ -7,6 +7,7 @@ For more information on this file, see
 https://docs.djangoproject.com/en/3.1/howto/deployment/asgi/
 """
 
+import django
 import os
 
 from channels.auth import AuthMiddlewareStack
@@ -17,6 +18,8 @@ import play.routing
 import puzzles.routing
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'aerochess.settings')
+
+django.setup()
 
 application = ProtocolTypeRouter({
     'http': get_asgi_application(),
