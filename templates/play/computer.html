@@ -42,7 +42,7 @@
                         <div class="game-bar">
                             <div class="white-progress progress-bar-animated" id="white-progress"></div>
                         </div>
-                        <div class="game-board-computer" id="computerBoard"></div>
+                        <div class="game-board-computer" id="computerBoard" style="touch-action: none"></div>
                     </div>
 
                     <!-- Usuario -->
@@ -77,7 +77,6 @@
 
                                 <!-- Nivel de dificultad -->
                                 <select class="form-control game-form-control mr-2" id="level" title="Nivel de Stockfish">
-                                    <option class="select-title text-center" disabled>Nivel de Stockfish</option>
                                     <option value="0">Nivel 0</option>
                                     <option value="2">Nivel 1</option>
                                     <option value="4">Nivel 2</option>
@@ -126,45 +125,7 @@
                                 <button id="flip_board" class="btn game-btn">Rotar tablero</button>
                                 <button id="take_back" class="btn game-btn">Movimiento anterior</button>
                             </div>
-  <!-- Modal -->
-
-                            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-
-                                <div class="modal-dialog modal-dialog-centered" role="document">
-
-                                <div class="modal-content custom-modal-content">
-
-                                    <div class="modal-header">
-
-                                    <h5 class="modal-title" id="exampleModalLongTitle">Nueva Partida</h5>
-
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-
-                                        <span aria-hidden="true">&times;</span>
-
-                                    </button>
-
-                                    </div>
-
-                                    <div class="modal-body">
-
-                                    ¿Esta seguro de querer iniciar una nueva partida?
-
-                                    </div>
-
-                                    <div class="modal-footer">
-
-                                    <button id="new_game"  type="button" class="btn btn-success " data-dismiss="modal">SI</button>
-
-                                    <button                type="button" class="btn btn-secondary" data-dismiss="modal">NO</button>
-
-                                    </div>
-
-                                </div>
-
-                                </div>
-
-                            </div>                                                    
+                                                    
                         </div>
                     </div>
 

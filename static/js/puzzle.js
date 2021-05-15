@@ -21,8 +21,6 @@ var $nodes = $('#nodes')
 var $knps = $('#knps')
 var squareClass = 'square-55d63' // Se usa para destacar el último movimiento
 var squareToHighlight = null // Se usa para destacar el último movimiento
-var whiteSquareGrey = '#a9a9a9' // Determina el color con el que se destaca una casilla blanca
-var blackSquareGrey = '#696969' // Determina el color con el que se destaca una casilla negra
 var orientation = null
 
 
@@ -40,21 +38,26 @@ function reproSon (name) {
     audio.play();
 }
 
-// Función que marca las casillas disponibles para mover
-function greySquare (square) {
-    var $square = $('#puzzleBoard .square-' + square)
-    
-    var background = whiteSquareGrey
-    if ($square.hasClass('black-3c85d')) {
-        background = blackSquareGrey
-    }
-    
-    $square.css('background', background)
+// Marca la casilla de la pieza seleccionada para mover
+function showStart (square) {
+    var $square = $('#computerBoard .square-' + square)
+    $square.addClass("showStart")
 }
 
-// Función que desmarca las casillas disponibles para mover
-function removeGreySquares () {
-    $('#puzzleBoard .square-55d63').css('background', '')
+// Marca las casillas disponibles para mover
+function showMoves (square) {
+    var $square = $('#computerBoard .square-' + square)
+    $square.addClass("showMoves")
+}
+
+// Desmarca la casilla de la pieza seleccionada para mover
+function removeshowStart () {
+    $('#computerBoard .square-55d63').removeClass('showStart')
+}
+
+// Desmarca las casillas disponibles para mover
+function removeshowMoves () {
+    $('#computerBoard .square-55d63').removeClass('showMoves')
 }
 
 // Función que marca los posibles movimientos cuando el ratón se sitúa sobre una pieza
@@ -76,17 +79,18 @@ function onMouseoverSquare (square, piece) {
     if (moves.length === 0) return
     
     // Destaca la casilla en la que se sitúa el ratón
-    greySquare(square)
+    showStart(square)
     
     // Destaca las casillas donde se puede mover la pieza
     for (var i = 0; i < moves.length; i++) {
-        greySquare(moves[i].to)
+        showMoves(moves[i].to)
     }
 }
 
 // Función que desmarca los posibles movimientos cuando el ratón ya no está situado sobre esa pieza
 function onMouseoutSquare (square, piece) {
-    removeGreySquares()
+    removeshowStart()
+    removeshowMoves()
 }
 
 // Función que desmarca el último movimiento realizado
@@ -164,7 +168,6 @@ function onSnapEnd () {
 
 // Elimina el header del pgn
 function remove_pgn_header(pgn) {
-
     return pgn.split("<br />").slice(3,100).join("<br />")
 } 
 

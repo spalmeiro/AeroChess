@@ -536,15 +536,15 @@ hr {
 
 .game-form-control:hover {
     color: #ffffff;
-    background-color:rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.3);
     border-color: #ffffff;
     outline: 0;
     box-shadow: 0 0 0 0.15rem rgb(255, 255, 255);
 }
 
-.game-form-control:focus, .game-form-control.focus {
+.game-form-control:focus {
     color: #ffffff;
-    background-color:rgba(255, 255, 255, 0.3);
+    background-color: rgb(85, 85, 85);
     border-color: #ffffff;
     outline: 0;
     box-shadow: 0 0 0 0.15rem rgb(255, 255, 255);
@@ -605,7 +605,7 @@ hr {
 /* --- Destaca los últimos movimientos realizados --- */
 
 .highlight {
-    box-shadow: inset 0 0 3px 3px yellow;
+    box-shadow: inset 0 0 3px 3px yellow !important;
 }
 
 /* -------------------------------------------------- */
@@ -613,6 +613,11 @@ hr {
 
 
 /* -------- Destaca los posibles movimientos -------- */
+
+.showStart {
+    /* background: radial-gradient(rgba(20,85,30,0.5) 19%, rgba(0,0,0,0) 20%); */
+    box-shadow: inset 0 0 3px 3px rgba(20,85,30,0.5);
+}
 
 .showMoves {
     background: radial-gradient(rgba(20,85,30,0.5) 19%, rgba(0,0,0,0) 20%);

@@ -20,8 +20,6 @@ var $pgn = $('#pgn') // PGN
 // var $knps = $('#knps')
 var squareClass = 'square-55d63' // Se usa para pintar los cuadros de los ultimos movimientos
 var squareToHighlight = null // Se usa para pintar los cuadros de los ultimos movimientos
-var whiteSquareGrey = '#a9a9a9' // Determina el color con el que se destaca una casilla blanca
-var blackSquareGrey = '#696969' // Determina el color con el que se destaca una casilla negra
 var orientation = null
 
 // Variables que definen el título y contenido de los modales

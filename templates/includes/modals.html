@@ -1,8 +1,31 @@
+<!-- Modal para confirmar que deseas iniciar una nueva partida en el modo contra el ordenador -->
+<div class="modal fade" id="exampleModalCenter" tabindex="0">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content custom-modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Nueva Partida</h5>
+                <button class="close" type="button" data-dismiss="modal">
+                    <span style="color: white;">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <p>¿Estás seguro de querer iniciar una nueva partida?</p>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-secondary mr-auto" type="button" role="button" data-dismiss="modal">Cancelar</button>
+                <button class="btn btn-success" id="new_game" type="button" role="button" data-dismiss="modal">Sí, estoy seguro</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
 <!-- Modal genérico para los distintos mensajes sobre el estado de la conexión -->
 <div class="modal fade" id="connectionModal" tabindex="0">
-
     <div class="modal-dialog modal-dialog-centered">
-
         <div class="modal-content custom-modal-content">
 
             <div class="modal-header">
@@ -24,9 +47,7 @@
 
 <!-- Modal genérico para los distintos mensajes sobre el estado de la partida -->
 <div class="modal fade" id="statusModal" tabindex="0">
-
     <div class="modal-dialog modal-dialog-centered">
-
         <div class="modal-content custom-modal-content">
 
             <div class="modal-header">
@@ -48,9 +69,7 @@
 
 <!-- Modal para ofrecer tablas -->
 <div class="modal fade" id="drawOfferModal" tabindex="0">
-
     <div class="modal-dialog modal-dialog-centered">
-
         <div class="modal-content custom-modal-content">
 
             <div class="modal-header">
@@ -73,9 +92,7 @@
 
 <!-- Modal para esperar el resultado de la oferta de tablas -->
 <div class="modal fade" id="drawWaitModal" tabindex="0">
-
     <div class="modal-dialog modal-dialog-centered">
-
         <div class="modal-content custom-modal-content">
 
             <div class="modal-header">
@@ -93,9 +110,7 @@
 
 <!-- Modal para responder a la oferta de tablas -->
 <div class="modal fade" id="drawAcceptModal" tabindex="0">
-
     <div class="modal-dialog modal-dialog-centered">
-
         <div class="modal-content custom-modal-content">
 
             <div class="modal-header">
@@ -118,9 +133,7 @@
 
 <!-- Modal para abandonar la partida -->
 <div class="modal fade" id="resignModal" tabindex="0">
-
     <div class="modal-dialog modal-dialog-centered">
-
         <div class="modal-content custom-modal-content">
 
             <div class="modal-header">
@@ -143,9 +156,7 @@
 
 <!-- Modal de desconexión del oponente -->
 <div class="modal fade" id="disconnectionModal" tabindex="0">
-
     <div class="modal-dialog modal-dialog-centered">
-
         <div class="modal-content custom-modal-content">
 
             <div class="modal-header">
@@ -164,9 +175,7 @@
 
 <!-- Modal para la personalización de las piezas y el tablero -->
 <div class="modal fade" id="personalizacion" data-backdrop="static" tabindex="0">
-
     <div class="modal-dialog modal-dialog-centered">
-
         <div class="modal-content custom-modal-content">
             
             <div class="modal-header">
@@ -216,7 +225,5 @@
             </form>
             
         </div>
-
     </div>
-
 </div>
