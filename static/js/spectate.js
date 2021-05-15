@@ -359,7 +359,7 @@ socket.onmessage = function (message) {
         game_over = true
         $status.html(status)
 
-        $statusModalTitle.html("Victoria")
+        $statusModalTitle.html("Fin de la partida")
         $statusModalBody.html("Tu oponente ha abandonado la partida. ¡Has ganado!")
         $('#statusModal').modal({
             backdrop: 'static',
