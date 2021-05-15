@@ -14,7 +14,14 @@ from stockfish import Stockfish
 
 import random
 
-# Rutas hacia stockfish.exe
+import os
+import stat
+
+# Permisos para ejecutar stockfish
+st = os.stat("./stockfish/stockfish")
+os.chmod("./stockfish/stockfish", st.st_mode | stat.S_IEXEC)
+
+# Rutas hacia stockfish
 stockfish = Stockfish("./stockfish/stockfish")
 engine = chess.engine.SimpleEngine.popen_uci("./stockfish/stockfish")
 
