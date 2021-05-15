@@ -4,36 +4,60 @@
 
 {% block body %}
 
-    <main>
+    <!-- Barra de navegación -->
+    {% include "includes/navbar.html" %}
+    
+    <!-- Modales -->
+    {% include "includes/modals.html" %}
 
-        <div class="container">
+    <main class="bg-img">
+        <div class="container h-100">
+            <div class="row h-100 justify-content-center align-items-center">
+                <div class="col-10 col-md-8 col-lg-6">
 
-            <h2 class="text-center">Crear partida online</h2>
-            <hr>
+                    <form class="custom-form" method="post">
 
-            <form class="form-create" method="post">
+                        <!-- Esto proporciona protección contra Cross Site Request Forgeries -->
+                        {% csrf_token %}
 
-                <!-- Esto proporciona protección contra Cross Site Request Forgeries -->
-                {% csrf_token %}
+                        <h1 class="text-center">Crear partida online</h1>
+                        <hr>
 
-                <div class="form-group">
-                    <label class="form-label" for="opponent">Oponente (si se deja en blanco será una partida pública que aparecerá en el lobby):</label>
-                    <input class="form-control" type="text" name="opponent" id="opponent" placeholder="Oponente" autofocus>
+                        <!-- Elección del tipo de partida -->
+                        <div class="form-group">
+                            <label class="form-label" for="opponent">Elige el tipo de partida:</label>
+                            <div class="row mt-2">
+                                <div class="col">
+                                    <div class="btn-group-toggle" data-toggle="buttons">
+                                        <label class="btn btn-gametype active w-100">
+                                            <input type="radio" name="private" value="False" checked>Pública
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="btn-group-toggle" data-toggle="buttons">
+                                        <label class="btn btn-gametype active w-100">
+                                            <input type="radio" name="private" value="True">Privada
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group mt-4">
+                            <label for="owner_side">Selecciona con qué piezas deseas jugar:</label>
+                            <div class="d-flex justify-content-center mt-2">
+                                <button type="submit" class="btn btn-pieces black" name="owner_side" id="owner_side" value="black"></button>
+                                <button type="submit" class="btn btn-pieces random" name="owner_side" id="owner_side" value="random"></button>
+                                <button type="submit" class="btn btn-pieces white" name="owner_side" id="owner_side" value="white"></button>
+                            </div>
+                        </div>
+
+                    </form>
+
                 </div>
-                <!-- AÑADO CAJA DE CONFIGURACIÓN PARA EL MODO CREAR PARTIDA -->
-                <div class="color-box">                                            
-                    <label for="owner_side">Selecciona con qué piezas deseas jugar:</label>
-                    <div class="selection-box">
-                        <button type="button" value="white" class="btn btn-dark"><i class="fas fa-chess-queen fa-3x"></i></button>
-                        <button type="button" value="black" class="btn btn-dark"><i class="fas fa-chess-knight fa-3x"></i></button>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Crear partida</button>    
-                </div>
-                
-            </form>
-S
+            </div>
         </div>
-
     </main>
 
 {% endblock %}

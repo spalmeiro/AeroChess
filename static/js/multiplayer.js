@@ -21,12 +21,7 @@ var $pgn = $('#pgn') // PGN
 // var $knps = $('#knps')
 var squareClass = 'square-55d63' // Se usa para pintar los cuadros de los ultimos movimientos
 var squareToHighlight = null // Se usa para pintar los cuadros de los ultimos movimientos
-var whiteSquareGrey = '#a9a9a9' // Determina el color con el que se destaca una casilla blanca
-var blackSquareGrey = '#696969' // Determina el color con el que se destaca una casilla negra
 var orientation = null
-
-// Variables para la personalización
-var $piece_style = $('#piece_style') // Estilo de las piezas
 
 // Variables que definen el título y contenido de los modales
 var $connectionModalTitle = $("#connectionModal_title")
@@ -56,21 +51,26 @@ function reproSon (name) {
     audio.play();
 }
 
-// Marca las casillas disponibles para mover
-function greySquare (square) {
+// Marca la casilla de la pieza seleccionada para mover
+function showStart (square) {
     var $square = $('#multiplayerBoard .square-' + square)
-    
-    var background = whiteSquareGrey
-    if ($square.hasClass('black-3c85d')) {
-        background = blackSquareGrey
-    }
-    
-    $square.css('background', background)
+    $square.addClass("showStart")
+}
+
+// Marca las casillas disponibles para mover
+function showMoves (square) {
+    var $square = $('#multiplayerBoard .square-' + square)
+    $square.addClass("showMoves")
+}
+
+// Desmarca la casilla de la pieza seleccionada para mover
+function removeshowStart () {
+    $('#multiplayerBoard .square-55d63').removeClass('showStart')
 }
 
 // Desmarca las casillas disponibles para mover
-function removeGreySquares () {
-    $('#multiplayerBoard .square-55d63').css('background', '')
+function removeshowMoves () {
+    $('#multiplayerBoard .square-55d63').removeClass('showMoves')
 }
 
 // Marca los posibles movimientos cuando el ratón se sitúa sobre una pieza
@@ -92,17 +92,18 @@ function onMouseoverSquare (square, piece) {
     if (moves.length === 0) return
     
     // Destaca la casilla en la que se sitúa el ratón
-    greySquare(square)
+    showStart(square)
     
     // Destaca las casillas donde se puede mover la pieza
     for (var i = 0; i < moves.length; i++) {
-        greySquare(moves[i].to)
+        showMoves(moves[i].to)
     }
 }
 
 // Desmarca los posibles movimientos cuando el ratón ya no está situado sobre esa pieza
 function onMouseoutSquare (square, piece) {
-    removeGreySquares()
+    removeshowStart()
+    removeshowMoves()
 }
 
 // Desmarca el último movimiento realizado
@@ -299,7 +300,7 @@ socket.onmessage = function (message) {
         // Carga la configuración del tablero
         var config = {
             draggable: true,
-            pieceTheme: style,
+            pieceTheme: piece_theme,
             position: 'start',
             onDragStart: onDragStart,
             onDrop: onDrop,
@@ -328,13 +329,26 @@ socket.onmessage = function (message) {
 
         // Si el oponente no está conectado, espera
         if (data.opponent_online != true) {
-            $connectionModalTitle.html("Oponente desconectado")
-            $connectionModalBody.html("Por favor espera a que tu oponente se conecte a la partida...")
-            $('#connectionModal').modal({
-                backdrop: 'static',
-                keyboard: false
-            })
-            opponent_online = false
+
+            // Distinto modal en función de si la partida es privada o pública
+            if (private == "True") {
+                $connectionModalTitle.html("Partida privada creada")
+                $connectionModalBody.html("Jugarás contra el primer oponente que se conecte al siguiente enlace: " + window.location.href)
+                $('#connectionModal').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                })
+                opponent_online = false
+            }
+            else {
+                $connectionModalTitle.html("Oponente desconectado")
+                $connectionModalBody.html("Por favor espera a que tu oponente se conecte a la partida...")
+                $('#connectionModal').modal({
+                    backdrop: 'static',
+                    keyboard: false
+                })
+                opponent_online = false
+            }
         }
     }
 

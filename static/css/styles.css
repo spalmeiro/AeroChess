@@ -4,6 +4,66 @@
 
 
 
+/* Modificado de Bootstrap */
+hr {
+    border-top: 1px solid #ffffff;
+}
+
+/* Modificado de Bootstrap */
+.pt-6 {
+    padding-top: 6rem;
+}
+
+
+
+/* ------------------- Background ------------------- */
+
+.bg-img {
+    background-color: rgb(0,0,0);
+    background-image: url("../img/background/chessKnight.jpg");
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    overflow-y: auto;
+}
+
+.bg-img2 {
+    background-color: rgb(0,0,0);
+    background-image: linear-gradient(to bottom, rgba(50, 50, 50, 0.8) 0%, rgba(50, 50, 50, 0.8) 100%), url("../img/background/chessKnight.jpg");
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    overflow-y: auto;
+}
+
+/* -------------------------------------------------- */
+
+
+
+/* -------------- Barra de navegación --------------- */
+
+.custom-navbar {
+    background-color: rgb(40, 40, 40);
+    border-bottom: 1px solid black;
+}
+
+.custom-dropdown-menu {
+    color: #ffffff;
+    background-color: rgb(85, 85, 85);
+}
+
+.custom-dropdown-item {
+    color: #ffffff;
+}
+
+/* -------------------------------------------------- */
+
+
+
 /* ----------- Animación de los dropdowns ----------- */
 
 .dropdown-toggle::after {
@@ -22,15 +82,520 @@
 
 
 
-/* ------------- Animación de parpadeo -------------- */
+/* --------------------- Modals --------------------- */
 
-.blink {
-    animation: blinker 1.5s cubic-bezier(.5, 0, 1, 1) infinite alternate;  
+.custom-modal-content {
+    color: #ffffff;
+    background-color: rgba(45, 45, 45);
+    padding-left: 1rem;
+    padding-top: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 1rem;
+    border-color: #ffffff;
+    border-radius: 0.25rem;
+    border-style: solid;
+    border-width: 1px;
 }
 
-@keyframes blinker {  
-    from { opacity: 1; }
-    to { opacity: 0; }
+.custom-modal-select {
+    color: #ffffff;
+    background-color: rgb(85, 85, 85);
+    border-color: #ffffff;
+    border-radius: 0.25rem;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.custom-modal-select:focus {
+    color: #ffffff;
+    border-color: #ffffff;
+    outline: 0;
+    box-shadow: 0 0 0 0.15rem rgb(255, 255, 255);
+}
+
+/* -------------------------------------------------- */
+
+
+
+/* --------------------- Footer --------------------- */
+
+.custom-footer-header {
+    color: #ffffff;
+    background-color: rgb(40, 40, 40) !important;
+}
+
+.custom-footer-body {
+    color: #ffffff;
+    background-color: rgb(30, 30, 30) !important;
+}
+
+.custom-text-footer {
+    color: #ffffff;
+}
+
+/* -------------------------------------------------- */
+
+
+
+/* --------------------- Index ---------------------- */
+
+.index-header {
+    padding-bottom: 5rem;
+    color: #ffffff;
+}
+
+.btn-index {
+    width: 100%;
+    height: 20vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    color: #ffffff;
+    border-color: #ffffff;
+    background-color: rgba(100, 100, 100, 0.75);
+    border-width: 1px;
+    border-style: solid;
+}
+
+.btn-index:hover {
+    color: #ffffff;
+    background-color:rgba(140, 140, 140, 0.9);
+    outline: 0;
+    box-shadow: 0 0 0 0.15rem rgb(255, 255, 255);
+}
+
+.btn-index:focus, .btn-index.focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.15rem rgb(255, 255, 255);
+}
+
+/* -------------------------------------------------- */
+
+
+
+/* ---------------------- About ----------------------*/
+
+.custom-about {
+    color: #ffffff;
+}
+
+/* -------------------------------------------------- */
+
+
+
+/* --------------------- Forms ---------------------- */
+
+.custom-form {
+    color: #ffffff;
+    background-color: rgba(50, 50, 50, 0.9);
+    padding-left: 1rem;
+    padding-top: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 1rem;
+    border-color: #ffffff;
+    border-radius: 0.25rem;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.custom-form-control {
+    color: #ffffff;
+    background-color: rgba(100, 100, 100, 0.75);
+}
+
+.custom-form-control:focus {
+    color: #ffffff;
+    background-color: rgba(100, 100, 100, 0.75);
+    border-color: #ffffff;
+    outline: 0;
+    box-shadow: 0 0 0 0.15rem rgb(255, 255, 255);
+}
+
+.custom-form-control::placeholder {
+    color: #ffffff;
+    opacity: 0.5;
+}
+
+.custom-invalid-form {
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+    font-size: 100%;
+    color: #dc3545;
+}
+
+/* -------------------------------------------------- */
+
+
+
+/* ----------- Botones de tipo de partida ----------- */
+
+.btn-gametype {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    background-color: rgba(100, 100, 100, 0.75);
+    border-color: #ffffff;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.btn-gametype:hover {
+    color: #ffffff;
+    background-color:rgba(255, 255, 255, 0.3);
+    outline: 0;
+    box-shadow: 0 0 0 0.15rem rgb(255, 255, 255);
+}
+  
+.btn-gametype:focus, .btn-gametype.focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.15rem rgb(255, 255, 255);
+}
+
+/* -------------------------------------------------- */
+
+
+
+/* ---------- Botones para crear partida ------------ */
+
+.btn-pieces {
+    margin-right: 1rem;
+    margin-left: 1rem;
+    display: block;
+    padding: 0;
+    width: 100px;
+    height: 100px;
+    background-color: rgba(100, 100, 100, 0.75);
+    border-color: #ffffff;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.btn-pieces:hover {
+    color: #fff;
+    background-color:rgba(255, 255, 255, 0.3);
+    outline: 0;
+    box-shadow: 0 0 0 0.15rem rgb(255, 255, 255);
+}
+  
+.btn-pieces:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.15rem rgb(255, 255, 255);
+}
+
+.black {
+    background-image: url("../img/chesspieces/cburnett/bK.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.random {
+    background-image: url("../img/chesspieces/cburnett/bwK.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.white {
+    background-image: url("../img/chesspieces/cburnett/wK.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+/* -------------------------------------------------- */
+
+
+
+/* ---------------- Lista de puzzles ---------------- */
+
+.puzzle-list {
+    color: #ffffff;
+}
+
+.puzzle-list-header {
+    padding: 1.25rem;
+    color: #ffffff;
+    font-size: 150%;
+    text-align: left;
+    background-color: rgb(40, 40, 40);
+    border-color: #ffffff;
+    border-style: solid;
+    border-width: 2px;
+    border-bottom: 1px solid #ffffff;
+}
+
+.puzzle-list-body {
+    padding: 0;
+    margin: 0;
+    color: #ffffff;
+    text-align: left;
+    background-color: rgba(70, 70, 70);
+    border-color: #ffffff;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.puzzle-list-item {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    border: 1px solid #ffffff;
+}
+
+.puzzle-list-item:hover {
+    color: #ffffff;
+    background-color:rgba(255, 255, 255, 0.3);
+    outline: 0;
+    box-shadow: 0 0 0 0.15rem rgb(255, 255, 255);
+}
+
+/* -------------------------------------------------- */
+
+
+
+/* --------------------- Perfil --------------------- */
+
+.profile {
+    color: #ffffff;
+}
+
+/* -------------------------------------------------- */
+
+
+
+/* --------------- Lista de partidas ---------------- */
+
+.lobby {
+    color: #ffffff;
+}
+
+.game-list {
+    margin: 0;
+    border-color: #ffffff;
+    border-radius: 0.25rem;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.game-list-header {
+    color: #ffffff;
+    background-color: rgb(40, 40, 40);
+    border-color: #ffffff;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.game-list-body {
+    color: #ffffff;
+    background-color: rgb(70, 70, 70);
+    border-color: #ffffff;
+    border-style: solid;
+    border-width: 1px;
+}
+
+/* -------------------------------------------------- */
+
+
+
+/* ---------------- Páginas de juego ---------------- */
+
+.game-ui {
+    max-height: 752px;
+    max-width: 1140px;
+    margin-bottom: 5rem;
+    display: flex;
+    flex-direction: row;
+}
+
+.game-wrapper {
+    height: 100%;
+    width: 59%;
+    margin-right: 2%;
+    padding-left: 1rem;
+    padding-top: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 1rem;
+    color: #ffffff;
+    background-color: rgba(50, 50, 50, 0.9);
+    border-color: #ffffff;
+    border-radius: 0.25rem;
+    border-style: ridge;
+    border-width: 2px;
+}
+
+.game-board-wrapper {
+    height: 100%;
+    width: 100%;
+    align-self: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    color: #ffffff;
+}
+
+.game-bar {
+    width: 3%;
+    min-width: 10px;
+    align-self: stretch;
+    margin-right: 1%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background-color: #000000;
+    border-color: #000000;
+    border-radius: 0.25rem;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.white-progress {
+    height: 50%;
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 0 0 0.25rem 0.25rem;
+    transition: height 1s;
+}
+
+.game-board-computer {
+    width: 96%;
+}
+
+.game-board {
+    width: 100%;
+}
+
+.game-info {
+    width: 39%;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    font-size: 100%;
+    color: #ffffff;
+    background-color: rgba(50, 50, 50, 0.9);
+    border-radius: 0.25rem;
+    border-style: ridge;
+    border-width: 2px;
+}
+
+.game-info-header {
+    padding: 1.25rem;
+    height: max-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    color: #ffffff;
+    border-bottom: 1px ridge #ffffff;
+}
+
+.game-info-status {
+    padding: 1.25rem;
+    height: max-content;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    font-size: 100%;
+    color: #ffffff;
+    border-bottom: 1px ridge #ffffff;
+}
+
+.game-info-pgn {
+    padding: 1.25rem;
+    display: flex;
+    justify-content: left;
+    align-items: flex-start;
+    overflow-y: auto;
+    font-size: 100%;
+    color: #ffffff;
+}
+
+.game-info-options {
+    margin-top: auto;
+    padding: 1.25rem;
+    height: auto;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    font-size: 100%;
+    color: #ffffff;
+    border-top: 1px ridge #ffffff;
+}
+
+.game-form-control {
+    color: #ffffff;
+    background-color: rgba(100, 100, 100, 0.75);
+    border-color: #ffffff;
+    border-radius: 0.25rem;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.game-form-control:hover {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-color: #ffffff;
+    outline: 0;
+    box-shadow: 0 0 0 0.15rem rgb(255, 255, 255);
+}
+
+.game-form-control:focus {
+    color: #ffffff;
+    background-color: rgb(85, 85, 85);
+    border-color: #ffffff;
+    outline: 0;
+    box-shadow: 0 0 0 0.15rem rgb(255, 255, 255);
+}
+
+.game-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    background-color: rgba(100, 100, 100, 0.75);
+    border-color: #ffffff;
+    border-radius: 0.25rem;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.game-btn:hover {
+    color: #ffffff;
+    background-color:rgba(255, 255, 255, 0.3);
+    border-color: #ffffff;
+    outline: 0;
+    box-shadow: 0 0 0 0.15rem rgb(255, 255, 255);
+}
+  
+.game-btn:focus, .game-btn.focus {
+    color: #ffffff;
+    background-color:rgba(255, 255, 255, 0.3);
+    border-color: #ffffff;
+    outline: 0;
+    box-shadow: 0 0 0 0.15rem rgb(255, 255, 255);
+}
+
+@media (max-width: 768px) {
+    .game-ui {
+        max-height: max-content;
+        max-width: 1140px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .game-wrapper {
+        height: 100%;
+        width: 100%;
+        margin-right: 0;
+    }
+
+    .game-info {
+        width: 100%;
+        margin-top: 2rem;
+    }
 }
 
 /* -------------------------------------------------- */
@@ -40,7 +605,22 @@
 /* --- Destaca los últimos movimientos realizados --- */
 
 .highlight {
-    box-shadow: inset 0 0 3px 3px yellow;
+    box-shadow: inset 0 0 3px 3px yellow !important;
+}
+
+/* -------------------------------------------------- */
+
+
+
+/* -------- Destaca los posibles movimientos -------- */
+
+.showStart {
+    /* background: radial-gradient(rgba(20,85,30,0.5) 19%, rgba(0,0,0,0) 20%); */
+    box-shadow: inset 0 0 3px 3px rgba(20,85,30,0.5);
+}
+
+.showMoves {
+    background: radial-gradient(rgba(20,85,30,0.5) 19%, rgba(0,0,0,0) 20%);
 }
 
 /* -------------------------------------------------- */
@@ -97,88 +677,12 @@
     background-color:#86A666;
     color:#FFFFDD;
 }
+
+.fa-check {
+    color: rgb(4, 179, 4);
+}
+
+.fa-times{
+    color: red;
+}
 /* -------------------------------------------------- */
-
-
-.colocacion-inicial{                    /* CLASE PARA LA COLOCACIÓN INICIAL */
-    margin-top: 6rem;
-    padding: 2rem 1rem;
-    margin-bottom: 2rem;
-}
-
-.botones-de-juego {                     /* CLASE PARA CAMBIAR EL TIPO DE BOTONES */
-    display: flex;
-    border-radius: 6px;
-    border: none;
-    color: #fff;
-    cursor: pointer;
-    font-size: 10px;
-    padding: 10px 10px;
-    text-align: center;
-    width: auto;
-    }
-    .botones-de-juego:hover {
-    background-color: #FB7E29;
-    color: #fff;
-    }
-
-.grupo-botones{
-    display: flex;
-}
-
-
-.color-box{
-    border: 3px solid #fff;
-    background-color: gray;
-    padding: 40px;
-    margin: 20px;
-    width: 300px;
-    height: 350px;
-    margin-top: 10px;
-    margin-right: 63%;
-    margin-left: 37%;
-    justify-content: center;
-    text-align: center;
-    color: white;
-}
-
-/* .color-selection { */
-/*     text-decoration:none;
-    font-weight: 600;
-    font-size: 20px;
-    color:#333333; */
-/*     display:flex;
-    padding-top:15px;
-    padding-bottom:15px;
-    padding-left:25px;
-    padding-right:25px;
-    background-color:grey;
-    border-color: #d8d8d8;
-    border-width: 3px;
-    border-style: solid;
-    border-radius:35px;
-    } */
-
-
-.selection-box{
-    display:flex;
-    padding: 20px 20px 20px 20px;
-    margin: 0 0 25px;
-    width: 250;
-    height: 150;
-}
-
-.btn-dark{
-    height: 100px;
-    width: 100px;
-}
-
-.form-group{
-    color:white;
-}
-
-.fa-chess-knight{
-color: black;
-width:20px;
-height:20px;
-}

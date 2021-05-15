@@ -7,10 +7,12 @@
     <!-- Barra de navegación -->
     {% include "includes/navbar.html" %}
 
-    <main>
+    <!-- Modales -->
+    {% include "includes/modals.html" %}
 
-        <!-- Bloque de partidas públicas disponibles -->
-        <div class="container mt-5">
+    <!-- Contenido -->
+    <main class="bg-img pt-6 vh-100">
+        <div class="container puzzle-list">
 
             <!-- Título -->
             <div>
@@ -18,134 +20,58 @@
                 <hr>
             </div>
 
-            <div class="accordion" id="puzzleList">
-
-                <!-- Lista de puzzles de mate en 2 -->
+            <!-- Lista de puzzles con mate en 2 -->
+            <div class="accordion pb-3" id="m8n2card">
                 <div class="card">
 
-                    <div class="card-header" id="m8n2header">
+                    <!-- Cabecera -->
+                    <button class="puzzle-list-header" data-toggle="collapse" data-target="#m8n2list">Mate en 2</button>
 
-                        <h2 class="mb-0">
-                        <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#m8n2list" aria-expanded="false" aria-controls="m8n2list">
-                            Mate en 2
-                        </button>
-                        </h2>
+                    <!-- Lista -->
+                    <ul class="puzzle-list-body collapse" id="m8n2list" data-parent="#m8n2card"> 
+                        {% for puzzle in m8n2list %} 
+                            <li class="puzzle-list-item" style="transform: rotate(0);"><a class="stretched-link" href="{{ puzzle.link }}"></a>{{ puzzle.citation }}</li>
+                        {% endfor %}
+                    </ul>
 
-                    </div>
+                </div>
+            </div>
+
+            <!-- Lista de puzzles con mate en 3 -->
+            <div class="accordion pb-3" id="m8n3accordion">
+                <div class="card">
+
+                    <!-- Cabecera -->
+                    <button class="puzzle-list-header" data-toggle="collapse" data-target="#m8n3list">Mate en 3</button>
+
+                    <!-- Lista -->
+                    <ul class="puzzle-list-body collapse" id="m8n3list" data-parent="#m8n3accordion"> 
+                        {% for puzzle in m8n3list %} 
+                            <li class="puzzle-list-item" style="transform: rotate(0);"><a class="stretched-link" href="{{ puzzle.link }}"></a>{{ puzzle.citation }}</li>
+                        {% endfor %}
+                    </ul>
+
+                </div>
+            </div>
+
+            <!-- Lista de puzzles con mate en 4 -->
+            <div class="accordion pb-3" id="m8n4accordion">
+                <div class="card">
+
+                    <!-- Cabecera -->
+                    <button class="puzzle-list-header" data-toggle="collapse" data-target="#m8n4list">Mate en 4</button>
+
+                    <!-- Lista -->
+                    <ul class="puzzle-list-body collapse" id="m8n4list" data-parent="#m8n4accordion"> 
+                        {% for puzzle in m8n4list %} 
+                            <li class="puzzle-list-item" style="transform: rotate(0);"><a class="stretched-link" href="{{ puzzle.link }}"></a>{{ puzzle.citation }}</li>
+                        {% endfor %}
+                    </ul>
+
+                </div>
+            </div>
             
-                    <div id="m8n2list" class="collapse" aria-labelledby="m8n2header" data-parent="#puzzleList">
-
-                        <div class="card-body">
-                            
-                            <table class="table table-hover">
-                                <!-- <thead class="thead-light">
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Oponente</th>
-                                        <th scope="col">Juegas con</th>
-                                        <th scope="col">Modo</th>
-                                    </tr>
-                                </thead> -->
-                                <tbody>
-                                    {% for puzzle in m8n2list %}
-                                    <tr style="transform: rotate(0);"> 
-                                        <th scope="row"><a class="stretched-link" href="{{ puzzle.link }}"></a>{{ puzzle.citation }}</th>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <!-- Lista de puzzles de mate en 3 -->
-                <div class="card">
-
-                    <div class="card-header" id="m8n3header">
-
-                        <h2 class="mb-0">
-                        <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#m8n3list" aria-expanded="false" aria-controls="m8n3list">
-                            Mate en 3
-                        </button>
-                        </h2>
-
-                    </div>
-
-                    <div id="m8n3list" class="collapse" aria-labelledby="m8n3header" data-parent="#puzzleList">
-
-                        <div class="card-body">
-                            
-                            <table class="table table-hover">
-                                <!-- <thead class="thead-light">
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Oponente</th>
-                                        <th scope="col">Juegas con</th>
-                                        <th scope="col">Modo</th>
-                                    </tr>
-                                </thead> -->
-                                <tbody>
-                                    {% for puzzle in m8n3list %}
-                                    <tr style="transform: rotate(0);"> 
-                                        <th scope="row"><a class="stretched-link" href="{{ puzzle.link }}"></a>{{ puzzle.citation }}</th>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <!-- Lista de puzzles de mate en 4 -->
-                <div class="card">
-
-                    <div class="card-header" id="m8n4header">
-
-                        <h2 class="mb-0">
-                        <button class="btn btn-link btn-block text-left collapsed" type="button" data-toggle="collapse" data-target="#m8n4list" aria-expanded="false" aria-controls="m8n4list">
-                            Mate en 4
-                        </button>
-                        </h2>
-
-                    </div>
-
-                    <div id="m8n4list" class="collapse" aria-labelledby="m8n4header" data-parent="#puzzleList">
-
-                        <div class="card-body">
-                            
-                            <table class="table table-hover">
-                                <!-- <thead class="thead-light">
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Oponente</th>
-                                        <th scope="col">Juegas con</th>
-                                        <th scope="col">Modo</th>
-                                    </tr>
-                                </thead> -->
-                                <tbody>
-                                    {% for puzzle in m8n4list %}
-                                    <tr style="transform: rotate(0);"> 
-                                        <th scope="row"><a class="stretched-link" href="{{ puzzle.link }}"></a>{{ puzzle.citation }}</th>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>      
         </div>
-
     </main>
 
 {% endblock %}

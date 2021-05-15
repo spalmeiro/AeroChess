@@ -21,9 +21,6 @@ var $nodes = $('#nodes')
 var $knps = $('#knps')
 var squareClass = 'square-55d63' // Se usa para destacar el último movimiento
 var squareToHighlight = null // Se usa para destacar el último movimiento
-var micolor=CSS['black']
-var whiteSquareGrey = '#a9a9a9' // Determina el color con el que se destaca una casilla blanca
-var blackSquareGrey = '#696969' // Determina el color con el que se destaca una casilla negra
 var orientation = null
 
 
@@ -33,35 +30,7 @@ var orientation = null
 
 
 //-------------- BLOQUE DE FUNCIONES PARA EL FUNCIONAMIENTO DEL TABLERO Y EL JUEGO ---------------//
-$("#board_theme").on('change',  function () {
-    // Tablero predeterminado
-    if (this.selectedIndex == 0) {
-        micolor = 'boardtheme1black';
-      
-    } 
-    // Tablero verde
-    else if (this.selectedIndex == 1) {
-        micolor = 'boardtheme2black';
-        
-    }
-    // Tablero azul
-    else if (this.selectedIndex == 2) {
-        micolor = 'boardtheme3black';
-        
-    }
-
-    else if (this.selectedIndex == 3) {
-        micolor= 'boardtheme4black';
-        
-    }
-
-    else if (this.selectedIndex == 4) {
-        micolor = 'boardtheme5black';
-        
-    }
-
-}); 
-   
+    
 
 // Función que reproduce los sonidos que se le pasan como argumento
 function reproSon (name) {
@@ -69,21 +38,26 @@ function reproSon (name) {
     audio.play();
 }
 
-// Función que marca las casillas disponibles para mover
-function greySquare (square,Codecolor) {
+// Marca la casilla de la pieza seleccionada para mover
+function showStart (square) {
     var $square = $('#puzzleBoard .square-' + square)
-    
-    var background = whiteSquareGrey
-    if ($square.hasClass(Codecolor)) {
-        background = blackSquareGrey
-    }
-    
-    $square.css('background', background)
+    $square.addClass("showStart")
 }
 
-// Función que desmarca las casillas disponibles para mover
-function removeGreySquares () {
-    $('#puzzleBoard .square-55d63').css('background', '')
+// Marca las casillas disponibles para mover
+function showMoves (square) {
+    var $square = $('#puzzleBoard .square-' + square)
+    $square.addClass("showMoves")
+}
+
+// Desmarca la casilla de la pieza seleccionada para mover
+function removeshowStart () {
+    $('#puzzleBoard .square-55d63').removeClass('showStart')
+}
+
+// Desmarca las casillas disponibles para mover
+function removeshowMoves () {
+    $('#puzzleBoard .square-55d63').removeClass('showMoves')
 }
 
 // Función que marca los posibles movimientos cuando el ratón se sitúa sobre una pieza
@@ -105,17 +79,18 @@ function onMouseoverSquare (square, piece) {
     if (moves.length === 0) return
     
     // Destaca la casilla en la que se sitúa el ratón
-    greySquare(square,micolor)
+    showStart(square)
     
     // Destaca las casillas donde se puede mover la pieza
     for (var i = 0; i < moves.length; i++) {
-        greySquare(moves[i].to,micolor)
+        showMoves(moves[i].to)
     }
 }
 
 // Función que desmarca los posibles movimientos cuando el ratón ya no está situado sobre esa pieza
 function onMouseoutSquare (square, piece) {
-    removeGreySquares()
+    removeshowStart()
+    removeshowMoves()
 }
 
 // Función que desmarca el último movimiento realizado
@@ -193,7 +168,6 @@ function onSnapEnd () {
 
 // Elimina el header del pgn
 function remove_pgn_header(pgn) {
-
     return pgn.split("<br />").slice(3,100).join("<br />")
 } 
 
@@ -259,12 +233,10 @@ else if (game.turn() === 'w') {
     orientation = "white"
 }
 
-
-
 // Configuración del tablero
 var config = {
     draggable: true,
-    pieceTheme: style,
+    pieceTheme: piece_theme,
     position: puzzle_fen,
     onDragStart: onDragStart,
     onDrop: onDrop,
@@ -290,107 +262,9 @@ updateStatus();
 
 //---------------------- BLOQUE DE FUNCIONES PARA LA RESOLUCIÓN DEL PUZZLE -----------------------//
 
-
-
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
- 
-
-
-
-//------------- BLOQUE DE FUNCIONES PARA LA COMUNICACIÓN CON STOCKFISH MEDIANTE AJAX -------------//
-
-
-// Garantiza que se cumplen los protocolos de seguridad de CRFS
-function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
-const csrftoken = getCookie('csrftoken');
-
-// Envia información sobre la partida al servidor y devuelve el mejor movimiento calculado por Stockfish
-function make_move() {
-
-    $.ajax({
-        url: '/puzzles/make_move',
-        type: "POST",
-        data: {
-            'fen': game.fen(),
-            'move_time': 1000,
-            'Nivel': 20,
-        },
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader("X-CSRFToken", csrftoken);
-        },
-        success: function (data) {
-            // Carga el nuevo FEN en el tablero
-            game.move(data.best_move, { sloppy: true })
-
-            // Actualiza el tablero
-            board.position(game.fen());
-
-            estoy=data.best_move.substring(0,2);
-            voy=data.best_move.substring(2,4);
-          
-
-            removeHighlights()
-            $board.find('.square-' + estoy).addClass('highlight');
-            $board.find('.square-' + voy).addClass('highlight')
-            squareToHighlight = data.best_move;
-
-            // Actualiza la información sobre la partida
-            $score.text(data.score);
-            $time.text(data.time);
-            $nodes.text(data.nodes);
-            $knps.text(data.time)
-
-            current_progress=($score.text()/20)+50
-            $("#dynamic")
-            .css("width", current_progress + "%")
-            //.attr("aria-valuenow", current_progress)
-            .text((current_progress) + "% Probabilidad de victoria");                    
-
-            reproSon("ficha.wav");
-
-            // Actualiza el estado de la partida
-            updateStatus();
-
-            console.log(data)
-        },
-        error: function (error) {
-            console.log(error);
-        }
-    });
-}
-
 function dividirCadena(cadenaADividir,separador) {
     Solucion = cadenaADividir.split(separador);
- }
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-//------------- BLOQUE DE FUNCIONES PARA LOS BOTONES QUE SE MUESTRAN EN LA INTERFAZ --------------//
-
-// Mostrar solución
-
-$('#showSolution').on('click', function() {
-movsolution()
-});
+}
 
 function movsolution(){
     k=1
@@ -450,4 +324,40 @@ function arrayfen(){
 }
 
 window.onload = arrayfen
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+ 
+
+
+
+//------------- BLOQUE DE FUNCIONES PARA LOS BOTONES QUE SE MUESTRAN EN LA INTERFAZ --------------//
+
+// Mostrar solución
+$('#showSolution').on('click', function() {
+    movsolution()
+});
+
+// Puzzle anterior
+$('#previous_puzzle').on('click', function() {
+    puzzle_pk = parseInt(puzzle_pk) - 1
+    if (puzzle_pk == 0) puzzle_pk = 1169
+    var path = window.location.protocol + "//" + window.location.host + "/puzzles/" + puzzle_pk
+    window.location.href = path
+})
+
+// Puzzle aleatorio
+$('#random_puzzle').on('click', function() {
+    puzzle_pk = Math.floor(Math.random() * (1170 - 1)) + 1
+    var path = window.location.protocol + "//" + window.location.host + "/puzzles/" + puzzle_pk
+    window.location.href = path
+})
+
+// Siguiente puzzle
+$('#next_puzzle').on('click', function() {
+    puzzle_pk = parseInt(puzzle_pk) + 1
+    if (puzzle_pk == 1170) puzzle_pk = 1
+    var path = window.location.protocol + "//" + window.location.host + "/puzzles/" + puzzle_pk
+    window.location.href = path
+})
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////

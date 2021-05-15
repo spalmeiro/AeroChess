@@ -7,6 +7,8 @@ import chess
 import chess.engine
 from stockfish import Stockfish
 
+import random
+
 # Rutas hacia stockfish.exe
 stockfish = Stockfish("../stockfish/stockfish_13_win_x64/stockfish_13_win_x64.exe")
 engine = chess.engine.SimpleEngine.popen_uci("../stockfish/stockfish_13_win_x64/stockfish_13_win_x64.exe")
@@ -43,6 +45,7 @@ def lista(request):
 
     return render(request, "puzzles/list.html", {"m8n2list": m8n2list, "m8n3list": m8n3list, "m8n4list": m8n4list})
 
+
 # Puzzle
 def puzzle(request, puzzle_id):
 
@@ -51,43 +54,14 @@ def puzzle(request, puzzle_id):
 
     return render(request, "puzzles/puzzle.html", {"puzzle": puzzle})
 
-# Para recibir los datos de la partida y generar la respuesta del motor de ajedrez
-def make_move(request): 
 
-    fen = request.POST["fen"] # Recoge el FEN de la partida
-    
-    move_time = request.POST["move_time"] # Recoge el tiempo de movimiento permitido para el ordenador
+def random_puzzle(request):
 
-    nivel = request.POST["Nivel"] # Recoge el nivel de dificultad seleccionado para el ordenador
+    n_puzzles = Puzzle.objects.all().count()
 
-    stockfish.set_skill_level(int(nivel)) # Carga el nivel de dificultad en stockfish
-    
-    sub_board = stockfish.set_fen_position(fen) # Crea un tablero en stockfish con el FEN recogido de la web
-    
-    board = chess.Board(fen)
-    
-    best_move = stockfish.get_best_move_time(int(move_time)) # Se busca el mejor movimiento en el tiempo permitido
-    
-    board.push_uci(str(best_move)) # Se ejecuta el mejor movimiento en el tablero creado en Stockfish
+    random_pk = random.randint(1, n_puzzles+1)
 
-    info = engine.analyse(board, chess.engine.Limit(time=0.1)) # Devuelve la información de la partida tras un análisis de Stockfish 
-    
-    fen = board.fen() # Devuelve el nuevo FEN de la partida tras el movimiento de Stockfish
+    # Carga la información del puzzle desde la base de datos
+    puzzle = get_object_or_404(Puzzle, pk=random_pk)
 
-    stockfish.set_skill_level(20) # Carga el nivel de dificultad en stockfish
-    
-    sub_board = stockfish.set_fen_position(fen) # Crea un tablero en stockfish con el FEN recogido de la web
-
-    Tu_best_move = stockfish.get_best_move_time(100) # Se busca el mejor movimiento en el tiempo permitido    
-    
-    # Se devuelven todas las variables que serán enviadas de nuevo a la web mediante un archivo json
-    data = {
-        "fen": fen,            
-        "best_move": str(best_move),
-        "score": str(info["score"].white().score()),
-        "pv": str(best_move),
-        "nodes":str(best_move),
-        "time": str(Tu_best_move)
-    }
-    
-    return JsonResponse(data)
+    return render(request, "puzzles/puzzle.html", {"puzzle": puzzle})

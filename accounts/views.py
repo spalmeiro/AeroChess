@@ -9,9 +9,14 @@ from django.db.models import Q
 
 # Registro
 def signup(request):
+
     if request.method == "POST":
+
         form = signupform(request.POST)
+
+        # Si la form es válida
         if form.is_valid():
+
             user = form.save()
             user.refresh_from_db() 
 
@@ -25,9 +30,18 @@ def signup(request):
  
             # Redirige al usuario a la página principal
             return redirect("/")
+
+        # Si la form no es válida
+        else:
+
+            # Redirige al usuario a la form y muestra los errores
+            return render(request, "registration/signup.html", {"form": form})
+
     else:
         form = signupform()
+
     return render(request, "registration/signup.html", {"form": form})
+
 
 # Perfil
 @login_required
