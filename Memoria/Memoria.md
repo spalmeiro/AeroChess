@@ -8,11 +8,11 @@
 En este documento se recoge:
 * La documentación empleada.
 * Las ideas a implementar
-* Nuestos objetivos durante el Proyecto
-* La Pagina Final
-* La Funcionalidad por Encima de todo
-* Los bugs encontrados.
-* Un tutorial sobre cómo contribuir.
+* Objetivos durante el Proyecto
+* La Página Final
+* La Funcionalidad por encima de todo
+* Bugs encontrados.
+* Tutorial sobre cómo contribuir.
 
 # Webs de consulta
 
@@ -72,9 +72,9 @@ En este documento se recoge:
 
 <div style="text-align: justify">
 
-<p>Pensada para abarcar las distintas opciones de juego: modo contra el ordenador, puzzle y multijugador.
-Personaliza las fichas y el tablero a tu gusto y desmuestra tu destreza.</p>  
-<p>La zona de Lobby muestra las partidas activas y, además, permite a los usuarios unirse a las partidas disponibles. Si lo tuyo no es el ajedrez, o necesitas perfeccionar tu destreza en este deporte, no dudes en usar el modo espectador para visualizar partidas en vivo.</p>
+<p>Pensada para abarcar las distintas opciones de juego: modo contra el ordenador, puzzle y multijugador, para que los jugadores puedan desmostrar su destreza.
+Se pueden personalizar las fichas y el tablero a gusto del usuario.</p>  
+<p>La zona de Lobby muestra las partidas activas y, además, permite unirse a las partidas públicas disponibles. En el caso de las partidas privadas, es necesario que el creador de la partida comparta un link a la otra persona para que ésta se pueda unir. Si el usuario no parte con una gran habilidad en el ajedrez, o necesita perfeccionar su destreza en este deporte, dispone del modo espectador para visualizar partidas en vivo.</p>
 
 </div>
 
@@ -84,10 +84,10 @@ Personaliza las fichas y el tablero a tu gusto y desmuestra tu destreza.</p>
         <img src="img/f2.png" alt="drawing " width="drawing" >
 </p>
 <div style="text-align: justify">
-<p>Nada mejor para aprender que practicar con los distintos niveles de dificultad del ordenador.</p>
+<p>Sin duda, lo mejor para aprender es practicar con los distintos niveles de dificultad del ordenador.</p>
 <p>Dividida en dos partes, la carta de la derecha permite al jugador visualizar los movimientos realizados hasta el momento, así como usar los distintos botones típicos para realizar movimientos, retroceder, rotar tablero o crear una partida nueva.
 La opción FEN permite crear una situación de partida.
-El motor Stokfish será un verdadero quebradero de cabeza para ti. </p>
+Se advierte de que puede ser realmente difícil derrotar al motor Stockfish en una partida. </p>
 
 </div>
 
@@ -97,7 +97,7 @@ El motor Stokfish será un verdadero quebradero de cabeza para ti. </p>
         <img src="img/f3.png" alt="drawing " width="drawing" >
 </p>
 <div style="text-align: justify">
-<p>El modo puzzle permite poner en jaque situaciones reales de partida. Demuestra que eres capaz de vencer a la máquina en pocos movimientos. A pesar de todo, si te atrancas, ¡nunca viene mal echar un vistazo a la solución!</p>
+<p>El modo puzzle permite permite dar jaque mate en situaciones reales de partida. EL jugador podrá demostrar que es capaz de vencer a la máquina en pocos movimientos. A pesar de todo, si no encuentra el movimiento correcto, ¡nunca viene mal echar un vistazo a la solución!</p>
 
 
 </div>
@@ -119,7 +119,7 @@ El motor Stokfish será un verdadero quebradero de cabeza para ti. </p>
 </div>
 
 <div style="text-align: justify">
-<p>La página también permite al usuario registrarse con una cuenta propia para mantener un registro de las partidas jugadas y su historial de victorias y derrotas. En este apartado de creación de cuentas de usuario cabe destacar que mediante django ésta es capaz de dictar sentencias sobre si las contraseñas escogidas son adecuadas desde el punto de vista de la seguridad. Dicho de otro modo, la página mostrará una alerta cuando la contraseña escogida tenga una longitud inferior a 8 caracteres y también asegurará que sea de carácter alfa-numérico, no siendo aceptable por ejemplo una contraseña compuesta sólo por números. En esta misma línea, en la pantalla de inicio de sesión también se muestran alertas cuando la contraseña o el usuario introducidos no coinciden con el correcto.</p>
+<p>La página también permite al usuario registrarse con una cuenta propia para mantener un registro de las partidas jugadas y su historial de victorias y derrotas. En este apartado de creación de cuentas de usuario cabe destacar que mediante django la página es capaz de dictar sentencias sobre si las contraseñas escogidas son adecuadas desde el punto de vista de la seguridad. Dicho de otro modo, la página mostrará una alerta cuando la contraseña escogida tenga una longitud inferior a 8 caracteres y también asegurará que sea de carácter alfa-numérico, no siendo aceptable por ejemplo una contraseña compuesta sólo por números. En esta misma línea, en la pantalla de inicio de sesión también se muestran alertas cuando la contraseña o el usuario introducidos no coinciden con el correcto.</p>
 <p align="center">
         <img src="img/Alerta_inicio_sesion.png" alt="drawing " 
         width="300" >
@@ -133,7 +133,7 @@ El motor Stokfish será un verdadero quebradero de cabeza para ti. </p>
 <div style="text-align: justify">
 
 <p>
-También se mencionó previamente que la página permite la personalización del tablero y de las fichas de juego dentro de la selección que se ofrece. En este sentido cabe destacar que dicha personalización se mantiene entre las diferentes pantallas de juego (modo individual, puzles, modo online) y sólo se perderá cuando el usuario cierre la ventana del navegador. Este fue uno de los objetivos que quedó por implementar, de manera que la información de personalización quedara guardada en la base de datos vinculada a la cuenta de usuario y la personalización quedaría registrada.
+También se mencionó previamente que la página permite la personalización del tablero y de las fichas de juego dentro de la selección que se ofrece. En este sentido se puntualiza que dicha personalización se mantiene entre las diferentes pantallas de juego (modo individual, puzzles, modo online) y sólo se perderá cuando el usuario cierre la ventana del navegador. Este fue uno de los objetivos que quedó por implementar, de manera que la información de personalización quedara guardada en la base de datos vinculada a la cuenta de usuario y la personalización quedaría registrada.
 <p align="center">
         <img src="img/f4.png" alt="drawing " width="300" >
 </p>
