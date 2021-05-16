@@ -545,6 +545,7 @@ socket.onmessage = function (message) {
 
 // ------------ BLOQUE DE FUNCIONES PARA LOS BOTONES QUE SE MUESTRAN EN LA INTERFAZ ------------- //
 
+
 // Copia el link de la partida privada al portapapeles
 $('#copy_link').on('click', function() {
 

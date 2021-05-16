@@ -372,6 +372,14 @@ function make_move() {
 
 // Reiniciar la partida
 $('#new_game').on('click', function() {
+    $('#newgameModal').modal({
+        keyboard: false,
+        backdrop: 'static'
+    })
+})
+
+// Si se confirma que se quiere reiniciar la partida
+$('#new_game_accept').on('click', function() {
 
     // Reproduce el sonido
     reproSon("boton.mp3")

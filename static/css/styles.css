@@ -332,7 +332,8 @@ hr {
     padding: 1.25rem;
     color: #ffffff;
     font-size: 150%;
-    text-align: left;
+    display: flex;
+    align-items: center;
     background-color: rgb(40, 40, 40);
     border-color: #ffffff;
     border-style: solid;

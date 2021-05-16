@@ -5,7 +5,7 @@
 
 
 
-//----------------------------------- DECLARACIÓN DE VARIABLES -----------------------------------//
+// ---------------------------------- DECLARACIÓN DE VARIABLES ---------------------------------- //
 
 
 // Variables del tablero y del estado de la partida
@@ -24,7 +24,7 @@ var orientation = null
 
 
 
-//-------------- BLOQUE DE FUNCIONES PARA EL FUNCIONAMIENTO DEL TABLERO Y EL JUEGO ---------------//
+// ------------- BLOQUE DE FUNCIONES PARA EL FUNCIONAMIENTO DEL TABLERO Y EL JUEGO -------------- //
     
 
 // Reproduce los sonidos que se le pasan como argumento
@@ -110,72 +110,6 @@ function removeHighlights () {
     $board.find('.square-55d63').removeClass('highlight')
 }
 
-// Controla cuándo y qué piezas se pueden seleccionar para mover
-function onDragStart (source, piece, position, orientation) {
-    
-    // Evita que se puedan mover fichas en una partida acabada
-    if (game.game_over()) return false
-
-    // Controla que sólo se puedan seleccionar las piezas del lado al que le toca mover
-    if ((orientation === 'white' && piece.search(/^w/) === -1) || (orientation === 'black' && piece.search(/^b/) === -1)) return false
-}
-
-// Controla qué ocurre cuando soltamos una pieza
-p=0; j=0;
-function onDrop (source, target) {
-
-    // Comprueba si el movimiento es legal
-    var move = game.move({
-        from: source,
-        to: target,
-        promotion: 'q'
-    })
-
-    // Hace que la pieza vuelva a su posición original si el movimiento no está permitido
-    if (move === null) return 'snapback'
-
-    reproSon("ficha.wav");
-
-   if (game.fen()==fen_to_compare[j]){}
-   else{
-    game.undo();
-    reproSon("burla.mp3")
-    // Actualiza el estado del tablero
-    board.position(game.fen());
-    // Actualiza el estado de la partida
-    updateStatus();
-return
-   }
-
- j=j+1
-    // Al soltar la pieza se activa la función que genera la respuesta del motor de ajedrez
-
-    if (game.turn() === 'w') {
-        p=p+1
-    }
-
-    setTimeout(movsolution, 1000);
-   
-
-    // Se destaca el movimiento realizado
-    removeHighlights()
-    $board.find('.square-' + source).addClass('highlight')
-    $board.find('.square-' + target).addClass('highlight')
-
-    // Se actualizan los datos
-    updateStatus();
-}
-
-// Función que controla qué ocurre cuando se acaba un movimiento (en concreto lo destaca)
-function onMoveEnd () {
-    $board.find('.square-' + squareToHighlight).addClass('highlight')
-}
-
-//
-function onSnapEnd () {
-    board.position(game.fen())
-}
-
 // Elimina el header del pgn
 function remove_pgn_header(pgn) {
     return pgn.split("<br />").slice(3,100).join("<br />")
@@ -186,19 +120,26 @@ function updateStatus () {
 
     var status = ''
     var moveColor = 'blancas'
-    var moveColor = 'negras'
 
     // Comprueba si mueven las negras
     if (game.turn() === 'b') {
         moveColor = 'negras'
-        moveColor = 'blancas'
     }
 
     // Comprueba si hay jaque mate
     if (game.in_checkmate()) {
-        alert("Hola")
+
+        // Ganan negras
+        if(moveColor === 'blancas') {
+            status = "Fin de la partida, las negras hacen jaque mate."
+        }
+
+        // Ganan blancas
+        else {    
+            status = "Fin de la partida, las blancas hacen jaque mate."
+        }
+
         reproSon('mate.mp3')
-        status = 'Fin de la partida, ' + moveColor2 + ' hacen jaque mate.'
     }
 
     // Comprueba si hay tablas
@@ -232,6 +173,70 @@ function updateStatus () {
     $fen.val(game.fen())
     new_pgn = remove_pgn_header(game.pgn({ max_width: 5, newline_char: "<br />"}))
     $pgn.html(new_pgn)
+}
+
+// Controla cuándo y qué piezas se pueden seleccionar para mover
+function onDragStart (source, piece, position, orientation) {
+    
+    // Evita que se puedan mover fichas en una partida acabada
+    if (game.game_over()) return false
+
+    // Controla que sólo se puedan seleccionar las piezas del lado al que le toca mover
+    if ((orientation === 'white' && piece.search(/^w/) === -1) || (orientation === 'black' && piece.search(/^b/) === -1)) return false
+}
+
+// Controla qué ocurre cuando soltamos una pieza
+p=0; j=0;
+function onDrop (source, target) {
+
+    // Comprueba si el movimiento es legal
+    var move = game.move({
+        from: source,
+        to: target,
+        promotion: 'q'
+    })
+
+    // Hace que la pieza vuelva a su posición original si el movimiento no está permitido
+    if (move === null) return 'snapback'
+
+    reproSon("ficha.wav");
+
+    if (game.fen()==fen_to_compare[j]) {}
+    else{
+        game.undo();
+        reproSon("burla.mp3")
+        // Actualiza el estado del tablero
+        board.position(game.fen());
+        // Actualiza el estado de la partida
+        updateStatus();
+        return
+    }
+
+    j=j+1
+
+    if (game.turn() === 'w') {
+        p=p+1
+    }
+
+    setTimeout(movsolution, 1000);
+   
+    // Se destaca el movimiento realizado
+    removeHighlights()
+    $board.find('.square-' + source).addClass('highlight')
+    $board.find('.square-' + target).addClass('highlight')
+
+    // Se actualizan los datos
+    updateStatus();
+}
+
+// Función que controla qué ocurre cuando se acaba un movimiento (en concreto lo destaca)
+function onMoveEnd () {
+    $board.find('.square-' + squareToHighlight).addClass('highlight')
+}
+
+//
+function onSnapEnd () {
+    board.position(game.fen())
 }
 
 // Carga el FEN del puzzle
@@ -273,80 +278,72 @@ updateStatus();
 
 
 
-//---------------------- BLOQUE DE FUNCIONES PARA LA RESOLUCIÓN DEL PUZZLE -----------------------//
+// --------------------- BLOQUE DE FUNCIONES PARA LA RESOLUCIÓN DEL PUZZLE ---------------------- //
+
 
 function dividirCadena(cadenaADividir,separador) {
     Solucion = cadenaADividir.split(separador);
 }
 
 function movsolution(){
-    k=1
-    i=2
+    k = 1
+    i = 2
     dividirCadena(puzzle_pgn," ")
     
     if (game.in_checkmate()) {
         return
     }
-     
     else if (game.turn() === 'b') {
-        n=i+3*p
-        p=p+1
+        n = i + 3*p
+        p = p + 1
+    }
+    else {
+        n = k + 3*p
     }
     
-    
-     else{
-           
-        n=k+3*p
-    
-    }
-    
-    
-        game.move(Solucion[n], {sloppy: true })
-        board.position(game.fen());
-    
-         updateStatus();
+    game.move(Solucion[n], {sloppy: true })
+    board.position(game.fen());
 
-
-
+    updateStatus();
 }
 
-// Moviemiento valido
+// Movimiento valido
 var fen_to_compare = [];
 function arrayfen(){
     
     n=0
 
-
     dividirCadena(puzzle_pgn," ")
     
- 
- 
-        if (game2.turn() === 'b') { i=2}
-        
-        
-         else{i=1}
+    if (game2.turn() === 'b') {
+        i = 2
+    }
+    else {
+        i = 1
+    }
 
+    while (n < 8) {
 
-         while (n < 8) {
-            
-            x=n*3+i;
-         
+        x=n*3+i;
+        
         game2.move(Solucion[x], {sloppy: true })
         fen_to_compare[n]=game2.fen()
         x=x+i
         game2.move(Solucion[x], {sloppy: true })
         n++;
-    } 
+    }
 }
 
 window.onload = arrayfen
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
  
 
 
 
-//------------- BLOQUE DE FUNCIONES PARA LOS BOTONES QUE SE MUESTRAN EN LA INTERFAZ --------------//
+// ------------ BLOQUE DE FUNCIONES PARA LOS BOTONES QUE SE MUESTRAN EN LA INTERFAZ ------------- //
+
 
 // Mostrar solución
 $('#showSolution').on('click', function() {
@@ -376,6 +373,12 @@ $('#next_puzzle').on('click', function() {
     window.location.href = path
 })
 
+// Volver al lobby
+$('#return').on('click', function() {
+    var path = window.location.protocol + "//" + window.location.host + "/puzzles/list"
+    window.location.href = path
+})
+
 // Hace que los botones cambien en cierto portsize
 $(window).resize(function () {
     if (window.innerWidth > 768 && window.innerWidth < 992) {
@@ -387,5 +390,6 @@ $(window).resize(function () {
         $('#next_puzzle').html('Siguiente')
     }
 })
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
