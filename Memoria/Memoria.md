@@ -1,5 +1,5 @@
 <p align="center">
-        <img src="https://www.pngarts.com/files/4/Chess-PNG-Background-Image.png" alt="drawing " width="drawing" >
+        <img src="img/Imagen_portada.png" alt="drawing " width="drawing" >
     </a>
 </p>
 
@@ -8,9 +8,11 @@
 En este documento se recoge:
 * La documentación empleada.
 * Las ideas a implementar
-* Los bugs encontrados.
-* Un tutorial de instalación.
-* Un tutorial sobre cómo contribuir.
+* Objetivos durante el Proyecto
+* La Página Final
+* La Funcionalidad por encima de todo
+* Bugs encontrados.
+* Tutorial sobre cómo contribuir.
 
 # Webs de consulta
 
@@ -29,7 +31,7 @@ En este documento se recoge:
 * Tablero de ajedrez en JavaScript: https://chessboardjs.com/.
 
 # Ideas a implementar
-
+<div style="text-align: justify"> 
 * Un modo de juego de un jugador contra la máquina, que será el mejor motor de ajedrez del mundo, Stockfish.
 
 * Un sistema de autenticación para que los usuarios puedan registrarse y autenticarse.
@@ -52,24 +54,93 @@ En este documento se recoge:
 
 * Un sistema de clasificación de usuarios registrados similar a los puntos ELO (?).
 
-# Bugs conocidos
+</div>
 
-* Al cambiar el tamaño de la página el botón de navegación en modo colapsado deja de funcionar.
+# Objetivos durante el Proyecto
 
-# Instalación y activación
+<div style="text-align: justify">
+<p>Con el paso de las semanas las ideas a implementar no hicieron más que crecer, pero los objetivos del proyecto cambiaron muy poco. Sin embargo, lo que comenzó siendo un objetivo primario como era la inclusión de un modo de "trampas", fue rápidamente descartado debido a que los sistemas anti-cheat de las páginas que se tenían como objetivo funcionan realmente bien. Esto es porque los motores de ajedrez siempre elijen el mejor movimiento desde el punto de vista estadístico y no como las personas que pueden planear estrategias y las intentan seguir mientras pueden, realizando en varias ocasiones movimientos que no serían el mejor posible según un motor de ajedrez. Esto provoca que las páginas webs puedan analizar si los movimientos son realizados por una máquina o por una persona. Descartada esta idea pronto se pensó en qué hacer con el proyecto y la decisión fue clara: se quiso ver como de funcional se podía hacer una página web sobre ajedrez. De ese modo, se fijó la funcionalidad como eje principal en el diseño de la web, consiguiendo que ésta pudiera ofrecer varios modos de juego a los usuarios. El objetivo último que se alcanzó fue servir la página de forma online y abierta para todo el mundo.</p>
+ </div>
+        
 
-El objetivo es crear un directorio que contenga todo lo necesario para el funcionamiento del servidor web de manera que se pueda ejecutar localmente.
+# La Pagina Final
 
-## Creación de la carpeta contenedora del proyecto y sus dependencias
+<span></span>
+<p align="center">
+        <img src="img/Imagen_portada.png" alt="drawing " width="drawing" >
+</p>
 
-Esta carpeta almacenará en su interior el entorno virtual de python, los archivos ejecutables de Stockfish y la rama del proyecto que se desee.
+<div style="text-align: justify">
 
-En este ejemplo se va a crear en el escritorio, por lo que la ruta sería:
-"`C:\Users\Usuario\Desktop\PGAA`"
+<p>Pensada para abarcar las distintas opciones de juego: modo contra el ordenador, puzzle y multijugador, para que los jugadores puedan desmostrar su destreza.
+Se pueden personalizar las fichas y el tablero a gusto del usuario.</p>  
+<p>La zona de Lobby muestra las partidas activas y, además, permite unirse a las partidas públicas disponibles. En el caso de las partidas privadas, es necesario que el creador de la partida comparta un link a la otra persona para que ésta se pueda unir. Si el usuario no parte con una gran habilidad en el ajedrez, o necesita perfeccionar su destreza en este deporte, dispone del modo espectador para visualizar partidas en vivo.</p>
 
-La ruta puede ser evidentemente distinta y da absolutamente igual, lo único que es recomendable es que ninguno de los nombres de los directorios especificados en la ruta contenga caracteres especiales ni espacios para evitar posibles problemas (a veces también dan problemas los acentos).
+</div>
 
-## Descarga del archivo ejecutable de Stockfish
+
+## Modo contra el ordenador
+<p align="center">
+        <img src="img/f2.png" alt="drawing " width="drawing" >
+</p>
+<div style="text-align: justify">
+<p>Sin duda, lo mejor para aprender es practicar con los distintos niveles de dificultad del ordenador.</p>
+<p>Dividida en dos partes, la carta de la derecha permite al jugador visualizar los movimientos realizados hasta el momento, así como usar los distintos botones típicos para realizar movimientos, retroceder, rotar tablero o crear una partida nueva.
+La opción FEN permite crear una situación de partida.
+Se advierte de que puede ser realmente difícil derrotar al motor Stockfish en una partida. </p>
+
+</div>
+
+
+## Modo puzzle
+<p align="center">
+        <img src="img/f3.png" alt="drawing " width="drawing" >
+</p>
+<div style="text-align: justify">
+<p>El modo puzzle permite permite dar jaque mate en situaciones reales de partida. EL jugador podrá demostrar que es capaz de vencer a la máquina en pocos movimientos. A pesar de todo, si no encuentra el movimiento correcto, ¡nunca viene mal echar un vistazo a la solución!</p>
+
+
+</div>
+
+# La Funcionalidad por encima de todo
+
+<div style="text-align: justify">
+<p>Respecto de cómo la página se adapta a distintos dispositivos como ordenadores, tablets o teléfonos móviles, o simplemente ante la reducción de la ventana del navegador en un ordenador, cabe destacar que ésta cuenta con un diseño que le permite ajustarse con éxito a todas estas variantes sin pérdida alguna de funcionalidad. Por ejemplo, la barra de navegación pasará a un modo desplegable cuando la ventana sea demasiado pequeña como para alojarla.</p>
+
+<p align="center">
+        <img src="img/Pantalla_juego_semicolapsada.png" alt="drawing " width="drawing" >
+        <img src="img/Barra_nav_colapsada.png" alt="drawing " width="300" >
+                <img src="img/f6.png" alt="drawing " 
+        width="300" >
+</p>
+
+<div style="text-align: justify">
+
+</div>
+
+<div style="text-align: justify">
+<p>La página también permite al usuario registrarse con una cuenta propia para mantener un registro de las partidas jugadas y su historial de victorias y derrotas. En este apartado de creación de cuentas de usuario cabe destacar que mediante django la página es capaz de dictar sentencias sobre si las contraseñas escogidas son adecuadas desde el punto de vista de la seguridad. Dicho de otro modo, la página mostrará una alerta cuando la contraseña escogida tenga una longitud inferior a 8 caracteres y también asegurará que sea de carácter alfa-numérico, no siendo aceptable por ejemplo una contraseña compuesta sólo por números. En esta misma línea, en la pantalla de inicio de sesión también se muestran alertas cuando la contraseña o el usuario introducidos no coinciden con el correcto.</p>
+<p align="center">
+        <img src="img/Alerta_inicio_sesion.png" alt="drawing " 
+        width="300" >
+        <img src="img/Alertas_creacion_cuenta.png" alt="drawing " 
+        width="300" >      
+</p>
+<div style="text-align: justify">
+</div>
+
+
+<div style="text-align: justify">
+
+<p>
+También se mencionó previamente que la página permite la personalización del tablero y de las fichas de juego dentro de la selección que se ofrece. En este sentido se puntualiza que dicha personalización se mantiene entre las diferentes pantallas de juego (modo individual, puzzles, modo online) y sólo se perderá cuando el usuario cierre la ventana del navegador. Este fue uno de los objetivos que quedó por implementar, de manera que la información de personalización quedara guardada en la base de datos vinculada a la cuenta de usuario y la personalización quedaría registrada.
+<p align="center">
+        <img src="img/f4.png" alt="drawing " width="300" >
+</p>
+<div style="text-align: justify">
+</p>
+
+</div>
 
 
 ```
@@ -86,31 +157,4 @@ Cuando queráis actualizar el repositorio online con los cambios que habéis hec
 
 **NOTA 2:** Los cambios se aplican a la rama del proyecto que tengáis seleccionada, si esa rama no existiera en el repositorio online pero sí en el repositorio local, sería creada cuando publicarais los cambios.
 
-```
-
-# Página Final
-
-## Página principal del sitio web.
-<span></span>
-<p align="center">
-        <img src="img/f1.png" alt="drawing " width="drawing" >
-</p>
-<p>Pensada para abarcar las distintas opciones de juego: modo contra el ordenador, puzzle y multijugador.
-Personaliza las fichas y el tablero a tu gusto y desmuestra tu destreza.</p>  
-<p>La zona de Lobby muestra las partidas activas y, además, permite a los usuarios unirse a las partidas disponibles. Si lo tuyo no es el ajedrez, o necesitas perfeccionar tu destreza en este deporte, no dudes en usar el modo espectador para visualizar partidas en vivo.</p>
-
-## Modo contra el ordenador
-<p align="center">
-        <img src="img/f2.png" alt="drawing " width="drawing" >
-</p>
-<p>Nada mejor para aprender que practicar con los distintos niveles de dificultad del ordenador.</p>
-<p>Dividida en dos partes, la carta de la derecha permite al jugador visualizar los movimientos realizados hasta el momento, así como usar los distintos botones típicos para realizar movimientos, retroceder, rotar tablero o crear una partida nueva.
-La opción FEN permite crear una situación de partida.
-El motor Stokfish será un verdadero quebradero de cabeza para ti. </p>
-
-## Modo puzzle
-<p align="center">
-        <img src="img/f3.png" alt="drawing " width="drawing" >
-</p>
-
-<p>El modo puzzle permite poner en jaque situaciones reales de partida. Demuestra que eres capaz de vencer a la máquina en pocos movimientos. A pesar de todo, si te atrancas, ¡nunca viene mal echar un vistazo a la solución!</p>
+ </div>
