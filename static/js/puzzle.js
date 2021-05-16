@@ -109,6 +109,7 @@ function onDragStart (source, piece, position, orientation) {
 }
 p=0
 j=0
+
 // Función que controla qué ocurre cuando soltamos una pieza
 function onDrop (source, target) {
 
@@ -141,8 +142,6 @@ return
     if (game.turn() === 'w') {
         p=p+1
     }
-    console.log(j)
-    console.log(p)
 
     setTimeout(movsolution, 1000);
    
@@ -184,6 +183,7 @@ function updateStatus () {
 
     // Comprueba si hay jaque mate
     if (game.in_checkmate()) {
+        alert("Hola")
         reproSon('mate.mp3')
         status = 'Fin de la partida, ' + moveColor + ' hacen jaque mate.'
     }
@@ -271,8 +271,11 @@ function movsolution(){
     i=2
     dividirCadena(puzzle_pgn," ")
     
+    if (game.in_checkmate()) {
+        return
+    }
      
-    if (game.turn() === 'b') {
+    else if (game.turn() === 'b') {
         n=i+3*p
         p=p+1
     }

@@ -8,8 +8,10 @@
 En este documento se recoge:
 * La documentación empleada.
 * Las ideas a implementar
+* Nuestos objetivos durante el Proyecto
+* La Pagina Final
+* La Funcionalidad por Encima de todo
 * Los bugs encontrados.
-* Un tutorial de instalación.
 * Un tutorial sobre cómo contribuir.
 
 # Webs de consulta
@@ -29,7 +31,7 @@ En este documento se recoge:
 * Tablero de ajedrez en JavaScript: https://chessboardjs.com/.
 
 # Ideas a implementar
-
+<div style="text-align: justify"> 
 * Un modo de juego de un jugador contra la máquina, que será el mejor motor de ajedrez del mundo, Stockfish.
 
 * Un sistema de autenticación para que los usuarios puedan registrarse y autenticarse.
@@ -52,45 +54,18 @@ En este documento se recoge:
 
 * Un sistema de clasificación de usuarios registrados similar a los puntos ELO (?).
 
-# Bugs conocidos
+</div>
 
-* Al cambiar el tamaño de la página el botón de navegación en modo colapsado deja de funcionar.
+# Nuestos objetivos durante el Proyecto
 
-# Instalación y activación
+<div style="text-align: justify">
+Con el paso de los días las ideas a implementar no han echo mas que crecer pero los objetivos del proyecto han cambiado muy poco, lo que comenzó siendo un objetivo primario como era la inclusión de un modo de "trampas", fue rápidamente descartado por que los sistemas anti-cheat de las paginas que teníamos como objetivo funcionan realmente bien, dado que los motores ajedrecísticos siempre elijen el mejor movimiento visto desde el punto estadístico y no como las personas que planean estrategias y las intentas seguir mientras pueden haciendo en varias ocasiones movimientos que no serian el mejor pasible según el motor, esto hace que las paginas webs puedan analizar si los movimientos son realizados por una maquina o por una persona. Descartada esta idea pronto pensamos en que hacer con el proyecto y la decisión era clara queríamos ver como de funcional podíamos hacer una pagina web sobre ajedrez, con una idea muy clara poner la funcionalidad como eje principal en el diseño de nuestra web, el objetivo ultimo era ser capaces de servir la pagina de forma online y abierta para todo el mundo.   
 
-El objetivo es crear un directorio que contenga todo lo necesario para el funcionamiento del servidor web de manera que se pueda ejecutar localmente.
+ </div>
+        
 
-## Creación de la carpeta contenedora del proyecto y sus dependencias
+# La Pagina Final
 
-Esta carpeta almacenará en su interior el entorno virtual de python, los archivos ejecutables de Stockfish y la rama del proyecto que se desee.
-
-En este ejemplo se va a crear en el escritorio, por lo que la ruta sería:
-"`C:\Users\Usuario\Desktop\PGAA`"
-
-La ruta puede ser evidentemente distinta y da absolutamente igual, lo único que es recomendable es que ninguno de los nombres de los directorios especificados en la ruta contenga caracteres especiales ni espacios para evitar posibles problemas (a veces también dan problemas los acentos).
-
-## Descarga del archivo ejecutable de Stockfish
-
-
-```
-
-# Cómo contribuir
-
-Si estáis utilizando GitHub Desktop, él mismo detectará los cambios que se realicen en el repositorio y podréis llevar un registro de dichos cambios haciendo "commits" a vuestra copia local del repositorio a través de la aplicación.
-
-**NOTA:** los cambios que hagáis de manera local son efectivos tan pronto guardáis el archivo editado desde el editor, pero son registrados por GitHub Desktop hasta que hacéis un "commmit". Es recomendable hacer un "commit" local cada vez que acabéis una sesión de trabajo.
-
-Cuando queráis actualizar el repositorio online con los cambios que habéis hecho de forma local, basta con darle a publicar desde GitHub Desktop y la aplicación se encargará de sincronizar los archivos locales con los archivos online.
-
-**NOTA:** es recomendable antes de hacer cambios en el repositorio online asegurarse de que habéis aplicado los cambios a la versión más actualizada del repositorio online y que funciona, para minimizar la posibilidad de que vuestros cambios rompan el proyecto.
-
-**NOTA 2:** Los cambios se aplican a la rama del proyecto que tengáis seleccionada, si esa rama no existiera en el repositorio online pero sí en el repositorio local, sería creada cuando publicarais los cambios.
-
-```
-
-# Página Final
-
-## Página principal del sitio web.
 <span></span>
 <p align="center">
         <img src="img/f1.png" alt="drawing " width="drawing" >
@@ -114,3 +89,27 @@ El motor Stokfish será un verdadero quebradero de cabeza para ti. </p>
 </p>
 
 <p>El modo puzzle permite poner en jaque situaciones reales de partida. Demuestra que eres capaz de vencer a la máquina en pocos movimientos. A pesar de todo, si te atrancas, ¡nunca viene mal echar un vistazo a la solución!</p>
+
+# La Funcionalidad por Encima de todo
+
+
+# Bugs conocidos
+
+
+<div style="text-align: justify">
+
+```
+
+# Cómo contribuir
+
+Si estáis utilizando GitHub Desktop, él mismo detectará los cambios que se realicen en el repositorio y podréis llevar un registro de dichos cambios haciendo "commits" a vuestra copia local del repositorio a través de la aplicación.
+
+**NOTA:** los cambios que hagáis de manera local son efectivos tan pronto guardáis el archivo editado desde el editor, pero son registrados por GitHub Desktop hasta que hacéis un "commmit". Es recomendable hacer un "commit" local cada vez que acabéis una sesión de trabajo.
+
+Cuando queráis actualizar el repositorio online con los cambios que habéis hecho de forma local, basta con darle a publicar desde GitHub Desktop y la aplicación se encargará de sincronizar los archivos locales con los archivos online.
+
+**NOTA:** es recomendable antes de hacer cambios en el repositorio online asegurarse de que habéis aplicado los cambios a la versión más actualizada del repositorio online y que funciona, para minimizar la posibilidad de que vuestros cambios rompan el proyecto.
+
+**NOTA 2:** Los cambios se aplican a la rama del proyecto que tengáis seleccionada, si esa rama no existiera en el repositorio online pero sí en el repositorio local, sería creada cuando publicarais los cambios.
+
+ </div>
