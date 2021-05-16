@@ -8,8 +8,10 @@
 En este documento se recoge:
 * La documentación empleada.
 * Las ideas a implementar
+* Nuestos objetivos durante el Proyecto
+* La Pagina Final
+* La Funcionalidad por Encima de todo
 * Los bugs encontrados.
-* Un tutorial de instalación.
 * Un tutorial sobre cómo contribuir.
 
 # Webs de consulta
@@ -29,7 +31,7 @@ En este documento se recoge:
 * Tablero de ajedrez en JavaScript: https://chessboardjs.com/.
 
 # Ideas a implementar
-
+<div style="text-align: justify"> 
 * Un modo de juego de un jugador contra la máquina, que será el mejor motor de ajedrez del mundo, Stockfish.
 
 * Un sistema de autenticación para que los usuarios puedan registrarse y autenticarse.
@@ -51,26 +53,22 @@ En este documento se recoge:
 * Un modo de "trampas" de manera que se pueda utilizar nuestra página para calcular los mejores movimientos a realizar en partidas que se estén jugando en otras páginas de ajedrez (?).
 
 * Un sistema de clasificación de usuarios registrados similar a los puntos ELO (?).
+</div>
+
+# Nuestos objetivos durante el Proyecto
+<div style="text-align: justify">
+Con el paso de los días las ideas a implementar no han echo mas que crecer pero los objetivos del proyecto han cambiado muy poco, lo que comenzó siendo un objetivo primario como era la inclusión de un modo de "trampas", fue rápidamente descartado por que los sistemas anti-cheat de las paginas que teníamos como objetivo funcionan realmente bien, dado que los motores ajedrecísticos siempre elijen el mejor movimiento visto desde el punto estadístico y no como las personas que planean estrategias y las intentas seguir mientras pueden haciendo en varias ocasiones movimientos que no serian el mejor pasible según el motor, esto hace que las paginas webs puedan analizar si los movimientos son realizados por una maquina o por una persona. Descartada esta idea pronto pensamos en que hacer con el proyecto y la decisión era clara queríamos ver como de funcional podíamos hacer una pagina web sobre ajedrez, con una idea muy clara poner la funcionalidad como eje principal en el diseño de nuestra web, el objetivo ultimo era ser capaces de servir la pagina de forma online y abierta para todo el mundo.   
+ </div>
+# La Pagina Final
+
+
+# La Funcionalidad por Encima de todo
+
 
 # Bugs conocidos
 
-* Al cambiar el tamaño de la página el botón de navegación en modo colapsado deja de funcionar.
 
-# Instalación y activación
-
-El objetivo es crear un directorio que contenga todo lo necesario para el funcionamiento del servidor web de manera que se pueda ejecutar localmente.
-
-## Creación de la carpeta contenedora del proyecto y sus dependencias
-
-Esta carpeta almacenará en su interior el entorno virtual de python, los archivos ejecutables de Stockfish y la rama del proyecto que se desee.
-
-En este ejemplo se va a crear en el escritorio, por lo que la ruta sería:
-"`C:\Users\Usuario\Desktop\PGAA`"
-
-La ruta puede ser evidentemente distinta y da absolutamente igual, lo único que es recomendable es que ninguno de los nombres de los directorios especificados en la ruta contenga caracteres especiales ni espacios para evitar posibles problemas (a veces también dan problemas los acentos).
-
-## Descarga del archivo ejecutable de Stockfish
-
+<div style="text-align: justify">
 
 ```
 
@@ -85,3 +83,5 @@ Cuando queráis actualizar el repositorio online con los cambios que habéis hec
 **NOTA:** es recomendable antes de hacer cambios en el repositorio online asegurarse de que habéis aplicado los cambios a la versión más actualizada del repositorio online y que funciona, para minimizar la posibilidad de que vuestros cambios rompan el proyecto.
 
 **NOTA 2:** Los cambios se aplican a la rama del proyecto que tengáis seleccionada, si esa rama no existiera en el repositorio online pero sí en el repositorio local, sería creada cuando publicarais los cambios.
+
+ </div>

@@ -1,5 +1,5 @@
 <p align="center">
-        <img src="https://www.pngarts.com/files/4/Chess-PNG-Background-Image.png" alt="drawing " width="drawing" >
+        <img src="https://images.chesscomfiles.com/uploads/v1/blog/496846.b79ff85c.5000x5000o.6b89b6847d70.png" alt="drawing " width="600" >
     </a>
 </p>
 
@@ -29,7 +29,7 @@ En este documento se recoge:
 * Tablero de ajedrez en JavaScript: https://chessboardjs.com/.
 
 # Ideas a implementar
-
+<div style="text-align: justify">
 * Un modo de juego de un jugador contra la máquina, que será el mejor motor de ajedrez del mundo, Stockfish.
 
 * Un sistema de autenticación para que los usuarios puedan registrarse y autenticarse.
@@ -52,12 +52,14 @@ En este documento se recoge:
 
 * Un sistema de clasificación de usuarios registrados similar a los puntos ELO (?).
 
+ </div>
+
 # Bugs conocidos
 
 * Al cambiar el tamaño de la página el botón de navegación en modo colapsado deja de funcionar.
 
 # Instalación y activación
-
+<div style="text-align: justify"> 
 El objetivo es crear un directorio que contenga todo lo necesario para el funcionamiento del servidor web de manera que se pueda ejecutar localmente.
 
 ## Creación de la carpeta contenedora del proyecto y sus dependencias
@@ -165,8 +167,10 @@ Para cerrar el servidor basta con hacer "CTRL + C" en la consola que se ha abier
 
 **NOTA:** también se puede cerrar el servidor cerrando directamente la consola, aunque es una manera un poco más brusca de hacerlo.
 
-# Reseteo de la base de datos
+</div>
 
+# Reseteo de la base de datos
+<div style="text-align: justify">
 Se hace necesario un reset de la base de datos cada vez que se haga un cambio en su estructura, a través de la modificación de los modelos de Django.
 
 Para borrar todos los datos almacenados en la base de datos (dependiendo del cambio aplicado, ejecutar esto puede ser opcional):
@@ -194,9 +198,10 @@ Por último, para cargar en la base de datos la lista de puzzles, se ejecuta:
 ```
 (AeroChess-venv) C:\Users\Usuario\Desktop\PGAA\AeroChess> python manage.py loaddata puzzle_list.json
 ```
+ </div>
 
 # Cómo contribuir
-
+```
 Si estáis utilizando GitHub Desktop, él mismo detectará los cambios que se realicen en el repositorio y podréis llevar un registro de dichos cambios haciendo "commits" a vuestra copia local del repositorio a través de la aplicación.
 
 **NOTA:** los cambios que hagáis de manera local son efectivos tan pronto guardáis el archivo editado desde el editor, pero son registrados por GitHub Desktop hasta que hacéis un "commmit". Es recomendable hacer un "commit" local cada vez que acabéis una sesión de trabajo.
