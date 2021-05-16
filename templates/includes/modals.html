@@ -23,6 +23,28 @@
     </div>
 </div>
 
+<!-- Modal para la conexión en partidas privadas -->
+<div class="modal fade" id="privateModal" tabindex="0">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content custom-modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="privateModal_title"></h5>
+            </div>
+
+            <div class="modal-body">
+                <p id="privateModal_body"></p>
+            </div>
+
+            <div class="modal-footer">
+                <a class="btn btn-danger mr-auto" id="connection_cancel" href="{% url 'lobby' %}" type="button" role="button">Cancelar partida</a>
+                <button class="btn btn-primary" id="copy_link" type="button" role="button">Copiar link</button>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
 <!-- Modal genérico para los distintos mensajes sobre el estado de la conexión -->
 <div class="modal fade" id="connectionModal" tabindex="0">
     <div class="modal-dialog modal-dialog-centered">
@@ -59,7 +81,7 @@
             </div>
 
             <div class="modal-footer">
-                <button class="btn btn-success" type="button" role="button" data-dismiss="modal">Aceptar</button>
+                <button class="btn btn-success" id="status_accept" type="button" role="button" data-dismiss="modal">Aceptar</button>
             </div>
 
         </div>
@@ -160,13 +182,10 @@
         <div class="modal-content custom-modal-content">
 
             <div class="modal-header">
-                <h5 class="modal-title">Tu oponente ha abandonado la sala</h5>
+                <h5 class="modal-title" id="disconnectionModal_title"></h5>
             </div>
 
-            <div class="modal-body">
-                <p>Esperando a que regrese...<div id="countdown"></div></p>
-                <p>Si no lo hace, la partida contará como una derrota.</p>
-            </div>
+            <div class="modal-body" id="disconnectionModal_body"></div>
 
         </div>
     </div>

@@ -18,13 +18,12 @@ from channels.auth import AuthMiddlewareStack
 from channels.routing import ProtocolTypeRouter, URLRouter
 
 import play.routing
-import puzzles.routing
 
 application = ProtocolTypeRouter({
     'http': django_asgi_app,
     'websocket': AuthMiddlewareStack(
         URLRouter(
-            play.routing.websocket_urlpatterns + puzzles.routing.websocket_urlpatterns
+            play.routing.websocket_urlpatterns
         )
     ),
 })

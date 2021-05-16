@@ -1,5 +1,5 @@
 /* 
-    CÓDIGO NECESARIO PARA EL FUNCIONAMIENTO DE LA PÁGINA DE JUEGO CONTRA EL ORDENADOR
+    CÓDIGO NECESARIO PARA EL FUNCIONAMIENTO DE LOS PUZZLES
 */
 
 
@@ -13,13 +13,8 @@ var $board = $('#puzzleBoard')
 var game = new Chess()
 var game2 = new Chess()
 var $status = $('#status') // Estado de la partida
-var $fen = $('#fen') // FEN
-var $pgn = $('#pgn') // PGN
-var $score = $('#score')
-var $time = $('#time')
-var $nodes = $('#nodes')
-var $knps = $('#knps')
-var squareClass = 'square-55d63' // Se usa para destacar el último movimiento
+var $fen = $('#fen')
+var $pgn = $('#pgn')
 var squareToHighlight = null // Se usa para destacar el último movimiento
 var orientation = null
 
@@ -32,7 +27,7 @@ var orientation = null
 //-------------- BLOQUE DE FUNCIONES PARA EL FUNCIONAMIENTO DEL TABLERO Y EL JUEGO ---------------//
     
 
-// Función que reproduce los sonidos que se le pasan como argumento
+// Reproduce los sonidos que se le pasan como argumento
 function reproSon (name) {
     var audio = new Audio('/static/sounds/' + name);
     audio.play();
@@ -44,10 +39,16 @@ function showStart (square) {
     $square.addClass("showStart")
 }
 
-// Marca las casillas disponibles para mover
+// Marca las casillas disponibles para mover sin capturar
 function showMoves (square) {
     var $square = $('#puzzleBoard .square-' + square)
     $square.addClass("showMoves")
+}
+
+// Marca las casillas disponibles para mover capturando
+function showCapture (square) {
+    var $square = $('#puzzleBoard .square-' + square)
+    $square.addClass("showCapture")
 }
 
 // Desmarca la casilla de la pieza seleccionada para mover
@@ -55,12 +56,17 @@ function removeshowStart () {
     $('#puzzleBoard .square-55d63').removeClass('showStart')
 }
 
-// Desmarca las casillas disponibles para mover
+// Desmarca las casillas disponibles para mover sin capturar
 function removeshowMoves () {
     $('#puzzleBoard .square-55d63').removeClass('showMoves')
 }
 
-// Función que marca los posibles movimientos cuando el ratón se sitúa sobre una pieza
+// Desmarca las casillas disponibles para mover capturando
+function removeshowCapture () {
+    $('#puzzleBoard .square-55d63').removeClass('showCapture')
+}
+
+// Marca los posibles movimientos cuando el ratón se sitúa sobre una pieza
 function onMouseoverSquare (square, piece) {
 
     // Evita que se marquen movimientos en una partida acabada
@@ -83,22 +89,28 @@ function onMouseoverSquare (square, piece) {
     
     // Destaca las casillas donde se puede mover la pieza
     for (var i = 0; i < moves.length; i++) {
-        showMoves(moves[i].to)
+        if (moves[i].hasOwnProperty('captured')) {
+            showCapture(moves[i].to)
+        }
+        else {
+            showMoves(moves[i].to)
+        }
     }
 }
 
-// Función que desmarca los posibles movimientos cuando el ratón ya no está situado sobre esa pieza
+// Desmarca los posibles movimientos cuando el ratón ya no está situado sobre esa pieza
 function onMouseoutSquare (square, piece) {
     removeshowStart()
     removeshowMoves()
+    removeshowCapture()
 }
 
-// Función que desmarca el último movimiento realizado
+// Desmarca el último movimiento realizado
 function removeHighlights () {
-    $board.find('.' + squareClass).removeClass('highlight')
+    $board.find('.square-55d63').removeClass('highlight')
 }
 
-// Función que controla cuándo y qué piezas se pueden seleccionar para mover
+// Controla cuándo y qué piezas se pueden seleccionar para mover
 function onDragStart (source, piece, position, orientation) {
     
     // Evita que se puedan mover fichas en una partida acabada
@@ -107,16 +119,16 @@ function onDragStart (source, piece, position, orientation) {
     // Controla que sólo se puedan seleccionar las piezas del lado al que le toca mover
     if ((orientation === 'white' && piece.search(/^w/) === -1) || (orientation === 'black' && piece.search(/^b/) === -1)) return false
 }
-p=0
-j=0
-// Función que controla qué ocurre cuando soltamos una pieza
+
+// Controla qué ocurre cuando soltamos una pieza
+p=0; j=0;
 function onDrop (source, target) {
 
     // Comprueba si el movimiento es legal
     var move = game.move({
         from: source,
         to: target,
-        promotion: 'q' // siempre promociona a reina ¿podríamos hacer algo para elegir la pieza?
+        promotion: 'q'
     })
 
     // Hace que la pieza vuelva a su posición original si el movimiento no está permitido
@@ -141,8 +153,6 @@ return
     if (game.turn() === 'w') {
         p=p+1
     }
-    console.log(j)
-    console.log(p)
 
     setTimeout(movsolution, 1000);
    
@@ -156,7 +166,7 @@ return
     updateStatus();
 }
 
-// Función que controla qué ocurre cuando se acaba un movmiento (en concreto lo destaca)
+// Función que controla qué ocurre cuando se acaba un movimiento (en concreto lo destaca)
 function onMoveEnd () {
     $board.find('.square-' + squareToHighlight).addClass('highlight')
 }
@@ -176,16 +186,19 @@ function updateStatus () {
 
     var status = ''
     var moveColor = 'blancas'
+    var moveColor = 'negras'
 
     // Comprueba si mueven las negras
     if (game.turn() === 'b') {
         moveColor = 'negras'
+        moveColor = 'blancas'
     }
 
     // Comprueba si hay jaque mate
     if (game.in_checkmate()) {
+        alert("Hola")
         reproSon('mate.mp3')
-        status = 'Fin de la partida, ' + moveColor + ' hacen jaque mate.'
+        status = 'Fin de la partida, ' + moveColor2 + ' hacen jaque mate.'
     }
 
     // Comprueba si hay tablas
@@ -271,8 +284,11 @@ function movsolution(){
     i=2
     dividirCadena(puzzle_pgn," ")
     
+    if (game.in_checkmate()) {
+        return
+    }
      
-    if (game.turn() === 'b') {
+    else if (game.turn() === 'b') {
         n=i+3*p
         p=p+1
     }
@@ -358,6 +374,18 @@ $('#next_puzzle').on('click', function() {
     if (puzzle_pk == 1170) puzzle_pk = 1
     var path = window.location.protocol + "//" + window.location.host + "/puzzles/" + puzzle_pk
     window.location.href = path
+})
+
+// Hace que los botones cambien en cierto portsize
+$(window).resize(function () {
+    if (window.innerWidth > 768 && window.innerWidth < 992) {
+        $('#previous_puzzle').html('<i class="fas fa-chevron-left"></i>')
+        $('#next_puzzle').html('<i class="fas fa-chevron-right"></i>')
+    }
+    else {
+        $('#previous_puzzle').html('Anterior')
+        $('#next_puzzle').html('Siguiente')
+    }
 })
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

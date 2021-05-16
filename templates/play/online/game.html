@@ -49,12 +49,12 @@
 
                     <!-- Tablero -->
                     <div class="game-board-wrapper">
-                        <div class="game-board" id="multiplayerBoard"></div>
+                        <div class="game-board" id="multiplayerBoard" style="touch-action: none"></div>
                     </div>
 
                     <!-- Usuario -->
                     <hr class="mt-2 mb-1">
-                    <h5 class="text-center">{{ user.username }}</h5>
+                    <h4 class="text-center">{{ user.username }}</h4>
                 
                 </div>
     
@@ -68,14 +68,18 @@
                     <div class="game-info-status" id="status"></div>
 
                     <!-- PGN -->
-                    <div class="game-info-pgn" id="pgn"></div>
+                    <!-- <div class="game-info-pgn" id="pgn"></div> -->
+                    <div class="game-info-pgn-wrapper">
+                        <div class="game-info-pgn" id="pgn"></div>
+                        <div class="game-info-pgn-helper"></div>
+                    </div>
 
                     <!-- Botones -->
                     <div class="game-info-options">
                         <div class="align-self-end w-100">
 
                             <!-- Opciones -->
-                            <div class="btn-group" style="width: 100%;">
+                            <div class="btn-group" id="multiplayer-options" style="width: 100%;">
                                 <button class="btn game-btn" id="drawOffer">Ofrecer tablas</button>
                                 <button class="btn game-btn" id="resign">Abandonar</button>
                             </div>
