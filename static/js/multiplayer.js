@@ -525,6 +525,7 @@ socket.onmessage = function (message) {
             status = "Fin de la partida, abandono de blancas"
         }
 
+        game_over = true
         $status.html(status)
 
         $('#statusModal_title').html("Victoria")
@@ -650,6 +651,19 @@ $("#resign_yes").on("click", function() {
         backdrop: "static",
         keyboard: false
     })
+})
+
+// Activa el botón de regreso al lobby si se acaba la partida
+$('#status_accept').on('click', function() {
+    if (game.game_over() || game_over) {
+        $('#multiplayer-options').html('<button class="btn game-btn" id="return">Volver al lobby</button>')
+    }
+})
+
+// Volver al lobby
+$('#return').on('click', function() {
+    var path = window.location.protocol + "//" + window.location.host + "/play/online"
+    window.location.href = path
 })
 
 

@@ -13,6 +13,7 @@ var $board = $('#computerBoard')
 var game = new Chess()
 var $status = $('#status') // Estado de la partida
 var $fen = $('#fen')
+var fen_set = false
 var $pgn = $('#pgn')
 var $score = $('#score')
 var $time = $('#time')
@@ -174,9 +175,13 @@ function updateStatus () {
     // Se actualiza el estado de la partida, el FEN y el PGN
     $status.html(status)
     $fen.val(game.fen())
-    new_pgn = remove_pgn_header(game.pgn({ max_width: 5, newline_char: "<br />"}))
-    // $pgn.html(new_pgn)
-    $pgn.html(game.pgn({ max_width: 5, newline_char: "<br />"}))
+    if (fen_set == true) {
+        new_pgn = remove_pgn_header(game.pgn({ max_width: 5, newline_char: "<br />"}))
+        $pgn.html(new_pgn)
+    }
+    else {
+        $pgn.html(game.pgn({ max_width: 5, newline_char: "<br />"}))
+    }
 }
 
 // Controla cuándo y qué piezas se pueden seleccionar para mover
@@ -378,6 +383,7 @@ $('#new_game').on('click', function() {
     board.position('start')
 
     // Actualiza el estado de la partida y de la barra
+    fen_set = false
     status_bar(0)
     updateStatus()
 })
@@ -444,7 +450,8 @@ $('#set_fen').on('click', function() {
         alert('¡Este FEN no es válido!')
 
     // Actualiza el estado de la partida
-    updateStatus();
+    fen_set = true
+    updateStatus()
 })
 
 
