@@ -247,7 +247,7 @@ class multiplayerConsumer(AsyncJsonWebsocketConsumer):
 
             # Abandono
             elif command == "resign":
-                await self.resign()
+                await self.resign(content["winner"])
                 await self.game_over_in_db(content["winner"], content["details"])
 
         except:
@@ -381,11 +381,12 @@ class multiplayerConsumer(AsyncJsonWebsocketConsumer):
 
     # Abandono de una partida
 
-    async def resign(self):
+    async def resign(self, winner):
         await self.channel_layer.group_send(
             str(self.game_id),
             {
                 "type": "resign.handler",
+                "winner": winner,
                 "sender_channel_name": self.channel_name,
             }
         )
@@ -394,6 +395,7 @@ class multiplayerConsumer(AsyncJsonWebsocketConsumer):
         if self.channel_name != event["sender_channel_name"]:
             await self.send_json({
                 "command": "opponent-resigned",
+                "winner": event["winner"],
             })
 
 
