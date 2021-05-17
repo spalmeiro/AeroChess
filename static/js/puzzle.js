@@ -222,7 +222,7 @@ function onDrop (source, target) {
         p=p+1
     }
 
-    setTimeout(movsolution, 1000);
+    setTimeout(movsolution, 1000, 0);
     
     // Se desmarcan los indicadores de posibles movimientos
     removeshowStart()
@@ -301,7 +301,7 @@ function dividirCadena(cadenaADividir,separador) {
     Solucion = cadenaADividir.split(separador);
 }
 
-function movsolution(){
+function movsolution(z){
     k = 1
     i = 2
     dividirCadena(puzzle_pgn," ")
@@ -317,6 +317,8 @@ function movsolution(){
         n = k + 3*p
     }
     
+    j = j + z
+
     game.move(Solucion[n], {sloppy: true })
     board.position(game.fen());
 
@@ -363,7 +365,7 @@ window.onload = arrayfen
 
 // Mostrar solución
 $('#showSolution').on('click', function() {
-    movsolution()
+    movsolution(0.5)
 });
 
 // Puzzle anterior
