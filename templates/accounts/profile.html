@@ -10,20 +10,71 @@
     <!-- Modales -->
     {% include "includes/modals.html" %}
 
-    <main class="bg-img pt-6 vh-100">
+    <main class="bg-img2 pt-6 vh-100">
 
         <!-- Bloque de partidas completadas -->
         <div class="container profile">
 
-            <!-- Título -->
+            <!-- Datos -->
             <div>
-                <h2 class="text-left">Partidas completadas</h2>
+                <h2 class="text-left">Datos de usuario</h2>
+                <hr>
+            </div>
+
+            <form class="custom-form profile-data" method="post">
+
+                <!-- Esto proporciona protección contra Cross Site Request Forgeries -->
+                {% csrf_token %}
+
+                <!-- Nombre de usuario -->
+                <div class="profile-field">
+                    <label class="mb-0 w-10" for="username">Usuario:</label>
+                    <input class="form-control custom-form-control w-90" id="username" type="text" name="username" placeholder="{{ user.username }}" required>
+                </div>
+                <div class="profile-field">
+                    {% if form.username.errors %}
+                        <div class="custom-invalid-form ml-auto mb-0 w-90">
+                        {% for error in form.username.errors %}
+                            <p>{{ error|escape }}</p>
+                        {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Email -->
+                <div class="profile-field mt-3">
+                    <label class="mb-0 w-10" for="email">Email:</label>
+                    <input class="form-control custom-form-control w-90" id="email" type="email" name="email" placeholder="{{ user.email }}">
+                </div>
+                <div class="profile-field">
+                    {% if form.email.errors %}
+                        <div class="custom-invalid-form ml-auto mb-0 w-90">
+                        {% for error in form.email.errors %}
+                            <p>{{ error|escape }}</p>
+                        {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <hr>
+
+                <div class="d-flex align-items-center justify-content-end">
+                    <div id="success_message"></div>
+                    <button class="btn btn-primary ml-3" id="submit" type="submit">Actualizar perfil</button>
+                    <button class="btn btn-primary ml-3" id="change_password">Cambiar contraseña</button>
+                </div>
+
+            </form>
+
+            <!-- Partidas completadas -->
+            <div>
+                <h2 class="text-left mt-5">Partidas completadas</h2>
                 <hr>
             </div>
 
             {% if completed %}
                 
-                <table class="table table-hover game-list" id="public">
+                <table class="table game-list" id="public">
 
                     <thead class="game-list-header">
                         <tr>
@@ -56,5 +107,25 @@
         </div>
 
     </main>
+
+{% endblock %}
+
+{% block scripts %}
+
+    <!-- Proporciona feedback si los cambios son exitosos -->
+    <script>
+
+        var success = "{{ success }}"
+        var newusername = "{{ new.username }}"
+        var newemail = "{{ new.email }}"
+
+        if (success == "True") {
+            $('#success_message').html('Perfil actualizado <i class="fas fa-check"></i>')
+            $('#username').attr('placeholder', newusername)
+            $('#email').attr('placeholder', newemail)
+            $('#greeting').html('Hola ' + newusername + '!')
+        }
+
+    </script>
 
 {% endblock %}

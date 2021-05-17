@@ -29,8 +29,12 @@ var orientation = null
 
 // Reproduce los sonidos que se le pasan como argumento
 function reproSon (name) {
-    var audio = new Audio('/static/sounds/' + name);
-    audio.play();
+    if (sound == 1) {
+        var audio = new Audio('/static/sounds/' + name)
+        audio.play()
+    } else {
+        return
+    }
 }
 
 // Marca la casilla de la pieza seleccionada para mover
@@ -219,7 +223,12 @@ function onDrop (source, target) {
     }
 
     setTimeout(movsolution, 1000);
-   
+    
+    // Se desmarcan los indicadores de posibles movimientos
+    removeshowStart()
+    removeshowMoves()
+    removeshowCapture()
+
     // Se destaca el movimiento realizado
     removeHighlights()
     $board.find('.square-' + source).addClass('highlight')
@@ -231,6 +240,13 @@ function onDrop (source, target) {
 
 // Función que controla qué ocurre cuando se acaba un movimiento (en concreto lo destaca)
 function onMoveEnd () {
+    
+    // Se desmarcan los indicadores de posibles movimientos
+    removeshowStart()
+    removeshowMoves()
+    removeshowCapture()
+
+    // Se destaca el movimiento realizado
     $board.find('.square-' + squareToHighlight).addClass('highlight')
 }
 
@@ -377,18 +393,6 @@ $('#next_puzzle').on('click', function() {
 $('#return').on('click', function() {
     var path = window.location.protocol + "//" + window.location.host + "/puzzles/list"
     window.location.href = path
-})
-
-// Hace que los botones cambien en cierto portsize
-$(window).resize(function () {
-    if (window.innerWidth > 768 && window.innerWidth < 992) {
-        $('#previous_puzzle').html('<i class="fas fa-chevron-left"></i>')
-        $('#next_puzzle').html('<i class="fas fa-chevron-right"></i>')
-    }
-    else {
-        $('#previous_puzzle').html('Anterior')
-        $('#next_puzzle').html('Siguiente')
-    }
 })
 
 

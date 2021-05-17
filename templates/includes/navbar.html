@@ -4,7 +4,7 @@
 
         <!-- Navegación - Página principal -->
         <a class="navbar-brand d-flex" href="/">
-            <div class="navbar-brand-icon align-top mr-md-2">
+            <div class="navbar-brand-icon align-top mr-2">
                 <span class="fas fa-chess"></span>
             </div>
             <div class="navbar-brand-text">AeroChess</div> 
@@ -55,7 +55,7 @@
                 {% if user.is_authenticated %}
                 
                     <li class="nav-item">
-                        <span class="navbar-text">Hola {{ user.username }}!</span>
+                        <span class="navbar-text" id="greeting">Hola {{ user.username }}!</span>
                     </li>
                     
                     <li class="nav-item dropdown">
@@ -85,7 +85,8 @@
                         <span class="fas fa-cog"></span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-right custom-dropdown-menu">
-                        <li><button class="dropdown-item custom-dropdown-item" data-toggle="modal" data-target="#personalizacion"><span class="fas fa-pencil-alt"></span> Personalización</button></li>
+                        <li class="custom-dropdown-item">Sonido<label class="switch"><input class="primary" id="sound_select" type="checkbox"><span class="slider round"></span></label></li>   
+                        <li><button class="dropdown-item custom-dropdown-item" id="customization">Personalización<span class="fas fa-pencil-alt ml-4"></span></button></li>
                     </ul>
                 </li>
 

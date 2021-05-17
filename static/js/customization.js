@@ -4,6 +4,39 @@
 
 
 
+// Activa el modal de personalización
+$('#customization').on('click', function() {
+    $('#customizationModal').modal()
+})
+
+
+// --------------- Personalización del sonido ----------------- //
+
+var sound = sessionStorage.getItem("sound")
+
+if (sound == null) {
+    sound = 1;
+}
+
+$('#sound_select').on('click', function() {
+    if ($('#sound_select').is(":checked")) {
+        sound = 1
+    } else {
+        sound = 0
+    }
+    sessionStorage.setItem("sound", sound)
+})
+
+// Sincroniza la opción guardada con la que se muestra en el menú
+if (sound == 1) {
+    $('#sound_select').prop('checked', true)
+} else {
+    $('#sound_select').prop('checked', false)
+}
+
+//////////////////////////////////////////////////////////////////
+
+
 
 // -------------- Personalización de las piezas --------------- //
 
@@ -26,8 +59,8 @@ function piece_theme_preview (piece) {
 
 // Se previsualizan los cambios
 $('#piece_theme').on('click', function() {
-    board_preview.flip()    
-    board_preview.flip()
+    previewBoard.flip()    
+    previewBoard.flip()
 })
 
 // Sincroniza el tema activo con el tema mostrado en el modal
@@ -81,8 +114,8 @@ $("#board_theme").on('change',  function () {
 
 // Se previsualizan los cambios
 $('#board_theme').on('click', function() {
-    board_preview.flip()    
-    board_preview.flip()
+    previewBoard.flip()    
+    previewBoard.flip()
 })
 
 // Sincroniza el tema activo con el tema mostrado en el modal
@@ -117,9 +150,9 @@ var config = {
 }
 
 // Carga el tablero
-var board_preview = Chessboard('BoardPreview', config)
+var previewBoard = Chessboard('previewBoard', config)
 
 // Permite que el tablero sea responsive
-$(window).resize(board_preview.resize)
+$(window).resize(previewBoard.resize)
 
 //////////////////////////////////////////////////////////////////
