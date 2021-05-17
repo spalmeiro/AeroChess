@@ -57,7 +57,7 @@ En este documento se recoge:
 
 El objetivo es crear un directorio que contenga todo lo necesario para el funcionamiento del servidor web de manera que se pueda ejecutar localmente.
 
-NOTA: este tutorial explica únicamente la instalación del proyecto en Windows 10.
+NOTA: este tutorial explica únicamente la instalación del proyecto en Windows 10, si se busca un tutorial sobre como instalarlo en Linux, se ha incluido uno en la rama de producción.
 
 ## Creación de la carpeta contenedora del proyecto y sus dependencias
 
