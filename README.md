@@ -35,11 +35,11 @@ E instalar las librerías necesarias para el proyecto a partir del archivo "requ
 
 ```
 (AeroChess-venv) usuario@linux:~/Desktop/PGAA$ cd AeroChess
-(AeroChess-venv) usuario@linux:~/Desktop/PGAA/AeroChess pip3 install -r requirements.txt
+(AeroChess-venv) usuario@linux:~/Desktop/PGAA/AeroChess$ pip3 install -r requirements.txt
 ```
 
 Una vez hecho esto para iniciar el servidor en modo local basta con ejecutar el siguiente comando (para más información consultar la [documentación de Django](https://docs.djangoproject.com/en/3.1/))
 
 ```
-(AeroChess-venv) usuario@linux:~/Desktop/PGAA$ python3 manage.y runserver
+(AeroChess-venv) usuario@linux:~/Desktop/PGAA/AeroChess$ python3 manage.y runserver
 ```
