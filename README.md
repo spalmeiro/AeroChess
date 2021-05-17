@@ -5,64 +5,63 @@
 
 <h1 align="center" style="font-size:50px;">AeroChess</h1>
 
-En este documento se recoge:
-* La documentación empleada.
-* Las ideas a implementar
-* Los bugs encontrados.
-* Un tutorial de instalación.
-* Un tutorial sobre cómo contribuir.
+Servidor ASGI de Django para jugar al ajedrez creado por Paco, Quintín, Sergio y Valeriano como proyecto para la asignatura de Programación Gráfica en Python y JavaScript.
 
-# Webs de consulta
+La versión de producción desplegada en Heroku puede probarse [aquí](https://aerochess.herokuapp.com/).
+
+En este documento se recoge:
+
+* [La documentación empleada.](#docs)
+
+* [Las ideas a implementar.](#features)
+
+* [Los bugs encontrados.](#bugs)
+
+* [Un tutorial de instalación.](#installation)
+
+* [Un tutorial sobre cómo contribuir.](#contribute)
+
+# <a name="docs"></a> Webs de consulta
 
 * Desarrollo web de mozilla: https://developer.mozilla.org/en-US/docs/
 
-* Libro de Python: https://greenteapress.com/wp/think-python/
+* Python: https://docs.python.org/3/
 
-* Documentación Python: https://docs.python.org/3/
+* Django: https://docs.djangoproject.com/en/3.1/
 
-* Documentación Django: https://docs.djangoproject.com/en/3.1/
-
-* Documentación Bootstrap: https://getbootstrap.com/docs/4.6/
+* Django Channels: https://channels.readthedocs.io/en/stable/
 
 * Stockfish en Python: https://github.com/zhelyabuzhsky/stockfish.
 
+* Motor de ajedrez en JavaScript: https://github.com/jhlywa/chess.js/
+
 * Tablero de ajedrez en JavaScript: https://chessboardjs.com/.
 
-# Ideas a implementar
+* JQuery: https://api.jquery.com/
 
-* Un modo de juego de un jugador contra la máquina, que será el mejor motor de ajedrez del mundo, Stockfish.
+* Bootstrap: https://getbootstrap.com/docs/4.6/
 
-* Un sistema de autenticación para que los usuarios puedan registrarse y autenticarse.
+* Heroku: https://devcenter.heroku.com/
 
-* Un modo multijudador online mediante un sistema de creación de partidas a las que otro jugador se pueda unir:
-    * Desde un  lobby  para partidas públicas.
-    * Mediante una invitación para partidas privadas.
+# <a name="features"></a> Ideas a implementar
 
 * Distintos tipos de partida multijugador en función por ejemplo del tiempo permitido para jugar.
 
-* Un modo de puzzles donde el jugador tenga que conseguir determinado objetivo en un número limitado de movimientos.
+* Un sistema de clasificación de usuarios registrados similar a los puntos ELO.
 
-* Un sistema de personalización de la interfaz que incluya cambios de estilo fichas y tablero y la opción de jugar con o sin sonido.
+# <a name="bugs"></a> Bugs conocidos
 
-* Una barra de estado de la partida que muestre qué lado está en una posición más favorable.
+* El botón de borrar usuario en el perfil no funciona.
 
-* Un registro de partidas completadas (e incluso partidas en curso) al que se pueda acceder desde el perfil del usuario.
-
-* Un modo de "trampas" de manera que se pueda utilizar nuestra página para calcular los mejores movimientos a realizar en partidas que se estén jugando en otras páginas de ajedrez (?).
-
-* Un sistema de clasificación de usuarios registrados similar a los puntos ELO (?).
-
-# Bugs conocidos
-
-* Al cambiar el tamaño de la página el botón de navegación en modo colapsado deja de funcionar.
-
-# Instalación y activación
+# <a name="installation"></a> Instalación y activación
 
 El objetivo es crear un directorio que contenga todo lo necesario para el funcionamiento del servidor web de manera que se pueda ejecutar localmente.
 
+NOTA: este tutorial explica únicamente la instalación del proyecto en Windows 10.
+
 ## Creación de la carpeta contenedora del proyecto y sus dependencias
 
-Esta carpeta almacenará en su interior el entorno virtual de python, los archivos ejecutables de Stockfish y la rama del proyecto que se desee.
+Esta carpeta almacenará en su interior el entorno virtual de python, los archivos ejecutables de Stockfish y la rama del proyecto que se desee. 
 
 En este ejemplo se va a crear en el escritorio, por lo que la ruta sería:
 "`C:\Users\Usuario\Desktop\PGAA`"
@@ -103,7 +102,7 @@ C:\Users\Usuario\Desktop\PGAA> python -m venv AeroChess-venv
 
 De esta manera, se crea el directorio "Aerochess-venv" en la carpeta contenedora y se instala una copia de la versión instalada de python en su interior.
 
-A continuación, hay que activar el entorno virtual ejecutando el archivo "activate.bat" que se encuentra dentro de la carpeta scripts del entorno virtual. Para ello, basta con ejecutar en la consola lo siguiente:
+A continuación, hay que activar el entorno virtual ejecutando el archivo "activate.bat" que se encuentra dentro de la carpeta "scripts" del entorno virtual. Para ello, basta con ejecutar en la consola lo siguiente:
 
 ```
 C:\Users\Usuario\Desktop\PGAA> .\AeroChess-venv\scripts\activate.bat
@@ -165,7 +164,7 @@ Para cerrar el servidor basta con hacer "CTRL + C" en la consola que se ha abier
 
 **NOTA:** también se puede cerrar el servidor cerrando directamente la consola, aunque es una manera un poco más brusca de hacerlo.
 
-# Reseteo de la base de datos
+## Reseteo de la base de datos
 
 Se hace necesario un reset de la base de datos cada vez que se haga un cambio en su estructura, a través de la modificación de los modelos de Django.
 
@@ -195,11 +194,11 @@ Por último, para cargar en la base de datos la lista de puzzles, se ejecuta:
 (AeroChess-venv) C:\Users\Usuario\Desktop\PGAA\AeroChess> python manage.py loaddata puzzle_list.json
 ```
 
-# Cómo contribuir
+# <a name="contribute"></a> Cómo contribuir
 
 Si estáis utilizando GitHub Desktop, él mismo detectará los cambios que se realicen en el repositorio y podréis llevar un registro de dichos cambios haciendo "commits" a vuestra copia local del repositorio a través de la aplicación.
 
-**NOTA:** los cambios que hagáis de manera local son efectivos tan pronto guardáis el archivo editado desde el editor, pero son registrados por GitHub Desktop hasta que hacéis un "commmit". Es recomendable hacer un "commit" local cada vez que acabéis una sesión de trabajo.
+**NOTA:** los cambios que hagáis de manera local son efectivos tan pronto guardáis el archivo editado desde el editor, pero no son registrados por GitHub Desktop hasta que hacéis un "commmit". Es recomendable hacer un "commit" local cada vez que acabéis una sesión de trabajo.
 
 Cuando queráis actualizar el repositorio online con los cambios que habéis hecho de forma local, basta con darle a publicar desde GitHub Desktop y la aplicación se encargará de sincronizar los archivos locales con los archivos online.
 
