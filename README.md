@@ -15,7 +15,7 @@ En este documento se recoge:
 
 * [Las ideas a implementar.](#features)
 
-* [Los bugs encontrados.](#bugs)
+* [Los bugs conocidos.](#bugs)
 
 * [Un tutorial de instalación.](#installation)
 
