@@ -76,9 +76,9 @@
                                 <button class="btn game-btn" id="showSolution" title="Mostrar solución">Mostrar solución</button>
                             </div>
                             <div class="btn-group w-100 mt-2">
-                                <button class="btn game-btn" id="previous_puzzle" title="Puzzle anterior">Anterior</button>
+                                <button class="btn game-btn" id="previous_puzzle" title="Puzzle anterior"></button>
                                 <button class="btn game-btn" id="random_puzzle" title="Puzzle aleatorio">Aleatorio</button>
-                                <button class="btn game-btn" id="next_puzzle" title="Puzzle siguiente">Siguiente</button>
+                                <button class="btn game-btn" id="next_puzzle" title="Puzzle siguiente"></button>
                             </div>
                             <div class="btn-group w-100 mt-2">
                                 <button class="btn game-btn" id="return" title="Volver a la lista de puzzles">Volver a la lista de puzzles</button>
@@ -102,6 +102,30 @@
         var puzzle_fen = "{{ puzzle.fen }}"
         var puzzle_pgn = "{{ puzzle.solution }}"
         var puzzle_pk = "{{ puzzle.pk }}"
+
+        // Decide que botones mostrar cuando carga la página en funcion del viewport
+        $(window).on('load', function () {
+            if (window.innerWidth > 768 && window.innerWidth < 992) {
+                $('#previous_puzzle').html('<i class="fas fa-chevron-left"></i>')
+                $('#next_puzzle').html('<i class="fas fa-chevron-right"></i>')
+            }
+            else {
+                $('#previous_puzzle').html('Anterior')
+                $('#next_puzzle').html('Siguiente')
+            }
+        })
+
+        // Hace que los botones cambien segun el viewport
+        $(window).resize(function () {
+            if (window.innerWidth > 768 && window.innerWidth < 992) {
+                $('#previous_puzzle').html('<i class="fas fa-chevron-left"></i>')
+                $('#next_puzzle').html('<i class="fas fa-chevron-right"></i>')
+            }
+            else {
+                $('#previous_puzzle').html('Anterior')
+                $('#next_puzzle').html('Siguiente')
+            }
+        })
 
     </script>
 

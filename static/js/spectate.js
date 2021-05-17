@@ -36,8 +36,12 @@ var socket = new WebSocket(ws_path)
 
 // Reproduce los sonidos que se le pasan como argumento
 function reproSon (name) {
-    var audio = new Audio('/static/sounds/' + name);
-    audio.play();
+    if (sound == 1) {
+        var audio = new Audio('/static/sounds/' + name)
+        audio.play()
+    } else {
+        return
+    }
 }
 
 // Desmarca el último movimiento realizado

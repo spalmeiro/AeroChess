@@ -2,8 +2,9 @@ from django.shortcuts import redirect, render
 
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
-from .forms import signupform
+from .forms import signupform, changeuserdataform
 from play.models import Game
 from django.db.models import Q
 
@@ -47,8 +48,8 @@ def signup(request):
 @login_required
 def profile(request):
 
+    # Lista de partidas completadas
     completed_games = Game.objects.all().filter(status=3).filter(Q(owner=request.user) | Q(adversary=request.user))
-
     completed = []
 
     for i in completed_games:
@@ -95,4 +96,34 @@ def profile(request):
         completed.append(game)
 
 
-    return render(request, "accounts/profile.html", {"completed": completed})
+    # Modificar datos de usuario
+    if request.method == "POST":
+
+        form = changeuserdataform(request.POST)
+
+        # Si la form es válida
+        if form.is_valid():
+
+            new = {}
+            user = User.objects.get(username = request.user.username)
+
+            new['username'] = form.cleaned_data['username']
+            new['email'] = form.cleaned_data['email']
+
+            user.username = new['username']
+            user.email = new['email']
+            user.save()
+ 
+            # Redirige al usuario a la página del perfil
+            return render(request, "accounts/profile.html", {"form": form, "success": True, "new": new, "completed": completed})
+
+        # Si la form no es válida
+        else:
+
+            # Redirige al usuario a la form y muestra los errores
+            return render(request, "accounts/profile.html", {"form": form, "success": False, "completed": completed})
+
+    else:
+        form = changeuserdataform()
+
+    return render(request, "accounts/profile.html", {"form": form, "success": False, "completed": completed})
