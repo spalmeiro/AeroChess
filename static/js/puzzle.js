@@ -391,7 +391,7 @@ $('#next_puzzle').on('click', function() {
     window.location.href = path
 })
 
-// Volver al lobby
+// Volver a la lista de puzzles
 $('#return').on('click', function() {
     var path = window.location.protocol + "//" + window.location.host + "/puzzles/list"
     window.location.href = path

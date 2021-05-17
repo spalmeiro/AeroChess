@@ -674,13 +674,11 @@ $("#resign_yes").on("click", function() {
 $('#status_accept').on('click', function() {
     if (game.game_over() || game_over) {
         $('#multiplayer-options').html('<button class="btn game-btn" id="return">Volver al lobby</button>')
+        $('#return').on('click', function() {
+            var path = window.location.protocol + "//" + window.location.host + "/play/online"
+            window.location.href = path
+        })
     }
-})
-
-// Volver al lobby
-$('#return').on('click', function() {
-    var path = window.location.protocol + "//" + window.location.host + "/play/online"
-    window.location.href = path
 })
 
 
