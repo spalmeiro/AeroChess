@@ -344,7 +344,7 @@ input:checked + .slider:before {
 }
 
 .random {
-    background-image: url("../img/chesspieces/cburnett/bwK.svg");
+    background-image: url("../img/chesspieces/cburnett/bwK.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
@@ -673,6 +673,12 @@ input:checked + .slider:before {
     box-shadow: 0 0 0 0.15rem rgb(255, 255, 255);
 }
 
+.previewBoard {
+    width: 400px;
+    margin: auto;
+    margin-bottom: 0.5rem;
+}
+
 @media (max-width: 1200px) {
 
     .game-ui {
@@ -730,6 +736,12 @@ input:checked + .slider:before {
 
     .game-btn {
         width: 100%;
+    }
+
+    .previewBoard {
+        width: 320px;
+        margin: auto;
+        margin-bottom: 0.5rem;
     }
 }
 
