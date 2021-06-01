@@ -1,6 +1,5 @@
 <p align="center">
         <img src="https://www.pngarts.com/files/4/Chess-PNG-Background-Image.png" alt="drawing " width="drawing" >
-    </a>
 </p>
 
 <h1 align="center" style="font-size:50px;">AeroChess</h1>
