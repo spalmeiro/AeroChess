@@ -51,7 +51,7 @@ En este documento se recoge:
 
 # <a name="bugs"></a> Bugs conocidos
 
-* El botón de borrar usuario en el perfil no funciona.
+* El botón de borrar usuario en el perfil no funciona (porque no ha sido implementado todavía).
 
 # <a name="installation"></a> Instalación y activación
 
@@ -160,7 +160,7 @@ Para acceder al sitio web se debe teclear [127.0.0.1:8000][web] o [localhost:800
 
 [web]:http://localhost:8000
 
-Para cerrar el servidor basta con hacer "CTRL + C" en la consola que se ha abierto. Esto provocará que se nos pregunte: "¿Desea terminar el trabajo por lotes (S/N)?". Respondemos que sí ("s" y  "ENTER") y listo.
+Para cerrar el servidor basta con hacer "CTRL + C" en la consola que se ha abierto. Esto provocará que se nos pregunte: "¿Desea terminar el trabajo por lotes (S/N)?". Respondemos que sí ("s" y "ENTER") y listo.
 
 **NOTA:** también se puede cerrar el servidor cerrando directamente la consola, aunque es una manera un poco más brusca de hacerlo.
 
@@ -198,7 +198,7 @@ Por último, para cargar en la base de datos la lista de puzzles, se ejecuta:
 
 Si estáis utilizando GitHub Desktop, él mismo detectará los cambios que se realicen en el repositorio y podréis llevar un registro de dichos cambios haciendo "commits" a vuestra copia local del repositorio a través de la aplicación.
 
-**NOTA:** los cambios que hagáis de manera local son efectivos tan pronto guardáis el archivo editado desde el editor, pero no son registrados por GitHub Desktop hasta que hacéis un "commmit". Es recomendable hacer un "commit" local cada vez que acabéis una sesión de trabajo.
+**NOTA:** los cambios que hagáis de manera local son efectivos tan pronto guardáis el archivo editado desde el editor, pero no son registrados por GitHub Desktop hasta que hacéis un "commit". Es recomendable hacer un "commit" local cada vez que acabéis una sesión de trabajo.
 
 Cuando queráis actualizar el repositorio online con los cambios que habéis hecho de forma local, basta con darle a publicar desde GitHub Desktop y la aplicación se encargará de sincronizar los archivos locales con los archivos online.
 
