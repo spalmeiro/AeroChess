@@ -1,6 +1,5 @@
 <p align="center">
         <img src="https://www.pngarts.com/files/4/Chess-PNG-Background-Image.png" alt="drawing " width="drawing" >
-    </a>
 </p>
 
 <h1 align="center" style="font-size:50px;">AeroChess</h1>
@@ -23,25 +22,25 @@ En este documento se recoge:
 
 # <a name="docs"></a> Webs de consulta
 
-* Desarrollo web de mozilla: https://developer.mozilla.org/en-US/docs/
+* Desarrollo web de mozilla: https://developer.mozilla.org/en-US/docs/.
 
-* Python: https://docs.python.org/3/
+* Python: https://docs.python.org/3/.
 
-* Django: https://docs.djangoproject.com/en/3.1/
+* Django: https://docs.djangoproject.com/en/3.1/.
 
-* Django Channels: https://channels.readthedocs.io/en/stable/
+* Django Channels: https://channels.readthedocs.io/en/stable/.
 
 * Stockfish en Python: https://github.com/zhelyabuzhsky/stockfish.
 
-* Motor de ajedrez en JavaScript: https://github.com/jhlywa/chess.js/
+* Motor de ajedrez en JavaScript: https://github.com/jhlywa/chess.js/.
 
 * Tablero de ajedrez en JavaScript: https://chessboardjs.com/.
 
-* JQuery: https://api.jquery.com/
+* JQuery: https://api.jquery.com/.
 
-* Bootstrap: https://getbootstrap.com/docs/4.6/
+* Bootstrap: https://getbootstrap.com/docs/4.6/.
 
-* Heroku: https://devcenter.heroku.com/
+* Heroku: https://devcenter.heroku.com/.
 
 # <a name="features"></a> Ideas a implementar
 
