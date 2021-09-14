@@ -1,5 +1,5 @@
 <!-- Modal para confirmar que deseas iniciar una nueva partida en el modo contra el ordenador -->
-<div class="modal fade" id="exampleModalCenter" tabindex="0">
+<div class="modal fade" id="newgameModal" tabindex="0">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content custom-modal-content">
 
@@ -16,7 +16,7 @@
 
             <div class="modal-footer">
                 <button class="btn btn-secondary mr-auto" type="button" role="button" data-dismiss="modal">Cancelar</button>
-                <button class="btn btn-success" id="new_game" type="button" role="button" data-dismiss="modal">Sí, estoy seguro</button>
+                <button class="btn btn-success" id="new_game_accept" type="button" role="button" data-dismiss="modal">Sí, estoy seguro</button>
             </div>
 
         </div>
@@ -74,6 +74,9 @@
 
             <div class="modal-header">
                 <h5 class="modal-title" id="statusModal_title"></h5>
+                <button class="close" type="button" data-dismiss="modal">
+                    <span style="color: white;">&times;</span>
+                </button>
             </div>
 
             <div class="modal-body">
@@ -81,7 +84,7 @@
             </div>
 
             <div class="modal-footer">
-                <button class="btn btn-success" type="button" role="button" data-dismiss="modal">Aceptar</button>
+                <button class="btn btn-success" id="status_accept" type="button" role="button" data-dismiss="modal">Aceptar</button>
             </div>
 
         </div>
@@ -193,7 +196,7 @@
 
 
 <!-- Modal para la personalización de las piezas y el tablero -->
-<div class="modal fade" id="personalizacion" data-backdrop="static" tabindex="0">
+<div class="modal fade" id="customizationModal" data-backdrop="static" tabindex="0">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content custom-modal-content">
             
@@ -232,7 +235,7 @@
                         </select>
                     </div>
 
-                    <div id="BoardPreview" class="mx-auto mb-2" style="width: 400px;"></div>
+                    <div class="previewBoard" id="previewBoard"></div>
 
                 </div>
 

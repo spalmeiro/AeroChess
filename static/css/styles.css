@@ -4,18 +4,6 @@
 
 
 
-/* Modificado de Bootstrap */
-hr {
-    border-top: 1px solid #ffffff;
-}
-
-/* Modificado de Bootstrap */
-.pt-6 {
-    padding-top: 6rem;
-}
-
-
-
 /* ------------------- Background ------------------- */
 
 .bg-img {
@@ -57,7 +45,15 @@ hr {
 }
 
 .custom-dropdown-item {
+    width: 100%;
+    padding: 0.25rem 1.5rem;
+    display: block;
     color: #ffffff;
+}
+
+.custom-dropdown-item:hover {
+    color: #16181b;
+    background-color: #e9ecef;width: 100%;
 }
 
 /* -------------------------------------------------- */
@@ -76,6 +72,62 @@ hr {
 
 .dropdown-menu {
     margin-top: 0;
+}
+
+.switch {
+    position: relative;
+    display: block;
+    width: 30px;
+    height: 20px;
+    float: right;
+}
+
+.switch input {display:none;}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 7px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 13px;
+    width: 13px;
+    left: 2px;
+    bottom: 0px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input.primary:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(13px);
+    -ms-transform: translateX(13px);
+    transform: translateX(13px);
+}
+
+.slider.round {
+    border-radius: 17px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
 }
 
 /* -------------------------------------------------- */
@@ -292,7 +344,7 @@ hr {
 }
 
 .random {
-    background-image: url("../img/chesspieces/cburnett/bwK.svg");
+    background-image: url("../img/chesspieces/cburnett/bwK.png");
     background-position: center;
     background-repeat: no-repeat;
     background-size: contain;
@@ -332,7 +384,8 @@ hr {
     padding: 1.25rem;
     color: #ffffff;
     font-size: 150%;
-    text-align: left;
+    display: flex;
+    align-items: center;
     background-color: rgb(40, 40, 40);
     border-color: #ffffff;
     border-style: solid;
@@ -374,6 +427,16 @@ hr {
 
 .profile {
     color: #ffffff;
+}
+
+.profile-data {
+    background-color: rgb(40, 40, 40);  
+}
+
+.profile-field {
+    width: 100%;
+    display: flex;
+    align-items: center; 
 }
 
 /* -------------------------------------------------- */
@@ -610,6 +673,12 @@ hr {
     box-shadow: 0 0 0 0.15rem rgb(255, 255, 255);
 }
 
+.previewBoard {
+    width: 400px;
+    margin: auto;
+    margin-bottom: 0.5rem;
+}
+
 @media (max-width: 1200px) {
 
     .game-ui {
@@ -657,6 +726,7 @@ hr {
     .game-info {
         width: 100%;
         margin-top: 2rem;
+        margin-bottom: 2rem;
     }
 
     .game-info-pgn-wrapper {
@@ -666,6 +736,12 @@ hr {
 
     .game-btn {
         width: 100%;
+    }
+
+    .previewBoard {
+        width: 320px;
+        margin: auto;
+        margin-bottom: 0.5rem;
     }
 }
 
@@ -767,12 +843,30 @@ hr {
 
 /* ------------------- Colocación ------------------- */
 
+.w-10 {
+    width: 10% !important;
+}
+
+.w-90 {
+    width: 90% !important;
+}
+
 .w-40 {
     width: 40% !important;
 }
 
 .w-60 {
     width: 60% !important;
+}
+
+/* Modificado de Bootstrap */
+hr {
+    border-top: 1px solid #ffffff;
+}
+
+/* Modificado de Bootstrap */
+.pt-6 {
+    padding-top: 6rem;
 }
 
 /* -------------------------------------------------- 

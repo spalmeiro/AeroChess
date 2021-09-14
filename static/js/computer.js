@@ -13,6 +13,7 @@ var $board = $('#computerBoard')
 var game = new Chess()
 var $status = $('#status') // Estado de la partida
 var $fen = $('#fen')
+var fen_set = false
 var $pgn = $('#pgn')
 var $score = $('#score')
 var $time = $('#time')
@@ -32,8 +33,12 @@ var orientation = "white" // Siempre se entra jugando con blancas
 
 // Reproduce los sonidos que se le pasan como argumento
 function reproSon (name) {
-    var audio = new Audio('/static/sounds/' + name);
-    audio.play();
+    if (sound == 1) {
+        var audio = new Audio('/static/sounds/' + name)
+        audio.play()
+    } else {
+        return
+    }
 }
 
 // Marca la casilla de la pieza seleccionada para mover
@@ -174,9 +179,13 @@ function updateStatus () {
     // Se actualiza el estado de la partida, el FEN y el PGN
     $status.html(status)
     $fen.val(game.fen())
-    new_pgn = remove_pgn_header(game.pgn({ max_width: 5, newline_char: "<br />"}))
-    // $pgn.html(new_pgn)
-    $pgn.html(game.pgn({ max_width: 5, newline_char: "<br />"}))
+    if (fen_set == true) {
+        new_pgn = remove_pgn_header(game.pgn({ max_width: 5, newline_char: "<br />"}))
+        $pgn.html(new_pgn)
+    }
+    else {
+        $pgn.html(game.pgn({ max_width: 5, newline_char: "<br />"}))
+    }
 }
 
 // Controla cuándo y qué piezas se pueden seleccionar para mover
@@ -202,6 +211,11 @@ function onDrop (source, target) {
     // Hace que la pieza vuelva a su posición original si el movimiento no está permitido
     if (move === null) return 'snapback'
 
+    // Se desmarcan los indicadores de posibles movimientos
+    removeshowStart()
+    removeshowMoves()
+    removeshowCapture()
+
     // Se destaca el movimiento realizado
     removeHighlights()
     $board.find('.square-' + source).addClass('highlight')
@@ -217,8 +231,15 @@ function onDrop (source, target) {
     make_move();
 }
 
-// Controla qué ocurre cuando se acaba un movimiento (en concreto lo destaca)
+// Controla qué ocurre cuando se acaba un movimiento
 function onMoveEnd () {
+
+    // Se desmarcan los indicadores de posibles movimientos
+    removeshowStart()
+    removeshowMoves()
+    removeshowCapture()
+
+    // Se destaca el movimiento realizado
     $board.find('.square-' + squareToHighlight).addClass('highlight')
 }
 
@@ -367,6 +388,14 @@ function make_move() {
 
 // Reiniciar la partida
 $('#new_game').on('click', function() {
+    $('#newgameModal').modal({
+        keyboard: false,
+        backdrop: 'static'
+    })
+})
+
+// Si se confirma que se quiere reiniciar la partida
+$('#new_game_accept').on('click', function() {
 
     // Reproduce el sonido
     reproSon("boton.mp3")
@@ -378,6 +407,7 @@ $('#new_game').on('click', function() {
     board.position('start')
 
     // Actualiza el estado de la partida y de la barra
+    fen_set = false
     status_bar(0)
     updateStatus()
 })
@@ -444,7 +474,8 @@ $('#set_fen').on('click', function() {
         alert('¡Este FEN no es válido!')
 
     // Actualiza el estado de la partida
-    updateStatus();
+    fen_set = true
+    updateStatus()
 })
 
 

@@ -37,8 +37,12 @@ var socket = new WebSocket(ws_path)
 
 // Reproduce los sonidos que se le pasan como argumento
 function reproSon (name) {
-    var audio = new Audio('/static/sounds/' + name);
-    audio.play();
+    if (sound == 1) {
+        var audio = new Audio('/static/sounds/' + name)
+        audio.play()
+    } else {
+        return
+    }
 }
 
 // Marca la casilla de la pieza seleccionada para mover
@@ -237,6 +241,11 @@ function onDrop (source, target) {
     $board.find('.square-' + source).addClass('highlight')
     $board.find('.square-' + target).addClass('highlight')
 
+    // Se desmarcan los indicadores de posibles movimientos
+    removeshowStart()
+    removeshowMoves()
+    removeshowCapture()
+
     // Se actualizan los datos
     updateStatus();
 
@@ -248,6 +257,13 @@ function onDrop (source, target) {
 
 // Controla qué ocurre cuando se acaba un movimiento (en concreto lo destaca)
 function onMoveEnd () {
+    
+    // Se desmarcan los indicadores de posibles movimientos
+    removeshowStart()
+    removeshowMoves()
+    removeshowCapture()
+
+    // Se destaca el movimiento realizado
     $board.find('.square-' + squareToHighlight).addClass('highlight')
 }
 
@@ -525,6 +541,7 @@ socket.onmessage = function (message) {
             status = "Fin de la partida, abandono de blancas"
         }
 
+        game_over = true
         $status.html(status)
 
         $('#statusModal_title').html("Victoria")
@@ -543,6 +560,7 @@ socket.onmessage = function (message) {
 
 
 // ------------ BLOQUE DE FUNCIONES PARA LOS BOTONES QUE SE MUESTRAN EN LA INTERFAZ ------------- //
+
 
 // Copia el link de la partida privada al portapapeles
 $('#copy_link').on('click', function() {
@@ -650,6 +668,17 @@ $("#resign_yes").on("click", function() {
         backdrop: "static",
         keyboard: false
     })
+})
+
+// Activa el botón de regreso al lobby si se acaba la partida
+$('#status_accept').on('click', function() {
+    if (game.game_over() || game_over) {
+        $('#multiplayer-options').html('<button class="btn game-btn" id="return">Volver al lobby</button>')
+        $('#return').on('click', function() {
+            var path = window.location.protocol + "//" + window.location.host + "/play/online"
+            window.location.href = path
+        })
+    }
 })
 
 

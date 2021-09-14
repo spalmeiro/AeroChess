@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "c879f8d0b31f09953ac5e3fe532cf4782a1a3fb6ffbf4c7744a6b0f94577da14"
+            "sha256": "1bdc41ee6aaa82d4e5db2fb169b0c196ad7ce62ad6d3cdc2dcf2fef13a0cf701"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -21,6 +21,7 @@
                 "sha256:15f8af30b044c771aee6787e5ec24694c048184c7b9e54c3b60c750a4b93273a",
                 "sha256:b61808d7e97b7cd5a92ed574937a079c9387fdadd22bfbfa7ad2fd319ecc26e3"
             ],
+            "index": "pypi",
             "version": "==1.3.1"
         },
         "appdirs": {
@@ -44,7 +45,7 @@
                 "sha256:0c3c816a028d47f659d6ff5c745cb2acf1f966da1fe5c19c77a70282b25f4c5f",
                 "sha256:4291ca197d287d274d0b6cb5d6f8f8f82d434ed288f962539ff18cc9012f9ea3"
             ],
-            "markers": "python_full_version >= '3.5.3'",
+            "index": "pypi",
             "version": "==3.0.1"
         },
         "attrs": {
@@ -195,6 +196,14 @@
             "index": "pypi",
             "version": "==0.3.1"
         },
+        "dj-database-url": {
+            "hashes": [
+                "sha256:4aeaeb1f573c74835b0686a2b46b85990571159ffc21aa57ecd4d1e1cb334163",
+                "sha256:851785365761ebe4994a921b433062309eb882fedd318e1b0fcecc607ed02da9"
+            ],
+            "index": "pypi",
+            "version": "==0.5.0"
+        },
         "django": {
             "hashes": [
                 "sha256:32ce792ee9b6a0cbbec340123e229ac9f765dff8c2a4ae9247a14b2ba3a365a7",
@@ -299,7 +308,7 @@
                 "sha256:f52010e0a44e3d8530437e7da38d11fb822acfb0d5b12e9cd5ba655509937ca0",
                 "sha256:f8196f739092a78e4f6b1b2172679ed3343c39c61a3e9d722ce6fcf1dac2824a"
             ],
-            "markers": "python_version >= '3.6'",
+            "index": "pypi",
             "version": "==2.0.0"
         },
         "hyperlink": {
@@ -365,6 +374,7 @@
                 "sha256:fae04496f5bc150eefad4e9571d1a76c55d021325dcd484ce45065ebbdd00984",
                 "sha256:fe07bc6735d08e492a327f496b7850e98cb4d112c56df69b0c844dbebcbb47f6"
             ],
+            "index": "pypi",
             "version": "==1.0.2"
         },
         "pipenv": {
@@ -542,6 +552,14 @@
             ],
             "index": "pypi",
             "version": "==0.5.4"
+        },
+        "whitenoise": {
+            "hashes": [
+                "sha256:05ce0be39ad85740a78750c86a93485c40f08ad8c62a6006de0233765996e5c7",
+                "sha256:05d00198c777028d72d8b0bbd234db605ef6d60e9410125124002518a48e515d"
+            ],
+            "index": "pypi",
+            "version": "==5.2.0"
         },
         "zipp": {
             "hashes": [

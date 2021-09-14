@@ -25,7 +25,7 @@
                 <div class="card">
 
                     <!-- Cabecera -->
-                    <button class="puzzle-list-header" data-toggle="collapse" data-target="#m8n2list">Mate en 2</button>
+                    <button class="puzzle-list-header" id="list1" data-toggle="collapse" data-target="#m8n2list">Mate en 2<i class="fas fa-chevron-down ml-auto" id="chevron1"></i></button>
 
                     <!-- Lista -->
                     <ul class="puzzle-list-body collapse" id="m8n2list" data-parent="#m8n2card"> 
@@ -42,7 +42,7 @@
                 <div class="card">
 
                     <!-- Cabecera -->
-                    <button class="puzzle-list-header" data-toggle="collapse" data-target="#m8n3list">Mate en 3</button>
+                    <button class="puzzle-list-header" id="list2" data-toggle="collapse" data-target="#m8n3list">Mate en 3<i class="fas fa-chevron-down ml-auto" id="chevron2"></i></button>
 
                     <!-- Lista -->
                     <ul class="puzzle-list-body collapse" id="m8n3list" data-parent="#m8n3accordion"> 
@@ -59,7 +59,7 @@
                 <div class="card">
 
                     <!-- Cabecera -->
-                    <button class="puzzle-list-header" data-toggle="collapse" data-target="#m8n4list">Mate en 4</button>
+                    <button class="puzzle-list-header" id="list3" data-toggle="collapse" data-target="#m8n4list">Mate en 4<i class="fas fa-chevron-down ml-auto" id="chevron3"></i></button>
 
                     <!-- Lista -->
                     <ul class="puzzle-list-body collapse" id="m8n4list" data-parent="#m8n4accordion"> 
@@ -73,5 +73,38 @@
             
         </div>
     </main>
+
+{% endblock %}
+
+{% block scripts %}
+
+    <script>
+
+        // Cambia la orientación de los chevron cuando es necesario
+        $('#m8n2list').on('show.bs.collapse hide.bs.collapse', function (e) {
+            if (e.type == 'show') {
+                $('#chevron1').removeClass('fa-chevron-down').addClass('fa-chevron-up')
+            } else {
+                $('#chevron1').removeClass('fa-chevron-up').addClass('fa-chevron-down')
+            }
+        })
+
+        $('#m8n3list').on('show.bs.collapse hide.bs.collapse', function (e) {
+            if (e.type == 'show') {
+                $('#chevron2').removeClass('fa-chevron-down').addClass('fa-chevron-up')
+            } else {
+                $('#chevron2').removeClass('fa-chevron-up').addClass('fa-chevron-down')
+            }
+        })
+
+        $('#m8n4list').on('show.bs.collapse hide.bs.collapse', function (e) {
+            if (e.type == 'show') {
+                $('#chevron3').removeClass('fa-chevron-down').addClass('fa-chevron-up')
+            } else {
+                $('#chevron3').removeClass('fa-chevron-up').addClass('fa-chevron-down')
+            }
+        })
+
+    </script>
 
 {% endblock %}
